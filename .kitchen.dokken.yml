@@ -1,0 +1,848 @@
+driver:
+  name: dokken
+  privileged: true
+  chef_version: '15.10.12'
+
+transport:
+  name: dokken
+
+verifier:
+  root_path: '/opt/verifier'
+  sudo: false
+
+provisioner:
+  name: dokken
+  product_version: '15.10.12'
+  environments_path: test/environments
+  data_bags_path: ./data_bags
+  roles_path: test/roles
+  nodes_path: test/nodes
+  client_rb:
+    chef_license: accept
+
+platforms:
+  - name: centos-7
+    provisioner:
+      encrypted_data_bag_secret_key_path: .secret
+    driver:
+      image: centos:7
+      platform: rhel
+      pid_one_command: /usr/lib/systemd/systemd
+      intermediate_instructions:
+        - RUN yum clean all
+        - RUN yum -y install crontabs net-tools lsof sudo
+
+suites:
+
+  - name: base
+    #provisioner:
+    #  policyfile_path: ./policyfiles/base-policy.rb
+    run_list:
+      - recipe[jmh-server::default]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+
+  - name: ebizdev1
+    run_list:
+      - role[jmh-local]
+      - role[idev-sbo]
+      - role[idev-jmpn]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+
+  - name: ebizdev2
+    run_list:
+      - role[jmh-local-no-awsvpn]
+      - role[idev-mdsuspension]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_idev: {
+        mdsuspension: {
+          db: {
+            password: "mdsuspensionpassword"
+          }
+        }
+      }
+    }
+
+  - name: ebizdev3
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-idev::jmhapp_webserver]
+      - recipe[jmh-idev::kcadapter]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+
+
+  - name: apps01
+    run_list:
+      - role[base]
+      - role[events]
+      - role[prereg-client]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    driver:
+      network:
+         - ["forwarded_port", {guest: 8080, host: 7080}]
+         - ["forwarded_port", {guest: 8081, host: 9081}]
+         - ["forwarded_port", {guest: 8083, host: 9083}]
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password",
+      },
+      jmh_events: {
+        client: {
+          db: {
+           password: "eventer"
+          }
+        }
+      },
+      jmh_prereg: {
+        client: {
+          db: {
+            password: "preregpassword"
+          }
+        }
+      }
+    }
+
+  - name: apps03
+    run_list:
+     - role[base]
+     - recipe[jmh-db::default]  # needed to satisfy myjmh admin for testing
+     - recipe[jmh-myjmh::db]  # needed to satisfy myjmh admin for testing
+     - recipe[jmh-tomcat::user]
+     - role[jmh-crowd]
+     - role[pingfed]
+     - recipe[jmh-myjmh::admin]
+     - recipe[jmh-crowd::watch_scripts]
+     - recipe[jmh-utilities::hostsfile_epic_servers]
+     - recipe[jmh-utilities::hostsfile_profile_servers]
+     - recipe[jmh-operations::stage_reset_profile_db]
+     - recipe[jmh-operations::stage_reset_crowd_db]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      jmh_crowd: {
+      db_pool_size: "100",
+        application: {
+          password: "password",
+         },
+        mysql: {
+          password: "password"
+        }
+      },
+      jmh_myjmh: {
+        admin: {
+          db: {
+           password: 'password'
+          }
+        }
+      },
+      mysql: {
+        server_debian_password : "password",
+        server_root_password: "password",
+        server_repl_password: "password"
+      }
+    }
+    driver:
+      network:
+       - ["forwarded_port", {guest: 8095, host: 9095}]
+       - ["forwarded_port", {guest: 8495, host: 9495}]
+       - ["forwarded_port", {guest: 8086, host: 9086}]
+       - ["forwarded_port", {guest: 8082, host: 9082}]
+       - ["forwarded_port", {guest: 8089, host: 9089}]
+
+  - name: apps08
+    run_list:
+      - role[base]
+      - recipe[jmh-vvisits::vvisits_api]
+      - recipe[jmh-vvisits::mongodb]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      mongodb: {
+        admin: {
+          password: 'adminpassword'
+        }
+      },
+      jmh_vvisits: {
+        api: {
+          nodejs_newrelic_enabled: true,
+          mongodb: {
+            password: 'password'
+          }
+        }
+      }
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 8521, host: 9521}]
+
+  - name: apps06
+    run_list:
+      - role[base]
+      - recipe[jmh-sched::scheduling]
+      - recipe[jmh-fad::db]
+      - recipe[jmh-fad::client]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password",
+      },
+      jmh_fad: {
+        client: {
+          db: {
+            password: "fadpassword"
+          }
+        }
+      }
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 8094, host: 7094}]
+         - ["forwarded_port", {guest: 8464, host: 9464}]
+         - ["forwarded_port", {guest: 8085, host: 7085}]
+         - ["forwarded_port", {guest: 8449, host: 9449}]
+
+
+  - name: apps07
+    run_list:
+      - role[base]
+      - recipe[jmh-myjmh::default]
+      - role[apps07]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    driver:
+      network:
+      - ["forwarded_port", {guest: 8097, host: 9097}]
+      - ["forwarded_port", {guest: 8466, host: 9466}]
+      - ["forwarded_port", {guest: 8098, host: 9098}]
+      - ["forwarded_port", {guest: 8467, host: 9467}]
+      - ["forwarded_port", {guest: 8465, host: 9465}]
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_myjmh: {
+        profile: {
+          db: {
+            mrn_password: 'mrnpass'
+          }
+        },
+        profile_client: {
+          db: {
+            password: 'password'
+          },
+          enable_idp_redirects: true
+        },
+        profile_api: {
+          nodejs_newrelic_enabled: true
+        }
+      }
+    }
+
+
+  - name: web01
+    run_list:
+      - role[php_subsites]
+      - role[php-rollout]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+    driver:
+      network:
+       - ["forwarded_port", {guest: 80, host: 7080}]
+       - ["forwarded_port", {guest: 81, host: 7081}]
+       - ["forwarded_port", {guest: 82, host: 7082}]
+       - ["forwarded_port", {guest: 443, host: 7443}]
+
+
+  - name: publisher
+    run_list:
+      - role[jmh-local]
+      - role[cq-publisher]
+      - role[cq-dispatcher]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      cq: {
+        install_content: false,
+        publisher: {
+          content_assets: ["publisher/jmhbackup-pub-content-jmh.zip"]
+        },
+        dispatcher: {
+          ssl: {
+            data_bag_item: "johnmuirhealth_com_cert"
+          },
+          publisher_list: [{
+            name: "dev_instance",
+            ipaddress: "localhost",
+            port: 4503
+          }]
+        },
+        databag: {
+          password_key: "dev_aem_password"
+        }
+      }
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+         - ["forwarded_port", {guest: 4503, host: 9503}]
+
+  - name: author
+    run_list:
+      - role[cq-author]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      cq: {
+        install_content: false,
+        author: {
+          content_assets: ["author/jmhbackup-content-jmh.zip",
+                           "author/jmhbackup-dam-jmh-no-documents.zip"]
+        }
+      }
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+         - ["forwarded_port", {guest: 4502, host: 9502}]
+
+  - name: tools01
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-archiva]
+      - recipe[jmh-archiva::app_download]
+      - role[proxy_site]
+      - recipe[jmh-webserver::failover_site]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_archiva: {
+        rebuild_db: false,
+        install_repositories: false,
+        mysql: {
+          password: "password"
+        },
+        ebizrepo: {
+          apache_config: {
+            server_name: "test-ebizrepo.johnmuirhealth.com"
+          }
+        }
+      }
+    }
+    driver:
+      network:
+       - ["forwarded_port", {guest: 80, host: 7080}]
+       - ["forwarded_port", {guest: 83, host: 7083}]
+       - ["forwarded_port", {guest: 443, host: 7443}]
+       - ["forwarded_port", {guest: 8080, host: 9080}]
+
+  - name: sensugo
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-monitor::sensugo-backend]
+      - recipe[jmh-monitor::graphite]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      jmh_monitor: {
+        sensugo: {
+          admin_password: "admin",
+          default_email_addresses: "scott.marshall@johnmuirhealth.com"
+        }
+      },
+      jmh_db: {
+        watch_script: {
+          enable: false
+        },
+        "monitor": {
+          password: "passy"
+        }
+      },
+      mysql: {
+        server_root_password: "password"
+
+      }
+    }
+    driver:
+      network:
+        - ["forwarded_port", {guest: 3000, host: 7000}]
+        - ["forwarded_port", {guest: 80, host: 7080}]
+        - ["forwarded_port", {guest: 443, host: 7443}]
+
+  - name: monitor
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-db::server]
+      - role[rundeck]
+      - role[sensu-scott]
+      - recipe[jmh-cq::scripts]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_db: {
+        watch_script: {
+          email_addresses: "scott.marshall@johnmuirhealth.com"
+
+        }
+      },
+      rundeck: {
+          secret_file: "/tmp/kitchen/encrypted_data_bag_secret",
+          hostname: "test-rundeck.johnmuirhealth.com:4440",
+          rdbms: {
+              dbpassword: "password"
+          },
+      },
+      jmh_rundeck: {
+        remote_db_password: {
+          base_dir : "/tmp"
+        }
+      },
+      uchiwa: {
+        settings: {
+          pass: 'admin'
+        }
+      },
+      jmh_server: {
+        environment: 'dev'
+      },
+      jmh_monitor: {
+        handlers: {
+          email: {
+            addresses: ['scott.marshall@johnmuirhealth.com']
+          }
+        }
+      }
+    }
+    driver:
+      network:
+       - ["forwarded_port", {guest: 80, host: 7080}]
+       - ["forwarded_port", {guest: 443, host: 7443}]
+       - ["forwarded_port", {guest: 4440, host: 4440}]
+       - ["forwarded_port", {guest: 3000, host: 7000}]
+       - ["forwarded_port", {guest: 5672, host: 5672}]
+
+  - name: ebiz-tools
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-utilities::hostsfile_epic_servers]
+      - role[ebiz-tools]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    driver:
+      network:
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+    attributes: {
+      test_run: true,
+      jmh_server: {
+        environment: "_default"
+      },
+      jmh_operations: {
+        archivedb: {
+          backup_dir: '/var/lib/archivedb'
+        },
+        backup_root: '/var/lib',
+        # encryption_backup_root: '/encrypted',
+        shared_folder: {
+         root_directory: '/var/lib'
+        },
+        subversion: {
+          repos: ['jmmdhs']
+        }
+      },
+      mysql: {
+        server_root_password: "password"
+      }
+    }
+
+  - name: analytics
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-operations::analytics]
+      - recipe[jmh-operations::cert_check]
+      - recipe[jmh-myjmh::db]
+      - recipe[jmh-operations::zipsync]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      mysql: {
+        server_root_password: 'password'
+      },
+      jmh_myjmh: {
+        myjmh_command: {
+          db_password: 'password'
+        }
+      },
+      jmh_operations: {
+        analytics: {
+          db: {
+            password: 'password'
+          }
+        }
+      }
+    }
+
+
+  - name: supportportal
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-myjmh::admin]
+      - recipe[jmh-prereg::admin]
+      - recipe[jmh-webproxy::supportportal]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    driver:
+      network:
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+         - ["forwarded_port", {guest: 8082, host: 9082}]
+         - ["forwarded_port", {guest: 8467, host: 9467}]
+    attributes: {
+      test_run: true,
+      jmh_webproxy: {
+          supportportal: {
+            apache: {
+              server_aliases: ['supportportal', 'supportportal.hsys.local', 'supportportal-dev.johnmuirhealth.com']
+            }
+          }
+      }
+    }
+
+
+  - name: bamboo
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-bamboo]
+      # - recipe[jmh-bamboo::remote_agent]  # don't uncomment until you enable remote agents.
+    provisioner:
+      client_rb:
+        environment: awspoc
+    driver:
+       network:
+          - ["forwarded_port", {guest: 8085, host: 9085}]
+          - ["forwarded_port", {guest: 80, host: 7080}]
+          - ["forwarded_port", {guest: 9000, host: 9000}]
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_bamboo: {
+        mysql: {
+          password: 'bamboo'
+        },
+        mybase_bamboo_url: 'http://localhost:8085/bamboo',
+        use_local_download: false,
+        executables: [{
+            app_name: 'apache-maven-3.2.5',
+            url: 'http://mirror.olnevhost.net/pub/apache//maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz'
+        }]
+      },
+      mongodb: {
+        admin: {
+          password: 'adminpassword'
+        }
+      }
+    }
+
+#   - name: sensu-client
+#     run_list:
+#       - role[sensu-client-base]
+#     attributes: {
+#       test_run: true,
+#       sensu: {
+#         test_server : "ec2-52-53-238-195.us-west-1.compute.amazonaws.com",
+#         rabbitmq: {
+#           host: "ec2-52-53-238-195.us-west-1.compute.amazonaws.com"
+#         }
+#       }
+#     }
+
+  - name: dispatcher
+    run_list:
+      - role[base]
+      - recipe[jmh-cq::dispatcher-testmode]
+      - recipe[jmh-webserver::api]
+      - recipe[jmh-webserver::webcommon]
+      - recipe[jmh-webserver::app_widgets]
+      - recipe[jmh-webserver::idp]
+      - recipe[jmh-webserver::jmhhr]
+      - recipe[jmh-utilities::hostsfile_www_servers]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    driver:
+      network:
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+    attributes: {
+      test_run: true,
+      jmh_webserver: {
+        customphonebook: {
+          install: true
+        }
+      }
+    }
+
+  - name: splunk
+    run_list:
+      - role[base]
+      - recipe[jmh-splunk::server]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 8000, host: 9000}]
+         - ["forwarded_port", {guest: 8065, host: 9065}]
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+
+  - name: pingfederate
+    run_list:
+      - role[base]
+      - recipe[jmh-pingfed::pingfederate]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 9999, host: 9999}]
+         - ["forwarded_port", {guest: 9031, host: 9031}]
+
+
+  - name: pingfed-cluster
+    run_list:
+      - role[base]
+      - recipe[jmh-pingfed::pingfederate-console]
+      - recipe[jmh-pingfed::pingfederate-engine]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+    driver:
+      network:
+        - ["forwarded_port", {guest: 9999, host: 9999}]
+        - ["forwarded_port", {guest: 9031, host: 9031}]
+
+  - name: mychart
+    run_list:
+       - role[base]
+       - recipe[jmh-webserver::mychart_proxy]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+
+
+  - name: jenkins
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-ci::jenkins]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+    driver:
+      network:
+         - ["forwarded_port", {guest: 80, host: 7080}]
+         - ["forwarded_port", {guest: 443, host: 7443}]
+         - ["forwarded_port", {guest: 8080, host: 9080}]
+
+
+  - name: neprofile-db
+    run_list:
+      - recipe[jmh-server]
+      - recipe[jmh-infosec::neprofile-database]
+      - recipe[jmh-infosec::neprofile-openldap]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      mysql: {
+        server_root_password: "password"
+      },
+      openldap: {
+        rootpw: "password"
+      }
+    }
+    driver:
+      network:
+        - ["forwarded_port", {guest: 389, host: 7389}]
+        - ["forwarded_port", {guest: 636, host: 7636}]
+
+#  - name: screener
+#    run_list:
+#      - role[base]
+#      - recipe[jmh-screen::default]
+#    provisioner:
+#      client_rb:
+#        environment: awspoc
+#    attributes: {
+#      test_run: true,
+#      mysql: {
+#        server_root_password: "password"
+#      },
+#      jmh_screen: {
+#        nodeserver: {
+#          db: {
+#            password: "password"
+#          }
+#        }
+#      }
+#    }
+
+## For EC2 Servers only.
+#  - name: pingtest
+#    run_list:
+#      - role[base]
+#      - recipe[jmh-cq::dispatcher-testmode]
+#      - recipe[jmh-webserver::api]
+#      - recipe[jmh-webserver::webcommon]
+#      - recipe[jmh-webserver::idp]
+#      - recipe[jmh-db::server]
+#      - recipe[jmh-pingfed::pingfederate]
+##      - recipe[jmh-pingfed::pingfederate-console]
+##      - recipe[jmh-pingfed::pingfederate-engine]
+#    driver:
+#      customize:
+#        memory: 4096
+#        cpus: 2
+#      network:
+#        - ["forwarded_port", {guest: 80, host: 7080}]
+#        - ["forwarded_port", {guest: 443, host: 7443}]
+#        - ["forwarded_port", {guest: 9999, host: 9999}]
+#        - ["forwarded_port", {guest: 9031, host: 9031}]
+#    attributes: {
+#      mysql: {
+#        server_root_password: "password"
+#      },
+#      jmh_webserver: {
+#        customphonebook: {
+#          install: true
+##        },
+##        idp: {
+##          app_proxies: {
+##            target_recipe: "jmh-pingfed\\:\\:pingfederate-engine"
+##          }
+#        }
+#      }
+#    }
+
+# Need to make sure to make a system with an extra volume
+#  - name: dmcrypt
+#    run_list:
+#      - recipe[jmh-encrypt::lukscrypt]
+#    attributes: {
+#      test_run: true,
+#        jmh_encrypt: {
+#          lukscrypt: {
+#            physical_disk_name: "/dev/sdb",
+#            volume_size: "10MB",
+#            luks_passphrase: "supersecretword"
+#          }
+#        }
+#     }
+
+
+  # For testing remote db connections
+  # - name: prereg-admin
+    # run_list:
+     # - role[base]
+     # - recipe[jmh-prereg::admin]
+    # attributes: {
+      # mysql: {
+        # server_root_password: "password"
+      # }
+    # }
+
+  # # Commented out because it will contact the Bamboo Server
+  # - name: remote-agent
+    # run_list:
+      # - role[jmh-local]
+      # - recipe[jmh-bamboo::remote_agent]
+    # attributes: {
+      # test_run: true,
+      # jmh_bamboo: {
+        # server_ip: '192.168.114.72'
+      # },
+      # mysql: {
+        # server_debian_password : "password",
+        # server_root_password: "password",
+        # server_repl_password: "password"
+      # }
+    # }

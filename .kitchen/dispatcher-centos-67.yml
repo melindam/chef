@@ -1,0 +1,6 @@
+---
+hostname: 127.0.0.1
+port: '2200'
+username: vagrant
+ssh_key: "/Users/melindam/Documents/Aptana/chef-repo/.kitchen/kitchen-vagrant/kitchen-chef-repo-dispatcher-centos-67/.vagrant/machines/default/virtualbox/private_key"
+last_action: converge

@@ -1,0 +1,14 @@
+I, [2019-04-17T11:31:25.789933 #60146]  INFO -- base-xianlin-rhel-7: -----> Cleaning up any prior instances of <base-xianlin-rhel-7>
+I, [2019-04-17T11:31:25.790107 #60146]  INFO -- base-xianlin-rhel-7: -----> Destroying <base-xianlin-rhel-7>...
+I, [2019-04-17T11:31:25.791148 #60146]  INFO -- base-xianlin-rhel-7: Finished destroying <base-xianlin-rhel-7> (0m0.00s).
+I, [2019-04-17T11:31:25.791426 #60146]  INFO -- base-xianlin-rhel-7: -----> Testing <base-xianlin-rhel-7>
+I, [2019-04-17T11:31:25.791533 #60146]  INFO -- base-xianlin-rhel-7: -----> Creating <base-xianlin-rhel-7>...
+I, [2019-04-17T11:31:27.631687 #60146]  INFO -- base-xianlin-rhel-7: Bringing machine 'default' up with 'virtualbox' provider...
+I, [2019-04-17T11:31:28.035982 #60146]  INFO -- base-xianlin-rhel-7: ==> default: Box 'xianlin/rhel-7' could not be found. Attempting to find and install...
+I, [2019-04-17T11:31:28.036128 #60146]  INFO -- base-xianlin-rhel-7:     default: Box Provider: virtualbox
+I, [2019-04-17T11:31:28.036273 #60146]  INFO -- base-xianlin-rhel-7:     default: Box Version: >= 0
+I, [2019-04-17T11:31:29.111748 #60146]  INFO -- base-xianlin-rhel-7: ==> default: Loading metadata for box 'xianlin/rhel-7'
+I, [2019-04-17T11:31:29.111978 #60146]  INFO -- base-xianlin-rhel-7:     default: URL: https://vagrantcloud.com/xianlin/rhel-7
+I, [2019-04-17T11:31:30.188070 #60146]  INFO -- base-xianlin-rhel-7: ==> default: Adding box 'xianlin/rhel-7' (v1.0.2) for provider: virtualbox
+I, [2019-04-17T11:31:30.191719 #60146]  INFO -- base-xianlin-rhel-7:     default: Downloading: https://vagrantcloud.com/xianlin/boxes/rhel-7/versions/1.0.2/providers/virtualbox.box
+I, [2019-04-17T11:31:31.792806 #60146]  INFO -- base-xianlin-rhel-7: [K    default: Progress: 0% (Rate: 0*/s, Estimated time remaining: --:--:--)[K    default: Progress: 0% (Rate: 0*/s, Estimated time remaining: --:--:--)[K    default: Progress: 100% (Rate: 331/s, Estimated time remaining: --:--:--)[K    default: Progress: 0% (Rate: 0*/s, Estimated time remaining: --:--:--)[K    default: Download redirected to host: vagrantcloud-files-production.s3.amazonaws.com

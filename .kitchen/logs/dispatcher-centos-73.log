@@ -1,0 +1,4 @@
+I, [2019-08-28T14:23:54.005754 #30246]  INFO -- dispatcher-centos-73: -----> Destroying <dispatcher-centos-73>...
+I, [2019-08-28T14:23:54.263601 #30246]  INFO -- dispatcher-centos-73: EC2 instance <i-07a2d1fee9daae786> destroyed.
+I, [2019-08-28T14:23:54.263788 #30246]  INFO -- dispatcher-centos-73: Removing automatic key pair kitchen-dispatchercentos73-melindam-TEBIZ0168local-2019-08-26T17:53:54Z-wrfl1kc6
+I, [2019-08-28T14:23:54.305785 #30246]  INFO -- dispatcher-centos-73: Finished destroying <dispatcher-centos-73> (0m0.30s).

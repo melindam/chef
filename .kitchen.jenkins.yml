@@ -1,0 +1,563 @@
+driver:
+  name: ec2
+  security_group_ids: ["sg-587d163d"]
+  region: us-west-1
+  availability_zone: us-west-1b
+  require_chef_omnibus: true
+  subnet_id: subnet-15e01d4c
+  instance_type: t2.medium
+  associate_public_ip: true
+  interface: dns
+  shared_credentials_profile: default
+
+transport:
+  ssh_key: .chef/pems/jmh_ebiz.pem
+  connection_timeout: 10
+  connection_retries: 5
+  username: centos
+
+provisioner:
+   name: chef_zero
+   product_name: chef
+   product_version: '15.10.12'
+   environments_path: test/environments
+   data_bags_path: ./data_bags
+   roles_path: test/roles
+   nodes_path: test/nodes
+   client_rb:
+     chef_license: accept
+
+platforms:
+   - name: centos-7.6
+     provisioner:
+       encrypted_data_bag_secret_key_path: /home/jenkins/.secret
+     driver:
+       image_id: ami-09026d87726df9454
+     transport:
+       username: centos
+
+############### End EC2 Section ###############
+
+suites:
+
+  - name: base
+    run_list:
+      - role[base]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true
+    }
+
+  - name: apps01
+    run_list:
+      - role[base]
+      - role[events]
+      - role[prereg-client]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      mysql: {
+        server_root_password: "password",
+      },
+      jmh_events: {
+        client: {
+          db: {
+           password: "eventer"
+          }
+        }
+      }
+    }
+
+  - name: apps03
+    run_list:
+     - role[base]
+     - recipe[jmh-db::default]  # needed to satisfy myjmh admin for testing
+     - recipe[jmh-myjmh::db]  # needed to satisfy myjmh admin for testing
+     - recipe[jmh-tomcat::user]
+     - role[jmh-crowd]
+     - role[pingfed]
+     - recipe[jmh-myjmh::admin]
+     - recipe[jmh-crowd::watch_scripts]
+     - recipe[jmh-utilities::hostsfile_epic_servers]
+     - recipe[jmh-utilities::hostsfile_profile_servers]
+     - recipe[jmh-operations::stage_reset_profile_db]
+     - recipe[jmh-operations::stage_reset_crowd_db]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      jmh_crowd: {
+      db_pool_size: "100",
+        application: {
+          password: "password",
+         },
+        mysql: {
+          password: "password"
+        }
+      },
+      jmh_myjmh: {
+        admin: {
+          db: {
+           password: 'password'
+          }
+        }
+      },
+      mysql: {
+        server_debian_password : "password",
+        server_root_password: "password",
+        server_repl_password: "password"
+      }
+    }
+
+  - name: apps06
+    run_list:
+      - role[base]
+      - recipe[jmh-sched::scheduling]
+      - recipe[jmh-fad::db]
+      - recipe[jmh-fad::client]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      mysql: {
+        server_root_password: "password",
+      },
+      jmh_fad: {
+        client: {
+          db: {
+            password: "fadpassword"
+          }
+        }
+      }
+    }
+
+  - name: web01
+    run_list:
+      - role[php_subsites]
+      - role[php-rollout]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true
+    }
+
+  - name: publisher
+    run_list:
+      - role[jmh-local]
+      - role[cq-publisher]
+      - role[cq-dispatcher]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      cq: {
+        install_content: false,
+        publisher: {
+          content_assets: ["publisher/jmhbackup-pub-content-jmh.zip"]
+        },
+        dispatcher: {
+          ssl: {
+            data_bag_item: "johnmuirhealth_com_cert"
+          },
+          publisher_list: [{
+            name: "dev_instance",
+            ipaddress: "localhost",
+            port: 4503
+          }]
+        },
+        databag: {
+          password_key: "dev_aem_password"
+        }
+      }
+    }
+
+  - name: author
+    run_list:
+      - role[cq-author]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      cq: {
+        install_content: false,
+        author: {
+          content_assets: ["author/jmhbackup-content-jmh.zip",
+                           "author/jmhbackup-dam-jmh-no-documents.zip"]
+        }
+      }
+    }
+
+  - name: tools01
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-archiva]
+      - recipe[jmh-archiva::app_download]
+      - role[proxy_site]
+      - recipe[jmh-webserver::failover_site]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      mysql: {
+        server_debian_password : "password",
+        server_root_password: "password",
+        server_repl_password: "password"
+      },
+      jmh_archiva: {
+        rebuild_db: false,
+        install_repositories: false,
+        mysql: {
+          password: "password"
+        },
+        ebizrepo: {
+          apache_config: {
+            server_name: "test-rundeck.johnmuirhealth.com"
+          }
+        }
+      }
+    }
+
+  - name: sensugo
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-db::server]
+      - role[rundeck]
+      - recipe[jmh-monitor::sensugo-backend]
+      - recipe[jmh-monitor::graphite]
+      - recipe[jmh-cq::scripts]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      jmh_monitor: {
+        sensugo: {
+          admin_password: "admin",
+          default_email_addresses: "melinda.moran@johnmuirhealth.com"
+        }
+      },
+      rundeck: {
+        secret_file: "/tmp/kitchen/encrypted_data_bag_secret",
+        hostname: "test-rundeck.johnmuirhealth.com:4440",
+        rdbms: {
+          dbpassword: "password"
+        },
+      },
+      jmh_rundeck: {
+        remote_db_password: {
+          base_dir: "/tmp"
+        }
+      },
+      jmh_db: {
+        watch_script: {
+          enable: false
+        },
+        "monitor": {
+          password: "passy"
+        }
+      },
+      mysql: {
+        server_root_password: "password"
+
+      }
+    }
+
+  - name: ebiz-tools
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-utilities::hostsfile_internal]
+      - role[ebiz-tools]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      jmh_server: {
+        environment: "_default"
+      },
+      jmh_operations: {
+        archivedb: {
+          backup_dir: '/var/lib/archivedb'
+        },
+        backup_root: '/var/lib',
+        # encryption_backup_root: '/encrypted',
+        shared_folder: {
+         root_directory: '/var/lib'
+        },
+        subversion: {
+          repos: ['jmmdhs']
+        }
+      },
+      mysql: {
+        server_root_password: "password"
+      }
+    }
+
+  - name: analytics
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-operations::analytics]
+      - recipe[jmh-operations::cert_check]
+      - recipe[jmh-myjmh::db]
+      - recipe[jmh-operations::zipsync]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      mysql: {
+        server_root_password: 'password'
+      },
+      jmh_myjmh: {
+        myjmh_command: {
+          db_password: 'password'
+        }
+      },
+      jmh_operations: {
+        analytics: {
+          db: {
+            password: 'password'
+          }
+        }
+      }
+    }
+
+
+  - name: supportportal
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-myjmh::admin]
+      - recipe[jmh-prereg::admin]
+      - recipe[jmh-webproxy::supportportal]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true
+    }
+
+
+  - name: bamboo
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-bamboo]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_bamboo: {
+        mysql: {
+          password: 'bamboo'
+        },
+        mybase_bamboo_url: 'http://localhost:8085/bamboo',
+        use_local_download: false,
+        executables: [{
+            app_name: 'apache-maven-3.2.5',
+            url: 'http://mirror.olnevhost.net/pub/apache//maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz'
+        }]
+      },
+      sonarqube: {
+        jdbc: {
+           password: "password"
+        }
+      }
+    }
+
+  - name: dispatcher
+    run_list:
+      - role[base]
+      - recipe[jmh-cq::dispatcher-testmode]
+      - recipe[jmh-webserver::api]
+      - recipe[jmh-webserver::webcommon]
+      - recipe[jmh-webserver::app_widgets]
+      - recipe[jmh-webserver::idp]
+      - recipe[jmh-webserver::jmhhr]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      jmh_webserver: {
+        customphonebook: {
+          install: true
+        }
+      }
+    }
+
+  - name: splunk
+    run_list:
+      - role[base]
+      - recipe[jmh-splunk::server]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true
+    }
+
+  - name: pingfederate
+    run_list:
+      - role[base]
+      - recipe[jmh-pingfed::pingfederate]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+
+  - name: pingfed-cluster
+    run_list:
+      - role[base]
+      - recipe[jmh-pingfed::pingfederate-console]
+      - recipe[jmh-pingfed::pingfederate-engine]
+    attributes: {
+      test_run: true
+    }
+
+  - name: mychart
+    run_list:
+       - role[base]
+       - recipe[jmh-webserver::mychart_proxy]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true
+    }
+
+
+  - name: jenkins
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-ci]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true
+    }
+
+  - name: apps07
+    run_list:
+    - role[base]
+    - recipe[jmh-myjmh::default]
+    - role[apps07]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_myjmh: {
+        profile: {
+          db: {
+            mrn_password: 'mrnpass'
+          }
+        },
+        profile_client: {
+          db: {
+            password: 'password'
+          }
+        },
+        profile_api: {
+          nodejs_newrelic_enabled: true
+        }
+      }
+    }
+
+  - name: apps08
+    run_list:
+      - role[base]
+      - recipe[jmh-vvisits::vvisits_api]
+      - recipe[jmh-vvisits::mongodb]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true,
+      mongodb: {
+        admin: {
+          password: 'adminpassword'
+        }
+      },
+      jmh_vvisits: {
+        api: {
+          nodejs_newrelic_enabled: true,
+          mongodb: {
+            password: 'password'
+          }
+        }
+      }
+    }
+
+  - name: payment-gateway
+    run_list:
+      - role[base]
+      - recipe[jmh-paygateway::payment_gateway]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+
+  - name: ebizdev1
+    run_list:
+      - role[jmh-local]
+      - role[idev-sbo]
+      - role[idev-jmpn]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }
+
+  - name: ebizdev2
+    run_list:
+      - role[jmh-local-no-awsvpn]
+      - role[idev-mdsuspension]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run : true,
+      mysql: {
+        server_root_password: "password"
+      },
+      jmh_idev: {
+        mdsuspension: {
+          db: {
+            password: "mdsuspensionpassword"
+          }
+        }
+      }
+    }
+
+  - name: ebizdev3
+    run_list:
+      - role[jmh-local]
+      - recipe[jmh-idev::jmhapp_webserver]
+      - recipe[jmh-idev::kcadapter]
+    provisioner:
+      client_rb:
+        environment: awspoc
+    attributes: {
+      test_run: true
+    }

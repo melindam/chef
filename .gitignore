@@ -1,0 +1,17 @@
+.project
+.idea
+.rake_test_cache
+.vagrant
+.secret
+.settings
+test/nodes
+test/roles
+Berksfile.lock
+Gemfile.lock
+.metadata
+DS_Store
+.DS_Store?
+.Trashes
+ehthumbs.db
+Thumbs.db
+.chef/pems

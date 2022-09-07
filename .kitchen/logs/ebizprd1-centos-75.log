@@ -1,0 +1,64 @@
+I, [2019-09-27T12:08:42.710218 #10992]  INFO -- ebizprd1-centos-75: -----> Converging <ebizprd1-centos-75>...
+I, [2019-09-27T12:08:42.710656 #10992]  INFO -- ebizprd1-centos-75: Preparing files for transfer
+I, [2019-09-27T12:08:42.710730 #10992]  INFO -- ebizprd1-centos-75: Preparing dna.json
+I, [2019-09-27T12:08:42.711137 #10992]  INFO -- ebizprd1-centos-75: Resolving cookbook dependencies with Berkshelf 7.0.6...
+I, [2019-09-27T12:08:56.198036 #10992]  INFO -- ebizprd1-centos-75: Removing non-cookbook files before transfer
+I, [2019-09-27T12:08:56.369376 #10992]  INFO -- ebizprd1-centos-75: Preparing data_bags
+I, [2019-09-27T12:08:56.410558 #10992]  INFO -- ebizprd1-centos-75: Preparing environments
+I, [2019-09-27T12:08:56.412072 #10992]  INFO -- ebizprd1-centos-75: Preparing nodes
+I, [2019-09-27T12:08:56.462778 #10992]  INFO -- ebizprd1-centos-75: Preparing roles
+I, [2019-09-27T12:08:56.476128 #10992]  INFO -- ebizprd1-centos-75: Preparing secret
+I, [2019-09-27T12:08:56.476589 #10992]  INFO -- ebizprd1-centos-75: Preparing validation.pem
+I, [2019-09-27T12:08:56.477387 #10992]  INFO -- ebizprd1-centos-75: Preparing client.rb
+I, [2019-09-27T12:08:56.482469 #10992]  INFO -- ebizprd1-centos-75: [SSH] connection failed, retrying in 1 seconds (#<Errno::ECONNREFUSED: Connection refused - connect(2) for 127.0.0.1:2222>)
+I, [2019-09-27T12:08:57.483528 #10992]  INFO -- ebizprd1-centos-75: [SSH] connection failed, retrying in 1 seconds (#<Errno::ECONNREFUSED: Connection refused - connect(2) for 127.0.0.1:2222>)
+I, [2019-09-27T12:08:58.490114 #10992]  INFO -- ebizprd1-centos-75: [SSH] connection failed, retrying in 1 seconds (#<Errno::ECONNREFUSED: Connection refused - connect(2) for 127.0.0.1:2222>)
+I, [2019-09-27T12:08:59.499908 #10992]  INFO -- ebizprd1-centos-75: [SSH] connection failed, retrying in 1 seconds (#<Errno::ECONNREFUSED: Connection refused - connect(2) for 127.0.0.1:2222>)
+W, [2019-09-27T12:09:00.503732 #10992]  WARN -- ebizprd1-centos-75: [SSH] connection failed, terminating (#<Errno::ECONNREFUSED: Connection refused - connect(2) for 127.0.0.1:2222>)
+E, [2019-09-27T12:09:00.798841 #10992] ERROR -- ebizprd1-centos-75: Converge failed on instance <ebizprd1-centos-75>.
+E, [2019-09-27T12:09:00.798978 #10992] ERROR -- ebizprd1-centos-75: ------Exception-------
+E, [2019-09-27T12:09:00.799001 #10992] ERROR -- ebizprd1-centos-75: Class: Kitchen::ActionFailed
+E, [2019-09-27T12:09:00.799018 #10992] ERROR -- ebizprd1-centos-75: Message: SSH session could not be established
+E, [2019-09-27T12:09:00.799032 #10992] ERROR -- ebizprd1-centos-75: ----------------------
+E, [2019-09-27T12:09:00.799045 #10992] ERROR -- ebizprd1-centos-75: ------Backtrace-------
+E, [2019-09-27T12:09:00.799058 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/provisioner/base.rb:91:in `rescue in call'
+E, [2019-09-27T12:09:00.799073 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/provisioner/base.rb:67:in `call'
+E, [2019-09-27T12:09:00.799087 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:408:in `block in converge_action'
+E, [2019-09-27T12:09:00.799100 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:551:in `synchronize_or_call'
+E, [2019-09-27T12:09:00.799114 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:513:in `block in action'
+E, [2019-09-27T12:09:00.799128 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/2.5.0/benchmark.rb:293:in `measure'
+E, [2019-09-27T12:09:00.799142 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:512:in `action'
+E, [2019-09-27T12:09:00.799155 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:404:in `converge_action'
+E, [2019-09-27T12:09:00.799190 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:382:in `block (2 levels) in transition_to'
+E, [2019-09-27T12:09:00.799204 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/lifecycle_hooks.rb:45:in `run_with_hooks'
+E, [2019-09-27T12:09:00.799216 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:381:in `block in transition_to'
+E, [2019-09-27T12:09:00.799226 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:380:in `each'
+E, [2019-09-27T12:09:00.799237 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:380:in `transition_to'
+E, [2019-09-27T12:09:00.799249 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:140:in `converge'
+E, [2019-09-27T12:09:00.799259 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/command.rb:197:in `public_send'
+E, [2019-09-27T12:09:00.799270 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2019-09-27T12:09:00.799281 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2019-09-27T12:09:00.799292 #10992] ERROR -- ebizprd1-centos-75: ----End Backtrace-----
+E, [2019-09-27T12:09:00.799303 #10992] ERROR -- ebizprd1-centos-75: ---Nested Exception---
+E, [2019-09-27T12:09:00.799313 #10992] ERROR -- ebizprd1-centos-75: Class: Kitchen::Transport::SshFailed
+E, [2019-09-27T12:09:00.799324 #10992] ERROR -- ebizprd1-centos-75: Message: SSH session could not be established
+E, [2019-09-27T12:09:00.799334 #10992] ERROR -- ebizprd1-centos-75: ----------------------
+E, [2019-09-27T12:09:00.799344 #10992] ERROR -- ebizprd1-centos-75: ------Backtrace-------
+E, [2019-09-27T12:09:00.799355 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/provisioner/base.rb:91:in `rescue in call'
+E, [2019-09-27T12:09:00.799366 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/provisioner/base.rb:67:in `call'
+E, [2019-09-27T12:09:00.799377 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:408:in `block in converge_action'
+E, [2019-09-27T12:09:00.799388 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:551:in `synchronize_or_call'
+E, [2019-09-27T12:09:00.799398 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:513:in `block in action'
+E, [2019-09-27T12:09:00.799409 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/2.5.0/benchmark.rb:293:in `measure'
+E, [2019-09-27T12:09:00.799420 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:512:in `action'
+E, [2019-09-27T12:09:00.799431 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:404:in `converge_action'
+E, [2019-09-27T12:09:00.799442 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:382:in `block (2 levels) in transition_to'
+E, [2019-09-27T12:09:00.799452 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/lifecycle_hooks.rb:45:in `run_with_hooks'
+E, [2019-09-27T12:09:00.799463 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:381:in `block in transition_to'
+E, [2019-09-27T12:09:00.799485 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:380:in `each'
+E, [2019-09-27T12:09:00.799497 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:380:in `transition_to'
+E, [2019-09-27T12:09:00.799508 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/instance.rb:140:in `converge'
+E, [2019-09-27T12:09:00.799519 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/command.rb:197:in `public_send'
+E, [2019-09-27T12:09:00.799530 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2019-09-27T12:09:00.799541 #10992] ERROR -- ebizprd1-centos-75: /opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/test-kitchen-1.23.2/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2019-09-27T12:09:00.799552 #10992] ERROR -- ebizprd1-centos-75: ----End Backtrace-----

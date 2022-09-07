@@ -1,0 +1,99 @@
+############### Start Vagrant Section ###############
+driver:
+  name: vagrant
+provisioner:
+  name: chef_zero
+  product_name: chef
+  product_version: '15.0.12'
+  environments_path: test/environments
+  data_bags_path: ./data_bags
+  roles_path: test/roles
+  nodes_path: test/nodes
+  client_rb:
+    chef_license: accept
+    environment: awsdev
+
+platforms:
+  - name: windows-2012r2
+    provisioner:
+      encrypted_data_bag_secret_key_path: .secret
+    driver:
+      box: mwrock/Windows2012R2
+# ############# End Vagrant Section ###############
+############### Start EC2 Section ###############
+#
+# 1. install aws bundle: http://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-bundle-other-os
+# 2. run aws configure
+# 3. answer the key and access question.  It will create ~/.aws/credentials
+
+#driver:
+#  name: ec2
+#  security_group_ids: ["sg-587d163d"]
+#  region: us-west-1
+#  availability_zone: us-west-1b
+#  subnet_id: subnet-15e01d4c
+#  instance_type: t2.medium
+#  associate_public_ip: true
+#  interface: dns
+#  shared_credentials_profile: default
+#
+#transport:
+#  ssh_key: .chef/pems/jmh_ebiz.pem
+#  connection_timeout: 10
+#  connection_retries: 5
+#  username: centos
+#
+#provisioner:
+#   name: chef_zero
+#   product_name: chef
+#   product_version: '15.0.12'
+#   environments_path: test/environments
+#   data_bags_path: ./data_bags
+#   roles_path: test/roles
+#   nodes_path: test/nodes
+#   client_rb:
+#    environment: awsdev
+#
+#platforms:
+#   - name: windows-2012r2
+#     provisioner:
+#       encrypted_data_bag_secret_key_path: .secret
+#     transport:
+#       username: testkitchen
+#       password: password
+
+
+############### End EC2 Section ###############
+
+suites:
+
+  - name: winbase
+    run_list:
+      - recipe[jmh-server::default]
+    attributes: {
+      test_run : true
+    }
+
+  - name: winiis
+    run_list:
+      - recipe[jmh-server::default]
+      - recipe[jmh-iis::default]
+    attributes: {
+      test_run : true
+    }
+
+  - name: bamboo-agent
+    run_list:
+      - recipe[jmh-server::default]
+      - recipe[jmh-bamboo::remote_agent_win]
+    attributes: {
+      test_run : true
+    }
+
+  - name: neprofile-access
+    run_list:
+      - recipe[jmh-server::default]
+      - recipe[jmh-infosec::neprofile-neaccess]
+    attributes: {
+      test_run : true
+    }
