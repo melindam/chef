@@ -1,0 +1,7 @@
+{
+  "comment": "Daniela Penati",
+  "groups": ["devadmin"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDSRAaO//xG+ZVqJn1UWfVLihzZR+VWMd4+Q83zKNc55Yl8qfb8EvqYsu+RA7CJiENzogGo2CrijLYkpFk+j2CwU4Roe5w9kHti+kMm6utG4cKnrapYMPr4yYUSusbDO8uaUaP2GZnL+tWiA/wUKs0AZitQksDboB9Qyu7wveWMtBE0+NZTXEjW2ujghAwTV9Hb23k80kEUrccFc+pyfh/0YRAqjiqFz/woKFowJcMRDGBpEJljqpeDw/XWgZr0IQUdPPqoOWCg9EIvx6695cCJG2nk8du4TAPR47yqiDav7nZodM7VZuGjWJ5SUHKBd0EEVSzpOISADj1cpWeAnNICgNklg5rEAS0wmM+hHD95Eq871WgCQ6H6XN7RuAUKbieuc130kpjsECsxdaYcJesNw5bVLQosl+KOeKUgdKgMy4vQmHhlhwyoIDqC3J3mumsxM5vEjkB9Z2XP0Gr3XMACpZ5z2HWmyVFCKMA5ZeyjGTPHyH97L3tGGTha7iLGZDdzJxc7nfDUiaNn+wRAdEFAPerNbLhbfRh7V1Avd3yjVNr1NKDsR705MNkmbjzGXRgK5B93m7qOt/fHJ5ccvUlFC9voS2dcf52bvWn9tWAw/8/m+kNHa8tz+DmxjwEnsrhiJb/Rx8U44Uc7uFPYxLVl/pRMfZrvAazxafaInAeXsw== Daniela Penat",
+  "id": "daniela",
+  "shell": "/bin/bash"
+}

@@ -1,0 +1,12 @@
+name 'jmh-vvisits'
+maintainer 'Melinda Moran'
+maintainer_email 'melinda.moran@johnmuirhealth.com'
+license 'all_rights'
+description 'Installs/Configures jmh-vvisits'
+long_description 'Installs/Configures jmh-vvisits'
+version '0.2.10'
+
+depends 'jmh-encrypt'
+depends 'jmh-nodejs'
+depends 'jmh-utilities'
+depends 'jmh-mongodb'

@@ -1,0 +1,31 @@
+{
+  "id": "idev",
+  "nas_mount_username": {
+    "encrypted_data": "djSdtiJBLfrwJUcjwMjfhFk4R12tfukv3gy5c9U=\n",
+    "iv": "UUB7+iZbU/wTRpkt\n",
+    "auth_tag": "weaDlhHptO01ByubzdxvPQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "nas_mount_password": {
+    "encrypted_data": "ntDjDcSVWW51J+jrEqxGBhmLrNibtpvJVUibiWfKgw==\n",
+    "iv": "gxMJ/k70ndxhSkI2\n",
+    "auth_tag": "eH+TKfab0zM9+7h+tQlLTQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "comhub": {
+    "encrypted_data": "Mszzzpb/xs4jN38Hi4vFgHaxzPioMbfyNBXI5Q4nL+AAPCiL3cgArxhNK1+a\nK2kN1dGaa11/4O9X5rJvBtWb0IiA2tnOJV5poz7l+GKNzCabOCRb0B6fqg==\n",
+    "iv": "j/Y/PDW7DcjAQjls\n",
+    "auth_tag": "x/judhcK6dzHUfxSwhqg7w==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "mdsuspension": {
+    "encrypted_data": "MysspGgcOf3s8x6zyHsge7HO0Mz4SQT5Kui4s7VoNP5E/Lc48qeKlRrdsOS/\nrfEnUcxjNKn/BUNJV0fmUOqJxlANdtJKaLhYAGH14Sa2f4PS49Tv4o4isiQp\nCWiomLmISIW9\n",
+    "iv": "s6Yepv4/D9fUkrVH\n",
+    "auth_tag": "IOIr/f0y1yj9TGFPPwX1zA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

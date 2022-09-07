@@ -1,0 +1,11 @@
+# For the sensu-backend service, inside /etc/rsyslog.d/99-sensu-backend.conf
+if $programname == 'sensu-backend' then {
+        /var/log/sensu/sensu-backend.log
+        ~
+}
+
+# For the sensu-agent service, inside /etc/rsyslog.d/99-sensu-agent.conf
+if $programname == 'sensu-agent' then {
+        /var/log/sensu/sensu-agent.log
+        ~
+}

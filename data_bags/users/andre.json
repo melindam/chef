@@ -1,0 +1,7 @@
+{ 
+  "comment": "Andre Krichikov",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7nr3YmlcnuOB9ZOuUoID3vuRpyfn9YPanP2IqS9imQ/ZpcV/AmvIMnn9VpFI47Ehnr3y42JsWAnL7fuZPnY/+AH8Bep25W5Zgz46bOTdEuh0ukZ4UG7ML2+Ysd+la3/25L2knm9x8kjHjPvoW75ig1uvYtDBp/nPy9zQoHPAOVhzjm2IJq7t/makLke7AYJkGA2xL7XqS9zV03bdXrH6Zk6PfdyeqIdNomYsqiEGDDJNrT/9zviuze7ORDTQfV8AouyDnV1YUCTdHRlgI0Hgp/R/MD1hE3XRx3Gmt8clnyc1FcuPB4eyhyHBLpiqFjOmNNLc2zkI50vYs6aEd9Olh3pKH4TT1uzKACrm3KGbx9kRljHcoDNq5Uzu7Kvz3cnHPTU2idjpAtCQO1bk008jGdQdNsYcEY8ftzRjHXIYLxY7wyytesvKeRa/Ojt9NCqAahnxibLElAm9zitNwOJd7vPV50PKhywP5YDk6sLP9zMvPTFp7GVwc+g9X/PGLLm/YM09sPGtPM3i74ARSegdBizRQNR9bwHc+SNASRyeuGiwMgofWDQygZN6hmV8dICFVoEbHvu2h8Gkg88S8cqbxLEF6rbA0Wenyr+fizus4rJGKIPsIrYq5OBhUEwYl4qP/sF68UYyEtYY0OnCGp+UK1YpzXySnrL5KY8V/vYZZwQ== Andre Krichikov",
+  "id": "andre",
+  "shell": "/bin/false"
+}

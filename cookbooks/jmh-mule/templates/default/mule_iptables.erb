@@ -1,0 +1,4 @@
+# JMH MULE SERVERS
+<% @portlist.each_key do |iptable_port| %>
+-A FWR -p tcp -m multiport --dport <%= iptable_port %> -j <%= @portlist[iptable_port]['target'] %>
+<% end %>

@@ -1,0 +1,40 @@
+#!/bin/sh
+#set -x
+
+ADDRESS="<%= node['jmh_billpay']['transfer']['addresses'].join(',') %>"
+
+BINDIR="<%= node['jmh_billpay']['transfer']['bindir'] %>"
+LOGFILE="<%= node['jmh_billpay']['transfer']['logfile'] %>"
+EPICLOGFILE="<%= node['jmh_billpay']['transfer']['epiclogfile']  %>"
+EMAIL=<%= !!node['jmh_billpay']['transfer']['email'] %>
+
+PROBLEM=0
+
+if [ "$1" = "-e"  ]
+then
+	EMAIL=true
+fi
+
+cd $BINDIR
+
+echo "**Now running EPIC export**" > $EPICLOGFILE
+./billpay_export_epic.sh >> $EPICLOGFILE 2>&1
+if [ $? -ne 0 ]
+then
+	PROBLEM=1
+fi
+
+echo "**Now running billpay export**" > $LOGFILE
+./billpay_export_ftp.sh >> $LOGFILE 2>&1
+if [ $? -ne 0 ]
+then
+	PROBLEM=1
+fi
+
+if [ $PROBLEM -ne 0 ]
+then
+	cat "$LOGFILE" | mail -s "Billpay Transfer ERRORS" $ADDRESS
+elif [ "$EMAIL" = "true" ]
+then
+	cat "$LOGFILE" | mail -s "Billpay Transfer Results" $ADDRESS
+fi

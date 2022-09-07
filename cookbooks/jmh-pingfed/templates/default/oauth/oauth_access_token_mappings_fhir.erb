@@ -1,0 +1,26 @@
+{
+  "attributeSources": [],
+  "attributeContractFulfillment": {
+    "token": {
+      "source": {
+        "type": "ADAPTER"
+      },
+      "value": "token"
+    }
+  },
+  "issuanceCriteria": {
+    "conditionalCriteria": []
+  },
+  "id": "authz_req|fhirhtmlform|FHIR",
+  "context": {
+    "type": "IDP_ADAPTER",
+    "contextRef": {
+      "id": "fhirhtmlform",
+      "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/fhirhtmlform"
+    }
+  },
+  "accessTokenManagerRef": {
+    "id": "FHIR",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/oauth/accessTokenManagers/FHIR"
+  }
+}

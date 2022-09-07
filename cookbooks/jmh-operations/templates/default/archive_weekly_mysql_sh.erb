@@ -1,0 +1,25 @@
+#!/bin/sh
+#set -x 
+
+WEEKAGO=`date --date "now -1week" +"%Y%m%d"`
+DAILYFILE="<%= @dailyfile %>"
+
+ARCHIVEDIR="<%= @backup_dir %>"
+
+<% @server_list.each do |n| %>
+#<%= n['name']%>
+cd $ARCHIVEDIR/weekly/<%= n['name'] %>
+for x in `find $ARCHIVEDIR/<%= n['name'] %>  -name "*${WEEKAGO}${DAILYFILE}*"`
+do
+	echo "Copying $x"
+	cp -rp $x ./
+done
+find . -mtime <%= @retention %> -exec rm -f {} \;
+
+if [ $? -ne 0 ]
+then
+  echo "Error with the copy"
+  exit 1
+fi
+
+<% end %>

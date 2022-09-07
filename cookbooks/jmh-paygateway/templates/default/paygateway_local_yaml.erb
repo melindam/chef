@@ -1,0 +1,41 @@
+# Dropped of by Chef!!
+# YAML config file overrides default and production 
+
+server:
+    port: <%= @https_port %>
+    log_dir: <%= @log_dir %>
+    host: <%= @hostname %>
+    https:
+        cert: <%= @cert %>
+        key: <%= @key %>
+    session:
+        db:
+            host: 127.0.0.1
+            port: 3306
+            user: <%= @db_username %>
+            password: <%= @db_password %>
+            database: pg    
+
+workday:
+    uri:
+        soapApi:
+            host: <%= node['jmh_paygateway']['workday']['host'] %>
+            path: /ccx/service/<%= @workday_jmh_location %>/Revenue_Management/v35.1
+        returnFromPayment: https://<%= @workday_url %>/<%= @workday_jmh_location %>/d/home.htmld
+    oauth:
+        clientID: <%= node['jmh_paygateway']['workday']['client_id'] %>
+        clientSecret: <%= node['jmh_paygateway']['workday']['client_secret'] %>
+        authorizationURL: https://<%= @workday_url %>/<%= @workday_jmh_location %>/authorize
+        tokenUrlHost: <%= node['jmh_paygateway']['workday']['host'] %>
+        tokenUrlPath: /ccx/oauth2/<%= @workday_jmh_location %>/token
+    wsSecurity:
+        usernameToken: <%= @workday_user_token %>
+        username: <%= @workday_username %>
+        password: <%= @workday_password %>
+        
+orbital:
+    auth:
+        hostedSecureID: <%= node['jmh_paygateway']['orbital']['secureid'] %>
+        hostedSecureAPIToken: <%= node['jmh_paygateway']['orbital']['apitoken'] %>
+    chaseServerUrl: https://<%= node['jmh_paygateway']['chase']['url'] %>
+    ourBaseUrl: https://<%= node['jmh_server']['global']['apache']['api']['server_name'] %>/gw

@@ -1,0 +1,12 @@
+name 'jmh-mongodb'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'All Rights Reserved'
+description 'Installs/Configures jmh-mongodb'
+long_description 'Installs/Configures jmh-mongodb'
+version '0.2.1'
+chef_version '>= 13.0'
+
+depends 'openssl'
+depends 'sc-mongodb'
+depends 'jmh-server'

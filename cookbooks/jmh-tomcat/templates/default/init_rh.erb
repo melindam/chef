@@ -1,0 +1,58 @@
+#!/bin/bash  
+# description: Tomcat Start Stop Restart  
+# processname: tomcat  
+# chkconfig: 234 20 80  
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:<%= @catalina_home %>/bin
+
+JAVA_HOME=<%= @java_home %>
+export JAVA_HOME
+
+# Directory where the Tomcat 7 binary distribution resides
+CATALINA_HOME=<%= @catalina_home %>
+
+# Directory for per-instance configuration files and webapps
+CATALINA_BASE=<%= @catalina_base %>
+
+# Use the Java security manager? (yes/no)
+TOMCAT7_SECURITY=<%= @use_security_manager %>
+
+PATH=$JAVA_HOME/bin:$PATH  
+export PATH  
+      
+      
+case $1 in  
+    start)  
+        <% if @systemd %>
+        echo "Redirecting to /bin/systemctl start <%= @tomcat_app %>.service"
+        /bin/systemctl start <%= @tomcat_app %>.service
+        <% else %>  
+        su - <%= @tomcat_user %> -c "$CATALINA_HOME/bin/startup.sh"
+        <% end %>  
+    ;;   
+    stop)  
+        <% if @systemd %>
+        echo "Redirecting to /bin/systemctl stop <%= @tomcat_app %>.service"
+        /bin/systemctl stop <%= @tomcat_app %>.service
+        <% else %>  
+        su - <%= @tomcat_user %> -c "$CATALINA_HOME/bin/shutdown.sh"  
+        <% end %>        
+    ;;   
+    version)     
+        su - <%= @tomcat_user %> -c "$CATALINA_HOME/bin/version.sh"  
+    ;;   
+    restart)  
+        <% if @systemd %>
+        echo "Redirecting to /bin/systemctl restart <%= @tomcat_app %>.service"
+        /bin/systemctl restart <%= @tomcat_app %>.service
+        <% else %>  
+        su - <%= @tomcat_user %> -c "$CATALINA_HOME/bin/shutdown.sh"  
+        sleep 3
+        su - <%= @tomcat_user %> -c "$CATALINA_HOME/bin/startup.sh"  
+        <% end %>  
+
+    ;;   
+    *)
+
+        echo "Usage: $0 [start|stop|version|restart]"
+    ;;
+esac      

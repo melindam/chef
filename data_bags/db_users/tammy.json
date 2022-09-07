@@ -1,0 +1,31 @@
+{
+  "comment": {
+    "encrypted_data": "lcWsPXWAzRJiupjSZ889ziqx1UtMJIIzpXaX9sjOxHY=\n",
+    "iv": "4XN5jh/DKQqc0QIC\n",
+    "auth_tag": "wjZVBfASoW+Rb2/+2d+FYg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "id": "tammy",
+  "password": {
+    "encrypted_data": "iWVyw90ABguyC1j6ouqgPi9lTKc7ErkPN1PbeMtROYUEgT4kqmA6lfpy4eWc\nQVS73khLFzYZj7OnWvtJ\n",
+    "iv": "4KhaCuFS2FSxAKAt\n",
+    "auth_tag": "YNnU6CDgR2cHGjAiZs6FfQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "active": {
+    "encrypted_data": "4vqRGtU3R7YehAn8CFfs6bKM4byI\n",
+    "iv": "fPY32FuirEkMk0K/\n",
+    "auth_tag": "i4jkqqU4JbCwGAu9gCWcuA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "access": {
+    "encrypted_data": "D1nyc8j4Ook0pxtkt0amrVT3GL4Joxb1ndiAdXEaWWiHfpA=\n",
+    "iv": "9nmtUtbwMHUs7Wc3\n",
+    "auth_tag": "63Z1S8LmZGtgKGOR3QzLwg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

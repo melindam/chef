@@ -1,0 +1,7 @@
+{ 
+  "comment": "Kelly Salamanca",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAxwoIEH1tdg4+xK+NZXwvw0FYn0Km3YWn6WCdok/93FGzvNeakJyPlNG+r/wrgqK8yH7Qgwnq2eKVo/CuRbeN3b8Kj09xcz0iTzjOtR1r+DpY/j8Rn54ZimgZvgMQd8W9EUOCKmmmLxOHz430hGeKp7fT0kkKJp1kS3WBAKVESU8Cn1/gxKxa9NkdNCYhCkmJ8MY7ZTfoyl/2+09cKk5dEs4u51l/lHscEeMXmW0OaLvB+JlePii3zVWPOo948ZixWeAzRFBDmAkLhy79XOFeF0YSbZQLxxTG8YKJSdRMwHh8Pdb9qVfenKAPPF1KAeFNxpzK0mP/9vwsk4TVA1lXCQ== rsa-key-20160721",
+  "id": "kelly",
+  "shell": "/bin/false"
+}

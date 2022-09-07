@@ -1,0 +1,49 @@
+{
+  "checks": {
+    "system_cpu_user_metrics": {
+      "type": "metric",
+      "command": "<%= @ruby_binary%> <%= @ruby_gems_dir%>/sensu-plugins-cpu-checks-<%= @plugin_hash['sensu-plugins-cpu-checks']%>/bin/metrics-user-pct-usage.rb --scheme :::environment:::.$(hostname)",
+      "subscribers":   <%= @cpu_subscribers.to_s %>,
+      "handlers": [
+        "relay"
+      ],
+      "interval": 60,
+      "ttl": 180
+    },
+    "system_cpu_metrics": {
+      "type": "metric",
+      "command": "<%= @ruby_binary%> <%= @ruby_gems_dir%>/sensu-plugins-cpu-checks-<%= @plugin_hash['sensu-plugins-cpu-checks']%>/bin/metrics-cpu-pcnt-usage.rb --scheme :::environment:::.$(hostname).cpu.total",
+      "subscribers":   <%= @cpu_subscribers.to_s %>,
+      "handlers": [
+        "relay"
+      ],
+      "interval": 60,
+      "ttl": 180
+    },
+   "cpu_check": {
+      "handlers": ["mailer"],
+      "command": "<%= @ruby_binary%> <%= @ruby_gems_dir%>/sensu-plugins-cpu-checks-<%= @plugin_hash['sensu-plugins-cpu-checks']%>/bin/check-cpu.rb -w 90",
+      "interval": 60,
+      "mail_to": <%= @mail_to%>,
+      "afterhours": true,
+      "occurrences" : 5,
+      "subscribers": <%= @cpu_subscribers.to_s %>
+   },
+   "metric_mysql_processes": {
+    "type": "metric",
+    "command": "<%= @ruby_binary%> <%= @ruby_gems_dir%>/sensu-plugins-mysql-<%= @plugin_hash['sensu-plugins-mysql']%>/bin/metrics-mysql-processes.rb -u <%= @mysql_user %> -p <%= @mysql_password %> -h 127.0.0.1 --scheme :::environment:::.$(hostname).mysql",
+    "subscribers": ["mysql"],
+    "handlers": ["relay"],
+    "interval": 60,
+    "ttl": 180
+   },
+  "metrics_ping": {
+    "type": "metric",
+    "command": "<%= @ruby_binary%> <%= @ruby_gems_dir%>/sensu-plugins-network-checks-<%= @plugin_hash['sensu-plugins-network-checks']%>/bin/metrics-ping.rb  --host <%= @ping_host %> --count 4 --timeout 60 --scheme :::environment:::.$(hostname).network",
+    "subscribers":   <%= @ping_subscribers.to_s %>,
+    "handlers": [ "relay" ],
+    "interval": 90,
+    "ttl": 180
+  }
+ }
+}

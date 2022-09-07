@@ -1,0 +1,48 @@
+#!/opt/chef/embedded/bin/ruby
+
+require 'find'
+require 'pathname'
+
+jar_paths = Hash.new
+Find.find('/usr/local/archiva/repositories') do |path|
+   next unless path =~ /.*\.[w|j]ar$/
+   jarfile = File.basename(path)
+   fullpath = File.dirname(path)
+   jargroup = Pathname(File.dirname(path)).parent
+   lastslash = fullpath.rindex('/') + 1
+   version = fullpath[lastslash..]
+   #puts "Jar is #{jarfile}"
+   #puts "Full dir is #{fullpath}"
+   #puts "Jar Group is #{jargroup}"
+   #puts "version is #{version}"
+   #jar_paths << path if path =~ /.*\.jar$/
+   if jar_paths[jargroup]
+    	jar_paths[jargroup][version] = path
+    else
+	jar_paths[jargroup] = { "#{version}" => path }
+    end
+
+end
+
+jar_paths.each do | group, jars |
+  puts "##{group}"
+  begin
+        if jars.length == 1
+           puts "#  Only 1 Version.  Leave it #{jars.keys[0]}"
+           next
+        end
+  	jar_sort = jars.keys.sort_by { |v| Gem::Version.new(v) }
+  	jar_sort.each  do |v|
+		unless v == jar_sort.last
+	        	puts "  rm -rf  #{File.dirname(jars[v])}"
+		else
+		  puts "#  keep #{v}"
+                end
+  	end
+  rescue ArgumentError
+	puts "#**Bad versions in #{group} #{jars.keys.to_s}"
+  end
+end
+
+puts "there are #{jar_paths.length} groups"
+# rm -rf data/ indexes/ temp/*

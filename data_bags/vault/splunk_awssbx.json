@@ -1,0 +1,5 @@
+{
+  "id": "splunk_awssbx",
+  "auth": "admin:password",
+  "secret": "notarealsecret"
+}

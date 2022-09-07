@@ -1,0 +1,13 @@
+name 'jmh-webproxy'
+maintainer 'Scott Marshall'
+maintainer_email 'scott.marshall@johnmuirhealth.com'
+license 'all_rights'
+description 'Installs/Configures jmh-webproxy'
+long_description 'Installs/Configures jmh-webproxy'
+version '0.2.25'
+
+depends 'hostsfile'
+depends 'jmh-billpay'
+depends 'jmh-myjmh'
+depends 'jmh-prereg'
+depends 'jmh-webserver'

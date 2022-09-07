@@ -1,0 +1,6 @@
+{ 
+  "comment": "Binh Lam LDAP Admin Account",
+  "groups": ["sysadmin"],
+  "id": "222538a",
+  "shell": "/bin/bash"
+}

@@ -1,0 +1,27 @@
+#!/bin/bash
+#set -x
+
+# To deploy canopy-client app to the apache document root.
+
+cd <%= @home_dir %>
+if cmp -s "./<%= @app_name %>.tgz" "./<%= @app_name %>.current.tgz"
+then
+	echo "Artifacts are the same. Not changing the backups"
+else
+	mv ./<%= @app_name %>.current.tgz ./<%= @app_name %>.prev.tgz 2> /dev/null
+	mv ./<%= @app_name %>.tgz ./<%= @app_name %>.current.tgz
+fi
+
+cd <%= @content_dir %>
+rm -rf ./<%= @app_name %>/*
+tar xzf <%= @home_dir %>/<%= @app_name %>.current.tgz
+if [ $? -eq 0 ]
+then
+   # cp -f <%= @misc_dir %>/environment.js ./<%= @app_name %>/app/environment.js
+   echo "Deployment complete"
+   exit 0
+else
+   echo "problem with untar"
+   exit 1
+fi
+

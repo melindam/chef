@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd <%= @backup_dir %>
+if [ $? -ne 0 ]
+then
+	exit 1
+else
+	rsync -azvr --size-only --delete --bwlimit=2000 -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' <%= @user %>@<%= @server['nat_ip'] && @jmh_local ? @server['nat_ip'] : @server['ipaddress']%>:/usr/local/archiva/repositories/* ./
+fi

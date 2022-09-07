@@ -1,0 +1,43 @@
+{
+  "name": "awstst",
+  "description": "My Chef environment",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+    "jmh_server": {
+        "environment": "dev",
+      "global": {
+          "apache": {
+            "www": {
+              "server_name": "www-tst.johnmuirhealth.com"
+            },
+            "idp": {
+              "server_name": "idp-tst.johnmuirhealth.com"
+            },
+            "prc": {
+              "server_name": "prc-tst.johnmuirhealth.com"
+            },
+            "jmhhr": {
+              "server_name": "www-tst.johnmuirhr.com"
+            },
+            "supportportal": {
+              "server_name": "supportportal-tst.johnmuirhealth.com"
+            },
+            "api": {
+              "server_name": "api-tst.johnmuirhealth.com"
+            }
+          }
+        },
+        "use_mail_relay": true
+    },
+    "jmh_epic": {
+        "environment": "tst"
+    }
+  }
+}

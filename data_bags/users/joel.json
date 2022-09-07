@@ -1,0 +1,7 @@
+{
+  "comment": "Joel Epps Hero Digital Contractor",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEjGOwbwVQipsV+YS6EkdLDrpYhQbl7jfG94NlGGhRTJuf+gKo7RsrsiDBa2DcpB4eO83MUJjfvHWZOkOe+6ZEcKSAuR9xHeevg8sv78dWd4PcxN5RikWkY/mav2ed5hyM5LAvGIB/v6cjxgzbiekO4n/Yk0EPajQvSZieTpzOjexzV8RpbK0kGhvsF1TkPcaxwe95qv4Sce4xnk/x4iPMGHHTspKii34FXJ3l4LoJgBm6bW7WR+rgevsUMPp0gmFHxRCqSNofts7ru4x6DMLfqGXuxfqiU00JiW8rAuV85jp7iGXz+Jl5n/EobKKrxdRFzb8fp0kaiUjGLQcmeqRDIC7XfXHCoCAZiilSefbZUYyRv/qapylc75UEASnBB6NBOsthWWay+ITVdyeTExpqrsvKZC0wgw4OuRohd98uB1L9HzKeQLeCla2Pn4Z9Ueemr3Y2S5IbnbyvDlFNdfoF8a3zOVDAeqLilvJH6zxo78Ekm3TL7OxadCrHEdwNqyBvOX4cFz2o/mfbDbzaUU5OxqcOKX2EE7ObvRQOzQIQcIILzV3P1PmfcvjUXTsI98XJC8l2B8SM8uMYayEjfJlPUq1/07uDLgOSRNoy8+LRdAddj8pdzBAWSP3uM828rCOd0cUQIaDyl80MW6HOwS9MU0fdC/wxLlPNjyV5tQEMiw== joel@herodigital.com",
+  "id": "joel",
+  "shell": "/bin/false"
+}

@@ -1,0 +1,59 @@
+# This job is used to create Canopy Health base 64 images to be used on their site.
+# Ensemble job picks up file from '<%= @export_dir %>' and placed on temp location in JMH network
+# Ensemble job sftp to id323h58@sftp.aperturecvo.com:/Home/id323h58/ID/Inbound/
+#!/bin/bash
+# set -x
+
+fTail='.jpg'
+image_dir='<%= @image_path %>'
+export_dir='<%= @export_dir %>'
+USER='<%= @db_user %>'
+PASSWD='<%= @db_password %>'
+Host='127.0.0.1'
+dB='<%= @db %>'
+firstLine=1
+
+Date=`date +%Y%m%d`
+
+outFile="${export_dir}/johnmuirhealth-${Date}.txt"
+> $outFile
+
+/usr/bin/mysql -u"$USER" -p"$PASSWD" -h"$Host" -D"$dB" -e'SELECT national_provider_id, first_name, last_name FROM doctor where has_profile_image = 1' |
+
+# Read through the piped result until it's empty.
+
+while read npi fname lname; do
+    if [[ $firstLine -eq 1 ]]
+    then
+       firstLine=0
+       echo "NPI|\"Firstname_Lastname\"|\"Bio\"|Base64_Image" > $outFile
+       continue
+    fi
+
+    fileName=$image_dir/$npi$fTail
+    eS="$npi|\"$fname $lname\"||"
+
+    if test ! -f $fileName
+    then
+        echo "Image File for $npi, $fname $lname does not exist."
+	      continue
+    fi
+
+	  etext=`base64 -w0 $fileName`
+    echo $eS$etext >> $outFile
+done
+
+# Permission changes for fad user to be able to read files
+chmod 664 $outFile
+
+# Find .txt files older than 3 days
+find -L ${export_dir} -type f -mtime +3 -exec rm -f {} \;
+
+# Check that file is more than 0 bytes, else fail script
+if test -s $outFile
+  then
+    exit 0
+  else
+    echo "Failure to create image file, exiting!"
+    exit 2
+  fi

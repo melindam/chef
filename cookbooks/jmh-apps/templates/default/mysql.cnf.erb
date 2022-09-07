@@ -1,0 +1,4 @@
+# Automated configuration file dropped off by Chef!
+[mysqld]
+<%= @config.map{|k,v| "#{k} = #{v}"}.join("\n") %>
+

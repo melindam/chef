@@ -1,0 +1,27 @@
+{
+  "id": "poc",
+  "mychart": {
+    "hostname": "epicmychartbld.hsys.local",
+    "ipaddress": "172.24.201.47",
+    "port": 443,
+    "protocol": "https",
+    "sso_context": "mychartpocsso",
+    "develop_token": "false",
+    "acordex": "FUFDPGW",
+    "mcm_mychart_context": "mychartmcmpoc",
+    "mcm_context": "interconnect-mychart-mobile-poc",
+    "mcm_check_hosts": { "POC": "epic18mchrtbld1.hsys.local"}
+  },
+  "interconnect": {
+    "hostname": "epicinternbgwsh.hsys.local",
+    "ipaddress": "172.24.201.16",
+    "port": 443,
+    "protocol": "https",
+    "context": "Interconnect-POC-eBiz",
+    "secure_context": "Interconnect-POC-eBiz-secured",
+    "check_hosts": { "POC": "epic18interbld1.hsys.local"},
+    "check_patient_mrn": "24043539",
+    "clientid": "3a1215dc-1187-4e16-9cf9-32c28a3bde7b"
+  },
+  "java_properties": [  ]
+}

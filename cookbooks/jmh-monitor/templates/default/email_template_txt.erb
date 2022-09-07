@@ -1,0 +1,17 @@
+<html>
+<h3>Informational Details</h3>
+<b>Check</b>: {{ .Check.Name }}<br>
+<b>Entity</b>: {{ .Entity.Name }}<br>
+<b>State</b>: {{ .Check.State }}<br>
+<b>Occurrences</b>: {{ .Check.Occurrences }}<br>
+<b>Sensu Server</b>: https://<%= @sensugo_servername %>/
+<h3>Check Output Details</h3>
+<b>Executed</b>: {{(UnixTime .Check.Executed).Format "2 Jan 2006 15:04:05"}}<br>
+<b>Last OK</b>: {{(UnixTime .Check.LastOK).Format "2 Jan 2006 15:04:05"}}<br>
+<b>Check Output</b>:
+<pre>
+  {{.Check.Output}}
+</pre>
+<br>
+
+</html>

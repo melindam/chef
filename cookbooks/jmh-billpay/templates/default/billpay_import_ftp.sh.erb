@@ -1,0 +1,39 @@
+#!/bin/bash
+set -x
+
+SERVER="<%= node['jmh_billpay']['ftp']['server'] %>"
+USER="<%= node['jmh_billpay']['ftp']['username'] %>"
+PASS="<%= node['jmh_billpay']['ftp']['password'] %>"
+EXT="<%= node['jmh_billpay']['ftp']['ext'] %>"
+DESTDIR="<%= node['jmh_billpay']['ftp']['destdir']['import'] %>"
+SOURCEDIR="<%= node['jmh_billpay']['ftp']['source']['import'] %>"
+
+clear
+# change local directory
+cd $DESTDIR
+
+#collect file names
+ftp -ni $SERVER <<EOF
+user $USER $PASS
+cd $SOURCEDIR
+mls *.txt import_list.txt
+quit
+EOF
+
+# create ftp action list
+echo >import_todo.lst user $USER $PASS
+echo >>import_todo.lst cd $SOURCEDIR
+while read N
+do
+    echo >>import_todo.lst get $N
+    #echo >>import_todo.lst delete $N
+done <import_list.txt
+
+echo >>import_todo.lst quit
+
+# ftp transfer process
+ftp -nv $SERVER <import_todo.lst
+
+# cleanup
+rm import_todo.lst
+rm import_list.txt

@@ -1,0 +1,156 @@
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.2.1 NAME 'securityAnswer'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.3.1 NAME 'securityQuestion'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.4.1 NAME 'verificationCode'
+	DESC 'email verification code'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.5.1 NAME 'jmhUID'
+	DESC 'UUID for JMH Federated integration'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.6.1 NAME 'ucsfUID'
+	DESC 'UCSF Federated UUID'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.7.1 NAME 'dob'
+    EQUALITY caseExactMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.8.1 NAME 'zip'
+    EQUALITY caseExactMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.3.9.1 NAME 'last4ssn'
+    EQUALITY caseExactMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    USAGE userApplications )    	
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.0.1 NAME 'jmhPatientID'
+	DESC 'JMH Patient ID'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.1.1 NAME 'ucsfPatientID'
+	DESC 'UCSF Patient ID'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.2.1 NAME 'jmhTypeID'
+	DESC 'JMH Type ID'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.3.1 NAME 'ucsfTypeID'
+	DESC 'UCSF Type Patient ID'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.4.1 NAME 'jmhMyChartAccountID'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.5.1 NAME 'ucsfMyChartAccountID'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.6.1 NAME 'jmhMyChartAccountIDType'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.7.1 NAME 'ucsfMyChartAccountIDType'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.8.1 NAME 'jmhMyChartLoginID'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.4.9.1 NAME 'jmhMyChartLoginIDType'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.5.0.1 NAME 'ucsfMyChartLoginID'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.5.1.1 NAME 'ucsfMyChartLoginIDType'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+attributetype ( 1.3.6.1.4.1.18060.0.4.5.2.1 NAME 'passwdToken'
+	DESC ''
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )	
+attributetype ( 1.3.6.1.4.1.18060.0.4.5.2.2 NAME 'canopyID'
+	DESC 'canopy permanent user id'
+	EQUALITY caseExactMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+	SINGLE-VALUE
+	USAGE userApplications )
+objectclass ( 1.3.6.1.4.1.18060.0.4.5.3.1 NAME 'canopyPerson'
+	AUXILIARY
+	MAY (securityAnswer $ securityQuestion $ verificationCode $ jmhUID $ ucsfUID $ 
+	dob $ zip $ last4ssn $ jmhPatientID $ ucsfPatientID $ jmhTypeID $ ucsfTypeID $
+	jmhMyChartAccountID $ ucsfMyChartAccountID $ jmhMyChartAccountIDType $ ucsfMyChartAccountIDType $ 
+	jmhMyChartLoginID $ jmhMyChartLoginIDType $ ucsfMyChartLoginID $ ucsfMyChartLoginIDType $
+	passwdToken $ canopyID) )

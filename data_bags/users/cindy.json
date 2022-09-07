@@ -1,0 +1,7 @@
+{
+  "comment": "Cindy Chen",
+  "groups": ["devadmin"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3nP/BqdN9FxqArDJP1mxAh+uTTGy0HdlAKn/8cdScKulOb2TyjUrPjRAseWbkFGW2umIBlQpVN9LlkJB6+DnuxukPItecgghoYCygWYAEt4SII9ybjD3UYH+lYlFZC2s805Y9kV4WE1l6vGqe6Ndy1IKiX/LdD+lewUIHpF0j9r1wIXqR4ZmlJg60ci6K3ShJvlAhkMGV/1s9YdnMLOQqUYxybAvEP9IqBdVH9gSvL3zQ/Kif1ztJJCtuJ5IGSjYuNnlYmLtCLeUEQaNcRCECNdKpycFxb4/6eLgzmU0nbQ7gVpIGkU9mj0lVKUv4jv4tvat9QzAFAOqkJtXvgkYT cindy@TEBIZ0156.local",
+  "id": "cindy",
+  "shell": "/bin/bash"
+}

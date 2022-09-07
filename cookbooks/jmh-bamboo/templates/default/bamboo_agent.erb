@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# description: Bamboo Agent
+# chkconfig: 234 21 81
+	       
+case "$1" in
+  start)
+	su - bamboo -c "cd /home/bamboo; export JAVA_HOME=<%= @java_home %>; \
+					<%= @java_home %>/bin/java -Dbamboo.home=<%= @agent_home %> -jar <%= @agent_name %>  <%= @bamboo_server %> start"
+	;;
+
+  stop)
+	su - bamboo -c "cd /home/bamboo; export JAVA_HOME=<%= @java_home %>; \
+				   <%= @java_home %>/bin/java -Dbamboo.home=<%= @agent_home %> -jar <%= @agent_name %>  <%= @bamboo_server %> stop"
+	;;
+	
+  restart)
+	$0 stop
+	sleep 5
+	$0 start
+	;;
+	
+  status)
+    ps ax | grep <%= @agent_home %>
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart|status}"
+	;;
+esac

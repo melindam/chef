@@ -1,0 +1,46 @@
+#
+# Author: Scott Marshall
+#
+# chkconfig: 345 99 1
+# Description: Bamboo server init
+# Provides: bamboo
+# Default-Start: 3 4 5
+# Default-Stop: 0 1 2 6
+
+BAMBOO_START="<%= @start_script %> start"
+BAMBOO_STOP="<%= @stop_script %> stop"
+BAMBOO_USER=<%= @user %>
+
+<% if @el -%>
+source /etc/rc.d/init.d/functions
+<% end -%>
+
+[ -x <%= @start_script %> ] || exit 1
+
+case "$1" in
+  start)
+    echo "Starting bamboo server"
+    <% if @el -%>
+    daemon --user $BAMBOO_USER $BAMBOO_START
+    <% else -%>
+    start-stop-daemon --start --quiet --user $USER --exec $BAMBOO_START
+    <% end -%>
+    ;;
+  stop)
+    echo "Stopping bamboo server"
+    $BAMBOO_STOP
+    ;;
+  restart)
+  	echo "Restarting bamboo server"
+  	$BAMBOO_STOP
+  	sleep 2
+  	$BAMBOO_START
+  	;;
+  status)
+    kill -0 `pgrep -u $BAMBOO_USER java` &> /dev/null
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+    exit 1
+    ;;
+esac

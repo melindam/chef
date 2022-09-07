@@ -1,0 +1,33 @@
+{
+  "id": "sso",
+  "stage_reset": {
+    "saved_users": {"3": {"username": "profilenonuser","crowd_username": "profilenonuser"},
+      "10584": {"username": "clinnine","crowd_username": "CP_MYCHART_10584_783EF18D"},
+      "4": {"username": "est3","crowd_username": "CP_MYCHART_4_361840EE"},
+      "2": {"username": "prdzambtwo","crowd_username": "CP_MYCHART_2_3588A791"},
+      "35483": {"username": "Prodtest07","crowd_username": "CP_MYCHART_35483_19BF722F"},
+      "5136": {"username": "prodtest1","crowd_username": "CP_MYCHART_5136_077E9E8C"},
+      "7304": {"username": "prodtest3","crowd_username": "CP_MYCHART_7224_2AB5C0FB"},
+      "5409": {"username": "prodtest4","crowd_username": "CP_MYCHART_5409_CEA57B3C"},
+      "96402": {"username": "prodtest5","crowd_username": "CP_MYCHART_96402_539ABC9C"},
+      "172917": {"username": "Prodtest7","crowd_username": "CP_MYCHART_172917_86FD9606"},
+      "10309": {"username": "prodtestassap","crowd_username": "CP_MYCHART_10309_8855C17C"},
+      "114283": {"username": "prodtestce","crowd_username": "CP_MYCHART_114283_C9A5070F"},
+      "53266": {"username": "prodtestclin","crowd_username": "CP_MYCHART_53266_C4A1934C"},
+      "163497": {"username": "prodtestrad","crowd_username": "CP_MYCHART_163497_7009BC36"},
+      "11578": {"username": "Testfour","crowd_username": "CP_MYCHART_11578_C729BC7F"}
+    },
+    "crowd_directory_id": "2686977",
+    "profilenonuser_password": "{PKCS5S2}IQg91Ax2gfSBuxo3eBT4ib7nbpElxmPP6CJlCNB3xU/27EUhgd3Hyi253RIl83er",
+    "default_password": "{PKCS5S2}WkDdlkPZ292vZkFtHqrMhf+mjo9Z69odnfrhlfcJEvDsS1OOGFwYZWWnLZuh5+1y",
+    "crowd_applications": {"1": "{PKCS5S2}gpbPTXPrIkAZJjCh0GNaqjAK/TcJUylK5B/PMrxa5pw+YjzK7SGgKKgAiNMuB75z",
+                            "2": "{PKCS5S2}pUXWJfSlOmoSzmxU2MsJc90FV6T1TPATeTbZcw22XtNJT9rXKBLdbxMvvcmD5DHA",
+                            "3": "{PKCS5S2}noHZcIfLGDVE0aQWk5vyieq2NYBrHd0+ym+ZS1hsY5Q03bG/K0i4CWYEzVX+Oowp",
+                            "425985": "{PKCS5S2}vwC9+/wMF6dqBY20z9vVSg30SkXMvQk4OVzDdnB1+YnQDZvAtK6Q1oCN5mno6ddP",
+                            "1015809": "{PKCS5S2}f42hseZjEiT3HJ5m41IuVvYeehlgT9P1twh06EQydsXjFFle0mtewiNnSL3iYzSc",
+                            "2260993": "{PKCS5S2}WTCElqZkZf7H+GjjXjjgrdSglL4+sMar0JCKoUAbfzbPgK3FIc5fEJkCsW68lrwq",
+                            "3047425": "{PKCS5S2}rf0yKbt8gxivi+DIdZssugykSEaXxMBEYV2JLGehMgGoP4COQ5joHkaECmA3L0FJ",
+                            "4554753": "{PKCS5S2}1UAeFyq3lwjo63mfrHR+10ivKsMhkd4mg7gOXMjJR6TOCU+Y+hOCLgGZRHQiBSmz"}
+  }
+
+}

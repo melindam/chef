@@ -1,0 +1,25 @@
+#
+# mod_deflate configuration
+#   DeflateCompressionLevel 9 is the HIGHEST (between 1-9) uses more CPU higher number
+#  SetOutputFilter DEFLATE enables compression for everything, so your AddOutputFilterByType instructions are not required
+## OK removed ## AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript
+#
+<IfModule mod_deflate.c>
+    SetOutputFilter DEFLATE
+
+#    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript
+
+    DeflateCompressionLevel 9
+ 
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    
+    DeflateFilterNote Input instream
+    DeflateFilterNote Output outstream
+    DeflateFilterNote Ratio ratio
+    
+    LogFormat '"%r" %{outstream}n/%{instream}n (%{ratio}n%%)' deflate
+    CustomLog logs/deflate.log deflate
+    
+</IfModule>

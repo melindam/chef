@@ -1,0 +1,19 @@
+# Dropped off by Chef!
+<Location /<%= @location%>>
+   DAV svn
+   SVNParentPath <%= @svn_repo_root %>
+
+   <Limit <%= @limits%>>
+      # Require SSL connection for password protection.
+      # SSLRequireSSL
+
+       AuthName "<%= @authname %>"
+       AuthType "<%= @authtype %>"
+       AuthBasicProvider crowd
+       CrowdAppName "<%= @crowdappname %>"
+       CrowdAppPassword "<%= @crowdapppassword %>"
+       CrowdURL "<%= @crowdurl %>"
+       Require <%= @require %>
+       <% if @authzuserauthoritative_enabled %>AuthzUserAuthoritative On<% end %>
+   </Limit>
+</Location>

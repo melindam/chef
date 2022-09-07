@@ -1,0 +1,7 @@
+name             'jmh-java'
+maintainer       'Scott Marshall'
+maintainer_email 'scott.marshall@johnmuirhealth.com'
+license          'all_rights'
+description      'Installs/Configures jmh-java'
+long_description 'Installs/Configures jmh-java with all necessary certificates installed into the keystore'
+version          '0.4.3'

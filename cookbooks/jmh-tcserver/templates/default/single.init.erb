@@ -1,0 +1,58 @@
+#
+# Author: Heavy Water Operations
+# 
+# chkconfig: 345 99 1
+# Description: <%= @app %> init script
+# Provides: <%= @app %>
+# Default-Start: 3 4 5
+# Default-Stop: 0 1 2 6
+
+BASE_SCRIPT="<%= @base_script %>"
+APP_NAME="<%= @app %>"
+APP_USER="<%= @user %>"
+
+<% if @el -%>
+source /etc/rc.d/init.d/functions
+<% end -%>
+
+[ -x <%= @base_script %> ] || exit 1
+
+# Being within current directory is requirement
+cd <%= @app_dir %>
+
+case "$1" in
+  start)
+    echo "Starting <%= @app %>"
+    <% if @el -%>
+    daemon --user $APP_USER $BASE_SCRIPT $APP_NAME start
+    <% else -%>
+    start-stop-daemon --start --quiet --user $APP_USER --exec $BASE_SCRIPT $APP_NAME start
+    <% end -%>
+    ;;
+  stop)
+  echo "Stopping <%= @app %>"
+    <% if @el -%>
+    daemon --user $APP_USER $BASE_SCRIPT $APP_NAME stop
+    <% else -%>
+    start-stop-daemon --stop --quiet --user $APP_USER --exec $BASE_SCRIPT $APP_NAME stop
+    <% end -%>
+    ;;
+  restart)
+    echo "Restarting <%= @app %>"
+    <% if @el -%>
+    daemon --user $APP_USER $BASE_SCRIPT $APP_NAME restart
+    <% else -%>
+    start-stop-daemon --stop --quiet --user $APP_USER --exec $BASE_SCRIPT $APP_NAME restart
+    <% end -%>
+    ;;
+  status)
+    # TODO: grep on app (this is going to give false positives)
+    su $APP_USER -c "$BASE_SCRIPT $APP_NAME status" | grep "NOT RUNNING"
+    [ $? -eq 0 ] && exit 1
+    exit 0
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+    exit 1
+    ;;
+esac

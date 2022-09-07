@@ -1,0 +1,13 @@
+# DO NOT MODIFY - Dropped off by Chef
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:<%= @chrome_path %>:<%= @node_path %>/bin:<%= @node_path %>/bin/node_modules
+
+export PATH

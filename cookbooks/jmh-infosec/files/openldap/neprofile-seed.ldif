@@ -1,0 +1,43 @@
+version: 1
+
+dn: o=neaccess
+objectClass: organization
+o: NEAccess App
+
+dn: ou=people,o=neaccess
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=group,o=neaccess
+objectClass: organizationalUnit
+ou: group
+
+dn: ou=disabled,o=neaccess
+objectClass: organizationalUnit
+ou: disabled
+
+dn: cn=system_user,ou=people,o=neaccess
+objectclass: top
+objectclass: inetOrgPerson
+objectclass: person
+objectclass: organizationalPerson
+sn: system_user
+cn: system_user
+
+dn: cn=neacces_users,ou=group,o=neaccess
+objectClass: top
+objectClass: groupOfNames
+cn: neaccess_users
+member: cn=system_user,ou=people,o=neaccess
+
+dn: cn=neacces_admins,ou=group,o=neaccess
+objectClass: top
+objectClass: groupOfNames
+cn: neaccess_admins
+member: cn=system_user,ou=people,o=neaccess
+
+dn: cn=administrators,ou=group,o=neaccess
+objectClass: top
+objectClass: groupOfNames
+cn: administrators
+member: cn=system_user,ou=people,o=neaccess

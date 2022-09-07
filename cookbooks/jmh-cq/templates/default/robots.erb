@@ -1,0 +1,11 @@
+User-agent: *
+<% if node['cq']['dispatcher']['robots']['disallow'] -%>
+<% Array(node['cq']['dispatcher']['robots']['disallow']).each do |section| -%>
+Disallow: <%= section %>
+<% end -%>
+<% end -%>
+<% if @sitemap_urls %>
+<% @sitemap_urls.each do |url| %>
+Sitemap: https://<%= @server_root %><%= url%>
+<% end %>
+<% end %>

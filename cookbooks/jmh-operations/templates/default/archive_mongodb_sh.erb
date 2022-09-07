@@ -1,0 +1,18 @@
+#!/bin/sh
+#set -x
+LOCALDIR=<%= @backup_dir %>
+MONGO_BACKUP_DIR=/home/jmhbackup/mongodb/
+
+<% @mongodb_server_list.each do |n| %>
+#<%= n['name'] %>
+cd ${LOCALDIR}/<%= n['name'] %>
+if [ $? -eq 0 ]
+then
+  <% if @dev_environments.include?(n['environment']) %>
+    rsync -avz -l --bwlimit=2000 --size-only --include  "*" -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' --del <%= @user %>@<%= n['ipaddress']%>:${MONGO_BACKUP_DIR} ./
+  <% else %>
+    rsync -avz -l --bwlimit=2000 --size-only -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' --del <%= @user %>@<%= n['ipaddress']%>:${MONGO_BACKUP_DIR} ./
+  <% end %>
+fi
+
+<% end %>

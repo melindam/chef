@@ -1,0 +1,7 @@
+{ 
+  "comment": "Justin Scricca",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+PhyAthpDxluN4xtrQ+QyGZ9qyFODqSSUR0y3kQRRdKFSZfmOwL1YlxH0Rm28Lc0cVRq4xlBZNyEv1E9Q0avUWsuY+A6+xJQfKjM80fDXsate5Jw/Bc/m4zVxTmWqp4KUzphDoov4AI9e+ask6COSjdvJQaAmmaP5/TCmlFFmFyB13vGnMEL0z5nmGCQALDoQo3b3W8x2qanpcnKjbf40OLGOwfa/uf3IDc+mvkG/QokJ7u76DA54fA1jXL2YqSI3w7LAPgn3YkS0E4/UF3qHDOEhxCKmJ/XEcBgkbtld7ZpOLf4p8nFtimxoaYguHNjpX6ymOX9DPTfCdBX1dyovJRoUOpKw07hNhfaDt8oyOd1lKCeBLutOvmGsdK7ZjmufyO5olnQzYt+t8sRP2SjCam5w+TfS4JNYOYU3znet27fy+I/5TNkJVMFzw4G1fxtAEqY5KAIqtzSJPnksdiJYMFMeyX1YyE8LlAhr/mS9iILqNtMGcOIzmuU85BwSBaIsDS4uydrK4T5drFyH/yEe1wGNwdddOuk4mYqmqkG8PFGE7141q1wXgMyFwDFoHx8HaYTB5+WS8ej7TmWuph85QhXSfuBCf4kqTlXuhffQHPP/ELlo9Udq3iA2ZUXagWScyuY/9JJoxw7I8jv4UAYdHOvw+T6thzk0GtzIOO50mQ== justin",
+  "id": "justin",
+  "shell": "/bin/bash"
+}

@@ -1,0 +1,11 @@
+ScriptAlias /cgi-bin/ "/var/www/cgi-bin/"
+<Directory "/var/www/cgi-bin">
+    AllowOverride None
+    Options None
+    <% if @legacy_apache %>
+    order deny,allow
+    deny from all
+    <% end %>
+    <%= @legacy_apache ? "allow from all" : "Require all Granted" %>
+</Directory>
+

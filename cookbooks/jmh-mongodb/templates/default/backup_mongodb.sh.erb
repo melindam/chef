@@ -1,0 +1,17 @@
+#!/bin/bash
+#set -x
+
+DATE=`date '+%Y%m%d_%H%M'`
+BACKUP_DIR=<%= @backup_dir %>
+PASSWD="<%= @db_password %>"
+
+for DB_NAME in `mongo -u admin -p ${PASSWD} --eval "printjson(db.adminCommand('listDatabases'))" | grep name | cut -d ":" -f2 | cut -d"\"" -f2`
+do
+
+  echo "===Mongodump started for ${DB_NAME}===" >> ${BACKUP_DIR}/backup_${DATE}.log 2>&1
+
+  /usr/bin/mongodump -vv --host "localhost:27017" --username admin --password ${PASSWD} --authenticationDatabase admin --db "${DB_NAME}" --archive="${BACKUP_DIR}/${DB_NAME}_${DATE}" --gzip >> ${BACKUP_DIR}/backup_${DATE}.log 2>&1
+
+done
+
+find -L $BACKUP_DIR -type f -mtime +2 -exec rm -f {} \;

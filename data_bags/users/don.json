@@ -1,0 +1,7 @@
+{
+  "comment": "Don Edwards Hero Digital",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwOWmqY1nY+e687xVLrtn21xEukyuKei3BhK0DQxW5XtAgZGW2HFpK9BxhpaKzWRzKuNjwlYUcEIY6W/FEbHQJtPW1Nw+FKB5r6Zyx1e0rSqEcnhEa90hmpHhwI+xMvZjVjlzDMeuB46X6vSEh9HFzbhIlOsJwFxtXuLgG7ggnPJW+caRR9J5dWbonIwhaSHccvt5zw2F+zZAzc7VWYeRfh7W6wQvnoaGwkSfJ9oS1lcJ6c7V/Hk1PgKorPefkmkZjs8Fh/SDHJYHMShtuf6k3nlmtx28hw+ElL9FKsmfBr7sEI8ksvvLJ8KgbFVjuxrQrZHNwOFM4ISX8AijqWlhF",
+  "id": "don",
+  "shell": "/bin/false"
+}

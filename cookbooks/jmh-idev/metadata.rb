@@ -1,0 +1,22 @@
+name 'jmh-idev'
+maintainer 'John Muir Health EBusiness'
+maintainer_email 'melinda.moran@johnmuirhealth.com'
+license 'All Rights Reserved'
+description 'Installs/Configures jmh-idev'
+long_description 'Installs/Configures jmh-idev'
+chef_version '>= 12.14' if respond_to?(:chef_version)
+issues_url 'https://github.com/JohnMuirHealth/chef-repo/issues'
+source_url 'https://github.com/JohnMuirHealth/chef-repo/'
+version '0.1.16'
+
+supports 'centos'
+
+depends 'jmh-crowd'
+depends 'jmh-db'
+depends 'jmh-nodejs'
+depends 'jmh-tomcat'
+depends 'jmh-server'
+depends 'jmh-utilities'
+depends 'jmh-webserver'
+depends 'mysql', '~> 8.5.0'
+depends 'openssl'

@@ -1,0 +1,6 @@
+#!/bin/sh
+# Dropped off by Chef!
+
+export PATH=<%= @nodejs_path %>/bin:$PATH
+
+<%= @nodejs_path %>/bin/node <%= @nodejs_path %><%= @node_command_path %> $@

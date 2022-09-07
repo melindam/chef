@@ -1,0 +1,13 @@
+
+Alias /physicianimages <%= @fad_folder %>
+
+<Directory <%= @fad_folder %>>
+    Options +Indexes
+    <% if @legacy_apache %>
+    order deny,allow
+    deny from all
+    allow from all
+    <% else %>
+    Require all Granted
+    <% end %>
+</Directory>

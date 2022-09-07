@@ -1,0 +1,38 @@
+{
+  "id": "secure",
+  "default_password": {
+    "encrypted_data": "f54ptZxqyq5gtcpgg694iu/BaPO3hVAqf8Kz\n",
+    "iv": "uTHR83le8uh/nK3a\n",
+    "auth_tag": "ryJF+QJp45Fkk1MlrsPqgA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "dev_password": {
+    "encrypted_data": "sbyEIVAUjuGQxrkOYzJnkLvTLjs0dPRDZl8a\n",
+    "iv": "eZhDWsoBEGnshw8g\n",
+    "auth_tag": "HwkCQpNJt6V2kiD80UPp3A==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "stage_password": {
+    "encrypted_data": "p7pj5sldGi/vl+O2Kdlnc7QLcd6dyH5VFCU7\n",
+    "iv": "FumHRNBjr1ubiylz\n",
+    "auth_tag": "KYZ8hgscf+IfzGil5MTwtg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_password": {
+    "encrypted_data": "vnyMTURziR3A42mXt+zbVMeRYbfYwEadYM/k\n",
+    "iv": "M6G6BfetkZX8hmLZ\n",
+    "auth_tag": "kr2F/4/oly3OlWKzh/PVtw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "keystore_password": {
+    "encrypted_data": "J4368sYRUfu61X3lrMiheZWKbS0BQdMos/rfZzxgFdA=\n",
+    "iv": "bOVy2JaXnuaUUb+D\n",
+    "auth_tag": "KrNJ2zRd6uWCR17TtRad8A==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

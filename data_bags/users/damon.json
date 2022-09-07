@@ -1,0 +1,7 @@
+{
+  "comment": "Damon Damele",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC9KrJNKLJlTWrxeos/Xkq7pxfakTOWXWOcHQpjZy4Ogu5X3H9WW0qrzLN6sUMSnjreavqvwMb4loFc+oSAkXUSEXUQk8RkL8Jf3SfjlL8JY6kWLTMi1UGtdL3WCMm/EY+v2xynTIDHd2rQA+bfONvKbvPooEPUGTmzwF9aRFgnFhfkYGZ2FpV5zsejuz9OhV7riJiNHKhBhIRTp4CaypnaUjKKInPIrsoGBATLBXxRmgahumc9KooDbptk6+GggIvWhb8ebo2AC71sZ2G9/fCn4A1sV+wZB91Hd1sHaWq04IOJwHSWpyXQ9Kfiwk11qGtfCHUob0C2D+1oQlRVGyCy17/ByQKnHsIvCBCM6baai0393xj7YM4fGLMRRMB9k18EAr8Xo46WET425iicvXBK0cQgcucn499R9yt01aNGMoFJV1KTA4yrtwC7aPqYQU8i1PXROjllh31GCi6+WQOWuBw+hXptzs4c4vWQctdaFaykmnhME2nCRLnC577ETY1+a0CMLGwmYlrr+v4bGj4JPrI6LxeQnzu40vFTmtAq0cvYMcl+bJRL90LjHBXiF5Kq5BA49yR3jfK4sH41DKeLRrgQj3e+M8iXicJc7MbQqgeKB2zOMRM88VbcoYPV2b3YlZaydvq7SkEahlfjX+wqhhwlhXKg6FE4ms4fcFwu4w== 106782",
+  "id": "damon",
+  "shell": "/bin/false"
+}

@@ -1,0 +1,11 @@
+name 'jmh-utilities'
+maintainer 'Scott Marshall'
+maintainer_email 'scott.marshall@johnmuirhealth.com'
+license 'all_rights'
+description 'Aides JMH Applications'
+long_description 'Series of utilities that aide jmh in building the infrastructure'
+version '0.1.21'
+
+depends 'hostsfile'
+depends 's3_file'
+depends 'jmh-java'

@@ -1,0 +1,52 @@
+{
+  "id": "repositories",
+  "remote_repositories": {
+
+    "snapshots":  { "org.springframework.maven.snapshot" :
+                          { "url" : "https://maven.springframework.org/snapshot/",
+                            "id" : "org.springframework.maven.snapshot",
+                            "name" : "Spring Maven Snapshot Repository",
+                            "order" : 2,
+                            "target_repo" : "org.springframework.maven.snapshot",
+                            "policies" : { "releases" : "always", "checksum" : "fail", "snapshots" : "always", "cache_failures" : "no" }
+                          },
+                      "apache.people.snapshots" :
+                        { "url" : "http://repository.apache.org/content/groups/snapshots-group/",
+                          "id" : "apache.people.snapshots",
+                          "name" : "Apache Snapshots",
+                          "order" : 5,
+                          "target_repo" : "apache.people.snapshots",
+                          "policies" : { "releases" : "always", "checksum" : "fail", "snapshots" : "always", "cache_failures" : "no" }
+                        },
+                     "spring-milestones" :
+                       { "url" : "https://repo.spring.io/milestone",
+                         "id" : "spring-milestones",
+                         "name" : "Spring Milestones",
+                         "order" : 6,
+                         "source_repo" : "snapshots",
+                         "policies" : { "cache_failures" : "no", "releases" : "always", "snapshots" : "always", "checksum" : "fail" }
+                       }
+    },
+    "internal":  {
+       "central" :
+         { "url" : "https://repo1.maven.org/maven2",
+          "id" : "central",
+          "name" : "Central Repository",
+          "order" : 1,
+          "whitelist_patterns" : ["**/*"],
+          "policies" : { "releases" : "once", "checksum" : "fix", "snapshots" : "never", "cache_failures" : "yes" } },
+       "adobe" :
+          { "url" : "https://repo.adobe.com/nexus/content/groups/public/",
+            "id" : "adobe-central",
+            "name" : "Adobe AEM Central Repository",
+            "order" : 3,
+            "target_repo" : "adobe",
+            "policies" : { "cache_failures" : "no", "releases" : "always", "snapshots" : "always", "checksum" : "fail" } },
+        "jboss" :
+          { "url" : "http://repository.jboss.org/nexus/content/groups/public/",
+            "id" : "jboss", "name" : "jboss",
+            "order" : 5,
+            "policies" : { "releases" : "always", "checksum" : "fail", "snapshots" : "always", "cache_failures" : "no" } }
+      }
+  }
+}

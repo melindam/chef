@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?><configuration>
+<version>2</version>
+<repositoryScanning>
+<fileTypes>
+<fileType>
+<id>artifacts</id>
+<patterns>
+<pattern>**/*.pom</pattern>
+<pattern>**/*.jar</pattern>
+<pattern>**/*.ear</pattern>
+<pattern>**/*.war</pattern>
+<pattern>**/*.car</pattern>
+<pattern>**/*.sar</pattern>
+<pattern>**/*.mar</pattern>
+<pattern>**/*.rar</pattern>
+<pattern>**/*.dtd</pattern>
+<pattern>**/*.tld</pattern>
+<pattern>**/*.tar.gz</pattern>
+<pattern>**/*.tar.bz2</pattern>
+<pattern>**/*.zip</pattern>
+</patterns>
+</fileType>
+<fileType>
+<id>indexable-content</id>
+<patterns>
+<pattern>**/*.txt</pattern>
+<pattern>**/*.TXT</pattern>
+<pattern>**/*.block</pattern>
+<pattern>**/*.config</pattern>
+<pattern>**/*.pom</pattern>
+<pattern>**/*.xml</pattern>
+<pattern>**/*.xsd</pattern>
+<pattern>**/*.dtd</pattern>
+<pattern>**/*.tld</pattern>
+</patterns>
+</fileType>
+<fileType>
+<id>auto-remove</id>
+<patterns>
+<pattern>**/*.bak</pattern>
+<pattern>**/*~</pattern>
+<pattern>**/*-</pattern>
+</patterns>
+</fileType>
+<fileType>
+<id>ignored</id>
+<patterns>
+<pattern>**/.htaccess</pattern>
+<pattern>**/KEYS</pattern>
+<pattern>**/*.rb</pattern>
+<pattern>**/*.sh</pattern>
+<pattern>**/.svn/**</pattern>
+<pattern>**/.DAV/**</pattern>
+<pattern>.index/**</pattern>
+<pattern>.indexer/**</pattern>
+</patterns>
+</fileType>
+</fileTypes>
+<knownContentConsumers>
+<knownContentConsumer>create-missing-checksums</knownContentConsumer>
+<knownContentConsumer>validate-checksum</knownContentConsumer>
+<knownContentConsumer>validate-signature</knownContentConsumer>
+<knownContentConsumer>index-content</knownContentConsumer>
+<knownContentConsumer>auto-remove</knownContentConsumer>
+<knownContentConsumer>auto-rename</knownContentConsumer>
+<knownContentConsumer>metadata-updater</knownContentConsumer>
+<knownContentConsumer>create-archiva-metadata</knownContentConsumer>
+<knownContentConsumer>duplicate-artifacts</knownContentConsumer>
+</knownContentConsumers>
+<invalidContentConsumers>
+<invalidContentConsumer>update-db-bad-content</invalidContentConsumer>
+</invalidContentConsumers>
+</repositoryScanning>
+<webapp>
+<ui>
+<showFindArtifacts>true</showFindArtifacts>
+<appletFindEnabled>true</appletFindEnabled>
+<disableEasterEggs>false</disableEasterEggs>
+<disableRegistration>false</disableRegistration>
+</ui>
+</webapp>
+<networkConfiguration>
+<usePooling>true</usePooling>
+</networkConfiguration>
+<redbackRuntimeConfiguration>
+<migratedFromRedbackConfiguration>true</migratedFromRedbackConfiguration>
+<ldapConfiguration>
+<port>-1</port>
+<ssl>false</ssl>
+<contextFactory>com.sun.jndi.ldap.LdapCtxFactory</contextFactory>
+<bindAuthenticatorEnabled>false</bindAuthenticatorEnabled>
+<writable>false</writable>
+<useRoleNameAsGroup>false</useRoleNameAsGroup>
+</ldapConfiguration>
+<useUsersCache>true</useUsersCache>
+<usersCacheConfiguration>
+<timeToIdleSeconds>14400</timeToIdleSeconds>
+<timeToLiveSeconds>14400</timeToLiveSeconds>
+<maxElementsInMemory>1000</maxElementsInMemory>
+<maxElementsOnDisk>0</maxElementsOnDisk>
+</usersCacheConfiguration>
+<userManagerImpls>
+<userManagerImpl>jdo</userManagerImpl>
+</userManagerImpls>
+<rbacManagerImpls>
+<rbacManagerImpl>jdo</rbacManagerImpl>
+</rbacManagerImpls>
+<configurationProperties>
+<security>
+<policy>
+<password>
+<rule>
+<alphanumeric>
+<enabled>false</enabled>
+</alphanumeric>
+<reuse>
+<enabled>true</enabled>
+</reuse>
+<alphacount>
+<minimum>1</minimum>
+<enabled>true</enabled>
+</alphacount>
+<characterlength>
+<maximum>30</maximum>
+<minimum>1</minimum>
+<enabled>true</enabled>
+</characterlength>
+<numericalcount>
+<enabled>false</enabled>
+<minimum>1</minimum>
+</numericalcount>
+<nowhitespace>
+<enabled>true</enabled>
+</nowhitespace>
+<musthave>
+<enabled>true</enabled>
+</musthave>
+</rule>
+<previous>
+<count>1</count>
+</previous>
+<expiration>
+<enabled>true</enabled>
+<days>360</days>
+</expiration>
+</password>
+<allowed>
+<login>
+<attempt>10</attempt>
+</login>
+</allowed>
+<unlockable>
+<accounts/>
+</unlockable>
+</policy>
+<rememberme>
+<path>/</path>
+<domain/>
+<secure>false</secure>
+<timeout>365</timeout>
+<enabled>true</enabled>
+</rememberme>
+<signon>
+<timeout>30</timeout>
+</signon>
+</security>
+<ldap>
+<config>
+<mapper>
+<attribute>
+<user>
+<id>cn</id>
+<object>
+<class>inetOrgPerson</class>
+</object>
+</user>
+<fullname>givenName</fullname>
+<password>userPassword</password>
+<email>mail</email>
+</attribute>
+</mapper>
+<max>
+<result>
+<count>0</count>
+</result>
+</max>
+<user>
+<attribute>uid</attribute>
+</user>
+<dn>dn</dn>
+<groups>
+<member>uniquemember</member>
+<class>groupOfUniqueNames</class>
+</groups>
+</config>
+</ldap>
+<email>
+<validation>
+<timeout>2880</timeout>
+<subject>Welcome to Archiva</subject>
+<required>true</required>
+</validation>
+</email>
+<redback>
+<default>
+<role>
+<guest>
+<id>guest</id>
+</guest>
+</role>
+<admin>admin</admin>
+</default>
+</redback>
+</configurationProperties>
+</redbackRuntimeConfiguration>
+<archivaRuntimeConfiguration>
+<fileLockConfiguration>
+<skipLocking>true</skipLocking>
+</fileLockConfiguration>
+<urlFailureCacheConfiguration>
+<timeToIdleSeconds>2700</timeToIdleSeconds>
+<timeToLiveSeconds>1800</timeToLiveSeconds>
+<maxElementsInMemory>1000</maxElementsInMemory>
+<maxElementsOnDisk>0</maxElementsOnDisk>
+</urlFailureCacheConfiguration>
+</archivaRuntimeConfiguration>
+<repositoryGroups>
+<% if @repository_groups %>
+<% @repository_groups.each do |reponame,repo| %>
+<repositoryGroup>
+<id><%= reponame %></id>
+<repositories>
+<% repo.each do |rgn| %>
+<repository><%= rgn %></repository>
+<% end %>
+</repositories>
+</repositoryGroup>
+<% end %>
+<% end %>
+</repositoryGroups>
+<managedRepositories>
+<% if @managed_repositories %>
+	<% @managed_repositories.each do |manname, manconfig| %>
+<managedRepository>
+<location><%= manconfig['location']%></location>
+<releases><%= manconfig['releases']? manconfig['releases'] : false %></releases>
+<blockRedeployments><%= manconfig['block_redeployments']? manconfig['block_redeployments'] : "false" %></blockRedeployments>
+<snapshots><%= manconfig['snapshots']? manconfig['snapshots'] : false %></snapshots>
+<scanned>true</scanned>
+<% if manconfig['cron'] %>
+<refreshCronExpression><%= manconfig['cron']%></refreshCronExpression>
+<% end %>
+<daysOlder><%= manconfig['days_older']? manconfig['days_older'] : "30" %></daysOlder>
+<deleteReleasedSnapshots>false</deleteReleasedSnapshots>
+<skipPackedIndexCreation>false</skipPackedIndexCreation>
+<stageRepoNeeded>false</stageRepoNeeded>			
+<id><%= manname %></id>
+<name><%= manconfig['name'] %></name>
+<% if manconfig['index_dir'] %><indexDir/><% end %>
+</managedRepository>
+	<% end %>
+<% end %>
+</managedRepositories>
+<!--
+<remoteRepositories>
+<% if @remote_repos %>
+<% @remote_repos.each do |remoteName, remoteconfig| %>
+	<remoteRepository>
+	<url><%= remoteconfig['url'] %></url>
+	<id><%= remoteconfig['id'] %></id>
+	<name><%= remoteconfig['name'] %></name>
+	<% if remoteconfig['username'] %>
+	<username><%= remoteconfig['username']%></username>
+	<% end %>
+	<% if remoteconfig['password'] %>
+	<password><%= remoteconfig['password']%></password>
+	<% end %>
+	</remoteRepository>
+<% end %>
+<% end %>
+</remoteRepositories>
+<proxyConnectors>
+
+<% if @remote_repos %>
+<% @remote_repos.each do |name, config| %>
+<proxyConnector>
+<targetRepoId><%= config['id'] %></targetRepoId>
+<% if config['order']%><order><%= config['order']%></order><% end %>
+<% if config['source_repo']%><sourceRepoId><%= config['source_repo']%></sourceRepoId><% end %>
+<% if config['proxy_id']%><proxyId><%= config['proxy_id']%></proxyId><% else %><proxyId/><% end %>
+	<% if config['whitelist_patterns']%>
+	<whiteListPatterns>
+		<% config['whitelist_patterns'].each do |pattern| %>
+		<whitelistPattern><%= pattern %></whitelistPattern>
+		<% end %>
+	</whiteListPatterns>
+	<% end %>
+	<% if config['policies'] %>
+	<policies>
+		<% if config['policies']['releases'] %><releases><%= config['policies']['releases']%></releases><% end %>
+		<% if config['policies']['checksum'] %><checksum><%= config['policies']['checksum']%></checksum><% end %>
+		<% if config['policies']['snapshots'] %><snapshots><%= config['policies']['snapshots']%></snapshots><% end %>
+		<% if config['policies']['cache_failures'] %><cache-failures><%= config['policies']['cache_failures']%></cache-failures><% end %>
+    </policies>
+	<% end %>
+</proxyConnector>
+<% end %>
+<%end %>
+</proxyConnectors>
+
+-->
+<remoteRepositories>
+<remoteRepository>
+<url>https://repo.maven.apache.org/maven2</url>
+<downloadRemoteIndex>false</downloadRemoteIndex>
+<downloadRemoteIndexOnStartup>false</downloadRemoteIndexOnStartup>
+<id>central</id>
+<name>Central Repository</name>
+</remoteRepository>
+</remoteRepositories>
+<proxyConnectors>
+<proxyConnector>
+<order>1</order>
+<sourceRepoId>internal</sourceRepoId>
+<targetRepoId>central</targetRepoId>
+<proxyId/>
+<whiteListPatterns>
+<whiteListPattern>**/*</whiteListPattern>
+</whiteListPatterns>
+<policies>
+<releases>once</releases>
+<checksum>fix</checksum>
+<snapshots>never</snapshots>
+<cache-failures>yes</cache-failures>
+</policies>
+<disabled>false</disabled>
+</proxyConnector>
+</proxyConnectors>
+<legacyArtifactPaths>
+<legacyArtifactPath>
+<path>jaxen/jars/jaxen-1.0-FCS-full.jar</path>
+<artifact>jaxen:jaxen:1.0-FCS:full:jar</artifact>
+</legacyArtifactPath>
+</legacyArtifactPaths>

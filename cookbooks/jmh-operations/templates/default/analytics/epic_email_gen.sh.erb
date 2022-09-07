@@ -1,0 +1,40 @@
+#!/bin/bash
+
+DATE=`date +%Y-%m-%d`
+OUTFILE=epic_$DATE.out
+SENDFILE=epic_ac_email_$DATE
+JAVA_HOME=<%= @java_home %>/bin
+EMAILS=<%= @emails %>
+INSTALL_DIR=<%= @install_dir %>
+E_DIR=<%= @ecrypt_dir %>
+
+mysql -h 127.0.0.1 -u <%= @dbuser %> -p'<%= @dbpassword %>' mychart --batch -s -N --execute "SELECT pat_mrn_id,myc_acss_code FROM online_patients WHERE deceased NOT LIKE 'Deceased' AND activatedate is null AND codegenerationdate BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 9 day) AND DATE_SUB(CURRENT_DATE, INTERVAL 3 day); " | sed 's/\t/,/g' > $E_DIR/$OUTFILE
+		
+cd $INSTALL_DIR
+cat $E_DIR/$OUTFILE | $JAVA_HOME/java -jar myjmh-command.jar -run emailExport -f '<%= @properties_file %>'  > $E_DIR/$SENDFILE_tmp.csv
+grep -v "WARNING\:" $E_DIR/$SENDFILE_tmp.csv > $E_DIR/$SENDFILE.csv
+if [ $? = 0 ]
+then
+       echo "You Results are attached" | mutt -a "$E_DIR/$SENDFILE.csv" -s "PHI MyJMH Email Activation Code for $DATE" -- $EMAILS
+fi
+
+
+# SFTP to Salesforce cloud
+SFTP_HOST="<%= @salesforce_host %>"
+PRIVATE_KEY="<%= @salesforce_key %>"
+SFTP_USER="<%= @ftp_user %>"
+SF_DIR="/Import/MyJMH_Activation"
+
+cd $E_DIR
+SFTP_COMMAND="sftp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=${PRIVATE_KEY} -b - ${SFTP_USER}@${SFTP_HOST}"
+
+printf "cd ${SF_DIR}\nput $SENDFILE.csv\nbye\n" | $SFTP_COMMAND
+
+if [ $? -ne 0 ]
+then
+	 echo "**PROBLEM DURING SFTP PROCESS**"
+	 exit 5;
+fi
+
+
+rm -f $E_DIR/$OUTFILE $E_DIR/$SENDFILE.csv $E_DIR/$SENDFILE_tmp.csv

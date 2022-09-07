@@ -1,0 +1,105 @@
+#!<%= @ruby_executable %>
+
+require 'net/http'
+require 'uri'
+require 'optparse'
+require 'net/http/post/multipart'
+require 'json'
+
+
+sleep_time = 10
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: deploy_aem_bundle.rb [options]"
+  opts.on('-u', '--username [aem username]', 'AEM Username') { |v| options['username'] = v }
+  opts.on('-p', '--password [pass]', 'AEM Password') { |v| options['password'] = v }
+  opts.on('-i', '--host [hostnameport]', 'hostname and port') { |v| options['host'] = v }
+  opts.on('-f', '--file [bundle_file]', 'Location of bundle file') { |v| options['file'] = v }
+  opts.on('-b', '--bundle [bundle name]', 'Location of bundle file') { |v| options['bundle'] = v }
+  opts.on('-h', '--help', 'Help') { puts opts
+  exit }
+end.parse!
+
+puts options['username']
+puts options['password']
+puts options['host']
+puts options['file']
+puts options['bundle']
+
+if options['username'].nil?
+  raise OptionParser::MissingArgument, "Need to specify a username"
+elsif options['password'].nil?
+  raise OptionParser::MissingArgument, "Need to specify a password"
+elsif options['host'].nil?
+  raise OptionParser::MissingArgument, "Need to specify a host and port"
+elsif options['file'].nil?
+  raise OptionParser::MissingArgument, "Need to specify a file location"
+elsif options['bundle'].nil?
+  raise OptionParser::MissingArgument, "Need to specify a bundle name"
+end
+
+puts "**Getting Bundle Status#{options['bundle']}**"
+uri = URI.parse("http://#{options['host']}/system/console/bundles/#{options['bundle']}")
+puts uri.to_s
+request = Net::HTTP::Post.new(uri)
+request.set_form_data({"action" => "status"})
+request.basic_auth(options['username'], options['password'])
+
+response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+  http.request(request)
+end
+puts "Response is #{response.code}"
+
+bundle_state = 0
+if response.code == '404'
+  bundle_state = 404
+else
+  status_json = JSON.parse(response.body)
+  bundle_state = status_json['stateRaw']
+  # 32 = active
+  # 4 = Resolved
+  # 2 = installed
+end
+
+case bundle_state
+when 404
+  puts "Bundle is not Installed"
+when 32
+  puts "Bundle is currently active"
+when 4
+  puts "Bundle is currently resolved"
+when 2
+  puts "Bundle is currently installed"
+else
+  puts "**Error dont know the status of the bundle: #{bundle_state}"
+end
+
+puts "**Install/Update Bundle #{options['file']}**"
+uri = URI.parse("http://#{options['host']}/system/console/bundles")
+request = Net::HTTP::Post::Multipart.new(uri.path,
+                                         "action" => bundle_state == 404 ? 'install' : 'update',
+                                         "bundlestartlevel" => "20",
+                                         "bundlefile" => UploadIO.new(options['file'], 'application/java-archive'))
+request.basic_auth(options['username'], options['password'])
+response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+  http.request(request)
+end
+puts "Response is #{response.code}"
+
+sleep(sleep_time)
+
+
+puts "**Starting/Refreshing bundle Bundle**"
+uri = URI.parse("http://#{options['host']}/system/console/bundles/#{options['bundle']}")
+# puts uri.to_s
+request = Net::HTTP::Post.new(uri)
+request.set_form_data({"action" => bundle_state == 32 ? "refresh": "start"})
+request.basic_auth(options['username'], options['password'])
+
+response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+  http.request(request)
+end
+puts "Response is #{response.code}"
+
+sleep(sleep_time)
+puts "**Bundle Release Complete**"

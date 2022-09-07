@@ -1,0 +1,26 @@
+#!/bin/bash
+# set -x
+
+# To deploy the app_widgets/scheduling/video Vidyo application
+
+ROOTDIR=/var/www/html/app_widgets/scheduling/video
+HOMEDIR=/home/jmhbackup
+
+cd ${HOMEDIR}
+rm -rf ./*video*.prev
+echo "COPY current Video files to ${HOMEDIR}"
+cp -rp ${ROOTDIR} ./video.prev
+
+echo "UnTar files"
+rm -rf ${ROOTDIR}/*
+tar -C ${ROOTDIR} -xzf ${HOMEDIR}/video.tgz
+
+echo "Changing Permissions for video app"
+chmod -R 755 ${ROOTDIR}
+chown -R jmhbackup. ${ROOTDIR}
+
+if [ $? -ne 0 ]
+then
+echo "!!!! PROBLEM with untar video app_widgets files !!!! "
+exit 1
+fi

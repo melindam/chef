@@ -1,0 +1,24 @@
+{
+  "id": "profile",
+  "dev_password": {
+    "encrypted_data": "d/6xRUaAbt1Owv5vTPu/EMQSSH9VBb4n3DN7ZXEqzYs=\n",
+    "iv": "z0njifiQvUqnJhuq\n",
+    "auth_tag": "U7F5VmYcliXbdgo/X8abCA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "stage_password": {
+    "encrypted_data": "Vkkpl4YjA3wt/KZhCgp1CRsWy3+th62UteFGMGlGSiR2\n",
+    "iv": "gYjIckqT9MMzYJbz\n",
+    "auth_tag": "SIyOuI7e37wSMWZDTXONfw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_password": {
+    "encrypted_data": "qLsEZxDyFN0+3EyDEbrSIdcfEEqw9VTv2f1odleLI8jvpP/c20Wi0+zyz26X\nSfXn\n",
+    "iv": "KoST/Mt3k2GK6CvZ\n",
+    "auth_tag": "e7lUNm9JvV5Ej6YL9j5r4g==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

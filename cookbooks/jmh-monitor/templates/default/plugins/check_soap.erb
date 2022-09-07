@@ -1,0 +1,38 @@
+#!/bin/sh
+
+if [ $# -lt 3 ]
+then
+	echo "Usage:"
+	echo "check_soap.sh <URL> <SOAP ACTION> <CALL>"
+	exit 5
+fi
+
+URL=$1
+SOAPACTION=$2
+CALL=$3
+
+USER_AGENT_PARAM=""
+if [ -n "$4" ]
+	then
+	USER_AGENT_PARAM="-A $4"
+fi
+
+RESPONSE=`curl -k -i -H "Content-Type: text/xml; charset=utf-8" ${USER_AGENT_PARAM} -H "SOAPAction: $SOAPACTION" -d "${CALL}" -X POST ${URL}`
+EXITCODE=$?
+
+if [ $EXITCODE -ne 0 ]
+then
+	echo "Return code was not 0 but $EXITCODE"
+	exit 5
+fi
+
+HTTPCODE=`echo $RESPONSE | tr $'\r' $'\n' | head -1 | grep "200"`
+if [ -n "$HTTPCODE" ]
+then
+	echo "$HTTPCODE"
+	echo $RESPONSE
+	exit 0
+else
+	echo $RESPONSE | tr $'\r' $'\n'
+	exit 1
+fi

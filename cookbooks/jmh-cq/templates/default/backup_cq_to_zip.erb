@@ -1,0 +1,41 @@
+#/bin/sh
+cd <%= @backup_zip_directory %>
+if [ -f <%= @zip_file_name %> ]; then
+    mv <%= @zip_file_name %> <%= @zip_file_name %>.bak
+fi
+
+<% if @load_balancer_enabled %>
+echo "Now draining the pools and waiting 5 minutes"
+  <% @load_balancer_pools.each do |pool| %>
+<%= @bin_dir %>/update_lb_pool_rb.sh -p <%= pool %> -s draining -n <%= @load_balancer_pool_ip %> -e <%= @load_balancer_environment %>
+  <% end %>
+sleep 300
+echo "Now disabling the pools"
+  <% @load_balancer_pools.each do |pool| %>
+<%= @bin_dir %>/update_lb_pool_rb.sh -p <%= pool %> -s disabled -n <%= @load_balancer_pool_ip %> -e <%= @load_balancer_environment %>
+  <% end %>
+
+<% end %>
+echo "Now starting the Compaction"
+
+<%= @bin_dir %>/compact-<%= @key_name %>.sh
+echo "Compaction Complete. Sleep for 2 minutes."
+
+sleep 120
+
+echo "Now Running garbage collection."
+<%= @bin_dir %>/runGarbageCollection-<%= @key_name %>.sh
+
+echo "Garbage Collection Complete.  Waiting 30 seconds and then starting backup"
+
+sleep 30
+
+curl -u <%= @admin %>:'<%= @password %>' -X POST \
+    "http://<%= @hostname %>:<%= @port %>/system/console/jmx/com.adobe.granite:type=Repository/op/startBackup/java.lang.String?target=<%= @backup_zip_directory %>/<%= @zip_file_name %>"
+
+<% if @load_balancer_enabled %>
+  echo "Now enabling the pools"
+  <% @load_balancer_pools.each do |pool| %>
+    <%= @bin_dir %>/update_lb_pool_rb.sh -p <%= pool %> -s active -n <%= @load_balancer_pool_ip %> -e <%= @load_balancer_environment %>
+  <% end %>
+<% end %>

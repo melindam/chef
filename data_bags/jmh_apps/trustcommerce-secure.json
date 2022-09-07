@@ -1,0 +1,17 @@
+{
+  "id": "trustcommerce-secure",
+  "dev": {
+    "encrypted_data": "ioT9NOLv6ouyN09xNKP0WdUJFwdBeriAaoRT4Uzf4BDi/0TRue3RrwW5yOy2\ntZaFh+19hnIaI9c3ZizRc9B0csOZN/6fWF8GgcGwfAyr/q/gvR4ARo/DDESz\nsr7FPqLRiRRJOQS15i/FWm1bL6n9I3PR5/MrxCp90O7xbngTNGM4aHmpPpMK\niueSbLRrlaBo+HyL7jkz9sv3mXlmsyTOE3Mxa/qZn0xSueBjst9gZaCO8065\noU1/uGQij7MpCkduz8BA4FfP2iQYVvBa4evg2d6MAspV0wmAXS7NMdpFyV0S\nyXSJdxuZUj1kg8+MbR+XrPYhkPQKynXs0QkkbujwnpTL+1G/1p8jRLBodbhs\noYrGnAIWbx/R+FPqpUWugOxFh6NofoAkIG5WOi0zxju3n2a3hzZE2iUOR1rh\nfCjkaEOWxsS3mfyC8IVsD18ohVFoy3bwdxRevfORs2yWSsCqLvE3KEi8TKuv\n/2nd71SV39g=\n",
+    "iv": "pfwjcyDFvgwJVyPT\n",
+    "auth_tag": "a6jjJeT35YnJAWmyHOQNLg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod": {
+    "encrypted_data": "qczrcKM18lJHUY4b3Lb2SkQqOC72853xQOI6Ks2Dt1ZD4K06XnlhL3L0To9M\ntHx1lGNJWe5anP84C7Mnrdm1N4wC+XAKVcjX4OVK9iC8kXSdj8oKVD2pzUY7\n+f4X14q7Vpi/ZDn3O9KS3ebK4X5FyTrB3+hoTsqhmTUPiDWooXZvBkpUV5cU\nPN4sYC2II+QynTep+eUghnN1IZf+mp/J8q/8JUSanxrcON1S0b2OIAoj9X0R\n6ei1Rzd5igdc5qv6IwqbTUgI77RuLkRBS95h/32GBqXQIGGAIgwlgUakuUdE\nugN/zdoDWkzO0FadebY8BMgsWb3rljfL08I32XbEzN5UKTSAqj5upjxUvwKK\nc+mmRGtI4UsPylCufkHTIOE78+UTuJSc5C9WzbTtbZ0vrrZhocEYDOOKAvwu\nhjt2FF/s58ynSa4=\n",
+    "iv": "Tu0kJ6zXE6H/t344\n",
+    "auth_tag": "QL2ve01fqFVKMm02vN9Czg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

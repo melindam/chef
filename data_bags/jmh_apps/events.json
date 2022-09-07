@@ -1,0 +1,24 @@
+{
+  "id": "events",
+  "author_eventmanageruser_password_dev": {
+    "encrypted_data": "gMk8btWdYdcC84BibQDd2Bh+8HAdC4YkfpkI4hwQ3VJwODo=\n",
+    "iv": "QbCXGxn8876GaBGP\n",
+    "auth_tag": "2V9SDIQFIOq4DVV0Io5MOg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "author_eventmanageruser_password_stage": {
+    "encrypted_data": "QiyXwT1th6NZWyr6DwSZf7pmaku8RkVqvhTdTnlrF5p/pbQ5\n",
+    "iv": "flAGntMBpCZdr/7R\n",
+    "auth_tag": "rtYt/BT9JA9aVy6gtJrAtA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "author_eventmanageruser_password_prod": {
+    "encrypted_data": "cqXaikk4L09LgLSKLpV8z9/htHgX7mYAn66UK/eOMNRRYaL8CCc=\n",
+    "iv": "zRoY2HCe+sBzEs7i\n",
+    "auth_tag": "YiP3sLC0OUcTpX+Jm6dd+Q==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

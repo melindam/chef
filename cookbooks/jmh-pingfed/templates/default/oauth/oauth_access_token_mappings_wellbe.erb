@@ -1,0 +1,32 @@
+{
+  "attributeSources": [],
+  "attributeContractFulfillment": {
+    "sub": {
+      "source": {
+        "type": "ADAPTER"
+      },
+      "value": "username"
+    },
+    "profileId": {
+      "source": {
+        "type": "ADAPTER"
+      },
+      "value": "profileId"
+    }
+  },
+  "issuanceCriteria": {
+    "conditionalCriteria": []
+  },
+  "id": "authz_req|httpform|WELLBE",
+  "context": {
+    "type": "IDP_ADAPTER",
+    "contextRef": {
+      "id": "httpform",
+      "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/httpform"
+    }
+  },
+  "accessTokenManagerRef": {
+    "id": "WELLBE",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/oauth/accessTokenManagers/WELLBE"
+  }
+}

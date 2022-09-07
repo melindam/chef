@@ -1,0 +1,104 @@
+# Dropped off by Chef!
+<% if @dmz %>
+# Armor DMZ Server
+# Expose the HTTP Ports
+-A FWR -p tcp --dport 80:83 -j ACCEPT
+-A FWR -p tcp --dport 443 -j ACCEPT
+-A FWR -p tcp --dport 7443 -j ACCEPT
+# Allow All traffic from 172.23
+-A FWR -p all -s 172.23.0.0/16 -j ACCEPT
+-A INPUT -p all -s 172.23.0.0/16 -j ACCEPT
+# Allow JMH VPN Traffic
+-A FWR -p all -s 192.168.169.0/24 -j ACCEPT
+# Rundeck/Sensu server (TODO Need to Update)
+-A FWR -p tcp -s 100.68.179.27 --dport 22 -j ACCEPT
+-A FWR -p tcp -s 100.68.179.10 --dport 22 -j ACCEPT
+-A OUTPUT -p tcp -d 100.68.179.27 -m multiport --dports 22,5672,3000 -j ACCEPT
+-A OUTPUT -p tcp -d 100.68.179.10 -m multiport --dports 8083,8001 -j ACCEPT
+# Mail Server on Trust
+-A OUTPUT -p tcp -d 100.68.179.13 --dport 25 -j ACCEPT
+-A OUTPUT -p tcp -d 100.68.179.21 --dport 25 -j ACCEPT
+-A OUTPUT -p tcp -d 100.68.181.11 --dport 25 -j ACCEPT
+-A OUTPUT -p tcp -d 100.68.181.20 --dport 25 -j ACCEPT
+# Access to the Trust
+# Armor Servers
+-A OUTPUT -p tcp -d 100.68.179.0/24 -m multiport --dports 80,81,82,83,443,4502:4503,4512:4513,5672,8080:8099,8443:8470,9031 -j ACCEPT
+-A OUTPUT -p tcp -d 100.68.181.0/24 -m multiport --dports 80,81,82,83,443,4502:4503,4512:4513,5672,8080:8099,8443:8470,9031 -j ACCEPT
+# DNS
+-A OUTPUT -p udp --sport 53 -j ACCEPT
+-A OUTPUT -p udp --dport 53 -j ACCEPT
+# Allow connections already in place
+-A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# Drop All Traffic to JMH Servers
+-A OUTPUT -d 172.23.0.0/16 -j DROP
+-A OUTPUT -d 172.24.0.0/16 -j DROP
+-A OUTPUT -d 172.25.0.0/16 -j DROP
+# Drop All other traffic to other Firehost Servers
+-A OUTPUT -d 100.68.179.0/24 -j DROP
+-A OUTPUT -d 100.68.181.0/24 -j DROP
+# BePatient
+-A OUTPUT -d 100.68.179.26/32 -j DROP
+-A OUTPUT -d 100.68.179.27/32 -j DROP
+
+<% else %>
+
+# mr1.hsys.local
+-A OUTPUT -p tcp -d 172.23.201.58 --dport 25 -j ACCEPT
+# hsystdc1.hsys.local
+-A OUTPUT -p tcp -d 172.23.202.216 -m multiport --dports 636,389 -j ACCEPT
+# hsyswcdc3.hsys.local
+-A OUTPUT -p tcp -d 172.24.202.236 -m multiport --dports 636,389 -j ACCEPT
+# intranet
+-A OUTPUT -p tcp -d 172.23.201.47 --dport 7777 -j ACCEPT
+# ebiz24.hsys.local(ebiz-tools)
+-A OUTPUT -p tcp -d 172.23.200.18 -m multiport --dports 22,80,443 -j ACCEPT
+-A OUTPUT -p icmp -d 172.23.200.18 -j ACCEPT
+# ebiz22.hsys.local
+-A OUTPUT -p tcp -d 172.23.203.65 -m multiport --dports 22 -j ACCEPT
+# infosec-splunkmon.hsys.local
+-A OUTPUT -p tcp -d 172.23.69.114 --dport 8089 -j ACCEPT
+# EPICMCHRTXVPRD1
+-A OUTPUT -p tcp -d 172.24.202.128 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICMCHRTXVPRD2
+-A OUTPUT -p tcp -d 172.24.202.129 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICMCHRTXVPRD3
+-A OUTPUT -p tcp -d 172.24.202.71 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICMCHRTXVPRD4
+-A OUTPUT -p tcp -d 172.24.202.72 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICMCHRTXVPRD5
+-A OUTPUT -p tcp -d 172.24.202.73 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICMCHRTXVPRD6
+-A OUTPUT -p tcp -d 172.24.202.74 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICMYCHARTPRD
+-A OUTPUT -p tcp -d 172.24.201.20 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICINTERXVPRD
+-A OUTPUT -p tcp -d 172.24.201.24 -m multiport --dports 80,443,8443 -j ACCEPT
+# EPICINTERXVPRD1
+-A OUTPUT -p tcp -d 172.24.206.227 -m multiport --dports 80,443 -j ACCEPT
+# EPICINTERXVPRD2
+-A OUTPUT -p tcp -d 172.24.206.228 -m multiport --dports 80,443 -j ACCEPT
+# EPICMCHRTXVSUP1
+-A OUTPUT -p tcp -d 172.23.209.114 -m multiport --dports 80,443 -j ACCEPT
+# Cloverleaf
+# OLD # -A OUTPUT -p tcp -d 172.24.200.185 --dport 9854 -j ACCEPT
+-A OUTPUT -p tcp -d 172.24.200.155 --dport 9854 -j ACCEPT
+# Cloverleaf Dev
+-A OUTPUT -p tcp -d 172.24.200.186 -m multiport --dports 7854:7856 -j ACCEPT
+# Always Allow DNS
+-A OUTPUT -p udp --sport 53 -j ACCEPT
+-A OUTPUT -p udp --dport 53 -j ACCEPT
+# Armor Monitor Servers
+##TODO:  Not Sure Yet
+# All all jmh traffic
+-A FWR -p all -s 10.6.0.0/16 -j ACCEPT
+-A FWR -p all -s 172.23.0.0/16 -j ACCEPT
+-A FWR -p all -s 172.24.0.0/16 -j ACCEPT
+-A FWR -p all -s 172.25.0/16 -j ACCEPT
+-A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# Drop all traffic TO jmh
+-A OUTPUT -d 172.23.0.0/16 -j DROP
+-A OUTPUT -d 172.24.0.0/16 -j DROP
+-A OUTPUT -d 172.25.0.0/16 -j DROP
+-A OUTPUT -d 10.90.6.0/24 -j DROP
+
+<% end %>

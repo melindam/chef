@@ -1,0 +1,25 @@
+#!/bin/sh
+#set -x
+# Primary master server will be synced to local file system
+#  If a secondary server exists, it will rsync the images to that server
+
+<% @server_list.each do |n| %>
+cd <%= @backup_dir %>/<%= n['environment']%>
+if [ $? -eq 0 ]
+then
+	echo "Starting rsyn for <%= n['environment']%>  -- <%= n['ipaddress']%>"
+	rsync -avz -r --bwlimit=2000 --size-only --delete -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' <%= @user%>@<%= n['ipaddress']%>:<%= @remote_image_path%>/ ./
+else
+	echo "No directory found for <%= @backup_dir %>/<%= n['environment']%>"
+	exit 1
+fi
+<% end %>
+
+
+# IF the secondary server list exists - then push images to that server
+<% @secondary_server_list.each do |n| %>
+# Add secondary rsync server to push images to for env: <%= n['environment']%> host:<%= n['ipaddress'] %>
+echo "Starting secondary sync for server:env = <%= n['environment']%> host:<%= n['ipaddress'] %>"
+rsync -rlODv --bwlimit=2000 --size-only --delete-excluded -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' <%= @backup_dir %>/<%= n['environment']%>/ <%= @user%>@<%= n['ipaddress'] %>:<%= @remote_image_path%>
+
+<% end -%>

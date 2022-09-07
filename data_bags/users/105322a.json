@@ -1,0 +1,6 @@
+{ 
+  "comment": "Kevin Bagnaschi LDAP Admin Account",
+  "groups": ["lock"],
+  "id": "105322a",
+  "shell": "/bin/false"
+}

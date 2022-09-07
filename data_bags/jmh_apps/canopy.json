@@ -1,0 +1,38 @@
+{
+  "id": "canopy",
+  "jwt": {
+    "encrypted_data": "MgzvILQWV4IxY8UQMm0hLBnK2oScIN5iHOmPf7mlgK4nO8/wk2JoadgRuOtB\nX503N12OK2wWsMQhIsmv3WuPKvYyQdQ919qBC+58o3DA0ZWDgHop0mpJCLJz\nrNkJABtQqCIek+rsGXuSmdG9CtQ+IE+rhZS0k8yIhiV1dSdvj7GHkAojdlzx\nVLf1N13vep2cMa9yvmag1khY\n",
+    "iv": "/OYkUzhzUVGQrf6n\n",
+    "auth_tag": "avirQ/SKxKtemoP1ef0OEQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "mdm": {
+    "encrypted_data": "9uEkWWLtOoNoIMSm1EWSkAqDjz3QXyuQrPs4opKNXKPrqlAmMm5X9BqsF2sh\nOoA=\n",
+    "iv": "A07Sp/a5639wU8Qi\n",
+    "auth_tag": "Wsns5vtCsgBtok6mW51Lsw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "proxy": {
+    "encrypted_data": "9ldWz81I5mNBRTPhf/raMIUqCh1qbH8rWbScnXoO8BAeoamcxD9FIChGNWqO\n1tYc4lLIB0EFg0MZEosb\n",
+    "iv": "ovhH6mHHGSH3+GJS\n",
+    "auth_tag": "k/7xkmSc1VtzD7vfmIlTuA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "openldap_ssl_pem": {
+    "encrypted_data": "L3JuqpsOYVIf+ZDyGRD8k5IluM2B+Wj93zLBooJixg+8sEGUZ11GsE8ZAlfv\nIATog1zi41K/1o1DWccdrB2X0f6RFKSsDjc6kOmBt2pUbr+ztT1VJ+YQYzjd\nu5geLG1kj4FJa+gYDxtbkhiboKNr4WGg1AZYNdaGDwNmEsM9pdiA3W9MZPcB\nllnhJPCZZ1d+3fTEJKE8AxLTBrmceFTkO0h2NdUUe8XHhZkoUscBTFc/Nm+P\nNLZLobcwX2J1K0yEO9QrjuDsYlJIuomiUvbeaBLQ6IY5qYPm/mNRh3BtXmUm\n4VZqifs2SLLgHaOPYFGBkgoa+Tv2OPgKlrPdRg689Xl4y5X1lxj071piEuUW\ndokqZwwwwt8tfaV/jNjfFt9Swi0FwscNe9QpQmE5z5GzRCThqcRpu0weXVlU\nIIJRT9slz0xQZnRmADiH0/JDsRsNLfDYzKMAVQ28lkNWElcOI4M42krrffAr\n8Glvom1iQ72vU8WTuXNmWOVXYqNlenDUSThAeHl3PwW7GIM9SV+NzrY0CFYP\nFfTlKdQwYG2+XPZJKOP4KqQip2paduWi6MLnQbKxxe7SgKjDh7E3tk7QI2Fs\n4HZWyV8nWOQVD7MRxl4yWTdqoFjfJmK4nPXOQqteVrfo6YCTOLcy5unise/Y\nULMB8CQy3/2wiW/PMZ7QFIFO014c6I97wC5brxI40BfyqA6ykjxaW48MrgFF\nh7C5J+caiHMUkxDyshzslrmZZFH0vo9YVfyXxgc7Hcp5EFlE62AQLCka4XO5\nzEZttxDylgwGvZ9DYss1X2DCPxBrGfKnnUfLkdmkYEszienczS0NvinbgaBa\nTge8p5s7VQc7M7ReElHItTjqWQOPIuuZLhwCV2+/s8BuR6eB3Azn0OIpqT/z\nA0VVKR6m2NcgYxlpmlX+a0URpAatsuzlv7flESDmYbBBQFibBzgPccMRD3mJ\nnCJPq2e200Caut8yQ+Qfu/DHsaRZaUH/zS1oLhJO/F43aH/q25+6TNWM/afg\nPnJE8WL1y15497VsYcnDMHB/2qw8XI+mQAe+dp2GimO0BcMxlyDbk4+MUqEa\n4NbTmY5vvWCoxrlmPZlzrlckPg/BnRHiDyqlWG3k+CUjzWX1yAF7CprM6Q9B\nUx7sDTVqUFxRSuIPdLGf6uOJROB6tvBZIGhpMffJUW5y0uZVTKQsdduvFURX\nI+tj2d2rFarvSgo=\n",
+    "iv": "0cJ714gIuDf4nk8X\n",
+    "auth_tag": "EyqIshHMNcHW+aEMvm1IrA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "openldap_ssl_key": {
+    "encrypted_data": "RJCLSR+M++rPAwCuVtbO/6+mTnfemb4RhNUbb4ClhdvoHW+bnNt0PU8aXUMy\nrkF9fkQnhuv9v/8h5PR6+45fvYFfYuzZgTqk2i2ElAZboebVtgFUbRfKc66m\nUj3oLr+1cNOj7CDex6a4A4RXfO/4SGl5xDpTZYOMMR6lO40n0KA/R1TFuG0w\ncr8JOEy29ICuEHIPZTocK8hUSO+CxgyiTBt53vXSkWc5myu86TNgUkFnAjU+\nXRV81ggb8qvrdB2z2nHsW5XvP+1Y2JaSdvM+hHbL3DNwR1Rm2rToufPvHHp0\nJ+PZ/FJ8/Ki+b9F86j8VbRXgqLz4l1Bt0WUEnYUg0D5R+EcoXsoerJIcJ1wQ\nPwfz66E1uxVVq4Rq7d1czpXpWE7UxRU8ekTs0v7ECHIbBk8F3z7n13VtFx4f\nPUnA3MKLfmi4cEsQKaHJDDRwxA3VmQ0vt1gYBwfv+jet7edmoYuExJn+pk7x\nOzEX+hYeEFoAqEGj7m43YVVa9BFbPMNoeMh077gw77QxiZOFMIIBrhcZEP2O\nEWMPkkedjh0/4Yr9BWMLzwOeBFJPZj2ckRATK+kdevPm1ge4k/ITKHGItKTQ\nFznK0WDcK5ixYRoleQQJInaGKtup/evHgD94k7597eDJEYldgaR9M6c6Vo9V\nKd2Hd3LpSb3cSKykqaiwEj/JhGsit5yDJFM+SHuiLYrCDAMr/8yx+cQeFx08\n+Wj/ykqgzcAy8Zw71WSoBVACgWJNzMpyiPIFrkijMWBauCd4+nmGSEo4XC3C\nMFTwZG9w/8dyKc5ROMkAM4N/aCK/d3i/LgluxCjL6bm+6opGuL6Tn+QTiuNo\nrFpiGtOhqQifUag9g/8o/1w8IOFSPTHAaafA9Hx/TALkdvgvkf8O8myZz7PH\nprpsJUBNHcfdXPsM0hw++vzUTDSdgnD7YT8RLdw9++ejc2VHk+0jctUvf7u5\nmv4JGFhwRMMIA+xm5sFeffTTbIdybwepcC1Qa3ukbtEN+97/sy+ys7jyzbZC\nobHQnh7+zbAU0kxqZm+7zdcIqq74c7iRAilPsEWeyJCwHnqS+qJtGMKxsU6s\nOn/GwX6lOvU4fO3EBpS37FOR31DEwuf6ULLnf3aOn3yVrdQXlMk+IH/fsA+i\nL4PMPlYekxClldXsMOMkojsowPyQZOkszV7+z661cdESDWPuYq3hYT41SHP0\niT7h+rhXZ5IwePXdDqzCV42oSVLTtYxgDTcgkpsJaaJMnzTR8RzGVqt3k/qs\nscAy6g==\n",
+    "iv": "exqEUJ+uLS3Mzsbq\n",
+    "auth_tag": "UVXt0pX32iQh+Vwnc0ScLg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

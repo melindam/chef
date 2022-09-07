@@ -1,0 +1,24 @@
+{
+  "id": "billpay-admin",
+  "dev_password": {
+    "encrypted_data": "oHIp1/e62aRZbIjjZCL9sGuakJUKERuRuE8tKVU04MMkk/VgsA==\n",
+    "iv": "vlKuMA3cO7oFWh4b\n",
+    "auth_tag": "otmkrf8OIt/KqecEM1owBQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "stage_password": {
+    "encrypted_data": "ZoWg+mK3AIWgO9SGxiinhQVoDHnBn63NafF+m8rZqQmTzA==\n",
+    "iv": "PyFj+ZwOrJ1PBxhJ\n",
+    "auth_tag": "tVwg+pexg8leHx0ut11BOg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_password": {
+    "encrypted_data": "cK3HiyZxpiro05p3EtqLQpJ5Ine5ONAruXM56dwhyF+fW/vn\n",
+    "iv": "7khRj45uwsVihFb+\n",
+    "auth_tag": "PzwRibYuV8wQL7YsEXOHjQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

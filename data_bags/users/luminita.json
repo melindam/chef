@@ -1,0 +1,7 @@
+{
+  "comment": "Luminita Nagy",
+  "groups": ["sysadmin", "devadmin"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3IH02r/Il80aUAv0UJni1jRISgmsBmzETtG+ZYNzVdbI788ZlIdl57JDRKLzE8ITuwlcJ7WJZfV9Qz5lTiR68gEVal/BiunyZg/GAikm9jEK41tt5XCb2UWlwczxuHq5Br1E623K6sh0HTZJoEE6syGCO1NGEmgY+plfR+S5SVrxeVLIEJhLcjPz4vXNvnSW8p4G1pW1RZpRpdg/goKwSX5Qb+Bnmx/FjtVhYDt71XJqAMImroRnL3YyuB3j5z7gXvcQEWmmE7fhEV8CQeQ6H//5yeG4GMid0vJvMPd6B6LBW4BPCnaSGELrFWh6mp8y67zy9fu0qMRB0yvhJKJaV2xU4i8ICpt6lx7Lb6BaqbnfwuYR2/izAd7XXZ3VYwAqs69nD1+0BgrG0aQB6C1qFeIH64kZS1ssK1jqjyDn0vfChqkcor4FYfuNxT2gN+WO4svdnYyrLbVOfO73BU89vohqp2roUOklmqZf8hDTpqufrPmULb6mjzmCgnoyAI9zlym0EnaYUKmjbdrZA2z2owWQeTENy7lOgXsgOAJsqkkx2kNilsubuqeHLfhBv+sU16OZl88doWXJ2SAPqhC58vcwYrf5oIVO3B2GqRjG931wEnGJJ+ntOeCAUPDIc+JJ78YfqpS1lG7kFvdl6S9XhuIHh1fc/elVqsqhahRC/wQ== luminita",
+  "id": "luminita",
+  "shell": "/bin/bash"
+}

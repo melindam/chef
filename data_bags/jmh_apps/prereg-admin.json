@@ -1,0 +1,24 @@
+{
+  "id": "prereg-admin",
+  "dev_password": {
+    "encrypted_data": "NiA5nFo4dgrg7l2HBiagVYxjgxKEAGoQeKB1QWtS\n",
+    "iv": "w+TatHKWsjs9tw4/\n",
+    "auth_tag": "0MMF0CF/aDhbQMzoo8JHNQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "stage_password": {
+    "encrypted_data": "ItXeHyxXlUQw2/ECwDas/Yw405gGxVRFQBqdDhTans8=\n",
+    "iv": "j8eoSw64280rqSmQ\n",
+    "auth_tag": "zkPp/pO7w2/52ey4+Ly/GQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_password": {
+    "encrypted_data": "FbvXcKmXYvYInGftNPeHD/SYx1Qg9O2APTJy+EeUZaTD\n",
+    "iv": "MGYRZ53eXC6ypSb5\n",
+    "auth_tag": "TwXPTqgNGGVYQK2mVYDuLw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

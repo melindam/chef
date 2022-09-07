@@ -1,0 +1,61 @@
+#!/bin/bash
+###  Dropped off by Chef! ###
+#
+# This script stops the (running) application
+#
+export JAVA_HOME=<%= @java_home %> 
+
+BIN_PATH=$(dirname $0)
+cd $BIN_PATH/..
+START_OPTS='stop -c .'
+if [ -z $CQ_JARFILE ]; then
+	CQ_JARFILE=`ls app/*.jar | head -1`
+fi
+
+timeout 45 ${JAVA_HOME}/bin/java -jar $CQ_JARFILE $START_OPTS
+STOP_CODE=$?
+if [ "${STOP_CODE}" == "0" ]
+then
+	echo "Application is shutting down"
+else 
+	echo "Stop command returned ${STOP_CODE}"
+fi
+sleep 10
+
+PID=$(cat <%= @cq_dir %>/crx-quickstart/conf/cq.pid 2>/dev/null)
+if [ -n $PID ]
+then 
+	kill -0 $PID 2>/dev/null
+	if [ $? -eq 0 ] 
+	then
+		echo "Pid is still running . Trying to kill the process..."
+		kill $PID
+		sleep 5
+
+		kill -0 $PID 2>/dev/null
+		if [ $? -ne 0 ] 
+		then
+			echo "process ${PID} was killed"
+		else	
+			echo "Gentle Kill did not work.  Trying SIGKILL"
+			kill -9 $PID
+			sleep 5
+			
+			kill -0 $PID
+			if [ $? -ne 0 ]
+			then
+				echo "FATAL: SIGKILL did not work either"
+				exit 4
+			fi 		
+		fi
+	fi
+else
+	echo "FATAL: cq.pid not found"
+	exit 4
+fi
+
+
+rm -f <%= @cq_dir %>/crx-quickstart/conf/cq.pid
+
+echo "AEM is now shut down with a code of ${STOP_CODE}"
+exit 0

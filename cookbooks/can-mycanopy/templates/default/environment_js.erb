@@ -1,0 +1,25 @@
+"use strict";
+var url_idp = "<%= @url_idp %>";
+exports.environment = {
+    production: <%= @production_mode %>,
+    url_api: "<%= @url_api %>",
+    url_sapi: "<%= @url_sapi %>",
+    url_idp: "<%= @url_idp %>",
+    url_idp_logout: "<%= @url_idp_logout %>",
+    url_idp_return_uri: "<%= @url_idp_return_uri %>",
+    automatic_logout_ms: 20 * 60 * 1000,
+    disableLogin: <%= @disable_login %>,
+    auth_cookie_domain: "<%= @cookie_domain %>",
+    auth_cookie_name: "<%= @cookie_name %>",
+    auth_cookie_expiration: <%= @cookie_expiration %>,
+    mockAPI: <%= @mock_api %>,
+    federations: [
+    <% @federations.each do |feds| -%>
+      {
+      <% feds.each_key do |k| -%>
+       "<%= k %>": "<%= feds[k] %>"<% unless feds.keys.last == k %>,<% end %> 
+      <% end -%>
+      }<% unless @federations.last == feds %>,<% end %>
+    <% end -%>
+    ]
+};

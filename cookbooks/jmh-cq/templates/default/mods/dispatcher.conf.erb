@@ -1,0 +1,14 @@
+<IfModule disp_apache2.c>
+  <% node['cq']['dispatcher']['config'].each do |key, value| -%>
+    <%= key.gsub(%r{_.}, &:upcase).gsub('_', '') %> <%= value %>
+  <% end -%>
+</IfModule>
+
+<Directory />
+        <IfModule disp_apache2.c>
+        SetHandler dispatcher-handler
+        ModMimeUsePathInfo On
+        </IfModule>
+   Options -Indexes -Includes -FollowSymLinks
+    AllowOverride None
+</Directory>

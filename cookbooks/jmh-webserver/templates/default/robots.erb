@@ -1,0 +1,11 @@
+User-agent: *
+<% if @allow -%>
+<% Array(@allow).each do |section| -%>
+Allow: <%= section %>
+<% end -%>
+<% end -%>
+<% if @disallow -%>
+<% Array(@disallow).each do |section| -%>
+Disallow: <%= section %>
+<% end -%>
+<% end -%>

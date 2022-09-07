@@ -1,0 +1,7 @@
+# Dropped off by Chef!
+JAVA_OPTS="<%= @java_opts %> -Dfile.encoding=UTF-8 $JAVA_OPTS"
+export JAVA_OPTS
+
+# set the location of the pid file
+CATALINA_PID=<%= @pid_file %>
+export CATALINA_PID

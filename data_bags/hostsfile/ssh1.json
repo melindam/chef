@@ -1,0 +1,7 @@
+{
+	"id": "ssh1",
+	"hosts": {
+		"ssh1.hsys.local" : {"ip": "206.107.211.51", "comments": "decommissioned Sept 2021"},
+		"ssh2.hsys.local" : {"ip": "12.25.162.40" }
+		}			   
+} 

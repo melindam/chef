@@ -1,0 +1,27 @@
+#!/bin/bash
+
+FAD_EXPORT=<%= node['jmh_fad']['client']['upload']['import_file_name'] %>
+FileDate=`date +%m_%d_%Y`
+ExitCode=0
+
+echo "Copying file from PROD of FAD_EXPORT_*_${FileDate}*.*"
+scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no <%= @prod_server %>:/usr/local/fadupload/processed/FAD_EXPORT_*_${FileDate}*.csv /home/jmhbackup/.
+
+for ServerName in <%= @dev_servers %>
+do
+
+  rsync --chmod=u+rw,g+rw,o+r -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' /home/jmhbackup/FAD_EXPORT*${FileDate}*.csv ${ServerName}:/usr/local/fadupload/${FAD_EXPORT}
+
+  echo "Starting Import process for SERVER = ${ServerName}"
+  curl -i http://${ServerName}:8085/fad/import | grep "'ok'"
+
+  if [[ $? -ne 0 ]]
+  then
+    echo "${ServerName} import process FAILED!!"
+    ExitCode=$?
+  fi
+done
+
+rm -f /home/jmhbackup/FAD_EXPORT_*
+
+exit ${ExitCode}

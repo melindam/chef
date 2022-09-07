@@ -1,0 +1,75 @@
+#!/bin/sh
+#set -x
+
+NEWDEPLOY=/home/tomcat/deploy
+DEPLOY_HOME=/home/tomcat
+TOMCAT_USER=tomcat
+TOMCAT_LOCATION=/usr/local/tomcat
+
+DEPLOYMENT_FOUND=0
+
+<% renamed_wars=[] %>
+
+<% @rollout_variables.each do |warinfo| %>
+# Check for <%= warinfo['bamboo_name'] %>
+cd $NEWDEPLOY
+ls <%= warinfo['bamboo_name'] %>* <% renamed_wars.each do |prevwar| %>| grep -v <%=prevwar%>.war <% end %> 2> /dev/null
+if [ $? -eq 0 ]
+then
+	DEPLOYMENT_FOUND=1
+	DEPLOY_PRESENT=`ls <%= warinfo['bamboo_name'] %>* <% renamed_wars.each do |prevwar| %>| grep -v <%=prevwar%>.war <% end %> | head -1`
+	echo "<%= @app_name %> <%= warinfo['war_name'] %> war file detected"
+	if [ "$DEPLOY_PRESENT" = "<%= warinfo['war_name'] %>.war" ]
+	then 
+		echo "No rename needed for $DEPLOY_PRESENT"
+	else
+		echo "Renaming WAR = $DEPLOY_PRESENT to NEW_WAR <%= warinfo['war_name'] %>.war"
+		mv $DEPLOY_PRESENT <%= warinfo['war_name'] %>.war
+	fi
+	<% renamed_wars.push(warinfo['war_name']) %>
+fi
+
+<% end %>
+if [ $DEPLOYMENT_FOUND -eq 0 ]
+then
+	echo "**No Deployment objects found in $NEWDEPLOY**"
+	echo "Exiting."
+	exit 1
+fi
+
+<% if @systemd %>
+sudo /bin/systemctl stop <%= @app_name %>.service
+<% else %> 
+echo "Shutting down tomcat"
+cd $TOMCAT_LOCATION/<%= @app_name %>/bin
+./shutdown.sh
+<% end %>
+	
+cd $DEPLOY_HOME
+rm -rf $DEPLOY_HOME/deploy.<%= @app_name %>.prev 2> /dev/null
+mkdir $DEPLOY_HOME/deploy.<%= @app_name %>.prev
+
+<% @rollout_variables.each do |warinfo| %>
+## Rolling out <%= warinfo['war_name'] %>
+<% if warinfo['db_name'] %>
+echo "Backing Up <%= warinfo['db_name'] %>"
+/usr/bin/mysqldump -h 127.0.0.1 -u root --skip-ssl --password="<%= @root_passwd %>" --databases <%= warinfo['db_name'] %> > $DEPLOY_HOME/deploy.<%= @app_name %>.prev/<%= warinfo['db_name'] %>.sql
+<% end %>
+cd $TOMCAT_LOCATION/<%= @app_name %>/webapps
+mv <%= warinfo['war_name'] %>.war $DEPLOY_HOME/deploy.<%= @app_name %>.prev/
+rm -rf <%= warinfo['war_name'] %>
+rm -rf $TOMCAT_LOCATION/<%= @app_name %>/work/Catalina/localhost/<%= warinfo['war_name'] %>
+cp $DEPLOY_HOME/deploy/<%= warinfo['war_name'] %>.war ./
+echo "<%= @app_name %> <%= warinfo['war_name'] %> deployed"
+
+<% end %>
+
+<% if @systemd %>
+sudo /bin/systemctl start <%= @app_name %>.service
+<% else %>
+$TOMCAT_LOCATION/<%= @app_name %>/bin/startup.sh
+<% end %>
+
+<% @rollout_variables.each do |warinfo| %>
+rm -f $NEWDEPLOY/<%= warinfo['war_name'] %>.war
+<% end %>

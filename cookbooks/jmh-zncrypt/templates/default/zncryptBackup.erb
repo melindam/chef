@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# To backup /etc/zncrypt directory and files for Gazzang disaster recovery of encrypted data
+
+BackupDir=/root/zncryptBackups
+Day=`date +%Y%m%d`
+
+find $BackupDir -mtime +7 -exec rm -f {} \;
+
+tar -cf $BackupDir/etc-zncrypt-$Day.tar /etc/zncrypt 2> /dev/null

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Dropped of by Chef!
+#
+#
+cd <%= @bin_dir %>
+RETURN_CODE=0
+
+<% @epic_hosts.each do |hostentry| %>
+  # <%= hostentry %>
+  echo "Now Checking <%= hostentry %>"
+  <% @java_bins.each do |jvm_bin| %>
+    <%= jvm_bin %>/bin/java <%= @sslpoke_classfile %> <%= hostentry %> 443
+    if [ $? -ne 0 ]
+    then
+      echo "**Failure for <%= hostentry %> and jvm <%= jvm_bin %>"
+      RETURN_CODE=1
+    fi
+    <% end %>
+<% end %>
+
+if [ "$RETURN_CODE" != 0 ]
+then
+  echo "**Run has failed**"
+  exit 1
+else
+  echo "**Successfull Run**"
+  exit 0
+fi

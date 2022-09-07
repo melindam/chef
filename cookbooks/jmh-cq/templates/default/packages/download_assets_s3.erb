@@ -1,0 +1,37 @@
+#!/bin/sh
+# Dropped off by Chef!
+# https://gist.github.com/drfill/c18308b6d71ee8032efda870b9be348e
+#set -x
+
+
+cd <%= @share_dir %>
+
+contentType="application/zip"
+AUTHOR_PACKAGES="<%= @author_packages.join(" ")%>"
+PUBLISHER_PACKAGES="<%= @publisher_packages.join(" ")%>"
+
+aws_folder="author"
+for package in $AUTHOR_PACKAGES
+do
+  echo "**${package}**"
+  dateValue=`TZ=GMT date -R`
+  resource="/<%= @s3bucket %>/${aws_folder}/${package}.zip"
+  stringToSign="GET\n\n${contentType}\n${dateValue}\n${resource}"
+  signature=`echo -en ${stringToSign} | openssl sha1 -hmac <%= @access_key %> -binary | base64`
+  /usr/bin/curl -H "Host: <%= @s3bucket %>.s3.amazonaws.com" -H "Date: ${dateValue}" \
+                -H "Content-Type: ${contentType}" -H "Authorization: AWS <%= @access_id %>:${signature}" \
+                https://<%= @s3bucket %>.s3.amazonaws.com/${aws_folder}/${package}.zip -o ${package}.zip
+done
+
+aws_folder="publisher"
+for package in $PUBLISHER_PACKAGES
+do
+  echo "**${package}**"
+  dateValue=`TZ=GMT date -R`
+  resource="/<%= @s3bucket %>/${aws_folder}/${package}.zip"
+  stringToSign="GET\n\n${contentType}\n${dateValue}\n${resource}"
+  signature=`echo -en ${stringToSign} | openssl sha1 -hmac <%= @access_key %> -binary | base64`
+  /usr/bin/curl -H "Host: <%= @s3bucket %>.s3.amazonaws.com" -H "Date: ${dateValue}" \
+                -H "Content-Type: ${contentType}" -H "Authorization: AWS <%= @access_id %>:${signature}" \
+                https://<%= @s3bucket %>.s3.amazonaws.com/${aws_folder}/${package}.zip -o ${package}.zip
+done

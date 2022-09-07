@@ -1,0 +1,17 @@
+{
+  "id": "splunk-secure",
+  "dev_password": {
+    "encrypted_data": "VbptQ9xG2ZF9A8OaYlcm3anBuo3QaBphDMxdA5W7BW278e8=\n",
+    "iv": "/32h+/Zvi2NWSVez\n",
+    "auth_tag": "FWSI3qr8R2xS7zT+USRobQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_password": {
+    "encrypted_data": "Qd2MI7JtM+ebyIkSqHDKif9O7tvoC7gBxfHk2lCqjgP7LIo=\n",
+    "iv": "rvxbKPE8/ISB+tLT\n",
+    "auth_tag": "VBfRBtc5tfd5t79WujfXbg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

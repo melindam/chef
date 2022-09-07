@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# This script runs NPM lighthouse with google-chrome-stable package to the domain you wish
+#  $1 variable will be www-dev OR www-sbx OR whatever domain you wish
+#  $2 variable will be the output path desired, or use current working directory its run from
+
+export PATH=<%= @nodejs_path %>/bin:$PATH
+
+DATE=`date "+%Y%m%d%H%M"`
+LHPATH="<%= @lighthouse_paths %>"
+domain=$1
+output_dir=$2
+
+if [[ -z $domain ]]
+then
+  echo "domain not configured - exiting 1"
+  exit 1
+fi
+
+if [[ -z $output_dir ]]
+then
+  echo "Output Dir not configured using default current path"
+  output_dir="./"
+fi
+
+if [ ! -d $output_dir ]
+then
+  echo "MAKING DIR Output Dir $output_dir"
+  mkdir $output_dir
+fi
+
+find $output_dir -name "*.html" -mtime +90 -exec rm -f {} \;
+
+for the_lh_path in $LHPATH
+do
+  lh_url=`echo $the_lh_path | sed "s/\//-/g"`
+  lighthouse https://$domain.johnmuirhealth.com$the_lh_path --output html --output-path=$output_dir/$DATE-$domain$lh_url.html --emulated-form-factor=desktop --chrome-flags="--no-sandbox --headless --disable-gpu"
+done

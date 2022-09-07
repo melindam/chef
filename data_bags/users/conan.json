@@ -1,0 +1,7 @@
+{ 
+  "comment": "Conan Nado",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqwz9ZMEq1O7qeUHSudwl8R9tqOAuUasWcjvBmUBMubXDkhDbhbuu3iEcUDSwiO2DaaWa1EoJy8emN87AUwXHHXWOIyUAgM8tXl1KE6cmCmcfMAED7XmK9T0sGcalDiUmzr1AhLImf8LIrMT9FNyJl4uC6D8yOM0DiqguupUpHCKEQhJam3znThigGDJKNSFdT0HRgXB8p/s/vY1384z1k9l7x7Smqv7i9zvItmNbxCLFMvg8lR0e82Z/RmSbw1v0n+v4/mWzxuAENYUbKwyKzPrHYk8e6K/ztQCUpnobIIYpFQJqd+5LvlKOSYdZ2iX5cXHxdRZPSOboEZ/aDYouD conan@MacBook-Pro-2.local",
+  "id": "conan",
+  "shell": "/bin/false"
+}

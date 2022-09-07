@@ -1,0 +1,128 @@
+#!/bin/sh
+#set -x
+
+NEWDEPLOY=/home/<%= node[:jmh_tcserver][:user] %>/deploy
+DEPLOY_HOME=/home/<%= node[:jmh_tcserver][:user] %>
+TOMCAT_USER=<%= node[:jmh_tcserver][:user] %>
+TCSERVER_LOCATION=<%= node[:jmh_tcserver][:install_dir] %>
+#DBUPDATESCRIPT=/home/tomcat/bin/updateMysqlToProd.sh
+MYSQLPASS='<%= node[:mysql][:server_root_password]%>'
+SERVERS=""
+
+
+# 0 - Name of the app
+# 1 - War file name to search for in deploy directory
+# 2 - Name to give the War file
+# 3 - Description of the App
+# 4 - Is there a database to be backed up?
+# 5 - Name of the Database
+# 6 - name of TCServer instance to deply to
+APP[0]=events,events-admin,events,"Event Manager",true,events,events
+APP[1]=preregistration,pre-registration-consumer,preregistration,"Preregistration",true,preregistration,preregistration
+APP[2]=prereg-admin,pre-registration-admin,prereg-admin,"Prereg Admin",true,preregistration,prereg-admin
+APP[3]=webrequest,webrequest,webrequest,"Webrequest",false,,webrequest
+APP[4]=billpay-admin,billpay-admin,billpay-admin,"Bill Pay Dashboard",false,billpay,billpay-admin
+APP[5]=billpay-services,billpay-services,billpay-services,"Online Billpay Services",true,billpay,billpay
+APP[6]=billpay,billpay,billpay,"Online Billpay",false,,billpay
+APP[7]=profileServices,profile-services,profileServices,"Consumer Profile Services",true,profile,myprofile
+APP[8]=myprofile,profile,myprofile,"Consumer Profile",false,,myprofile
+APP[9]=fad,fad,fad,"Find a Doctor",true,fad,fad
+
+cd $DEPLOY_HOME
+DEPLOY_PRESENT=`ls $NEWDEPLOY`
+
+if [ -z "$DEPLOY_PRESENT" ]
+then
+	echo "**No Deployment objects found in $NEWDEPLOY**"
+	echo "Exiting."
+	exit 5
+fi
+
+
+# move old deployment out of the way
+rm -rf deploy.prev
+cp -r deploy deploy.prev
+
+
+for war in `ls $NEWDEPLOY` 
+do
+	#echo $war
+	for index in 0 1 2 3 4 5 6 7 8 9
+	do 
+		#echo ${APP[index]}
+		appName=`echo ${APP[index]} | cut -d"," -f1`
+		prevWarName=`echo ${APP[index]} | cut -d"," -f2`
+		warName=`echo ${APP[index]} | cut -d"," -f3`
+		description=`echo ${APP[index]} | cut -d"," -f4`
+		db=`echo ${APP[index]} | cut -d"," -f5`
+		dbName=`echo ${APP[index]} | cut -d"," -f6`
+		tcServer=`echo ${APP[index]} | cut -d"," -f7`
+
+		if [ -a $NEWDEPLOY/$war ]
+		then 
+			echo $war | grep "${prevWarName}.*\.war" > /dev/null
+			if [ $? -eq 0 ]
+			then 
+				echo "Renaming $war to ${warName}.war"
+				mv deploy/$war deploy/${warName}.war	
+				continue
+			fi
+		fi
+	done
+done
+
+cd $DEPLOY_HOME
+for wars in `ls deploy`
+do
+        for index in 0 1 2 3 4 5 6 7 8 9
+        do
+                #echo ${APP[index]}
+                appName=`echo ${APP[index]} | cut -d"," -f1`
+                warName=`echo ${APP[index]} | cut -d"," -f3`
+                description=`echo ${APP[index]} | cut -d"," -f4`
+                db=`echo ${APP[index]} | cut -d"," -f5`
+                dbName=`echo ${APP[index]} | cut -d"," -f6`
+		tcServer=`echo ${APP[index]} | cut -d"," -f7`
+		if [ "$wars" = "${warName}.war" ]
+		then
+			echo "${description} detected"
+			cd $TCSERVER_LOCATION
+			SERVERS="${SERVERS}${tcServer} "
+			./tcruntime-ctl.sh $tcServer stop
+			
+			cd $DEPLOY_HOME
+			rm -rf $DEPLOY_HOME/deploy.${appName}.prev
+			mkdir $DEPLOY_HOME/deploy.${appName}.prev
+			
+			if [ "$db" = "true" ]
+			then
+				echo "backing up $dbName"
+				/usr/bin/mysqldump -u root --password="$MYSQLPASS" --databases $dbName > $DEPLOY_HOME/deploy.${appName}.prev/${dbName}.sql
+			fi
+
+			cd $TCSERVER_LOCATION/${tcServer}/webapps
+			mv ${warName}.war $DEPLOY_HOME/deploy.${appName}.prev/
+		  	
+			rm -rf $warName
+			rm -rf $TCSERVER_LOCATION/$tcServer/work/Catalina/localhost/$appName
+			cp $DEPLOY_HOME/deploy/${warName}.war ./
+			echo "${description} deployed"
+			# Update SQL
+		fi
+	done
+done
+
+if [ -n "$SERVERS" ]
+then 
+	STARTLIST=`echo $SERVERS | tr " " "\n"  | sort | uniq`
+	for serverstart in $STARTLIST
+	do
+		echo "Starting $serverstart Server"
+		cd  $TCSERVER_LOCATION
+		./tcruntime-ctl.sh $serverstart start
+	done
+fi
+
+rm -f $NEWDEPLOY/*
+
+echo "**Deployment Complete**"

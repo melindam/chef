@@ -1,0 +1,31 @@
+{
+  "comment": {
+    "encrypted_data": "QvTwrv8ZAQpDO5WVO72P3BUoFH/X6A9Vo9kdz3ALAKI=\n",
+    "iv": "ieZfBKiv0kQwL4xL\n",
+    "auth_tag": "nWpL6ufq7YbzdJDQALSMmQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "id": "luminita",
+  "password": {
+    "encrypted_data": "42ZqeGfa4scYz7dDtJ5O7z6pLhNlt9a6f+5NtPbS3LxlHXkPPKQ3qBLmoMI6\nXdZvP/Lm481hSNvjMFE2\n",
+    "iv": "Xd3KVgWAvPM+Pn3d\n",
+    "auth_tag": "1IEfuxBeICOC8ESbCUFqAQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "active": {
+    "encrypted_data": "MusKd88wkfyA5eCnmE7J536omjD1\n",
+    "iv": "juZmcIfSjyebXOw5\n",
+    "auth_tag": "7ZWVci4xoZbg5fDZEYkmcA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "access": {
+    "encrypted_data": "O+rMRd5uO1nVrti2AHN7NBbBYKyjVZL7djQ79XN4wX3PZHk=\n",
+    "iv": "Ez47cR7zhB6CkR2N\n",
+    "auth_tag": "9efKOzSPqBGX7PH1CdRN9g==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

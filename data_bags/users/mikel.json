@@ -1,0 +1,8 @@
+{ 
+  "comment": "Michael Lawless",
+  "groups": ["devadmin"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHi9b0fbkjim4vYiq6sKCz9viH5P/vLOgwtZjunhCNFS73/8hMbZ3/zYwwGhnUGE5PIpypQoZ8XT+Y67XER93kAqt1lCQhVFSkPHZ9lA95UMwYK1bkoKPfVi0ggw9IySc8Ik0lwQbe2dt+b7x9ycus6WDAqfTcKVNoN/LI7o7PrlNJOa/pYGy9jJEBV/wRb8uYx8yfXUA4y8Nto2m8VFznODKCpMOyRdgeWtaEBlVxGO6MOyMZaEiNvvIGIB/2YQljVZda+CBurO0YL9EH6hJTDtuBYanZKaq/DZ0nyVwpBB/+l29kN8RmpoH1zlhBHJQgz6Zy4WhxTzZDsLkB2km77HA2CZCfCaXyejZbFIreM9nlOyNw6WndWBsOzkpXN0fM/qBZLJfplavKzJLZQoIF65gF0Arof3zJfNWECLcvuZS+C9hsFesOwgSCOmQu6m97Ylgvt48PjQjKV56UmFCeH6Ncwq85DAzaLDFFLZrSOLZrZ8J6GWeLXAzx/2uinB7G5AdrNi9pQObN+99Ds7Md84Lqh6r8GCM1c/UpfF1owI374AVW29ChhKXjyX/ckTFE4lqANtkCPiPRh/34rZxBjZU55j/9uOIUbF4e9tD4+MWHjm7j3hmD8naplSHQNGdjucyD1XFyt9L5OA2zA0Xn/Vqm5ZxQBWSy3A2TRRe/rw== mikel",
+  "id": "mikel",
+  "shell": "/bin/bash"
+}
+

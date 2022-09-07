@@ -1,0 +1,38 @@
+{
+  "id": "cq",
+  "default_password": {
+    "encrypted_data": "fF3EY/cJJ9jg4pgBM8VP0zTXWLX4Zewr\n",
+    "iv": "e9oVh8rIok3RvUgP\n",
+    "auth_tag": "13wZWpnqiPKtgY8iS/MOoQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "sbx_aem_password": {
+    "encrypted_data": "BxUsQ3R/fanKC9V4xTpmS9mOx4FFcbJUB733kzD7NA==\n",
+    "iv": "dDicg70iJu/Shp7x\n",
+    "auth_tag": "uLpVHqHGqWAqgzDN6pl2bw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "dev_aem_password": {
+    "encrypted_data": "YAqe+D+gZ8IoXo+rkF2HvhvFtBCUSY6LFP7SIse+TA==\n",
+    "iv": "NnUIT2vfez2mv+nM\n",
+    "auth_tag": "dGKIMyFKm9/5FNFvS9lwpQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "stage_aem_password": {
+    "encrypted_data": "4JIBXLVRQXgAdcnU2BD57tYWWqoX3LQYFWug7zF0hTSlfg==\n",
+    "iv": "2tF2rQZviFJClMXS\n",
+    "auth_tag": "13y8b7XyigGvtv/6FpnfBQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_aem_password": {
+    "encrypted_data": "WszhYVUrKwLF6l8QiJqpUFPPxi4ZRD2vUW2HokXmHHpZhx4yKpc=\n",
+    "iv": "L07qeoLBAmcrx0Gb\n",
+    "auth_tag": "BEMv2P84o0sqFp9RbFSFQA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

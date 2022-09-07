@@ -1,0 +1,7 @@
+{ 
+  "comment": "David Hoffman",
+  "groups": ["lock"],
+  "ssh_keys": "",
+  "id": "david",
+  "shell": "/bin/false"
+}

@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+#
+# Generic check raising an error if exit code of command is not N.
+
+
+require 'mysql2'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+opts.banner = "Usage: chef_servers.rb [options]"
+opts.on('-m', '--max max_thread_count', 'Max thread Count') { |v| options['max_thread_count'] = v }
+opts.on('-h', '--help', 'Help') { puts opts
+exit }
+end.parse!
+
+client = Mysql2::Client.new(:host => "<%= @host %>", :username => "<%= @username %>", :password => "<%= @password%>", :database => "mysql")
+res = client.query("show processlist")
+thread_count =  res.count
+#puts thread_count
+client.close
+if thread_count > options['max_thread_count'].to_i
+  puts "Thread Count Higher Than #{options['max_thread_count']}: #{thread_count}"
+  exit 1
+else
+  puts "Thread Count is: #{thread_count}"
+  exit 0
+end

@@ -1,0 +1,208 @@
+{
+  "id": "httpform",
+  "name": "HTTP FORM",
+  "pluginDescriptorRef": {
+    "id": "com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/descriptors/com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter"
+  },
+  "configuration": {
+    "tables": [
+      {
+        "name": "Credential Validators",
+        "rows": [
+          {
+            "fields": [
+              {
+                "name": "Password Credential Validator Instance",
+                "value": "RESTCROWD"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "name": "Challenge Retries",
+        "value": "3"
+      },
+      {
+        "name": "Session State",
+        "value": "Per Adapter"
+      },
+      {
+        "name": "Session Timeout",
+        "value": "60"
+      },
+      {
+        "name": "Session Max Timeout",
+        "value": "480"
+      },
+      {
+        "name": "Allow Password Changes",
+        "value": "false"
+      },
+      {
+        "name": "Password Management System",
+        "value": ""
+      },
+      {
+        "name": "Enable 'Remember My Username'",
+        "value": "true"
+      },
+      {
+        "name": "Change Password Email Notification",
+        "value": "false"
+      },
+      {
+        "name": "Show Password Expiring Warning",
+        "value": "false"
+      },
+      {
+        "name": "Password Reset Type",
+        "value": "NONE"
+      },
+      {
+        "name": "Account Unlock",
+        "value": ""
+      },
+      {
+        "name": "Login Template",
+        "value": "html.form.login.template.html"
+      },
+      {
+        "name": "Logout Path",
+        "value": "/signout"
+      },
+      {
+        "name": "Logout Redirect",
+        "value": "https://<%= @www_server_name %>"
+      },
+      {
+        "name": "Logout Template",
+        "value": "idp.logout.success.page.template.html"
+      },
+      {
+        "name": "Change Password Template",
+        "value": "html.form.change.password.template.html"
+      },
+      {
+        "name": "Change Password Message Template",
+        "value": "html.form.message.template.html"
+      },
+      {
+        "name": "Password Management System Message Template",
+        "value": "html.form.message.template.html"
+      },
+      {
+        "name": "Change Password Email Template",
+        "value": ""
+      },
+      {
+        "name": "Expiring Password Warning Template",
+        "value": ""
+      },
+      {
+        "name": "Threshold for Expiring Password Warning",
+        "value": ""
+      },
+      {
+        "name": "Snooze Interval for Expiring Password Warning",
+        "value": ""
+      },
+      {
+        "name": "Login Challenge Template",
+        "value": "html.form.login.challenge.template.html"
+      },
+      {
+        "name": "'Remember My Username' Lifetime",
+        "value": "30"
+      },
+      {
+        "name": "Allow Username Edits During Chaining",
+        "value": "false"
+      },
+      {
+        "name": "Track Authentication Time",
+        "value": "true"
+      },
+      {
+        "name": "Post-Password Change Re-Authentication Delay",
+        "value": "0"
+      },
+      {
+        "name": "Password Reset Username Template",
+        "value": ""
+      },
+      {
+        "name": "Password Reset Code Template",
+        "value": ""
+      },
+      {
+        "name": "Password Reset Template",
+        "value": ""
+      },
+      {
+        "name": "Password Reset Error Template",
+        "value": ""
+      },
+      {
+        "name": "Password Reset Success Template",
+        "value": ""
+      },
+      {
+        "name": "Account Unlock Template",
+        "value": ""
+      },
+      {
+        "name": "OTP Length",
+        "value": ""
+      },
+      {
+        "name": "OTP Time to Live",
+        "value": ""
+      },
+      {
+        "name": "PingID Properties",
+        "value": ""
+      }
+    ]
+  },
+  "attributeContract": {
+    "coreAttributes": [
+      {
+        "name": "username",
+        "masked": false,
+        "pseudonym": true
+      }
+    ],
+    "extendedAttributes": [
+      {
+        "name": "profileId",
+        "masked": false,
+        "pseudonym": false
+      }
+    ],
+    "maskOgnlValues": false
+  },
+  "attributeMapping": {
+    "attributeSources": [],
+    "attributeContractFulfillment": {
+      "profileId": {
+        "source": {
+          "type": "ADAPTER"
+        },
+        "value": "profileId"
+      },
+      "username": {
+        "source": {
+          "type": "ADAPTER"
+        },
+        "value": "username"
+      }
+    },
+    "issuanceCriteria": {
+      "conditionalCriteria": []
+    }
+  }
+}

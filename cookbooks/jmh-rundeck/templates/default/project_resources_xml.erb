@@ -1,0 +1,18 @@
+<project>
+	<% @project_array.each do |res|%>
+		<% server_name  = res['name'] %>
+    <node name="<%= server_name%>"
+    	  description="" tags=""
+    	  hostname="<%= @resource_hash[server_name]['ipaddress']%>"
+    	  <% if @resource_hash[server_name]['osarch']%>
+    	  osArch="<%= @resource_hash[server_name]['osarch']%>"
+    	  <% end %>
+    	  <% if @resource_hash[server_name]['osname']%>
+    	  osName="<%= @resource_hash[server_name]['osname']%>"
+    	  <% end %>
+    	  <% if @resource_hash[server_name]['osversion']%>
+    	  osVersion="<%= @resource_hash[server_name]['osversion']%>"
+    	  <% end %>
+    	  username="<%= res['user']%>" />
+	<% end %>
+</project>

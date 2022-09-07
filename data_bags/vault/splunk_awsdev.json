@@ -1,0 +1,5 @@
+{
+  "id": "splunk_awsdev",
+  "auth": "admin:password",
+  "secret": "notarealsecret"
+}

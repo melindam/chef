@@ -1,0 +1,252 @@
+# Auto config dropped off by chef!
+<% if @params[:env] -%>
+<% @params[:env].each do |key, value| -%>
+SetEnv <%= key.upcase %> <%= value %>
+<% end -%>
+<% end -%>
+<% if @params[:extended_status] -%>
+ExtendedStatus On
+<% end -%>
+<% if @params[:ip_address] -%>
+<Virtualhost <%= @params[:ip_address] %>:<%= @params[:port] %>>
+<% end -%>
+  <% if @params[:server_name] -%>
+    ServerName <%= @params[:server_name] %>
+  <% end -%>
+  <% if @params[:server_aliases] && !Array(@params[:server_aliases]).empty? -%>
+    ServerAlias <%= Array(@params[:server_aliases]).join(' ') %>
+  <% end -%>
+  <% if @params[:docroot] -%>
+    DocumentRoot <%= @params[:docroot] %>
+  <% end -%>
+  <% if @params[:directory_index] -%>
+    DirectoryIndex <%= Array(@params[:directory_index]).join(' ') %>
+  <% end -%>
+  <% if @params[:script_aliases] -%>
+    <% Array(@params[:script_aliases]).each do |als, loc| -%>
+      ScriptAlias <%= als %> "<%= loc %>"
+    <% end -%>
+  <% end -%>
+  <% if @params[:aliases] -%>
+    <% Array(@params[:aliases]).each do |als, loc| -%>
+      Alias <%= als %> <%= loc %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:root_location] %>
+    <Location "/">
+      <% @params[:root_location].each do |directive| %>
+      <%= directive %>
+      <% end %>
+    </Location>
+  <% end %>
+  <% if @params[:proxy_passes] -%>
+    <% @params[:proxy_passes].each do |from, to| -%>
+      ProxyPass <%= from %> <%= to %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:proxy_pass_reverses] -%>
+    <% @params[:proxy_pass_reverses].each do |from, to| -%>
+      ProxyPassReverse <%= from %> <%= to %>
+    <% end -%>
+  <% end -%>
+  <% unless @params[:proxy_preserve_host].nil? -%>
+    ProxyPreserveHost <%= @params[:proxy_preserve_host] ? 'On' : 'Off' %>
+  <% end -%>
+    <% unless @params[:proxy_requests].nil? -%>
+    ProxyRequests <%= @params[:proxy_requests] ? 'On' : 'Off' %>
+  <% end -%>
+  <% if @params[:header_access_control] -%>
+    # CORS Header access request
+    SetEnvIf Origin "^https://(.+\.)?(johnmuirhealth\.com<%= node['test_run'] ? ":#{node['jmh_webserver']['test_run']['port']}" : ''%>)$" origin_is=$0
+    Header onsuccess unset Access-Control-Allow-Origin env=origin_is
+    Header always set Access-Control-Allow-Origin %{origin_is}e env=origin_is
+    Header always set Access-Control-Allow-Headers "origin, emp_token, x-requested-with, content-type, Authorization"
+    Header always set Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L]
+
+    Header onsuccess unset X-Frame-Options
+    Header always set X-Frame-Options "https://<%= node['jmh_server']['global']['apache']['www']['server_name'] %>"
+    Header onsuccess unset Content-Security-Policy
+    <If "%{REQUEST_URI} =~ m#/[mM]y[Cc]hart.*#">
+      #Allow mychart to be iframed by anyone for happytogether
+      Header always set Content-Security-Policy "frame-ancestors <%= node['jmh_webserver']['sso']['mychart_frame_ancestors'] %>"
+    </If>
+    <Else>
+      Header always set Content-Security-Policy "frame-ancestors <%= node['jmh_webserver']['sso']['frame_ancestors'] %>"
+    </Else>
+  <% end -%>
+	<% if @params[:prerender_io] -%>
+	# Prerender.io
+    RequestHeader set X-Prerender-Token "<%= node['jmh_webserver']['prerender']['token'] %>"
+    RequestHeader set X-Prerender-Version "<%= node['jmh_webserver']['prerender']['apache_version'] %>"
+    RewriteCond %{HTTP_USER_AGENT} googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator|whatsapp [NC,OR]
+    RewriteCond %{QUERY_STRING} _escaped_fragment_
+    Header append Vary User-Agent
+    RewriteCond %{REQUEST_URI} ^(?!.*?(\/npi|\.js|\.css|\.xml|\.less|\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.txt|\.ico|\.rss|\.zip|\.mp3|\.rar|\.exe|\.wmv|\.doc|\.avi|\.ppt|\.mpg|\.mpeg|\.tif|\.wav|\.mov|\.psd|\.ai|\.xls|\.mp4|\.m4a|\.swf|\.dat|\.dmg|\.iso|\.flv|\.m4v|\.torrent|\.ttf|\.woff|\.svg))
+	RewriteRule ^\/(doctor.*$) https://service.prerender.io/%{REQUEST_SCHEME}://%{HTTP_HOST}/$1 [P,END]
+	<% end -%>
+  <% if @params[:includes] -%>
+    <% @params[:includes].each do |path| -%>
+      Include <%= path %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:error_docs] -%>
+    <% @params[:error_docs].each do |status, path| -%>
+      ErrorDocument <%= status %> <%= path %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:rewrites] || @params[:cond_rewrites] -%>
+    RewriteEngine On
+  <% end -%>
+  <% if @params[:error_log] -%>
+    ErrorLog <%= @params[:error_log] %>
+  <% end -%>
+  <% if @params[:transfer_log] -%>
+    TransferLog <%= @params[:transfer_log] %>
+  <% end -%>
+  <% if @params[:log_level] -%>
+    LogLevel <%= @params[:log_level] %>
+  <% end -%>
+  <% if @params[:custom_log] -%>
+    <% Array(@params[:custom_log]).each do |entry| -%>
+      CustomLog <%= entry %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:rewrite_log] && node['jmh_webserver']['apache']['legacy_apache'] -%>
+    RewriteLog <%= @params[:rewrite_log] %>
+  <% end -%>
+  <% if @params[:rewrite_log_level] -%>
+    <%  if node['jmh_webserver']['apache']['legacy_apache'] -%>
+    RewriteLogLevel <%= @params[:rewrite_log_level] %>
+    <% else %>
+    LogLevel warn
+    <% end %>
+  <% end -%>
+  <% if @params[:header_ie11] -%>
+    Header add X-UA-Compatible "IE=EmulateIE11"
+  <% end -%>
+  <% if @params[:ssl_proxy_engine] -%>
+    SSLProxyEngine <%= @params[:ssl_proxy_engine] %>
+  <% end -%>
+  <% if @params[:ssl] -%>
+    SSLEngine on
+    SSLProtocol <%= @params[:ssl_protocol].nil? ? node['jmh_webserver']['apache']['ssl_protocol'] : @params[:ssl_protocol] %>
+    <% if @params[:ssl_proxy_protocol] -%>
+    SSLProxyProtocol <%= @params[:ssl_proxy_protocol] %>
+    <% end -%>
+    <% unless node['jmh_webserver']['apache']['legacy_apache'] %>
+    SSLProxyVerify none
+    SSLProxyCheckPeerName off
+    SSLProxyCheckPeerCN off
+		ProxyTimeout <%= @params[:proxy_timeout].nil? ? node['jmh_webserver']['apache']['proxy_timeout'] : @params[:proxy_timeout] %>
+		SetEnv proxy-sendchunked
+  	<% end -%>
+    SSLCipherSuite <%= node['jmh_webserver']['apache']['ssl_cipher'] %>
+    <% if @params[:ssl_pem_file] -%>
+      SSLCertificateFile <%= @params[:ssl_pem_file] %>
+    <% else -%>
+      SSLCertificateFile <%= node['jmh_webserver']['ssl_certs']['default']['pem'] %>
+    <% end -%>
+    <% if @params[:ssl_key_file] -%>
+      SSLCertificateKeyFile <%= @params[:ssl_key_file] %>
+    <% else -%>
+      SSLCertificateKeyFile <%= node['jmh_webserver']['ssl_certs']['default']['key'] %>
+    <% end -%>
+    <% if @params[:ssl_chain_file] -%>
+      SSLCertificateChainFile <%= @params[:ssl_chain_file] %>
+    <% end -%>
+    SetEnvIf User-Agent ".*MSIE.*" \
+      nokeepalive ssl-unclean-shutdown \
+      downgrade-1.0 force-response-1.0
+  <% end -%>
+  <% if @params[:server_status] %>
+	 <Location /server-status>
+	    SetHandler server-status
+	    <% if node['jmh_webserver']['apache']['legacy_apache'] %>
+	    Order deny,allow
+	    Deny from all
+	    Allow from localhost localhost.localdomain ip6-localhost 127.0.0.1 <%= node['fqdn'] %>
+	    <% else %>
+	    Require host localhost localhost.localdomain ip6-localhost <%= node['fqdn'] %>
+	    Require ip 127.0.0.1
+	    <% end %>
+	</Location>
+<% end %>
+  <% if @params[:locations] -%>
+    <% @params[:locations].each do |loc, conf| -%>
+      <Location "<%= loc %>">
+        <% conf.each do |key, value| -%>
+          <%= key %> <%= value %>
+        <% end -%>
+      </Location>
+    <% end -%>
+  <% end -%>
+  <% if @params[:directories] || @params[:directories_apache24] -%>
+    <% directories = @params[:directories] %>
+    <% directories = @params[:directories_apache24] if !node['jmh_webserver']['apache']['legacy_apache'] && @params[:directories_apache24] %>
+    <% directories.each do |dir, conf| -%>
+      <Directory "<%= dir %>">
+        <% conf.each do |key, value| -%>
+          <%= key %> <%= value %>
+        <% end -%>
+      </Directory>
+    <% end -%>
+  <% end -%>
+  <% if @params[:files] -%>
+    <% @params[:files].each do |files, conf| -%>
+      <Files <%= files %>>
+        <% conf.each do |key, value| -%>
+          <%= key %> <%= value %>
+        <% end -%>
+      </Files>
+    <% end -%>
+  <% end -%>
+  <% if @params[:proxies] -%>
+    <% @params[:proxies].each do |prox, conf| -%>
+      <Proxy <%= prox %>>
+        <% conf.each do |key, value| -%>
+          <%= key %> <%= value %>
+        <% end -%>
+      </Proxy>
+    <% end -%>
+  <% end -%>
+  <% if @params[:limit_request] -%>
+    <% Array(@params[:limit_request]).each do |lmts| -%>
+      <%= lmts %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:rewrites] -%>
+    <% @params[:rewrites].each do |rewrite| -%>
+      RewriteRule <%= rewrite %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:cond_rewrites] -%>
+    <% @params[:cond_rewrites].each do |rewrite, rules| -%>
+      <% Array(rules).each do |r| -%>
+        RewriteCond <%= r %>
+      <% end -%>
+      RewriteRule <%= rewrite %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:cond_final_rewrites] -%>
+    <% @params[:cond_final_rewrites].each do |rewrite, rules| -%>
+      <% Array(rules).each do |r| -%>
+        RewriteCond <%= r %>
+      <% end -%>
+      RewriteRule <%= rewrite %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:redirect_matches] -%>
+    <% @params[:redirect_matches].each do |src,dest| -%>
+      RedirectMatch <%= src %> <%= dest %>
+    <% end -%>
+  <% end -%>
+  <% if @params[:direct_maps] -%>
+    <% @params[:direct_maps].each do |line| -%>
+      <%= line %>
+    <% end -%>
+  <% end -%>
+<% if @params[:ip_address] %>
+</Virtualhost>
+<% end -%>

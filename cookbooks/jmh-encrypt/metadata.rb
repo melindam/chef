@@ -1,0 +1,10 @@
+name 'jmh-encrypt'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures jmh-encrypt'
+long_description 'Installs/Configures jmh-encrypt'
+version '0.1.2'
+
+depends 'dm-crypt'
+depends 'openssl'

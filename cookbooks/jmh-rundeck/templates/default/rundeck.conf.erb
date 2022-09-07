@@ -1,0 +1,33 @@
+<VirtualHost *:80>
+   ServerName <%= node['rundeck']['hostname'] %>
+   ServerAlias <%= node['ipaddress'] %>
+   ServerAdmin ops@<%=node['domain']%>
+	 ErrorLog <%= @log_dir %>/rundeck_error.log
+	 TransferLog <%= @log_dir %>/rundeck_access.log
+        
+   DocumentRoot <%= @doc_root %>
+   ServerSignature On
+        
+		<Proxy *>
+				Require all granted
+		</Proxy>
+		ProxyPass	/logs	!
+		ProxyPass	/icons	!
+		ProxyPass        / http://localhost:<%= node['rundeck']['port'] %>/
+		ProxyPassReverse / http://localhost:<%= node['rundeck']['port'] %>/
+        
+		<Directory />
+						Options +FollowSymLinks
+						AllowOverride None
+		</Directory>
+        
+		<Directory /var/www/html/logs>
+			Options +Indexes
+		</Directory>  
+		      
+		<Location /server-status>
+			SetHandler server-status
+			Require ip 127.0.0.1
+		</Location>
+        
+</VirtualHost>

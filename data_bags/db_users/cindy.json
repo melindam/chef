@@ -1,0 +1,31 @@
+{
+  "comment": {
+    "encrypted_data": "DIlBZReU/+Zng6+2edwKGDntJ0ly010Qq77r2oI=\n",
+    "iv": "VSzz75BGQ57SYeUW\n",
+    "auth_tag": "+hIXKq4tS1Ehzi4UVwdVvw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "id": "cindy",
+  "password": {
+    "encrypted_data": "4571qa0YLJhfA3ZJWQ9XZJmJMy+0v6pcopccdyySXJ7HOrzTgEPlK6DcQCn2\nh4xaIse/PyMKKM6DhCyU\n",
+    "iv": "5HQL4i9saoep3Fxz\n",
+    "auth_tag": "P0HlqNKvgmCAgiCu23uiXA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "active": {
+    "encrypted_data": "L4xHAMq7vBRlS+aJOj04NNtXOk2v\n",
+    "iv": "y1KI8Oj3TysAlUtv\n",
+    "auth_tag": "ltUHFKD0WX06qP0M7L+c8A==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "access": {
+    "encrypted_data": "AnPA1Lak+UK6Cqyyw94YXfiNt00WA3kvrObjfa4e/+Xgt8I=\n",
+    "iv": "1lYpxQ7SVXa6uoej\n",
+    "auth_tag": "kyjC+Z18BbFJxlqWVbLA2w==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

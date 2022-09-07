@@ -1,0 +1,50 @@
+#!/bin/sh
+#set -x
+# Dropped off by Chef!
+# https://gist.github.com/chrismdp/6c6b6c825b07f680e710
+
+PACK_DIR=<%= @share_dir %>
+
+cd <%= @bin_dir %>
+
+./download-assets.sh
+
+S3KEY="<%= @access_id %>"
+S3SECRET="<%= @access_key %>"
+S3BUCKET="<%= @s3bucket %>"
+S3STORAGETYPE="STANDARD" #REDUCED_REDUNDANCY or STANDARD etc.
+AWSREGION="s3"
+
+function putS3
+{
+  path=$1
+  file=$2
+  aws_path=$3
+  bucket="${S3BUCKET}"
+  date=$(date +"%a, %d %b %Y %T %z")
+  acl="x-amz-acl:private"
+  content_type="application/octet-stream"
+  storage_type="x-amz-storage-class:${S3STORAGETYPE}"
+  string="PUT\n\n$content_type\n$date\n$acl\n$storage_type\n/$bucket$aws_path$file"
+  signature=$(echo -en "${string}" | openssl sha1 -hmac "${S3SECRET}" -binary | base64)
+  curl -s -X PUT -T "$path/$file" \
+    -H "Host: $bucket.${AWSREGION}.amazonaws.com" \
+    -H "Date: $date" \
+    -H "Content-Type: $content_type" \
+    -H "$storage_type" \
+    -H "$acl" \
+    -H "Authorization: AWS ${S3KEY}:$signature" \
+    "https://$bucket.${AWSREGION}.amazonaws.com$aws_path$file"
+}
+
+<% @author_packages.each do |package| %>
+  echo "Now uploading Author <%= package %>"
+  putS3 "<%= @share_dir %>" "/<%= package%>.zip" "/author"
+
+<% end %>
+
+<% @publisher_packages.each do |package| %>
+  echo "Now uploading Publisher <%= package %>"
+  putS3 "<%= @share_dir %>" "/<%= package%>.zip" "/publisher"
+
+<% end %>

@@ -1,0 +1,4 @@
+#/bin/sh
+curl -u <%= @admin %>:'<%= @password %>' -X POST \
+    "http://<%= @hostname %>:<%= @port %>/system/console/jmx/com.adobe.granite:type=Repository/op/startBackup/java.lang.String?target=<%= @backup_directory %>"
+

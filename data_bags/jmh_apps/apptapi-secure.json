@@ -1,0 +1,31 @@
+{
+  "id": "apptapi-secure",
+  "jmh_jwt_default_key": {
+    "encrypted_data": "n6fAKLyZxSeovc3wpSpGCyhMDXi0y19TJpxyr0YXDz1Ubg15j7aO2AFxIkQc\nxf+Qw13B\n",
+    "iv": "Wk9lquTbHRtAL9oi\n",
+    "auth_tag": "8HcylQQFid9bGNDcZ4lb6Q==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "jmh_jwt_prod_key": {
+    "encrypted_data": "dLdGBAOYDNFpYJm2iKNUow/l6oiarXdhOcH7ab79mpmalHhCoedV5uojSObp\n3XguDAmJBmb60hf97r4=\n",
+    "iv": "EnsbhWssZRn4cOod\n",
+    "auth_tag": "wztD0hod6Ptw6KhEHSRSew==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "jmh_zocdoc_private_key": {
+    "encrypted_data": "Vki14pkats4ev9TPJkdnRm1EIV7kaZ6B915REZyDU64fniI3lqcNqIE1mCmJ\nfHI3zIvNrBasVibpfdcWw/oJoe6Y31sIFRRm0xduAD060fiEzQoh8iRq+/fQ\n8+I8fn/9UeOlbvuDrGOnTKJnHP3VINo214+FVKLIfYFj6B073u9zmbrv7M5p\npxIE8bqM4cV5qB3DXCxYajKnI6r4Y32zvc310xENl7opF39rhiYk6wPPIvc8\nfRu178o7DJLkldikehwkWjEukyLZgZ7SMz4txIzDXkDc8AQiwV63YHRStXtm\nrklneB9aJ72iqbyU+GvBsixMBMSxCvqq8KddS+2VOIbDViTwgwErfMKqh4w1\n9y+wdto3uBW18EFPLxbk/GZF36wtDCCQjxP1gxY3cGY/dJUNOyLqSsIengv6\nOX/1o8A0xcHvE0sTV7ujS6zD6I9wxg8CA94Sq5ZY/7lXNDjC20VGjZqm/LJD\nhN/UdQJDI51VOIdYBY2oFb4pdpEwOLHFaKYmfnqtaVX49qdOfD2qzJtlR7+i\n47pgZzfwJSG1s6j1AGKmrQEezpWA3b2KsSSkQtSwM7OERNBlDQBMMSalZjhg\nJs2y0fDxstZiMq+CQvqV6yIBYsVP6izd7+FZurcvqDK/4nZkIgmfLDjf/FAD\nk9hcyzn6EHf+E1F1LQqs1IGeK2ZKTWFzN2rK5mkQNCQBZyiravk4nFrflW0Q\n94zUbXZkiCT4heapw1dsvV9HcMQ/oLTLkyiPcu36mjsjxlXEk38yHTrN/zGA\nuWlrddb5MaVhoYMlSGospK5pIW00hF6odSSpu1NYxOuOo+3YlHFvhx4d5Jsu\nYluTKJYcxw//5n0IkWI3uFBnRU+Rh3rwL1DksBN5AwH52ZkLz3+F7bQOp0NY\npQZ0B8/J8jOenR2xhDh/Zr94T+hhAz1OApOvnpXHC+1cYLitlsXIy1yuKbNJ\nrhMZeNWvR0BcH1HYs020DtWRbvrjTnmzSj7bVfODbC+ZQDDzUhaDvYvo6Q4/\nXVh+Sk6EkVffEowfrwO1HJU6NXmlnujs3+qscGxFSt9BnQu72wxQzeBYTco7\nrHAE8+ReE0UGxzOssDzTVyWiFbmT1yG+trJN7940007yEd9NCEZIih6IQfC+\nJanYN91BKp/aaewWeTkPrJUt/ULXFVHQTXTGRTOvxBP4kGlUVJElkQM5ENtz\n0+fEwdIXLAvasQ5Bz/ysaiaEPC5dlybMhS0KJ2rtxZ8GzXLcF4B1Tgf63OAz\nzIvYum/KIh5vyIRmLHi09jQNeFSDc4vzlTa1mCuG7UI9t3c5mIADplcEibG5\nSqLZHNBnZGlGFyLN7jCnU3iZJY2PNX6KGG5FhDjsepjHwklDgZms24XyZBS6\n4ftcLsW+jcMLJ09+DuOFOgmo2QuneEByck1nNPuEB+AGyAMUpsRp52Futb25\nsegZnGn2EfHaYzDhKMta9/pRULpGTiiYsKChVE7lUYCSb92EAo8cBicWoLB5\nfIo3caF7gfytOPGXCKNly18SgoGy3xoKLNAafddLsD2Sds4fO49UkvzZNoAl\napUyi3kGI54nPDMWws7G/NY3510tp48HgVSmC8CLbXdIGt7uh0RVHULQkuk8\nuQxzKQ9+RCCNlDcbhTPV92vXzLNIdsQQClaU+sTgkqZZ9bAV9FPcRWKmLefh\nYaB6CHj6xeFDjR+PE2l2F6v+QJVEXdoarXzgB6n5MaUcTJUUpH9foEc5n7Up\nh35286jMiiRKAe9j+uLPRoQJVT+mnk5D9PQqhEa08pRSEoZ3snueZUCdVvyK\nuIrL6Yvt3F/ezTWBH3Idk7Wztrw06VB+z0meWSIWK8oMt0lKMBIQwQd52UMk\nQ8zcx1z1hpD0hV2RdXTlj5f4nLKPz+Izri5GPTXJMRMPBJ88lepcuokT2jGC\n8VbpmvD2/OE7dk+gKiLR948W55bkKgOa9/iW60j6/uiIKw564j7JC5Z2wpE5\nYulwrwqgUIhBa5oiZvXXrCPceeD0NCdJN/TkawkpHlWgEmwpDTBjdDiI7P5s\nmmwZv9VWiTLbEw7cjkG3bGZpFuV4PvQpvc6EtrIDsYBQbjmHoGjABVrhAPXG\n9+7TtfZGEalBGLLpXFfF4H3aDa2C4BlpdtwXauMO3XK507ckMc0MumCy0lLz\nMyDUWAGxET9sJeZd89XU6Xxoq2cwRRthANThVM+1j60T6ypJZW/SWP7cBgcR\nuI5uhEAMr7pUJHL4v8REMJk2miqdkgyWWz4hKDDmTiw8BKB4jOC2Qqp3CGCC\nbS3OmCU6MWzSXYqNOdtP\n",
+    "iv": "jfsVnoVJ7LNJO/yY\n",
+    "auth_tag": "mdZCJxDmAGTNW3D7FARjAQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "jmh_zocdoc_prod_private_key": {
+    "encrypted_data": "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\ndsihWTSr2CeAwJI=\n",
+    "iv": "0z1V1rqVSRDjy9uZ\n",
+    "auth_tag": "QMBW53r4iNo1TJ2AFDPGgQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

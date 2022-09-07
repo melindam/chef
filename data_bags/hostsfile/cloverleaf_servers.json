@@ -1,0 +1,9 @@
+{
+	"id": "cloverleaf_servers",
+	"hosts": {
+		"pwim-old.hsys.local": {"ip": "172.24.200.185", "alias": ["pwim-old"]},
+		"pwim.hsys.local": {"ip": "172.24.200.155", "alias":  ["cloverleaf jmhhc-prd"]},
+        "jmhhc-dr.hsys.local": {"ip": "172.23.203.202", "alias":  ["cloverleaf-disaster-recovery"]},
+        "pwimtest.hsys.local": {"ip": "172.24.200.186", "alias": ["cloverleafdev"]}
+	}			   
+}

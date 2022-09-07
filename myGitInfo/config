@@ -1,0 +1,33 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = git@github.com:JohnMuirHealth/chef-repo.git
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "scott"]
+	remote = origin
+	merge = refs/heads/scott
+[branch "melindam"]
+	remote = origin
+	merge = refs/heads/melindam
+[branch "aem61"]
+	remote = origin
+	merge = refs/heads/aem61
+[branch "cq-2.0.x"]
+	remote = origin
+	merge = refs/heads/cq-2.0.x
+[branch "melinda-mojave"]
+	remote = origin
+	merge = refs/heads/melinda-mojave
+[branch "mel_revert_databags"]
+	remote = origin
+	merge = refs/heads/mel_revert_databags
+[branch "mel21"]
+	remote = origin
+	merge = refs/heads/mel21

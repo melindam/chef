@@ -1,0 +1,16 @@
+{
+"handlers":{
+  "pdmailer": {
+    "type": "pipe",
+    "command": "<%= @ruby_binary %> <%= @ruby_gems_dir %>/sensu-plugins-mailer-<%= @plugin_version %>/bin/handler-pdmailer.rb",
+    "filters": ["occurrences","filter_onlyproduction_afterhours"]
+    }
+  },
+  "pdmailer": {
+    "mail_from": "<%= @email_from %>",
+    "mail_to": "<%= @email %>",
+    "smtp_address": "localhost",
+    "smtp_port": 25,
+    "admin_gui": "https://<%= @sensu_server %>"
+  }
+}

@@ -1,0 +1,65 @@
+#!/bin/sh
+# set -x
+#  Dropped off my Chef!!
+#  Author: Scott Marshall
+#  Name: import_echo.sh
+#  Description: Runs the mdsuspension echo file import by triggering it through a URL call.  The
+#               job checks the response for a success phrase and then stops.  If it does not get its
+#               success phrase, it tries again after a 2 minute sleep.  It will try 5 times before failing
+#
+
+
+URL="https://<%= @base_url %>/<%= @context %>"
+CREDS=<%= @user %>:<%= @password %>
+HTML_CODE_200="HTTP/1.1 200"
+SUCCESS_CONTENT="Success!"
+TEMP_OUTPUT=$(mktemp)
+
+success=false
+message=""
+
+for i in {1..5}
+do
+  echo "Attempt #${i}"
+  /usr/bin/curl -i --user "${CREDS}" -k $URL -o ${TEMP_OUTPUT} 2> /dev/null
+  status=$?
+
+  fgrep "${HTML_CODE_200}" ${TEMP_OUTPUT} > /dev/null
+  html_status=$?
+
+  fgrep "${SUCCESS_CONTENT}" ${TEMP_OUTPUT} > /dev/null
+  content_success=$?
+
+  cat $TEMP_OUTPUT
+
+  if [ $status -ne 0 ]
+  then
+    success=false
+    echo "**FAILED RUN**"
+    echo "Exit code of curl call not successfull: ${status}"
+
+  elif [ $html_status -ne 0 ]
+  then
+    success=false
+    echo "**FAILED RUN**"
+    echo "HTML CODE bad: `fgrep 'HTTP/' ${TEMP_OUTPUT}`"
+  elif [ $content_success -ne 0 ]
+  then
+    sucess=false
+    echo "**FAILED RUN**"
+    echo "Success Status not found in content: ${SUCCESS_CONTENT}"
+  else
+    success=true
+    break
+  fi
+  echo "Attempting another try in 25 seconds"
+  sleep 120
+done
+
+if [ $success = "true" ]
+then
+  echo "Successful Import!!"
+  exit 0;
+else
+  exit 1;
+fi

@@ -1,0 +1,9 @@
+{
+	"id": "hsysdc",
+	"hosts": {
+		"hsysdc1.hsys.local": {"ip": "10.90.6.136"},
+		"hsysdc2.hsys.local": {"ip": "10.90.6.137"},
+		"hsystdc1.hsys.local": {"ip": "172.23.202.216"},
+		"hsyswcdc3.hsys.local": {"ip": "172.24.202.236"}
+		}			   
+}

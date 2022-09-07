@@ -1,0 +1,5 @@
+<% if node['jmh_webserver']['apache']['legacy_apache'] %>
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combinedproxy
+<% else %>
+LogFormat "%a %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combinedproxy
+<% end %>

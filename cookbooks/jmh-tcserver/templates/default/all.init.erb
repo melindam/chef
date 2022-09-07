@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# tcserver      This shell script takes care of starting and stopping
+#		the tcserver server
+#
+# chkconfig: - 80 20 
+# description:	The TCServer Server
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+TCSERVER_HOME=<%= @tcserver_home %>
+TC_USER=<%= @user %>
+
+TC_APPS="<%= Array(node[:jmh_tcserver][:enabled_apps]).join(' ') %>"
+
+if [ -z $1 ]
+then
+	echo "Usage:"
+	echo "tcserver [command] #Command for all instances"
+	echo "tcserver [instance] [command]"
+	exit 1;
+fi
+
+if [ -z $2 ] 
+then
+	echo "Command sent to all instances"
+	for app in $LOCAL_APPS
+	do
+	   echo "$app"
+       	   su - $SUUSER -c "cd $TCSERVER_HOME; ./tcruntime-ctl.sh $app $1"
+	   echo
+	done
+else 
+	echo "Command sent to $1"
+	su - $SUUSER -c "cd $TCSERVER_HOME; ./tcruntime-ctl.sh $1 $2"
+fi
+
+exit;

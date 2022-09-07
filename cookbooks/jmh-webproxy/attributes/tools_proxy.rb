@@ -1,0 +1,13 @@
+default['jmh_webproxy']['tools']['sensu']['name'] = "sensu"
+default['jmh_webproxy']['tools']['sensu']['port'] = 443
+default['jmh_webproxy']['tools']['sensu']['search_role'] = "sensu-armor"
+default['jmh_webproxy']['tools']['sensu']['environment'] = "arprod"
+default['jmh_webproxy']['tools']['sensu']['proxy_port'] = 3000
+default['jmh_webproxy']['tools']['sensu']['proxy_context'] = "/"
+default['jmh_webproxy']['tools']['sensu']['server_name'] = "sensu.johnmuirhealth.com"
+default['jmh_webproxy']['tools']['sensu']['server_aliases'] = ["sensu-armor.johnmuirhealth.com"]
+default['jmh_webproxy']['tools']['sensu']['ssl'] = true
+default['jmh_webproxy']['tools']['sensu']['protocol'] = "https"
+default['jmh_webproxy']['tools']['sensu']['ssl_proxy_protocol'] = true
+default['jmh_webproxy']['tools']['sensu']['custom_log'] = ["logs/sensu_access_log combined"]
+default['jmh_webproxy']['tools']['sensu']['error_log'] = "logs/sensu_error_log"

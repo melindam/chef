@@ -1,0 +1,17 @@
+{
+  "id": "subversion",
+  "description": {
+    "encrypted_data": "CjORxKBRxyFrxNf62C29Y7oQRuuZyJ/F2u8QBIzfZXA+5c3Ki4f133p3itZN\nnqgfMNeKoE3MDTwx0prMyqoFAKl608ILfN2NFw==\n",
+    "iv": "xbu/+oeTDiQsO1dm\n",
+    "auth_tag": "LILoRHF3umod7JvF7Clneg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "repos": {
+    "encrypted_data": "XsAXRBBSZUoUNHumdbfB3tFPu3fZE/r5dVIlFCtU2x70NrcoQfGFitBarbNS\nfsyGwnBKLmuQ5QlyhjwUlHwtXm4tT3TjsmLLkSYv+wuI38SYRYRDUGbhTVwj\naNm+7iJBU54oGLeFBUgJg7qim3aRbvz1fnXTxNNxkWzwwa5fncBkLUazx+op\nwJc00vNLJZN20UTyCTt0ew==\n",
+    "iv": "hhyslB/EJX2vhAK5\n",
+    "auth_tag": "17VH5rAb7tSEDrNSTGbhrw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

@@ -1,0 +1,4 @@
+# SENSU
+-A FWR -p tcp --dport <%= node['jmh_monitor']['sensugo']['agent_port'] %> -j ACCEPT
+-A FWR -p tcp --dport <%= node['jmh_monitor']['sensugo']['api_port'] %> -j ACCEPT
+-A FWR -p tcp --dport <%= node['jmh_monitor']['sensugo']['web_port'] %> -j ACCEPT

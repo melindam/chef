@@ -1,0 +1,4 @@
+RemoteIPHeader <%= node['jmh_webserver']['apache']['remote_ip_header'] %>
+<% node['jmh_webserver']['apache']['remote_ip_proxy_servers'].each do |ip| %>
+RemoteIPInternalProxy <%= ip %>
+<% end %>

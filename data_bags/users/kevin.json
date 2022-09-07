@@ -1,0 +1,7 @@
+{
+  "comment": "Kevin Bagnaschi",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHEQHlbBbG23iQSIBEGGJBVox4a0srfzqEoJGEGcLcFxVet6GzrPXXB4kkMn0A1KUQBihmFUbKA2QSufUjCvzxos8RjgspWumWMttyyvbGLbsxlXDdNp7uBplcjiaj2ZJNuKfdhjqXidhV+0EawHoSkiTQ/hhlD/DJ/nzURKTWPlaEGQSxaO0zrF/KpTW6au8pngkd9gOfkLAQC3NiKPvVyJdIriB2kQKTZM3RSpNkgLzCrbuK41aS9VmKGhJA/yD0xUagOLV0lB9fLdRRTUCfRwbiDFClCK5EBiJZRBMDzO7OThXQy/08WR2ldtND8ZtQ6oVlXQmqxcUA+4aaYIHb exchange\\105322@TKNOW1010B\n",
+  "id": "kevin",
+  "shell": "/bin/false"
+}

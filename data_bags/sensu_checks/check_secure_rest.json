@@ -1,0 +1,79 @@
+{
+	"id": "check_secure_rest",
+	"template_name": "checks/check_secure_rest.erb",
+	"checks": [ {"name" : "interconnect-poc",
+				 "subscribers" : ["sensu-server","sensu-aws"],
+				 "handlers" : ["mailer"],
+				 "interval": 300,
+				 "occurences": 2,
+				 "maintenance": [[22,24],[0,8]],
+				 "options" : [ 	"epic18interbld1.hsys.local",
+				 				"interconnect-poc-ebiz-secured",
+					 			"3a1215dc-1187-4e16-9cf9-32c28a3bde7b"
+				              ]
+				 },
+				 {"name" : "interconnect-tst",
+				 "subscribers" : ["sensu-server","sensu-aws"],
+				 "handlers" : ["mailer"],
+				 "interval": 300,
+				 "occurences": 2,
+				 "maintenance": [[22,24],[0,8]],
+				 "options" : [ 	"epic18interbld1.hsys.local",
+				 				"interconnect-tst-ebiz-secured",
+					 			"3a1215dc-1187-4e16-9cf9-32c28a3bde7b"
+				              ]
+				 },
+				{"name" : "interconnect-tst2",
+					"subscribers" : ["sensu-server","sensu-aws"],
+					"handlers" : ["mailer"],
+					"interval": 300,
+					"occurences": 2,
+					"maintenance": [[22,24],[0,8]],
+					"options" : [ 	"epic18interbld1.hsys.local",
+						"interconnect-tst2-ebiz-secured",
+						"3a1215dc-1187-4e16-9cf9-32c28a3bde7b"
+					]
+				},
+				 {"name" : "interconnect-sup",
+				 "subscribers" : ["sensu-server","sensu-armor"],
+				 "handlers" : ["sup-email-handler"],
+				 "interval": 120,
+				 "occurences": 2,
+                 "afterhours": false,
+				 "options" : [ 	"epicinterxvprd2.hsys.local",
+				 				"Interconnect-SUP-eBiz-secured",
+                   "3a1215dc-1187-4e16-9cf9-32c28a3bde7b"
+				              ]
+				 },
+				 {"name" : "interconnect-prd",
+				 "subscribers" : ["sensu-server","sensu-armor"],
+				 "handlers" : ["mailer"],
+				 "interval": 60,
+				 "occurences": 2,
+				 "options" : [ 	"epicinterxvprd.hsys.local",
+				 				"Interconnect-PRD-eBiz-secure",
+					 "6c971a49-b361-456b-aa2c-123abdf9f5c1"
+				              ]
+				 },
+				 {"name" : "interconnect-prd1",
+				 "subscribers" : ["sensu-server","sensu-armor"],
+				 "handlers" : ["mailer"],
+				 "interval": 90,
+				 "occurences": 2,
+				 "options" : [ 	"epicinterxvprd1.hsys.local",
+				 				"Interconnect-PRD-eBiz-secure",
+					 "6c971a49-b361-456b-aa2c-123abdf9f5c1"
+				              ]
+				 },
+				 {"name" : "interconnect-prd2",
+				 "subscribers" : ["sensu-server","sensu-armor"],
+				 "handlers" : ["mailer"],
+				 "interval": 80,
+				 "occurences": 2,
+				 "options" : [ 	"epicinterxvprd2.hsys.local",
+				 				"Interconnect-PRD-eBiz-secure",
+					 "6c971a49-b361-456b-aa2c-123abdf9f5c1"
+				              ]
+				 }
+			]
+}

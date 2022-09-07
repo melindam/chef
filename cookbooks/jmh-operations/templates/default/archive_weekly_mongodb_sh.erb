@@ -1,0 +1,29 @@
+#!/bin/sh
+# set -x
+
+sourceDir="<%= node['jmh_operations']['archivedb']['mongodb_backup_dir']%>"
+targetDir="<%= node['jmh_operations']['archivedb']['mongodb_backup_dir']%>/weekly"
+
+<% @server_list.each do |n| %>
+# <%= n['name']%>
+  echo "Working on Archiving <%= n['name']%> ...."
+
+  cd $sourceDir/<%= n['name'] %>
+  sourceString=`ls -1t | head -1 | tr -d [A-Za-z.]`
+
+  for x in `ls -1t *${sourceString}*`
+    do
+      echo "Workin on $x ...."
+      cp -p $x $targetDir/<%= n['name'] %>
+  done
+  if [ $? -ne 0 ]
+  then
+    echo "Error with the copy of data <%= n['name'] %>"
+    exit 1
+  fi
+
+find . -mtime <%= @retention %> -exec rm -f {} \;
+
+<% end %>
+
+echo "Archiving Complete...."

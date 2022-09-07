@@ -1,0 +1,63 @@
+# Dropped of by Chef!!
+# swagger configuration file
+
+server:
+  port: <%= @https_port %>
+  log_dir: <%= @log_dir %>
+  host: <%=  @hostname %>
+  website: https://<%= @www_server_name %>
+
+db:
+  host: <%= @db_host %>
+  database: <%= @db %>
+  username: <%= @db_user %>
+  password: '<%= @db_password %>'
+  dialect: mysql
+
+basic_auth:
+  username: <%= @basic_auth_username %>
+  password: <%= @basic_auth_password %>
+
+crowd:
+  server: <%= @crowd_server %>
+  username: <%= @crowd_username %>
+  password: <%= @crowd_password %>
+
+idp:
+<% @idp_properties.each do |propName, propValue| %>
+  <%= propName %>: <%= propValue %>
+<% end %>
+
+epic:
+  baseUrl: <%= @interconnect_base_url %>
+  baseUrlSecure: <%= @interconnect_secure_url %>
+  interconnect:
+      username: <%= @interconnect_secure_user %>
+      password: <%= @interconnect_secure_user_password %>
+      clientId: <%= @interconnect_client_id %>
+
+crypto:
+  private_key: <%= @private_key_file %>
+  public_key: <%= @public_key_file %>
+
+whitelist:
+  ips: <%= @whitelist_ips %>
+
+chatbot:
+<% @chatbot_properties.each do |propName, propValue| %>
+  <%= propName %>: <%= propValue %>
+<% end %>
+
+aws:
+<% @aws_properties.each do |propName, propValue| %>
+  <%= propName %>: <%= propValue %>
+<% end %>
+
+ldap:
+<% @ldap_properties.each do |propName, propValue| %>
+  <%= propName %>: <%= propValue %>
+<% end %>
+
+google:
+  captcha:
+    secret: <%= @google_captcha_secret_key %>

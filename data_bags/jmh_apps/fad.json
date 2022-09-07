@@ -1,0 +1,10 @@
+{
+  "id": "fad",
+  "ssh_password_hash": {
+    "encrypted_data": "zvIHiQIgmqiFitgTP4TVWdJyOntzPVd1JmofOastgOkkTNn3m7CnCFqG/F3p\nkdt1kCBn1m6zMp7nxcuN7NJUlCTHcHoSN9bIMRMaM04CNRX8wtNLyUIaQ4wq\nEThSDqwVQzjhW7cjJYv7y8km8q5AHwo+kQeD\n",
+    "iv": "DQ4epsVVHjP7wBXt\n",
+    "auth_tag": "zAoPv/iz84lgDGUpBRJMGw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

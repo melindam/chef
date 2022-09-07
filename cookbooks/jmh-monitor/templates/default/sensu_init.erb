@@ -1,0 +1,17 @@
+#!/bin/bash
+# description: Sensu Restart for JMH
+# chkconfig 234 20 80
+
+SENSU_SERVICES="<%= @services %>"
+
+for SERVICE in $SENSU_SERVICES
+do
+        <% if @systemd %>
+        echo "$SERVICE about to $1"
+        /bin/systemctl $1 $SERVICE
+        <% else %>
+        echo "About to $1 $SERVICE"
+        /etc/init.d/$SERVICE $1
+        sleep 3
+        <% end %>
+done

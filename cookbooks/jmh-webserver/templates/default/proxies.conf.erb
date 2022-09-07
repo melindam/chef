@@ -1,0 +1,35 @@
+<% @proxies.each do |source, dest| -%>
+  <% if !@maintenance_mode %>
+		<% unless dest.nil? %>
+  ProxyPass <%= source %> <%= ::File.join("#{@proto}://#{@remote_address}:#{@remote_port}", dest) %>
+  ProxyPassReverse <%= source %> <%= ::File.join("#{@proto}://#{@remote_address}:#{@remote_port}", dest) %>
+  <Location <%= source%>>
+		<% if @directives %>
+      <% @directives.each do |directive| %>
+    <%= directive %>
+      <% end %>
+    <% else %>
+    Require all granted
+    <% end %>
+  </Location>
+	<% if @locations -%>
+		<% @locations.each do |loc, conf| -%>
+	<Location "<%= loc %>">
+	<% conf.each do |key, value| -%>
+		<%= key %> <%= value %>
+	<% end -%>
+	</Location>
+		<% end -%>
+	<% end -%>
+	<% if @custom_config %>
+	<% @custom_config.each do |customline| %>
+	<%= customline %>
+	<% end -%>
+	<% end -%>
+  <% else %>
+  ProxyPass <%= source %> !
+  <% end %>
+  <% else %>
+  	RewriteRule ^<%= source %>(.*) <%= @maintenance_page %>
+  <% end %>
+<% end -%>

@@ -1,0 +1,39 @@
+#!/bin/sh
+# set -x
+# Dropped off by Chef!
+
+echo "Get crowd_id for users"
+crowd_id=`/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+    -e 'select id from cwd_user where directory_id = <%= @crowd_directory_id %> and user_name in (<%= @user_array.to_s.gsub('[','').gsub(']','') %>)' | grep -v id | tr '\n' ',' `
+crowd_id=${crowd_id%?}
+echo "($crowd_id)"
+
+echo "Removing crowd user attributes"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+    -e "delete from cwd_user_attribute where directory_id = <%= @crowd_directory_id %> and id not in (${crowd_id}); select ROW_COUNT();"
+
+echo "Removing crowd user memberships"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+    -e "delete from cwd_membership where directory_id = <%= @crowd_directory_id %> and child_id not in (${crowd_id}); select ROW_COUNT();"
+
+echo "Removing crowd users"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+    -e "delete from cwd_user where  directory_id = <%= @crowd_directory_id %> and id not in (${crowd_id}); select ROW_COUNT();"
+
+echo "Updating Application Passwords"
+<% @crowd_applications.each do |crowd_id, crowd_password| %>
+  /usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+    -e 'update cwd_application set credential = "<%= crowd_password %>" where id = <%= crowd_id %>; select ROW_COUNT();'
+<% end %>
+
+echo "Updating users password for profilenonuser "
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+    -e 'update cwd_user set credential = "<%= @profilenonuser_password %>" where directory_id = <%= @crowd_directory_id %> and user_name = "profilenonuser"; select ROW_COUNT();'
+
+echo "Update passwords for users"
+<%  @user_array.each do |current_user| %>
+  <% next if current_user == 'profilenonuser' %>
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+  -e 'update cwd_user set credential = "<%= @default_password %>" where directory_id = <%= @crowd_directory_id %> and user_name = "<%= current_user %>"; select ROW_COUNT();'
+<% end %>
+

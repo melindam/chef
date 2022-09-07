@@ -1,0 +1,69 @@
+0000000000000000000000000000000000000000 d572cc21d5de48e4b8b9a63765c0532375e8be88 Melinda Moran <melinda.moran@johnmuirhealth.com> 1625185069 -0700	branch: Created from HEAD
+d572cc21d5de48e4b8b9a63765c0532375e8be88 e6b01fa769d3f5d09563f584845d3c0fe8e52ae5 Melinda Moran <melinda.moran@johnmuirhealth.com> 1625263573 -0700	commit: poc2 env
+e6b01fa769d3f5d09563f584845d3c0fe8e52ae5 d24c22d48967780cb09ef5dd1dede704519683fc Melinda Moran <melinda.moran@johnmuirhealth.com> 1625263601 -0700	commit: env
+d24c22d48967780cb09ef5dd1dede704519683fc 8cd9bf027169bd64c82fe6737d7fe2ae2368a15c Melinda Moran <melinda.moran@johnmuirhealth.com> 1625583842 -0700	commit: awstats cleanup
+8cd9bf027169bd64c82fe6737d7fe2ae2368a15c 80fb9d9a07293e54c467d5c34c63948341c15fac Melinda Moran <melinda.moran@johnmuirhealth.com> 1625583861 -0700	commit: revert to java8
+80fb9d9a07293e54c467d5c34c63948341c15fac 0b5cb5798a9eab1157831d33dcdadebc1bda9187 Melinda Moran <melinda.moran@johnmuirhealth.com> 1625583904 -0700	commit: new zoom attributes
+0b5cb5798a9eab1157831d33dcdadebc1bda9187 f3ef9d3b044ff4094044ce60c04d2a8683d41c2e Melinda Moran <melinda.moran@johnmuirhealth.com> 1625605130 -0700	commit: env
+f3ef9d3b044ff4094044ce60c04d2a8683d41c2e ee888489c9a1f8f645120e7900dea2dce51be257 Melinda Moran <melinda.moran@johnmuirhealth.com> 1625616930 -0700	pull origin master: Fast-forward
+ee888489c9a1f8f645120e7900dea2dce51be257 4f8e048bc32cc26ee9a3f391893e1bb488d564a3 Melinda Moran <melinda.moran@johnmuirhealth.com> 1626805682 -0700	commit: added hosts entry for caprrdb MSSQL DB connection
+4f8e048bc32cc26ee9a3f391893e1bb488d564a3 d26ae45dffbe374548adeeda6e23f0814256fb64 Melinda Moran <melinda.moran@johnmuirhealth.com> 1626808236 -0700	commit: for Azure server cloud config
+d26ae45dffbe374548adeeda6e23f0814256fb64 ae3a50660ce0e828621450bfc6062e808abe24df Melinda Moran <melinda.moran@johnmuirhealth.com> 1626808258 -0700	commit: exclude pending merges
+ae3a50660ce0e828621450bfc6062e808abe24df 04316beb918ee1507254d5fdef9a5e523960e605 Melinda Moran <melinda.moran@johnmuirhealth.com> 1626808359 -0700	commit: remove comments
+04316beb918ee1507254d5fdef9a5e523960e605 d330354acbc8d57c16be88f95a26e620c9e99f2c Melinda Moran <melinda.moran@johnmuirhealth.com> 1626814151 -0700	pull origin master: Fast-forward
+d330354acbc8d57c16be88f95a26e620c9e99f2c cc20ce5f3c8801b5d0275e73744b5aa8586ad375 Melinda Moran <melinda.moran@johnmuirhealth.com> 1626990771 -0700	commit: good bye haneyman
+cc20ce5f3c8801b5d0275e73744b5aa8586ad375 f0d8ae93bc7dad59263225361b9b095b8b4f0933 Melinda Moran <melinda.moran@johnmuirhealth.com> 1626990794 -0700	commit: remove old unused roles
+f0d8ae93bc7dad59263225361b9b095b8b4f0933 475a2f6e3b20e49f3d8cfbedbcfde9a5290db550 Melinda Moran <melinda.moran@johnmuirhealth.com> 1627081399 -0700	commit: vvisits feature flag
+475a2f6e3b20e49f3d8cfbedbcfde9a5290db550 515369e12159a9c5914d34466bf99daa68e4b66d Melinda Moran <melinda.moran@johnmuirhealth.com> 1627081426 -0700	commit: env vvisits to prod
+515369e12159a9c5914d34466bf99daa68e4b66d 6fd7add6127a60bc4426ba65ce9940dc9a713e4d Melinda Moran <melinda.moran@johnmuirhealth.com> 1627414251 -0700	commit: script updates
+6fd7add6127a60bc4426ba65ce9940dc9a713e4d b72a730881387690989dbfbee2a1c544adb27810 Melinda Moran <melinda.moran@johnmuirhealth.com> 1627499610 -0700	commit: env for mongodb to prod
+b72a730881387690989dbfbee2a1c544adb27810 87ad6c8226df704ef27955e2400893f45ecf025a Melinda Moran <melinda.moran@johnmuirhealth.com> 1627499628 -0700	commit: mongodb minor version upgrade
+87ad6c8226df704ef27955e2400893f45ecf025a c3004b92db095ea2cb0bf0d3a8ffcbb3a6471ea4 Melinda Moran <melinda.moran@johnmuirhealth.com> 1627499777 -0700	pull origin master: Fast-forward
+c3004b92db095ea2cb0bf0d3a8ffcbb3a6471ea4 91954883f3c84661ec1af68ffe5caf665a66495c Melinda Moran <melinda.moran@johnmuirhealth.com> 1627662569 -0700	commit: SYS-6585 audit log cleanup
+91954883f3c84661ec1af68ffe5caf665a66495c 6cb9aabc666583612ac71112fb6687d834c536d5 Melinda Moran <melinda.moran@johnmuirhealth.com> 1627662578 -0700	commit: jmh-server to prod
+6cb9aabc666583612ac71112fb6687d834c536d5 2a23fe18cb44daabf3b43077e52e144c8cb76b30 Melinda Moran <melinda.moran@johnmuirhealth.com> 1627667304 -0700	commit: rundeck minor upgrade
+2a23fe18cb44daabf3b43077e52e144c8cb76b30 1c69fb63094796179ddb443c1dac339f03a577cb Melinda Moran <melinda.moran@johnmuirhealth.com> 1628017552 -0700	commit: new env azutst
+1c69fb63094796179ddb443c1dac339f03a577cb aac26e5bad54f734f8b5ef4d7dd2ece0ebd40970 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628017574 -0700	commit: cq remove screener proxy
+aac26e5bad54f734f8b5ef4d7dd2ece0ebd40970 aed2a1498ca0da4f97d72b68802e3fe02203583b Melinda Moran <melinda.moran@johnmuirhealth.com> 1628017609 -0700	commit: add domain ucsfjmhcancer.com
+aed2a1498ca0da4f97d72b68802e3fe02203583b e2bfd3840ab149033ad44752a1bba6abad0c859d Melinda Moran <melinda.moran@johnmuirhealth.com> 1628017656 -0700	commit: jmh-cq to prod and new azutst env
+e2bfd3840ab149033ad44752a1bba6abad0c859d f7c9f884c7cc7a697efdeea1067d72d49eeb49a0 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628018498 -0700	pull origin master: Fast-forward
+f7c9f884c7cc7a697efdeea1067d72d49eeb49a0 54fa7a09a3ad217fee43699ea21139bb54ca5a0c Melinda Moran <melinda.moran@johnmuirhealth.com> 1628123275 -0700	commit: jmh-nodejs
+54fa7a09a3ad217fee43699ea21139bb54ca5a0c d2136de13175f5d83f52dab99e6dd11087dca0d7 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628123310 -0700	commit: jmh-vvisits cron update
+d2136de13175f5d83f52dab99e6dd11087dca0d7 919d35904e40dd640ba1767cdd3a1297c460eee6 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628123325 -0700	commit: nodejs and vvisits to prod
+919d35904e40dd640ba1767cdd3a1297c460eee6 1b7301c1bb66b7e9cced8783ca7e46ade6bd44e5 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628555025 -0700	commit: removed old proxy
+1b7301c1bb66b7e9cced8783ca7e46ade6bd44e5 064958d0ec773b2e68907840122751fa164babf6 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628634965 -0700	commit: prereg-admin java heap memory increase
+064958d0ec773b2e68907840122751fa164babf6 f50d6f384379cc032d0779ec653ebc6b7b604517 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628726218 -0700	commit: domain redirect for .org also
+f50d6f384379cc032d0779ec653ebc6b7b604517 6ca44d64f939ac2366e6ccabcbb89db003776d07 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628726432 -0700	pull origin master: Fast-forward
+6ca44d64f939ac2366e6ccabcbb89db003776d07 a3e9faa3d11125d2c732e6a72f400d640d686e50 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628893556 -0700	commit: added ssh2 server
+a3e9faa3d11125d2c732e6a72f400d640d686e50 95ecf46de75b74edd375db7b88c9bc4b4fe71e67 Melinda Moran <melinda.moran@johnmuirhealth.com> 1628893681 -0700	commit: script fixes for ssh2
+95ecf46de75b74edd375db7b88c9bc4b4fe71e67 82536b7c74dad400a10f6f227f427877a53e0122 Melinda Moran <melinda.moran@johnmuirhealth.com> 1629785111 -0700	commit: jmh-pingfed for new JAR file
+82536b7c74dad400a10f6f227f427877a53e0122 5f3cb0ca77033f89a41dbb2f71adbf963bb4a230 Melinda Moran <melinda.moran@johnmuirhealth.com> 1629785145 -0700	commit: nodejs upgrade
+5f3cb0ca77033f89a41dbb2f71adbf963bb4a230 546327dabdcb141dbef8ae0317427a4bf07a668a Melinda Moran <melinda.moran@johnmuirhealth.com> 1629785486 -0700	commit: env
+546327dabdcb141dbef8ae0317427a4bf07a668a d5f9c357003635544024016ae7e713a0b7ea9230 Melinda Moran <melinda.moran@johnmuirhealth.com> 1630105792 -0700	commit: profile-api to node14
+d5f9c357003635544024016ae7e713a0b7ea9230 e0a6bf42dce4ea9b1061bc5dc6c3a33e65b5474c Melinda Moran <melinda.moran@johnmuirhealth.com> 1630105895 -0700	commit: env
+e0a6bf42dce4ea9b1061bc5dc6c3a33e65b5474c ea028dffd9b26ff954554cb2fb53ca325850d308 Melinda Moran <melinda.moran@johnmuirhealth.com> 1630353316 -0700	pull origin master: Merge made by the 'recursive' strategy.
+ea028dffd9b26ff954554cb2fb53ca325850d308 4d822babc549b21fe27c5a9cd347a14edc2d6b6d Melinda Moran <melinda.moran@johnmuirhealth.com> 1630368184 -0700	commit: remove jive_utilities recipe
+4d822babc549b21fe27c5a9cd347a14edc2d6b6d e00be4f169eea6ba95ec9c0883138bacd161c1db Melinda Moran <melinda.moran@johnmuirhealth.com> 1630418984 -0700	commit: new mcm interconnect host checks
+e00be4f169eea6ba95ec9c0883138bacd161c1db 038cb4747fbf5cee7736c0743e7124585cd4ad49 Melinda Moran <melinda.moran@johnmuirhealth.com> 1630618382 -0700	commit: bamboo default nodejs version 14
+038cb4747fbf5cee7736c0743e7124585cd4ad49 e9dbf080a98b1c97ad9e7a2e9736dac96bfdd628 Melinda Moran <melinda.moran@johnmuirhealth.com> 1630618400 -0700	commit: pf jar update
+e9dbf080a98b1c97ad9e7a2e9736dac96bfdd628 8954c7cf3dd56fad3f2fc47df5270b36ca6aa3df Melinda Moran <melinda.moran@johnmuirhealth.com> 1630619807 -0700	commit: env jmh-bamboo
+8954c7cf3dd56fad3f2fc47df5270b36ca6aa3df 91089bb400a7c6703832a0e6e9ab721592aba213 Melinda Moran <melinda.moran@johnmuirhealth.com> 1630620366 -0700	pull origin master: Fast-forward
+91089bb400a7c6703832a0e6e9ab721592aba213 9d3e1e9ddea5d996521564ed5e6f68d72e065dc4 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631124821 -0700	commit: webserver logrotate update
+9d3e1e9ddea5d996521564ed5e6f68d72e065dc4 e5ee658024cb02344025c761a1fb707e68ec46a3 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631124845 -0700	commit: jmh-webserver env
+e5ee658024cb02344025c761a1fb707e68ec46a3 79690b9b18b17a1bbd4acb7be154048b66700dd8 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631124905 -0700	pull origin master: Fast-forward
+79690b9b18b17a1bbd4acb7be154048b66700dd8 947fd6eefd7fcd326c303cef1a878717d273ff58 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631290922 -0700	commit: ssh2 updates to myjmh scripts
+947fd6eefd7fcd326c303cef1a878717d273ff58 01a80b6dc1d53cb11ea103a7028d3e47f46efdb6 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631298681 -0700	commit: ssh1 decommissioned
+01a80b6dc1d53cb11ea103a7028d3e47f46efdb6 ad112b4ca449a42a50f54b2ab66dee6c5f0cc1e7 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631299399 -0700	commit: script fix for directory
+ad112b4ca449a42a50f54b2ab66dee6c5f0cc1e7 d8db9041aa850b3fc103f0d2a33c818eb940dc93 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631308245 -0700	commit: kcadapter to node 14
+d8db9041aa850b3fc103f0d2a33c818eb940dc93 5b7eb104dccc0d0e01acb1682dcfcb4224f3cc81 Melinda Moran <melinda.moran@johnmuirhealth.com> 1631725522 -0700	commit: env
+5b7eb104dccc0d0e01acb1682dcfcb4224f3cc81 e8b5b3641fa13c081fa6ed5c6837617df635fbbb Melinda Moran <melinda.moran@johnmuirhealth.com> 1631746701 -0700	commit: vvisits zoom info
+e8b5b3641fa13c081fa6ed5c6837617df635fbbb 9f70ae2ade9741b6707e4415decb61863e19ebe3 Melinda Moran <melinda.moran@johnmuirhealth.com> 1632783607 -0700	commit: cleanup users
+9f70ae2ade9741b6707e4415decb61863e19ebe3 cf878fa68e24b07a40d1cb3c78b881f563e04cc4 Melinda Moran <melinda.moran@johnmuirhealth.com> 1632783645 -0700	commit: arstage to have postfix disabled
+cf878fa68e24b07a40d1cb3c78b881f563e04cc4 b571963404125b8aa47c310f97dc5dbbef4f870d Melinda Moran <melinda.moran@johnmuirhealth.com> 1632783673 -0700	commit: noted arstage postfix disabled
+b571963404125b8aa47c310f97dc5dbbef4f870d 1e66d379630e0ff96c658f4cca28ccdc788bbc9c Melinda Moran <melinda.moran@johnmuirhealth.com> 1632868736 -0700	commit: nodejs upgrade
+1e66d379630e0ff96c658f4cca28ccdc788bbc9c 0ecea866659c9625f629cc86a614a880101b13ae Melinda Moran <melinda.moran@johnmuirhealth.com> 1632868753 -0700	commit: env nodejs upgrade
+0ecea866659c9625f629cc86a614a880101b13ae 066331a66dc9bf18c4d3848d8d4d34b756e23c42 Melinda Moran <melinda.moran@johnmuirhealth.com> 1633111416 -0700	commit: salesforce sftp server update
+066331a66dc9bf18c4d3848d8d4d34b756e23c42 da3a80fe7c1c9657aaa09ec76b063f2add838e39 Melinda Moran <melinda.moran@johnmuirhealth.com> 1633111429 -0700	commit: env jmh-operations
+da3a80fe7c1c9657aaa09ec76b063f2add838e39 7595a988729e2e59e3ead1c2f7ac88d96ef2608e Melinda Moran <melinda.moran@johnmuirhealth.com> 1633111741 -0700	pull origin master: Fast-forward
+7595a988729e2e59e3ead1c2f7ac88d96ef2608e b28ffe05f7920e2aeec63992082a34e04e4d231c Melinda Moran <melinda.moran@johnmuirhealth.com> 1633126422 -0700	commit: knife ssh script
+b28ffe05f7920e2aeec63992082a34e04e4d231c cf59d82549f70acbf30eac17ba084ee22df32fce Melinda Moran <melinda.moran@johnmuirhealth.com> 1633126484 -0700	pull origin master: Fast-forward

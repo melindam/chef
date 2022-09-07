@@ -1,0 +1,14 @@
+ID=00089469
+WSTrustSTS=true
+OAuth=true
+SaasProvisioning=true
+Product=PingFederate
+Version=10.2
+EnforcementType=3
+Tier=Subscription
+IssueDate=2020-11-09
+ExpirationDate=2023-08-30
+DeploymentMethod=Traditional
+Organization=John Muir Health
+SignCode=FF0F
+Signature=302C02146307227802A60C403A1B3AB20B88D221291411B002146AF04F316D028DE70C0ECEB1AB11C7786223D501

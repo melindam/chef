@@ -1,0 +1,30 @@
+# Dropped off by Chef!
+description: devuser, read/run only
+context:
+  project: '.*' # all projects
+for:
+  resource:
+    - allow: '*'  # allow read all kinds
+  adhoc:
+    - allow: [read,run,kill]  # allow read/running/killing adhoc jobs
+  job: 
+    - allow: [read,run,kill]  # allow read/run/kill of all jobs
+  node:
+    - allow: [read,run]  # allow read/run for all nodes
+by:
+  group: devuser
+
+---
+
+description: Admin, all access.
+context:
+  application: 'rundeck'
+for:
+  resource:
+    - allow: [read,run,kill]  # allow create of projects
+  project:
+    - allow:  [read,run,kill]  # allow view of all projects
+  storage:
+    - allow: [read,run,kill]  # allow read
+by:
+  group: devuser

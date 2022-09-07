@@ -1,0 +1,14 @@
+export TOMCAT_USER="<%= @tomcat_user %>"
+export CATALINA_HOME="<%= @catalina_home %>"
+export JAVA_HOME="<%= @java_home %>"
+export CATALINA_BASE="<%= @catalina_base %>"
+export JAVA_OPTS="<%= @java_opts %>"
+export JMX_OPTS="<%= @jmx_opts %>"
+export CLASSPATH=$CATALINA_HOME
+export CATALINA_PID=$CATALINA_HOME/bin/tomcat.pid
+<% if @catalina_opts.size() > 0 %>export CATALINA_OPTS="<%=@catalina_opts%>"<% end %>
+#export JSVC_OPTS= 
+#export CATALINA_MAIN=
+#export CATALINA_TMP=$CATALINA_HOME/temp
+#export CATALINA_OUT=
+#export JAVA_ENDORSED_DIRS

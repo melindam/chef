@@ -1,0 +1,13 @@
+#!/bin/bash
+# Copies the video visits api log files from production servers to ebiz-tools server
+# This job will be run from rundeck.johnmuirhealth.com weekly
+
+USER=<%= @user %>
+BACKUPDIR=<%= @backup_dir %>
+LOGDIR=/usr/local/nodeapp/vvisits-logs
+
+<% @server_list.each do |n| %>
+#<%= n['name']%>
+/usr/bin/rsync -avz --bwlimit=2000 --size-only -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' $USER@<%= n['ipaddress']%>:$LOGDIR/*.gz $BACKUPDIR/<%= n['name']%>/.
+
+<% end %>

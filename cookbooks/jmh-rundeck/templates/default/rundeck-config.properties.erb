@@ -1,0 +1,21 @@
+# Dropped off by Chef!
+rundeck.log4j.config.file = /etc/rundeck/log4j.properties
+# JDBC
+<% if @rdbms['enable'] == true %>
+dataSource.url = jdbc:mysql://<%= @rdbms['location'] %>:<%= @rdbms['port'] %>/<%= @rdbms['dbname'] %>?autoReconnect=true
+dataSource.driverClassName=org.mariadb.jdbc.Driver
+dataSource.dbCreate=update
+dataSource.username = <%= @rdbms['dbuser'] %>
+dataSource.password = <%= @rdbms['dbpassword'] %>
+<% else %>
+dataSource.url = jdbc:h2:file:/var/lib/rundeck/data/rundeckdb;MVCC=true
+<% end %>
+
+grails.mail.host=localhost
+grails.mail.port=25
+grails.mail.username=
+grails.mail.password=
+grails.mail.default.from=rundeck-donotreply@johnmuirhealth.net
+
+grails.serverURL = http://<%= @domain_name %>
+

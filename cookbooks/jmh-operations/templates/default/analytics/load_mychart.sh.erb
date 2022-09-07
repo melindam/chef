@@ -1,0 +1,135 @@
+#!/bin/sh
+#set -x
+source ../global_settings.sh
+
+cd $DATADIR
+ls -l
+echo "Now Converting Files to UTF8"
+/usr/bin/iconv -f utf-8 -t utf-8 -c $ACTIVATED_FILE > activated.txt
+/usr/bin/iconv -f utf-8 -t utf-8 -c $NON_ACTIVATED_FILE > non_activated.txt
+/usr/bin/iconv -f utf-8 -t utf-8 -c $PROXY_FILE > proxy.txt
+/usr/bin/iconv -f utf-8 -t utf-8 -c $OPENSCHEDULE_FILE > opensched_appts.txt
+#dos2unix $ACTIVATED_FILE
+#dos2unix $NON_ACTIVATED_FILE
+#dos2unix $PROXY_FILE
+#chown redwagon.redwagon $ACTIVATED_FILE  $NON_ACTIVATED_FILE $PROXY_FILE
+
+
+activated_file_lines=`cat activated.txt | wc -l`
+non_activated_file_lines=`cat non_activated.txt | wc -l`
+proxy_file_lines=`cat proxy.txt | wc -l`
+openschedule_file_lines=`cat opensched_appts.txt | wc -l`
+
+activated_file_lines=`expr $activated_file_lines - 1`
+non_activated_file_lines=`expr $non_activated_file_lines - 1`
+proxy_file_lines=`expr $proxy_file_lines - 1`
+openschedule_file_lines=`expr $openschedule_file_lines - 1`
+
+
+cd $SCRIPTDIR
+
+mysql -h 127.0.0.1 -u $DBUSER -p$PASS < create_database.sql
+mysql -h 127.0.0.1 -u $DBUSER -p$PASS << EOM
+delete from mychart.online_patients;
+LOAD DATA LOCAL INFILE "$DATADIR/activated.txt" INTO TABLE mychart.online_patients
+FIELDS TERMINATED BY '\t'
+ENCLOSED BY '"'
+IGNORE 1 LINES
+(status,pat_name,pat_mrn_id,deceased,@dob,sex,@activatedate,@codegenerationdate,myc_acss_code,@expirationdate,email_address,home_phone,add_line_1,add_line_2,city,st,zip,pcp_name,pcp,prim_location,@data_date,enc_type_abbr,@effective_date,@contact_date)
+set activatedate = STR_TO_DATE(@activatedate, '%m/%d/%Y'),
+codegenerationdate = STR_TO_DATE(@codegenerationdate, '%m/%d/%Y'),
+expirationdate = STR_TO_DATE(@expirationdate, '%m/%d/%Y'),
+data_date = STR_TO_DATE(@data_date, '%m/%d/%Y'),
+effective_date = STR_TO_DATE(@effective_date, '%m/%d/%Y'),
+contact_date = STR_TO_DATE(@contact_date, '%m/%d/%Y'),
+dob = STR_TO_DATE(@dob, '%m/%d/%Y')
+;
+
+LOAD DATA LOCAL INFILE "$DATADIR/non_activated.txt" INTO TABLE mychart.online_patients
+FIELDS TERMINATED BY '\t'
+ENCLOSED BY '"'
+IGNORE 1 LINES
+(status,pat_name,pat_mrn_id,deceased,@dob,sex,@activatedate,@codegenerationdate,myc_acss_code,@expirationdate,email_address,home_phone,add_line_1,add_line_2,city,st,zip,pcp_name,pcp,prim_location,@data_date,enc_type_abbr,@effective_date,@contact_date)
+set activatedate = STR_TO_DATE(@activatedate, '%m/%d/%Y'),
+codegenerationdate = STR_TO_DATE(@codegenerationdate, '%m/%d/%Y'),
+expirationdate = STR_TO_DATE(@expirationdate, '%m/%d/%Y'),
+data_date = STR_TO_DATE(@data_date, '%m/%d/%Y'),
+effective_date = STR_TO_DATE(@effective_date, '%m/%d/%Y'),
+contact_date = STR_TO_DATE(@contact_date, '%m/%d/%Y'),
+dob = STR_TO_DATE(@dob, '%m/%d/%Y')
+;
+
+delete from mychart.online_proxy_patients;
+LOAD DATA LOCAL INFILE "$DATADIR/proxy.txt" INTO TABLE mychart.online_proxy_patients
+FIELDS TERMINATED BY '\t'
+ENCLOSED BY '"'
+IGNORE 1 LINES
+(status,pat_name,pat_mrn_id,deceased,@dob,sex,@activatedate,@codegenerationdate,myc_acss_code,@expirationdate,email_address,home_phone,add_line_1,add_line_2,city,st,zip,pcp_name,pcp,prim_location,proxy_name,proxy_relation,proxy_email,proxy_phone,proxy_add_line_1,proxy_add_line_2,proxy_city,proxy_st,proxy_zip,@data_date,enc_type_abbr,@effective_date,@contact_date)
+set activatedate = STR_TO_DATE(@activatedate, '%m/%d/%Y'),
+codegenerationdate = STR_TO_DATE(@codegenerationdate, '%m/%d/%Y'),
+expirationdate = STR_TO_DATE(@expirationdate, '%m/%d/%Y'),
+data_date = STR_TO_DATE(@data_date, '%m/%d/%Y'),
+effective_date = STR_TO_DATE(@effective_date, '%m/%d/%Y'),
+contact_date = STR_TO_DATE(@contact_date, '%m/%d/%Y'),
+dob = STR_TO_DATE(@dob, '%m/%d/%Y')
+;
+
+delete from mychart.online_scheduling_appt;
+LOAD DATA LOCAL INFILE "$DATADIR/opensched_appts.txt" INTO TABLE mychart.online_scheduling_appt
+FIELDS TERMINATED BY '|'
+IGNORE 1 LINES
+(PatientEncounterID,PatMRN,ApptMadeDate,ApptMadeTime,@RecordCreateDate,RecordCreatedWhenApptMade,OriginalApptType,ChangedApptType,FinalApptType,AppointmentEntryEpicUserID,AppointmentChannel,ApptDTTM,DayOfWeekNM,ApptStatus,ApptStatusCD,CancelReason,CancelUser,Payor,FinancialClass,ProviderID,ProvName,SpecialtyDSC,ProvCity,ProvZip,Center,DeptName,DeptSpecialty,PatientID,PatAge,PatAgeGroup,PatSex,PatCity,PatZip,DaysBookedAhead,AfterHours,NewAppointmentType)
+SET
+RecordCreateDate = STR_TO_DATE(@RecordCreateDate, '%m/%d/%Y')
+;
+EOM
+
+
+EXIT_CODE=0
+
+total_online_patients_file_lines=$((activated_file_lines + non_activated_file_lines ))
+activated_db_lines=`mysql -h 127.0.0.1 -u $DBUSER -p$PASS  mychart -e "select count(*) from online_patients" --skip-column-names -s`
+#echo $non_activated_file_lines
+#non_activated_db_lines=`mysql -h 127.0.0.1 -u $DBUSER -p$PASS  mychart -e "select count(*) from not_activated" --skip-column-names -s`
+#echo $proxy_file_lines
+proxy_db_lines=`mysql -h 127.0.0.1 -u $DBUSER -p$PASS  mychart -e "select count(*) from online_proxy_patients" --skip-column-names -s`
+total_openschedule_file_lines=`mysql -h 127.0.0.1 -u $DBUSER -p$PASS  mychart -e "select count(*) from online_scheduling_appt" --skip-column-names -s`
+
+if [[ $total_online_patients_file_lines -ne $activated_db_lines ]]
+then
+	echo "**ERROR - Activated Records do not match"
+	EXIT_CODE=5
+fi
+echo "Patient Activated Lines: $activated_file_lines"
+echo "Patient Non-Activate Lines: $non_activated_file_lines"
+echo "Total Patient Record Lines:  $total_online_patients_file_lines"
+echo "Patient Database Lines: $activated_db_lines"
+echo
+
+#if [[ $non_activated_file_lines -ne $non_activated_db_lines ]]
+#then
+#	echo "**ERROR - Non Activated Records do not match"
+#	EXIT_CODE=5
+#fi
+#echo "Non Activated Records Lines:  $non_activated_file_lines"
+#echo "Non Activated Database Lines: $non_activated_db_lines"
+#echo
+
+if [[ $proxy_file_lines -ne $proxy_db_lines ]]
+then
+	echo "**ERROR - Proxy Records do not match"
+	EXIT_CODE=5
+fi
+echo "Proxy Records Lines:  $proxy_file_lines"
+echo "Proxy Database Lines: $proxy_db_lines"
+echo
+
+if [[ $openschedule_file_lines -ne $total_openschedule_file_lines ]]
+then
+	echo "**ERROR - OpenSchedule Appointment Records do not match"
+	EXIT_CODE=5
+fi
+echo "OpenSchedule File LINES: $openschedule_file_lines"
+echo "OpenSchedule Appts Database Lines: $total_openschedule_file_lines"
+
+exit $EXIT_CODE

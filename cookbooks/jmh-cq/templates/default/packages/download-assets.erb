@@ -1,0 +1,34 @@
+#!/bin/bash
+umask 0022
+
+# Description: Download assets from the servers from the local environment
+# Author: Scott Marshall
+
+AuthorFiles="<%= @author_packages.join(" ")%>"
+PublisherFiles="<%= @publisher_packages.join(" ")%>"
+
+cd <%= @share_dir %>
+
+# backup and install into Author
+for AFile in `echo $AuthorFiles` 
+do
+	mv -f ${AFile}.zip ${AFile}.zip.bak 
+done
+
+for AFile in `echo $AuthorFiles` 
+do
+	curl -u admin:<%= @author_server['password'] %> -o ${AFile}.zip http://<%= @author_server['ipaddress'] %>:4502/crx/packmgr/service.jsp?name="${AFile}"
+	sleep 1	
+done
+
+# backup and install into Publisher
+for PFile in `echo $PublisherFiles` 
+do
+	mv -f ${PFile}.zip ${PFile}.zip.bak 
+done
+
+for PFile in `echo $PublisherFiles` 
+do
+	curl -u admin:<%= @publisher_server['password'] %> -o ${PFile}.zip http://<%= @publisher_server['ipaddress'] %>:4503/crx/packmgr/service.jsp?name="${PFile}"	
+	sleep 1
+done

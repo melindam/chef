@@ -1,0 +1,18 @@
+name 'jmh-ci'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'All Rights Reserved'
+description 'Installs/Configures jmh-ci'
+long_description 'Installs/Configures jmh-ci'
+version '0.2.0'
+chef_version '>= 12.1' if respond_to?(:chef_version)
+
+depends 'chefdk'
+depends 'cloudcli'
+depends 'git'
+depends 'iptables'
+depends 'jenkins'
+depends 'jmh-java'
+depends 'jmh-nodejs'
+depends 'jmh-utilities'
+depends 'systemd'

@@ -1,0 +1,24 @@
+{
+  "filters": {
+    "filter_occurences_1_5_10": {
+      "attributes": {
+        "occurrences": "eval: value == 1 || value == 2 || value == 5 || value % 10 == 0 || ':::action:::' == 'resolve'"
+      }
+    },
+    "filter_onlyproduction_afterhours": {
+      "attributes": {
+      	"client": {
+      		"environment": "prod"
+      	},
+        "check": {
+						"afterhours": true
+				}
+      },
+      "when": {
+        "days": {
+          "all": [  {"begin": "8:00 PM", "end": "6:00 AM"} ]
+        }
+      }
+    }
+  }
+}

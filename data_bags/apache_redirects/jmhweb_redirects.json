@@ -1,0 +1,18 @@
+{
+  "id": "jmhweb_redirects",
+  "config": {
+    "aliases": {
+      "/jmherror/": "/var/www/html/jmherror/"
+    },
+    "directories_apache24": {
+      "/var/www/html/jmhweb": {
+        "AllowOverride": "None",
+        "Options": "IncludesNoExec",
+        "Require": "all granted"
+      }
+    },
+    "rewrites": [
+      "^/jmherror/(.*) /jmherror/$1 [PT,L]"
+    ]
+  }
+}

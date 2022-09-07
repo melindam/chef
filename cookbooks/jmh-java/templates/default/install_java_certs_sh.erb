@@ -1,0 +1,39 @@
+#!/bin/sh
+# Dropped off by Chef!
+# Desc: installs all the jmh and epic ssl certs on your local java cacerts for the mac
+#set -x
+
+if [ -z "$JAVA_HOME" ]; then
+  echo "JAVA_HOME needs to be set"
+  exit 1
+fi
+
+
+KEYTOOL=${JAVA_HOME}/jre/bin/keytool
+KEYSTORE=$JAVA_HOME/jre/lib/security/cacerts
+KEYPASS=changeit
+TMP_CERT_FILE=/tmp/cert.cer
+
+<% JmhJavaUtil.get_java_certs(node, node['jmh_java']['default_version']).each do |certname, certvalue| %>
+
+# <%= certname %>
+certname=<%= certname%>
+
+read -d '' certvalue << EOF
+<%= certvalue %>
+EOF
+
+echo "$certvalue" > ${TMP_CERT_FILE}
+
+result=`${KEYTOOL} -list -keystore ${KEYSTORE} -storepass ${KEYPASS} -alias $certname`
+if [ $? -eq 0 ]
+then
+  echo "Skipping ${certname}: already installed"
+else
+  echo "Now Installing ${certname}"
+  sudo ${KEYTOOL} -importcert -noprompt -trustcacerts -alias $certname -file ${TMP_CERT_FILE} -keystore ${KEYSTORE} -storepass ${KEYPASS}
+fi
+/bin/rm -f ${TMP_CERT_FILE}
+<% end %>
+
+echo "done!"

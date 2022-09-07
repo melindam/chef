@@ -1,0 +1,7 @@
+{
+  "comment": "Melinda Moran",
+  "groups": ["sysadmin", "devadmin"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQClqsnegXs9/2MmmeGtblu9kNxWIvVShLXxpgbVTN2zKyLY5V351CZb/myVZi1fd54e3jGCQHvYzyzH23pabax0efL1rBCXPlT5KlSlgQyyXvbfsw9KIpnJ+0LqfIwZqpgE5ol2SnFySPfBRnOIHE0IUWwHZ1usZLPRSc61dIpfFgiFt76rdlKYlmWDMnwnamd3TV6Q0XyU5KAXqj7sC2vIR3adv0tPgg74etsOM88Twagrq85VNOa+MQB2mu5qxvv4maK5ad2iOxySsA2bsqzcooAmhbCODP5Ec7u4kcvA05GDuTQJrCEScEBl+DVrzM9J7zEAejYw1ZKqP9N+6lHW5XDTmkQ56SpkCnqcpxfndAopeD/NGGUYrXXUNkYQnmKYYYh+/vgSADI+GU07Fu4WX83tiCw77IRdkOs4t3dSlolNYXSZbO7IvGNmBJudu6LXdpzMBBQ3BuE3gT4Yde7Hlg3cDHIxlFkENSdFwZIftPS261twRPpl0+lZj4bz6GofDCL2nsVbzEO+Jg/JQE9PyMRgccwv4wY1fwMp+DlMZIBY8RVsIY7pQc5UUTopG+aw7ZFOIENWWaz3BAzFPGkAbD7ft4JT9CBk4U2oznNtG+50lh52H6ex7VLMpN78La1ITUJFhH5qxs13FKiVu8kmuCbjAjaeZmUkM9sd5VVIgw== melindam",  
+  "id": "melindam",
+  "shell": "/bin/bash"
+}

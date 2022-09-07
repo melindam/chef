@@ -1,0 +1,6 @@
+# activeMQ port for Admin screen
+-A FWR -p tcp -m multiport --dport 8161 -j ACCEPT
+# for remote connections into queues
+-A FWR -p tcp -m multiport --dport 61616 -j ACCEPT
+# for JMX management 
+# -A FWR -p tcp -m multiport --dport 1099 -j ACCEPT

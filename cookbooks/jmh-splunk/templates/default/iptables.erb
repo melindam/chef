@@ -1,0 +1,4 @@
+# JMH SERVERS
+<% @portlist.each do |iptable_port,options| %>
+-A FWR -p tcp -m multiport --dport <%= iptable_port %> -j <%= options %>
+<% end %>

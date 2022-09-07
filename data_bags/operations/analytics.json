@@ -1,0 +1,5 @@
+{
+	"id": "analytics",
+	"admin_users": [     ],
+	"db_users": [ {"name": "ebusiness", "hostname": "172.23.%", "mysql_password_hash": "*A6D44CAA70D8EC1403AC1CA7A047AE845DB979CD", "action": "create"}]
+}

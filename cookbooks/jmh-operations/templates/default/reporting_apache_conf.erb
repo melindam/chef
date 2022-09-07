@@ -1,0 +1,14 @@
+# Dropped off by Chef!
+<Directory /var/www/html/reporting>
+        Options +Indexes
+</Directory>
+
+<Location /<%= @location%>>
+   AuthName "<%= @authname %>"
+   AuthType "<%= @authtype %>"
+   AuthBasicProvider crowd
+   CrowdAppName "<%= @crowdappname %>"
+   CrowdAppPassword "<%= @crowdapppassword %>"
+   CrowdURL "<%= @crowdurl %>"
+   Require <%= @require %>
+</Location>

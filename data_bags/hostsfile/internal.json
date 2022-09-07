@@ -1,0 +1,6 @@
+{
+	"id": "internal",
+	"hosts": {
+		"ebiz24.hsys.local" : {"ip": "172.23.200.18", "alias": ["ebiz-tools", "ebiz-tools.hsys.local"], "comments": "EBiz Tools RHEL 7 server"}
+			}			   
+}

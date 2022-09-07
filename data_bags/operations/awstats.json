@@ -1,0 +1,21 @@
+{
+	"id": "awstats",
+	"servers": [ {"name": "www.johnmuirhealth.com",
+				  "logs": "www-*access*log*.gz",
+				  "ssl_path": "",
+				  "alias_name": "cqdispatcher01",
+				  "node_search": "roles:cq-dispatcher* AND chef_environment:arprod",
+				  "skip_hosts": "147.75.8.72"},
+				 {"name": "api.johnmuirhealth.com",
+					"logs": "api-*access*log*.gz",
+					"ssl_path": "",
+					"alias_name": "api02.johnmuirhealth.com",
+					"node_search": "recipe:jmh-webserver\\:\\:api AND chef_environment:arprod",
+					"skip_hosts": "147.75.8.72"},
+				 {"name": "prc.johnmuirhealth.com",
+				  "logs": "prc-access*log*.gz",
+				  "ssl_path": "/",
+				  "node_search": "roles:cq-dispatcher* AND chef_environment:arprod",
+				  "alias_name": "www-vip72.johnmuirhealth.com",
+				  "skip_hosts": "147.75.8.72" } ]
+}

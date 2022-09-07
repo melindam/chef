@@ -1,0 +1,56 @@
+# Dropped of by Chef!!
+# swagger configuration file
+
+server:
+  port: <%= @https_port %>
+  log_dir: <%= @log_dir %>
+  host: <%=  @hostname %>
+
+mongo:
+  url: mongodb://<%= @db_user %>:<%= @db_password %>@<%= @db_host %>:27017/?authSource=<%= @db %>
+  db: <%= @db %>
+
+videovisits:
+  host: <%= @www_server_name %>
+  urlVisit: https://<%= @www_server_name %>/videovisit
+  urlVisitZoom: https://<%= @www_server_name %>/vv/visit.html
+  tinyUrlVisit: https://<%= @www_server_name %>/tn
+  hipaaPrivacyOfficeEmail: <%= @privacy_email %>
+<% @videovisit_properties.each do |propName, propValue| %>
+  <%= propName %>: <%= propValue %>
+<% end %>
+
+aws:
+<% @aws_properties.each do |propName, propValue| %>
+  <%= propName %>: <%= propValue %>
+<% end %>
+
+ldap:
+<% @ldap_properties.each do |propName, propValue| %>
+  <%= propName %>: <%= propValue %>
+<% end %>
+
+zoom:
+<% @zoom_properties.each_key do |section| %>
+  <%= section %>:
+    <% @zoom_properties[section].each do |propname, propvalue| %>
+    <%= propname %>: <%= propvalue %>
+  <% end %>
+<% end %>
+  userCleanupGracePeriod: <%= @zoom_cleanup_period %>
+
+mail:
+  host: localhost
+  
+features:
+  emailIcs: <%= @features_emailics %>
+  testing: <%= @features_testing %>
+  
+<% if @additional_properties %>
+  <% @additional_properties.each_key do |section| %>
+  <%= section %>:
+    <% @additional_properties[section].each do |propname, propvalue| %>
+      <%= propname %>: <%= propvalue %>
+    <% end %>
+  <% end %>
+<% end %>

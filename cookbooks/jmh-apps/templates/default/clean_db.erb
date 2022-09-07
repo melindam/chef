@@ -1,0 +1,30 @@
+#!/bin/sh
+#set -x
+#TODO this only works for billpay
+
+if [ -z $1 ]
+then
+        echo "You need to provide a database name"
+        echo "Usage: clean_db.sh <dbname>"
+        exit 1
+fi
+
+DB=$1
+
+cd /usr/local/tcserver
+
+if [ "$DB" == "billpay" ]
+then
+	./tcruntime-ctl.sh billpay-admin stop
+	./tcruntime-ctl.sh billpay stop
+fi
+
+<%= ::File.join(node[:jmh_apps][:mysql][:bin_dir], 'mysql')%> -u root -p'<%= node[:mysql][:server_root_password]%>' < /bin/cat << EOM
+DROP database $DB;
+commit;
+EOM
+
+<%= ::File.join(node[:jmh_apps][:mysql][:bin_dir], 'mysql')%> -u root -p'<%= node[:mysql][:server_root_password]%>' < /bin/cat << EOM
+CREATE database $DB;
+commit;
+EOM

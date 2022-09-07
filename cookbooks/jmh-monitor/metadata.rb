@@ -1,0 +1,18 @@
+name 'jmh-monitor'
+maintainer 'Scott Marshall'
+maintainer_email 'scott.marshall@johnmuirhealth.com'
+license 'All rights reserved'
+description 'Installs/Configures jmh-monitor'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version '0.12.1'
+
+depends 'apache2'
+depends 'hostsfile'
+depends 'iptables'
+depends 'jmh-db'
+depends 'jmh-server'
+depends 'jmh-utilities'
+depends 'jmh-webserver'
+depends 'logrotate'
+depends 'sensu-go'
+depends 'yum'

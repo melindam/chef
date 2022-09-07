@@ -1,0 +1,20 @@
+#!/bin/sh
+## Script Dropped off by Chef! ##
+# set -x
+
+PINGPATH=/usr/local/pingfederate/server/default/conf
+HOME_PATH=/home/pingfederate
+
+echo "moving tar file to prev directory"
+if [ -f $HOME_PATH/deploy/pingFed_current.tgz ]
+then
+    mv -f $HOME_PATH/deploy/pingFed_current.tgz $HOME_PATH/deploy.prev/pingFed.tgz
+fi
+
+echo "untaring template files"
+cd $PINGPATH
+tar -xzf $HOME_PATH/deploy/pingFed.tgz
+chown -R pingfederate. template
+
+echo "moving tar to current deployment tar"
+mv -f $HOME_PATH/deploy/pingFed.tgz $HOME_PATH/deploy/pingFed_current.tgz

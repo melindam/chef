@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# This script will take the production profile DB, restore it, and compare the data
+#    to EPIC and error out patients that no longer have valid MRN numbers in the system
+
+INSTALL_DIR=<%= @install_dir %>
+PASS=<%= @mysql_passwd %>
+DATE=`date +%Y%m%d`
+
+cd /data/ecryptfs/db_archive/apps02-prd01
+FILE=`ls -tr profile-* | tail -1`
+cp $FILE /var/tmp
+
+mysql -uroot -p$PASS mysql -e "CREATE DATABASE profile;"
+gunzip < /var/tmp/$FILE | mysql -uroot -p$PASS profile
+
+if [ $? != 0 ]
+then
+	rm -f /var/tmp/$FILE
+	echo "FAILED TO RESTORE DB"
+	exit 1
+else
+	cd /home/jmhbackup/bin
+	java -jar $INSTALL_DIR/myjmh-command.jar -run zipCodeSynch -createsql -f $INSTALL_DIR/settings.txt
+	if [ $? = 0 ]
+	then
+		cp myjmh-command.log log.$DATE
+		grep NO-PATIENT-FOUND log.$DATE | grep "ProfileRow{id" | awk '{print $5,$6}' | cut -d"{" -f2,3 | cut -d"," -f1,2 
+		if [ $? = 0 ]
+		then	
+			mysql -uroot -p$PASS mysql -e "DROP DATABASE profile;"
+			rm -f /var/tmp/$FILE
+			find . -name "log.*" -mtime +60 -exec rm -f {} \;
+			exit 1
+		else
+			echo "NO MRN MERGES FOUND"
+			exit 0
+		fi
+	else
+		echo "FAILED TO RUN MYJMH-COMMAND.JAR"	
+		exit 1
+	fi
+fi	

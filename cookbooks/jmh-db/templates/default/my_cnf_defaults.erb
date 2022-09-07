@@ -1,0 +1,13 @@
+# JMH MySQL <%= @mysql_version %> server settings
+[mysqld]
+log_timestamps = SYSTEM
+default-time-zone = SYSTEM
+default-storage-engine = <%= @default_storage_engine %>
+innodb_log_file_size = <%= @innodb_log_file_size %>
+max_allowed_packet = <%= @max_allowed_packet %>
+max_connections = <%= @max_connections%>
+sql_mode = <%= @sql_mode %>
+innodb_lru_scan_depth = <%= @innodb_lru_scan_depth %>
+slow_query_log = <%= @slow_query_log %>
+long_query_time = <%= @long_query_time %>
+slow_query_log_file = <%= @slow_query_log_file %>

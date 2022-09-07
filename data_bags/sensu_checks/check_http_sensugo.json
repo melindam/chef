@@ -1,0 +1,97 @@
+{
+  "id": "check_http_sensugo",
+  "checks": [
+    {
+      "name": "mdsuspension",
+      "options": "-H localhost -p 8105 -u /mdsuspension/login.jsp -t 120 -j GET",
+      "subscribers": ["idev-mdsuspension"],
+      "interval": 300,
+      "occurences": 2
+    },
+    {
+      "name": "jmpn",
+      "options": "-H localhost -p 8104 -u /jmpn/login -t 120 -j GET",
+      "subscribers": ["idev-jmpn"],
+      "interval": 300,
+      "occurences": 2
+    },
+    {
+      "name": "sbo",
+      "options": "-H localhost -p 8103 -u /sbo/login -t 120 -j GET",
+      "subscribers": ["idev-sbo"],
+      "interval": 300,
+      "occurences": 2
+    },
+    {
+      "name": "kcadapter",
+      "options": "-H localhost -p 8520 -u /kcadapter-api/status -t 120 -j GET",
+      "subscribers": ["idev-kcadapter"],
+      "interval": 300,
+      "occurences": 2
+    },
+    {
+      "name": "payment_gateway",
+      "options": "-H localhost -p 8523 -u /gw/api/status -t 120 -j GET",
+      "subscribers": ["payment_gateway"],
+      "interval": 300,
+      "occurences": 2
+    },
+    {
+      "name": "mychart_proxy",
+      "options": "-H localhost -p 443 -S -u /jmherror/error.html -t 120 -j GET",
+      "subscribers": ["mychart_proxy"],
+      "interval": 120,
+      "occurences": 2
+    },
+    {
+      "name": "fad_api_search",
+      "options": "-H localhost -p 8085 -u /fad/api/searchResultsWithOffset -t 120 -j GET -r 'physicianID'",
+      "subscribers": ["findadoctor"],
+      "interval": 120,
+      "occurences": 2
+    },
+    {
+      "name": "mychart_supsso",
+      "options": "-H epicmchrtxvsup1.hsys.local -p 443 -u /mychartsupsso/billing/guestpay -t 120  -S -j GET",
+      "interval": 300,
+      "subscribers": [
+        "sensu-server",
+        "sensu-armor"
+      ],
+      "handlers": [
+        "sup-email-handler"
+      ]
+    },
+    {
+      "name": "mychart_mcmsup",
+      "options": "-H epicmchrtxvsup1.hsys.local -p 443 -u /MyChartMCMSUP/Authentication/Login -t 120 -S -j GET",
+      "interval": 300,
+      "subscribers": [
+        "sensu-server",
+        "sensu-armor"
+      ],
+      "handlers": [
+        "sup-email-handler"
+      ]
+    },
+    {
+      "name": "mychart_supsso_openscheduling",
+      "options": "-H epicmchrtxvsup1.hsys.local -p 443 -u /mychartsupsso/openscheduling -t 120 -S -j GET",
+      "interval": 300,
+      "subscribers": [
+        "sensu-server",
+        "sensu-armor"
+      ],
+      "handlers": [
+        "sup-email-handler"
+      ]
+    },
+
+    {"name" : "mychartmobile_interconnect_sup",
+      "options": "-H epicmchrtxvsup1.hsys.local -p 443 -u /interconnect-mcm-sup -S -j GET",
+      "interval": 300,
+      "subscribers" : ["sensu-server","sensu-armor"],
+      "handlers" : ["sup-email-handler"]
+    }
+  ]
+}

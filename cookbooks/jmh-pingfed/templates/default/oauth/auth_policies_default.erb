@@ -1,0 +1,105 @@
+{
+  "failIfNoSelection": false,
+  "authnSelectionTrees": [
+    {
+      "rootNode": {
+        "action": {
+          "type": "AUTHN_SELECTOR",
+          "authenticationSelectorRef": {
+            "id": "httpselector",
+            "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/authenticationSelectors/httpselector"
+          }
+        },
+        "children": [
+          {
+            "action": {
+              "type": "AUTHN_SOURCE",
+              "context": "fhir",
+              "authenticationSource": {
+                "type": "IDP_ADAPTER",
+                "sourceRef": {
+                  "id": "fhirhtmlform",
+                  "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/fhirhtmlform"
+                }
+              }
+            },
+            "children": [
+              {
+                "action": {
+                  "type": "DONE",
+                  "context": "Fail"
+                }
+              },
+              {
+                "action": {
+                  "type": "AUTHN_SELECTOR",
+                  "context": "Success",
+                  "authenticationSelectorRef": {
+                    "id": "setcookieselector",
+                    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/authenticationSelectors/setcookieselector"
+                  }
+                },
+                "children": [
+                  {
+                    "action": {
+                      "type": "DONE",
+                      "context": "Success"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "action": {
+              "type": "AUTHN_SOURCE",
+              "context": "jmh-sso",
+              "authenticationSource": {
+                "type": "IDP_ADAPTER",
+                "sourceRef": {
+                  "id": "httpform",
+                  "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/httpform"
+                }
+              }
+            },
+            "children": [
+              {
+                "action": {
+                  "type": "DONE",
+                  "context": "Fail"
+                }
+              },
+              {
+                "action": {
+                  "type": "AUTHN_SELECTOR",
+                  "context": "Success",
+                  "authenticationSelectorRef": {
+                    "id": "setcookieselector",
+                    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/authenticationSelectors/setcookieselector"
+                  }
+                },
+                "children": [
+                  {
+                    "action": {
+                      "type": "DONE",
+                      "context": "Success"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "defaultAuthenticationSources": [
+    {
+      "type": "IDP_ADAPTER",
+      "sourceRef": {
+        "id": "httpform",
+        "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/httpform"
+      }
+    }
+  ]
+}

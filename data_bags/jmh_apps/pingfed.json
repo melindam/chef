@@ -1,0 +1,17 @@
+{
+  "id": "pingfed",
+  "password": {
+    "encrypted_data": "DjV9e6SC7prXT1/+v2W6/c4U/Fi1khI80wlonIkY5R7lXpZ/tTQlOpR60Svr\nAbLq5/qsJZaw9+4FeRSmwTX1P1Zf87IP/o/o9zbDQj8b5bFCJ0eJRAFIN28m\n780SLScpJqYMiw==\n",
+    "iv": "+oifpBJ9zePnuPgu\n",
+    "auth_tag": "FlGtsJyOFfGxzdmn1EE0Ng==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "client_secret": {
+    "encrypted_data": "Q+xutOVSEoR3JpNxouIXHHYxL8tzQi9rqWegOURwq2BsClZFMmWrp2UWVbmj\nLeRzaEeDB3AJf/4xt+J6C6TwFgC+QG3a66H9GBIAnc4o4oMEipht40MfXCMZ\n0Q4RYyFXxbmnUiYmP3ciY2+4dHT3GkLT9gaIk+bGvHLt208ySjA0p3r11w1A\nlmrWr/oH8cE8VjzDNeHnHnUbfsF1nVen5ghDwQinCXf8PnvNIMFjJUubfdx3\npaTmkYsLtEdWSVPgepFttsEqH5oD1dt6h5JYIP8WsedVdCap+4zCwMfg22co\nBwsHPHBCkGGNQmNL5sqjnrRoBfk6+gRDFCTHcmAkW/g7Pu4nL+Gheym9vF8q\nugOif+hMZgsOuOOBiZeJ4Hobm/hO3i4H4fmoZ8UHz/LsTJzv7flerUULSW8G\nXoKrCgeD+FntfpQboxwjfyHWOo8K97DRYy9pBhjE3lQPG2TGfbImMnXpn69W\nEXiGabh6VbhsuTIDRbsp3XbicOQJa42l+0g4/VxO7yPtUZrv+EkT9lDCyOLp\ndwgaWHeNHcIUiJnlH/x9RzsiDmU68DNA3HimxoAsgzKzFTknrwtvvsEQqa29\nHxqE7ih/nVKsyi6ogN4X26VNZhWttJ4gaM3AirSmQIF9T3U70d1P800X8g==\n",
+    "iv": "vunOAPf3IdeQVpeE\n",
+    "auth_tag": "3kGRRlW534DeSRJkYfsomg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

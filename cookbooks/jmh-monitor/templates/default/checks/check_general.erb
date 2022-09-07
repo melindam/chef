@@ -1,0 +1,44 @@
+{
+  "checks": {
+  	<% @checks.each do |check|
+			check_command = check['command']
+      @property_overrrides.each do |prop,val|
+       # Chef::Log.warn("#{prop} and #{val}")
+      check_command = check_command.gsub(/\${#{prop}}/, val )
+      end
+%>
+  	"<%= check['name']%>": {
+  		"handlers": <%= check['handlers']%>,
+  	    <%if check['type'] %>
+  	    "type": "<%= check['type']%>",
+  	    <% end %>
+  		"command": "<%= check_command %>",
+  		"interval": <%= check['interval'] ? check['interval'] : 60 %>,
+  		<% if check['maintenance'] %>
+  		"maintenance": <%= check['maintenance'] %>,
+  		<% end %>
+      <% if check['afterhours'].nil? %>
+        "afterhours": true,
+      <% else %>
+        "afterhours": <%= check['afterhours'] %>,
+      <% end %>
+	    <% if check['mail_to'] %>
+	     "mail_to": <%= check['mail_to'] %>,
+	    <% end %>
+        <% if check['standalone'] %>
+		 "standalone" : <%= check['standalone'] %>,
+        <% end %>
+        <% if check['occurences'] %>
+		 "occurrences" : <%= check['occurences'] %>,
+        <% end %>
+	   "refresh": <%= check['refresh'] ? check['refresh'] : node['jmh_monitor']['client']['default_refresh_rate'] %>,
+  		"subscribers":  <%= check['subscribers'] %>
+	<% if check == @checks.last %>
+	    }
+	<% else %>
+		},
+	<% end %>
+
+  	<% end %>
+	}
+}

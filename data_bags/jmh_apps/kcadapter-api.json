@@ -1,0 +1,38 @@
+{
+  "id": "kcadapter-api",
+  "workday_basic_auth": {
+    "encrypted_data": "WOyFS03rcmcmEgHKuWkgjhv0T63ckBymworri91RlEo6YYvLli3qf7J/8go1\nUlpUz/cZs8bgKRVCAgEvIfoEb3sfyOZRSOxyApmQbCPUQ3ktb9BTCkf0u/RC\n2f41g81T7abGIXSFicQ6Rbn7RWA7ygO+LCS7OV/XQllKysI1eLBTS4QTxS9b\nf/Y=\n",
+    "iv": "yKFWFOv872Vvw9Cy\n",
+    "auth_tag": "395A5pTB3fRhie9guadVYg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "workday_url": {
+    "encrypted_data": "B8/8T+o5LqlRJnBwbJ94DwdubuRYPDpfKX88Hu0IA9W+tQIHG4e31+inzeax\n9bqGxRS1pawccBlbsWUsO49YhspvYi+haL8Y5nTT1umTZP1VgQH0Y5qcn+mH\nbVH9y3Cmkg0tRZ+KVLDCMbJdmYf6LiYfZGrxSoa5sAIdOhZRqrK3u/Fr4IS2\nkDkRdAaqX+gdeA6a8kj6TFwUe9mKnE37FvAt+XN8XR6FqT8D0q04jUXxiDF/\n624IYYp/ogsM7FkqYhi6rLeA5ysKGtIyGMDWENzSsuiDBd//nTIPHkS8BdNW\nZTtAX9YeMPmYrzcM/8xKfIztomvsD9fAiMIJ1D0ln0Hi2g7JmBt2CRPFyaZa\nzGS0OxcEqwZPKMtcI7B9Hcv5i9cRLikH8UsIk3WVsMitbb4pID9E\n",
+    "iv": "ulcMyOjLTbWofsbY\n",
+    "auth_tag": "fPRh1J/5amRJ7U95nRaOYQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "kc_basic_auth": {
+    "encrypted_data": "H2E8b14wnTZjST1ymLZzPznUSpSVObUXnpN13i91o0VmkJL2/CduD3tpex/x\nCE//2ktY/2aB/0DPL6x4rfenxOzFJDfu76HojEmm/2Dpqxj7PdICbE+/R/EF\n/lcfoPlHahFFu5Dk3mo4qivkx4DR8OE2pOPrL9485DD4nxunoCZSWvjhCRne\nMG/Q+mEY/udxmXOktqcTMA==\n",
+    "iv": "vy6luUUJEy/am4sy\n",
+    "auth_tag": "wAi3sM/8GEGQgOMTagQmpA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "kc_url": {
+    "encrypted_data": "+FHpGbllmds7DUD541cMN9WNvPaXgdJuepG7iAGsPEUEYyupp0xvXCmHUDpo\nCDTAH9LokUoKVus7JLcKhHrsUzbugahhANcg4LqeUSO23IpIq/WSzALjQuYW\njgr3GDt8+s9kvDeoTKLoecydrzxufpdApOvSy1hCKMzucfKkyF7seGRaSBvc\nQ7TCt/Lx0dS0NG/6XQ==\n",
+    "iv": "ot69PWBn0t/L+zbf\n",
+    "auth_tag": "EZtkPPKs1OA8m0hxE9ah4g==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "kc_cron": {
+    "encrypted_data": "mQWsxbunFMI5Qiytm7UGEz4UpMqCXA7PXRPgOyGROBaI7PbalO3FGphd66ai\nwWsNkM8FpOBrYNkY1M4G3ReF\n",
+    "iv": "jsbg7DbC8gDewDAo\n",
+    "auth_tag": "6dquVHkeFx+u6NN8f7PW0A==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

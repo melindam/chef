@@ -1,0 +1,24 @@
+#!/bin/sh
+## Script Dropped off by Chef! ##
+# set -x
+
+PINGPATH=/usr/local/pingfederate/server/default/conf
+HOME_PATH=/home/pingfederate
+
+echo "moving tar file to prev directory"
+if [ -f $HOME_PATH/deploy/pingFed_current.tgz ]
+then
+    mv -f $HOME_PATH/deploy/pingFed_current.tgz $HOME_PATH/deploy.prev/pingFed.tgz
+    rm -rf $HOME_PATH/deploy/template $HOME_PATH/deploy/language-packs
+fi
+
+echo "untaring"
+cd $HOME_PATH/deploy
+tar -xzf $HOME_PATH/deploy/pingFed.tgz
+
+echo "moving lang and template files in place"
+mv -f language-packs/* $PINGPATH/language-packs/
+mv -f template/* $PINGPATH/template/
+
+echo "moving tar to current deployment tar"
+mv -f $HOME_PATH/deploy/pingFed.tgz $HOME_PATH/deploy/pingFed_current.tgz

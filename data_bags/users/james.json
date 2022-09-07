@@ -1,0 +1,7 @@
+{
+  "comment": "James Moseley",
+  "groups": ["devadmin"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4bc1Wor2Mn4Tj/E547PaUAXU7bB1JgmE15L3JM3ho10AZQLi0u+uQFsFxTnARYrmzw9EiOyOphJ4Zc3FdRXy6qro/BifbwB7ZV3kUh3+6SunUtPXEdZZnW8iQQAFM0IqUB/b0F9Um/CvvvHegsmghItImby7hXlmn7XuSdUSgsv7p90ahWkHe7AvCbeex4str82eWOMaKvAEGZmluYEN64hyxO755twoecRANt85v9//Fo+A9lVl+FKr/1DnIgPC9g1gWiiIpoyPMD6B862hXiBSOAij7vO3pJ15iYkF5CSQyZYXO3Omng98Jb2U4izxq4zwuLbyX14Rgh96QT1RFi8B2SK/4sF4eGNwXjzgBVWxGPWgxPNWNvpYNsMv210Y508LjOHi64NrzXHkoCrVVn5eFZJsjDzkU3PSXi5NiXZK79Hm+nTalR13/AedvH0VqMjonOAlD0bx8JuxpiIOTHgr/2hJCoy5Rpd2aCvu8H0+xMOW9JOSMwNsZ//jn20cW9ALShskdWLlwVJ9JKOcSfvTGDOKM7R7T1RQbcT2snxBC6dk5Z89tkW2uJdE4ExcSie/k3KzC8XUFI8+g/zxT6RUnJGy47VOVOA0PdPZTMUUtOJykwCFcSa1wlRf1+53SkE8FXKVxJ7u2kWYOiZOQokKVZ97kgMq+bhGOiNIaZQ== james.moseley@johnmuirhealth.com",
+  "id": "james",
+  "shell": "/bin/bash"
+}

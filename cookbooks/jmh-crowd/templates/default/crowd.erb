@@ -1,0 +1,4 @@
+-A FWR -p tcp -m tcp --dport <%= node['jmh_crowd']['port'] %> -j ACCEPT
+<% if node['jmh_crowd']['enable_ssl'] %>
+-A FWR -p tcp -m tcp --dport <%= node['jmh_crowd']['ssl_port'] %> -j ACCEPT
+<% end %>

@@ -1,0 +1,40 @@
+{
+  "id": "setcookieselector",
+  "name": "SET COOKIE SELECTOR",
+  "pluginDescriptorRef": {
+    "id": "com.pingidentity.authentication.selector.SetCookieAuthenticationSelector",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/authenticationSelectors/descriptors/com.pingidentity.authentication.selector.SetCookieAuthenticationSelector"
+  },
+  "configuration": {
+    "tables": [],
+    "fields": [
+      {
+        "name": "Cookie Domain",
+        "value": "johnmuirhealth.com"
+      },
+      {
+        "name": "Cookie Name",
+        "value": "AUTH_TOKEN"
+      },
+      {
+        "name": "Cookie Age",
+        "value": "30"
+      },
+      {
+        "name": "Value Attribute",
+        "value": "token"
+      },
+      {
+        "name": "Value Expression",
+        "value": "split(\":\")[1]"
+      }
+    ]
+  },
+  "attributeContract": {
+    "extendedAttributes": [
+      {
+        "name": "Success"
+      }
+    ]
+  }
+}

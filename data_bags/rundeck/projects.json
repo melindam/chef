@@ -1,0 +1,61 @@
+{
+	"id": "projects",
+	"projects": [ {"name": "AppServers",
+					"description": "Application Servers",
+				   "resources": [{"name": "apps01-prd", "user": "tomcat"},
+				   				 {"name": "apps01-stg", "user": "tomcat"},
+				   				 {"name": "apps03-prd", "user": "tomcat"},
+				   				 {"name": "apps03-stg", "user": "tomcat"},
+				   				 {"name": "apps06-prd", "user": "tomcat"},
+				   				 {"name": "myjmh03-prd", "user": "tomcat"},
+				   				 {"name": "myjmh03-stg", "user": "tomcat"}]
+				  },
+				  {"name": "DevelopmentUtilities",
+					  "description": "Utilities for use by developers",
+				   "resources": [{"name": "apps01-prd", "user": "tomcat"},
+				   				 {"name": "apps01-stg", "user": "tomcat"},
+				   				 {"name": "apps03-prd", "user": "tomcat"},
+				   				 {"name": "apps03-stg", "user": "tomcat"},
+				   				 {"name": "myjmh03-prd", "user": "tomcat"}]
+				  },
+				  {"name": "Dispatchers",
+ 				   "description": "Removes the caches for AEM Servers",
+				   "resources": [{"name": "dispatcher02-prd", "user": "root"},
+				   				 {"name": "dispatcher01-prd", "user": "root"},
+				   				 {"name": "dispatcher01-stg", "user": "root"},
+				   				 {"name": "dispatcher02-stg", "user": "root"},
+				   				 {"name": "publisher-poc", "user": "root"},
+					   			 {"name": "publisher-tst", "user": "root"},
+					   			 {"name": "publisher-tst2", "user": "root"}
+				   				]
+				  },
+				  {"name": "AEM",
+				   "description": "Maintenance on AEM Servers",
+				   "resources": [{"name": "publisher01-prd", "user": "cqadmin"},
+				   				 {"name": "publisher02-prd", "user": "cqadmin"},
+					   			 {"name": "publisher01-stg", "user": "cqadmin"},
+					             {"name": "publisher02-stg", "user": "cqadmin"},
+				   				 {"name": "author-prd", "user": "cqadmin"},
+				   				 {"name": "author01-stg", "user": "cqadmin"},
+					   			 {"name": "author-tst2", "user": "cqadmin"},
+					   			 {"name": "author-tst", "user": "cqadmin"},
+					   			 {"name": "author-poc", "user": "cqadmin"},
+							     {"name": "publisher-poc", "user": "cqadmin"},
+							     {"name": "publisher-tst2", "user": "cqadmin"},
+				   				 {"name": "monitor02-prd", "user": "cqadmin"}]
+				  },
+				  {"name": "EBusinessReporting",
+				   "description": "Jobs for Reports",
+				   "resources": [{"name": "ebiz22", "user": "jmhbackup"}]
+				  },
+				  {"name": "EBusinessTools",
+				   "description": "Backup jobs to the JMH Tools Server",
+				   "resources": [{"name": "ebiz24", "user": "jmhbackup"}]
+				  },
+				 {"name": "AWStats",
+					 "description": "AWSStats Log processing",
+                                   "resources": [ {"name": "ebiz24", "user": "awstats"}]
+                                  }
+
+				]
+}

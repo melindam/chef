@@ -1,0 +1,12 @@
+name 'jmh-splunk'
+maintainer 'Scott Marshall, Melinda Moran'
+maintainer_email 'scott.marshall@johnmuirhealth.com'
+license 'all_rights'
+description 'Installs/Configures jmh-splunk'
+long_description 'Installs/Configures jmh-splunk'
+version '0.2.0'
+
+depends 'chef-splunk', '>= 5.0.2'
+depends 'hostsfile'
+depends 'iptables'
+depends 'jmh-webserver'

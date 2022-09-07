@@ -1,0 +1,28 @@
+#!/bin/bash
+#set -x
+
+SFTP_HOST="ssh2.hsys.local"
+SFTP_USER="ebusiness"
+PRIVATE_KEY="/home/tomcat/.ssh/ebusiness_id_rsa"
+FTPDIR="/myjmh/mrn_report"
+SOURCEDIR="/usr/local/webapps/myjmh/import/"
+
+SFTP_COMMAND="sftp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=${PRIVATE_KEY} -b - ${SFTP_USER}@${SFTP_HOST}"
+
+cd $SOURCEDIR
+
+MRN_FILES="Patient_Merge*.csv"
+printf "cd ${FTPDIR}\nls ${MRN_FILES}\nbye\n" | $SFTP_COMMAND
+if [ $? -ne 0 ]
+then
+	echo "**** ERROR No SFTP File for MRN Merge  *****"
+	exit 1;
+fi
+
+GET_COMMAND="get *csv"
+printf "cd ${FTPDIR}\n${GET_COMMAND}\nbye\n" | $SFTP_COMMAND
+if [ $? -ne 0 ]
+then
+	echo "**PROBLEM DURING MYJMH EPIC SFTP GET PROCESS**"
+	exit 5;
+fi

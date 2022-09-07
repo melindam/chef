@@ -1,0 +1,10 @@
+{
+  "id": "zipnosis",
+  "api": {
+    "encrypted_data": "+II1UA8dos/POFgnv33OVMGxTZPZN4pNfo41KpycqdaKzvpqOiqEpJpNgU+4\nCXWPss5V+oOQb5R11Iv+Xb9OshvM1I2FSTPWtCMQwfw4oiuCk9wFhuR4+iKi\nq2EgIJ1hHs2ktwna+H6+z6duyvqUqN4sDdfmBLmMAfwrfc7QbhI9hGN4qwnN\nlYnjhnvy1b7swGAuJYy+O9NlW+ONZgPQ1/nPjHSywWNAwqh7KTAfXxvpwlvK\nXlcU6oP+JeBc7nTp943t2o4kjA6l9IXU/rcwZhM4qhn/qYrM4sQFeYG/Tt3e\nMSNNCbPQZhQwPujOTbQwWauexQ6HvpqRUgiJM2k=\n",
+    "iv": "m7JrOs5FGDzwOKLL\n",
+    "auth_tag": "3eS590bFUUT4f2mLcQIe5A==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

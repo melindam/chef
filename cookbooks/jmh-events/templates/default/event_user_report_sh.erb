@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Dropped off by Chef!
+
+YEAR='<%= @year%>'
+MONTH='<%= @month%>'
+PASS='<%= @mysql_password%>'
+REPORT_FILE="<%= @report_name %>-${YEAR}${MONTH}"
+
+read -d '' QUERY << EOF
+	   select e.name, 
+	   r.firstName, 
+	   r.lastName, 
+	   r.middleName,  
+	   r.creationDate,  
+	   se.session_start, 
+	   r.birthdate,   
+	   r.yearOfBirth, 
+	   r.address1, 
+	   r.address2, 
+	   r.city, 
+	   r.state, 
+	   r.country, 
+	   r.zip, 
+	   r.attendanceStatus,  
+	   r.homePhone, 
+	   r.cellPhone, 
+	   r.workPhone, 
+	   r.email, 
+	   r.preferredContactMethod  
+	   from registration as r 
+	     left outer join (select sevent.id id,  
+	     				  sevent.event_id event_id,  
+	     				  sevent.state state, 
+	     				  esession.session_start session_start  
+	     				  from event_scheduled sevent 
+	     				  left outer join event_session esession  
+	     				  on sevent.id = esession.scheduledEvent_id group by sevent.id) as se on r.scheduledEvent_id = se.id  
+	     left join event as e on e.id = se.event_id 
+	     where se.state <> "CANCELLED" 
+	     and MONTH(r.creationDate) = "${MONTH}" 
+	     AND YEAR(r.creationDate) = "${YEAR}" order by e.name;
+EOF
+
+
+# Run Query          
+/usr/bin/mysql -B -u events_rundeck --password="$PASS" -h <%= @mysql_host %> events -e "$QUERY" > <%= @report_folder%>/${REPORT_FILE}.txt
+
+# Zip up and password protect results
+cd <%= @report_folder%>
+7za a -p<%= @archive_password%> ${REPORT_FILE}.7z ${REPORT_FILE}.txt
+if [ $? -eq 0 ]
+then
+    shred -u -z ${REPORT_FILE}.txt
+else
+    echo "Shred Failed"
+    exit 5
+fi
+
+# copy results to backup folder
+/usr/bin/scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=<%= @rsa_file%> <%= @report_folder%>/${REPORT_FILE}.7z <%= @scp_user%>@<%= @scp_host%>:<%= @scp_folder%>
+
+
+message_body="New Event Manager Registration report file is attached.  Archived reports are available at: <%= @archive_url%>"
+
+echo ${message_body} | mutt -a <%= @report_folder%>/${REPORT_FILE}.7z -s "Event Manager Report File" -- <%= @email_address%>
+rm -f <%= @report_folder%>/${REPORT_FILE}.7z

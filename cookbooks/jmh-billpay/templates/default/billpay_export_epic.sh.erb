@@ -1,0 +1,39 @@
+#!/bin/bash
+#set -x
+
+HOMEDIR="<%= node['jmh_billpay']['scripts_dir'] %>"
+SFTP_HOST="<%= node['jmh_billpay']['epic']['server'] %>"
+SFTP_USER="<%= node['jmh_billpay']['epic']['user'] %>"
+PRIVATE_KEY="<%= node['jmh_billpay']['epic']['identity_file'] %>"
+DESTDIR="<%= node['jmh_billpay']['epic']['destdir'] %>/in"
+SOURCEDIR="<%= node['jmh_billpay']['export']['source'] %>"
+
+SFTP_COMMAND="sftp -o IdentityFile=${PRIVATE_KEY} -b - ${SFTP_USER}@${SFTP_HOST}"
+
+cd ${SOURCEDIR}
+EPIC_FILES=`ls EP*.txt`
+
+if [ -z "$EPIC_FILES" ]
+then
+	echo "*No Files for EPIC today*"
+	exit 1;
+fi
+
+PUT_COMMAND=""
+for epicfile in $EPIC_FILES
+do
+	PUT_COMMAND="${PUT_COMMAND}\nput $epicfile"
+done
+
+printf "cd ${DESTDIR}\n${PUT_COMMAND}\nbye\n" | $SFTP_COMMAND
+if [ $? -ne 0 ]
+then
+	echo "**PROBLEM DURING SFTP PROCESS**"
+	exit 5;
+fi
+
+# Move files to archive
+for epicfile in $EPIC_FILES
+do
+    mv $epicfile $SOURCEDIR/archive/$epicfile
+done

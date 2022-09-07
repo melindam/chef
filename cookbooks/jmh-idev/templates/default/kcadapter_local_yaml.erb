@@ -1,0 +1,29 @@
+# Dropped of by Chef!!
+
+server:
+  port: <%= @http_port %>
+  log_dir: <%= @log_dir %>
+  host: <%= @hostname %>
+
+workday:
+  url: <%= @workday_url %>
+  basic_auth:
+    username: <%= @wd_username %>
+    password: '<%= @wd_password %>'
+  mock: true
+
+knowledgecenter:
+  url: <%= @kc_url %>
+  basic_auth:
+    username: <%= @kc_username %>
+    password: <%= @kc_password %>
+
+smtp:
+  host: localhost
+  port: 25
+  from: noreply@johnmuirhealth.com
+  to: <%= @kc_emails %>
+
+cron:
+  schedule: '<%= @kc_cron %>'
+

@@ -1,0 +1,37 @@
+{
+  "id": "prd",
+  "mychart": {
+    "hostname": "epicmychartprd.hsys.local",
+    "ipaddress": "172.24.201.20",
+    "port": 443,
+    "protocol": "https",
+    "develop_token": "false",
+    "acordex": "DXTPKME",
+    "sso_context": "mychartprdsso",
+    "mcm_mychart_context": "mychartmcmprd",
+    "mcm_context": "interconnect-mcm-prd",
+    "mcm_check_hosts": { "PRD LoadBalancer": "epicmychartprd.hsys.local",
+      "PRD1": "epicmchrtxvprd1.hsys.local",
+      "PRD2": "epicmchrtxvprd2.hsys.local",
+      "PRD3": "epicmchrtxvprd3.hsys.local",
+      "PRD4": "epicmchrtxvprd4.hsys.local",
+      "PRD5": "epicmchrtxvprd5.hsys.local",
+      "PRD6": "epicmchrtxvprd6.hsys.local"
+    }
+  },
+  "interconnect": {
+    "hostname": "epicinterxvprd.hsys.local",
+    "ipaddress": "172.24.201.20",
+    "check_hosts": { "PRD LoadBalancer": "epicinterxvprd.hsys.local",
+                     "PRD1": "epicinterxvprd1.hsys.local",
+                     "PRD2": "epicinterxvprd2.hsys.local"
+                   },
+    "check_patient_mrn": "21737615",
+    "port": 443,
+    "protocol": "https",
+    "context": "interconnect-prd-ebiz",
+    "secure_context": "interconnect-prd-ebiz-secure",
+    "clientid": "6c971a49-b361-456b-aa2c-123abdf9f5c1"
+  },
+  "java_properties": [  ]
+}

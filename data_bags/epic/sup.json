@@ -1,0 +1,27 @@
+{
+  "id": "sup",
+  "mychart": {
+    "hostname": "epicmchrtxvsup1.hsys.local",
+    "ipaddress": "172.23.209.114",
+    "port": 443,
+    "protocol": "https",
+    "develop_token": "false",
+    "acordex": "DXTPKME",
+    "sso_context": "mychartsupsso",
+    "mcm_mychart_context": "mychartmcmsup",
+    "mcm_context": "interconnect-mcm-sup",
+    "mcm_check_hosts": { "SUP": "epicmchrtxvsup1.hsys.local"}
+  },
+  "interconnect": {
+    "hostname": "epicinterxvprd2.hsys.local",
+    "ipaddress": "172.24.201.13",
+    "port": 443,
+    "protocol": "https",
+    "context": "interconnect-sup-ebiz",
+    "secure_context": "interconnect-sup-ebiz-secured",
+    "check_hosts": { "SUP": "epicinterxvprd2.hsys.local"},
+    "check_patient_mrn": "21737615",
+    "clientid": "3a1215dc-1187-4e16-9cf9-32c28a3bde7b"
+  },
+  "java_properties": [  ]
+}

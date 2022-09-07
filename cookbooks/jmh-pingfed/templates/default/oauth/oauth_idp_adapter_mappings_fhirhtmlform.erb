@@ -1,0 +1,25 @@
+{
+      "id": "fhirhtmlform",
+      "idpAdapterRef": {
+        "id": "fhirhtmlform",
+        "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/fhirhtmlform"
+      },
+      "attributeSources": [],
+      "attributeContractFulfillment": {
+        "USER_NAME": {
+          "source": {
+            "type": "ADAPTER"
+          },
+          "value": "username"
+        },
+        "USER_KEY": {
+          "source": {
+            "type": "ADAPTER"
+          },
+          "value": "token"
+        }
+      },
+      "issuanceCriteria": {
+        "conditionalCriteria": []
+      }
+}

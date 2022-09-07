@@ -1,0 +1,29 @@
+{
+  "clientId": "fhir",
+  "redirectUris": [
+    "https://<%= @www_server_name %>/<%= @mychart_name %>/inside.asp?mode=oauthlogin"
+  ],
+  "grantTypes": [
+    "IMPLICIT"
+  ],
+  "name": "FHIR",
+  "description": "",
+  "logoUrl": "",
+  "refreshRolling": "SERVER_DEFAULT",
+  "persistentGrantExpirationType": "SERVER_DEFAULT",
+  "persistentGrantExpirationTime": 0,
+  "persistentGrantExpirationTimeUnit": "DAYS",
+  "bypassApprovalPage": true,
+  "restrictScopes": false,
+  "restrictedScopes": [],
+  "defaultAccessTokenManagerRef": {
+    "id": "FHIR",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/oauth/accessTokenManagers/FHIR"
+  },
+  "validateUsingAllEligibleAtms": false,
+  "oidcPolicy": {
+    "grantAccessSessionRevocationApi": false,
+    "pingAccessLogoutCapable": false
+  },
+  "requireSignedRequests": false
+}

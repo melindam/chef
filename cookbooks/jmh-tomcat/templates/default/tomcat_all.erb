@@ -1,0 +1,16 @@
+#!/bin/bash
+# To restart all tomcat instances under /usr/local/tomcat
+
+if [ -z $1 ]
+then
+	echo "Usage: $0 [start|stop|restart]"
+	exit 1
+fi
+
+cd /etc/init.d
+for INST in `fgrep -l '/usr/local/tomcat' *`
+do
+   echo "$INST $1"
+   /usr/sbin/service $INST $1
+   sleep 5
+done

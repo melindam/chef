@@ -1,0 +1,57 @@
+#!/bin/sh
+# Dropped off by Chef!
+# set -x
+
+JAVA_HOME=<%= @java_home %>
+LOCAL_LOG_FILE=<%= @local_log_file %>
+UPDATE_SQL_FILE=<%= @script_dir %>/profile_update_zips.sql
+MAX_FILE_LENGTH=<%= @max_update_length %>
+EMAIL_USER="melinda.moran@johnmuirhealth.com"
+
+cd <%= @script_dir %>
+
+$JAVA_HOME/bin/java -jar myjmh-command.jar -run zipCodeSynch -createsql -f '<%= @properties_file %>' 2> /dev/null
+if [ $? != 0 ]
+then
+  echo "Failed run by myjmh-command" | mailx -s "ProfileZipSync Update FAILED" $EMAIL_USER 
+  exit 1
+fi
+
+if [ ! -e "${UPDATE_SQL_FILE}" ]
+then
+  echo "Update File Does not Exist" | mailx -s "ProfileZipSync Update File Does not Exist!" $EMAIL_USER 
+  exit 1
+fi
+
+file_lines=`cat ${UPDATE_SQL_FILE} | wc -l`
+
+if [ $(( $file_lines  )) -eq $(( 0 )) ]
+then
+  echo "No records to update!" | mailx -s "ProfileZipSync No Records to UPDATE!" $EMAIL_USER 
+  rm -f ${UPDATE_SQL_FILE}
+  exit 0
+fi
+
+# Error out if the file is too large
+if [ $(( $file_lines )) -gt  $(( $MAX_FILE_LENGTH ))  ]
+then
+  echo "Update file is too large: $file_lines" | mailx -s "ProfileZipSync Update file is too large!" $EMAIL_USER
+  exit 1;
+fi
+
+cat ${UPDATE_SQL_FILE}
+echo "Now proceeding with updating ${file_lines} lines" > $LOCAL_LOG_FILE
+
+/usr/bin/mysql -h <%= @db_host %> -u <%= @db_user %> -p<%= @db_password %> <%= @db_name %> < ${UPDATE_SQL_FILE}
+if [ $? != 0 ]
+then
+  echo "SQL Update failed"
+  mailx -s "ProfileZipSync Update FAILED" $EMAIL_USER < $LOCAL_LOG_FILE
+  exit 1
+else
+  echo "Update complete"
+  rm -f ${UPDATE_SQL_FILE}
+  mailx -s "ProfileZipSync Success" $EMAIL_USER < $LOCAL_LOG_FILE
+  exit 0
+fi
+

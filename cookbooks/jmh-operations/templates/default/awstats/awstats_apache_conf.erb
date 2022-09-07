@@ -1,0 +1,11 @@
+Alias /awstats/icon/ <%= @wwwroot %>/icon/
+<Directory <%= @wwwroot %>/icon/>
+    Require all Granted
+</Directory>
+
+ScriptAlias /awstats/ <%= @wwwroot %>/cgi-bin/
+<Directory <%= @wwwroot %>/cgi-bin/>
+    DirectoryIndex awstats.pl
+    Options ExecCGI
+    Require all Granted
+</Directory>

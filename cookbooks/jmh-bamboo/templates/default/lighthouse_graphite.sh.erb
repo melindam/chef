@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# This script runs NPM lighthouse with google-chrome-stable package to the domain you wish
+#  $1 variable will be www-dev OR www-sbx OR whatever domain you wish
+
+export PATH=<%= @nodejs_path %>/bin:$PATH
+
+GRAPHITEHOST=<%= @graphite_server %>
+ENVIRONMENTS="www-tst2 www-tst www"
+
+DATE=`date "+%Y%m%d%H%M"`
+LHPATH="<%= @lighthouse_paths %>"
+
+for env in $ENVIRONMENTS
+do
+    for the_lh_path in $LHPATH
+    do
+    # echo "$DATE $the_lh_path" >> <%= @lighthouse_report_dir %>/lighthouse_stats.txt
+      lh_path=`echo $the_lh_path | sed "s/\//-/g"`
+      if [ $lh_path == "-" ]
+      then
+            graphite_path="home"
+      else
+            graphite_path=`echo $lh_path | sed s/-// | sed s/\=/-/g | sed s/\?/-/g | sed s/\.html//g`
+      fi
+    lighthouse-graphite https://$env.johnmuirhealth.com$the_lh_path --run=1 --graphite-host=$GRAPHITEHOST --graphite-prefix=lighthouse.$env.$graphite_path >> /dev/null 2>&1 # >> <%= @lighthouse_report_dir %>/lighthouse_stats.txt 2>&1
+    done
+done

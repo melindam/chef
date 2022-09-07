@@ -1,0 +1,46 @@
+# This script will be used to stop, install mule app <%= @mule_app %> remove any files, and startup mule
+
+MULE_USER=<%= @mule_user %>
+MULE_HOME=<%= @mule_home %>
+JAVA_HOME=<%= @java_home %>
+export JAVA_HOME MULE_HOME
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:$MULE_HOME/bin:$JAVA_HOME/bin
+
+APP=<%= @mule_app %>
+APPDIR=`echo $APP | cut -d "." -f1`
+
+if [ ! -d /home/tomcat/deploy.mule.current ]
+then
+  mkdir /home/tomcat/deploy.mule.current
+fi
+
+if [ ! -d /home/tomcat/deploy.mule.prev ]
+then
+  mkdir /home/tomcat/deploy.mule.prev
+fi
+
+if [ -e /home/tomcat/deploy.mule.current/<%= @mule_app %> ]
+then
+
+	CURRMD5=`md5sum /home/tomcat/deploy.mule.current/<%= @mule_app %> | cut -d " " -f1`
+	NEWMD5=`md5sum /home/tomcat/deploy.mule/<%= @mule_app %> | cut -d " " -f1`
+
+	if [ ${CURRMD5} != ${NEWMD5} ]
+	then
+		echo "Moving Current deployed Mule app <%= @mule_app %> to prev directory"
+		mv /home/tomcat/deploy.mule.current/<%= @mule_app %> /home/tomcat/deploy.mule.prev/
+	else
+ 		echo "Current deployed Mule app and new app same MD5 Size - no movement"	
+ 	fi	
+fi
+
+cd $MULE_HOME/bin
+$MULE_HOME/bin/mule stop
+echo "Deploying <%= @mule_app %>"
+rm -rf $MULE_HOME/apps/$APPDIR*
+cp /home/tomcat/deploy.mule/<%= @mule_app %> /home/tomcat/deploy.mule.current/
+echo "Copy deployed ZIP to apps/$APPDIR"
+mv /home/tomcat/deploy.mule/<%= @mule_app %> $MULE_HOME/apps/
+
+cd $MULE_HOME/bin
+$MULE_HOME/bin/mule start 

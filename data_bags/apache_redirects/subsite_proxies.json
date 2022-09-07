@@ -1,0 +1,12 @@
+{
+  "id": "subsite_proxies",
+  "target_role": "php_subsites",
+  "port" : "82",
+  "proxies": {
+    "/consumer_personas": "/consumer_personas",
+    "/custom": "/custom",
+    "/heartistry": "/heartistry",
+    "/history": "/history",
+    "/mdstart": "/mdstart"
+  }
+}

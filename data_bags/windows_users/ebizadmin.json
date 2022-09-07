@@ -1,0 +1,31 @@
+{
+  "comment": {
+    "encrypted_data": "PcW/2jHv0sshhCHYXgPpi4L2AURj+Zo5HAV1eg302gyo3w==\n",
+    "iv": "EUSxTdpKv9u2A6pl\n",
+    "auth_tag": "SSS1cxuPmqlQxJ4Iz1Cvnw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "groups": {
+    "encrypted_data": "PR8qWNPiHw9APbc+obWyNl42rAoYIRf/Ei6Si4eUdkbLK/A=\n",
+    "iv": "bh51EaXKiDXuDNCu\n",
+    "auth_tag": "MPIruwx0i2zOHHMQQ8ZxoQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "password": {
+    "encrypted_data": "JbsyWk2HX6Nz7Yfh128UfCNN7glXnn3sQU2lbtn44LGH/tgeag==\n",
+    "iv": "Ko4c3TEGnmMgowwQ\n",
+    "auth_tag": "/wUkgT071Ock1bDJYjEAnw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "id": "ebizadmin",
+  "windows": {
+    "encrypted_data": "FEga1me/lXzY86NhI8iS2ttRLUMY\n",
+    "iv": "CGxm6cMtiffJsJsR\n",
+    "auth_tag": "sFZpDpu7d1w6ecuGo6ocJg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

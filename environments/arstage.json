@@ -1,0 +1,377 @@
+{
+  "name": "arstage",
+  "description": "JMH Armor Stage Environment",
+  "cookbook_versions": {
+    "activemq": "= 1.3.7",
+    "apache2": "= 3.3.0",
+    "chef-solo-search": "= 0.5.1",
+    "database": "= 6.1.2",
+    "ecryptfs": "0.1.4",
+    "iptables": "= 0.15.0",
+    "jmh-apps": "= 1.2.0",
+    "jmh-archiva": "= 1.0.11",
+    "jmh-bamboo": "0.7.6",
+    "jmh-ci": "0.2.0",
+    "jmh-cq": "= 3.2.0",
+    "jmh-crowd": "= 2.4.6",
+    "jmh-db": "0.5.18",
+    "jmh-encrypt": "0.1.2",
+    "jmh-epic": "0.1.10",
+    "jmh-events": "0.2.8",
+    "jmh-fad": "0.3.12",
+    "jmh-idev": "0.1.15",
+    "jmh-java": "= 0.4.3",
+    "jmh-monitor": "= 0.12.0",
+    "jmh-mongodb": "= 0.2.1",
+    "jmh-mule": "0.2.0",
+    "jmh-myjmh": "0.4.19",
+    "jmh-nodejs": "0.1.9",
+    "jmh-operations": "= 1.2.16",
+    "jmh-paygateway": "0.1.2",
+    "jmh-pingfed": "0.6.0",
+    "jmh-prereg": "0.3.8",
+    "jmh-rundeck": "= 0.7.2",
+    "jmh-sched": "= 0.1.11",
+    "jmh-server": "= 1.7.2",
+    "jmh-splunk": "= 0.2.0",
+    "jmh-tomcat": "= 0.6.11",
+    "jmh-utilities": "= 0.1.21",
+    "jmh-vsftpd": "= 0.0.1",
+    "jmh-vvisits": "= 0.2.10",
+    "jmh-webproxy": "0.2.25",
+    "jmh-webserver": "= 0.5.44",
+    "jmh-yum": "= 0.0.1",
+    "logrotate": "1.9.0",
+    "metachef": "= 3.0.4",
+    "mysql": "= 8.5.2",
+    "os-hardening": "4.0.0",
+    "php": "= 5.0.0",
+    "pingfederate": "0.3.1",
+    "postfix": "~> 5.3.0",
+    "rabbitmq": "2.0.0",
+    "s3_file": "2.5.3",
+    "selinux": "= 2.1.1",
+    "sensu": "5.4.1",
+    "timezone-ii": "= 0.2.2",
+    "users": "= 5.3.1",
+    "vsftpd": "= 0.0.1",
+    "windows-hardening": "0.9.1",
+    "xml": "= 1.1.2"
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+    "cq": {
+      "crypto_environment": "prod",
+      "ldap_authentication": "true",
+      "omniture_prc_mode": "jmhprc",
+      "omniture_www_mode": "jmh",
+      "google_api_key": "AIzaSyByi6XMLRDKDjR2n79fcKB8bQUBcl_wt3E",
+      "scheduling_captcha_site_key": "6LdDGo8UAAAAACYPmZtCoMuTaIAAAGnRtJSEmk9C",
+      "personalization_google_geolocation_apikey": "AIzaSyDttRHHMvVr3FhPoiMdqYkiB1ZQjGtotss",
+      "jvm_opts": {
+        "tmp_directory": "/data/tmp"
+      },
+      "dispatcher": {
+        "jmherror": {
+          "myjmh_maintenance_message": "<h3 class=\"brighttext\">MyChart will be down from 2:00am to 4:00am for maintenance.</h3>"
+        }
+      },
+      "databag": {
+        "password_key": "stage_aem_password"
+      },
+      "author": {
+        "environment": "stage",
+        "apache80": {
+          "server_aliases": "author-stage02.johnmuirhealth.com"
+        },
+        "apache_ssl": {
+          "server_aliases": "author-stage02.johnmuirhealth.com"
+        }
+      },
+      "maintenance_time": {
+        "zip_hour": 19
+      },
+      "app_proxies": {
+        "profile_proxies": {
+          "target_ipaddress": "100.68.181.30",
+          "port": 443
+        },
+        "event_proxies": {
+          "target_ipaddress": "100.68.181.10"
+        },
+        "mychartsso_proxies": {
+          "target_ipaddress": "100.68.181.30"
+        },
+        "fad_proxies": {
+          "target_ipaddress": "100.68.181.30",
+          "port": 443,
+          "proto": "https"
+        }
+      }
+    },
+    "chef_client": {
+      "cron": {
+        "hour": "*",
+        "minute": "0,30",
+        "log_file": "/var/log/chef_cron.log",
+        "use_cron_d": false
+      },
+      "log_rotation": {
+        "postrotate": ""
+      },
+      "logrotate": {
+        "rotate": "7"
+      }
+    },
+    "jmh_db": {
+      "backup": {
+        "expiration": "+14",
+        "hour_interval": "*/6",
+        "weekday_interval": "1-5"
+      }
+    },
+    "jmh_apps": {
+      "databag": {
+        "password_key": "stage_password"
+      },
+      "db": {
+        "backup": {
+          "expiration": "+14",
+          "hour_interval": "9",
+          "weekday_interval": "1-5"
+        }
+      },
+      "mobile": {
+        "appserver": {
+          "newrelic": false
+        }
+      }
+    },
+    "jmh_crowd": {
+      "java_opts": "-Xms256m -Xmx2048m ",
+      "watch_script": {
+        "enable": true
+      }
+    },
+    "jmh_webserver": {
+      "epic_maintenance_windows": {
+        "COREUPGRADE": {
+          "start": "2018-04-02 10:45:00 PDT",
+          "stop": "2018-04-02 11:10:00 PDT"
+        }
+      },
+      "sso": {
+        "state_timeout": 300
+      },
+      "jmherror": {
+        "force_maintenance": false,
+        "error_maintenance_header": "MyChart will be down from 2:00am to 4:00am for maintenance.",
+        "maintenance_windows": [
+          [
+            "15:30:00 PST",
+            "16:30:00 PST"
+          ],
+          [
+            "20:45:00 PST",
+            "21:30:00 PST"
+          ],
+          [
+            "13:00:00 PST",
+            "14:30:00 PST"
+          ],
+          [
+            "02:00:00 PST",
+            "04:00:00 PST"
+          ]
+        ]
+      },
+      "api": {
+        "apache": {
+          "server_aliases": [
+            "api-stage02.johnmuirhealth.com"
+          ]
+        },
+        "app_proxies": {
+          "scheduling": {
+            "target_ipaddress": "100.68.181.30",
+            "port": "443"
+          },
+          "payment_gateway": {
+            "target_ipaddress": "100.68.181.30",
+            "port": "443"
+          },
+          "profile_api": {
+            "target_ipaddress": "100.68.181.30",
+            "port": "443"
+          },
+          "vvisits_api": {
+            "target_ipaddress": "100.68.181.30",
+            "port": "443"
+          },
+          "mychart": {
+            "target_ipaddress": "100.68.181.30"
+          }
+        }
+      }
+    },
+    "jmh_epic": {
+      "environment": "sup"
+    },
+    "jmh_monitor": {
+      "sensu_server": {
+        "role": "sensu-armor"
+      },
+      "sensugo_server": {
+        "role": "sensugo-armor"
+      }
+    },
+    "jmh_tomcat": {
+      "restart_on_config_change": true,
+      "keep_days_of_logs": "45"
+    },
+    "jmh_server": {
+      "environment": "stage",
+      "global": {
+        "max_header_size": "12000",
+        "apache": {
+          "www": {
+            "server_name": "stage.johnmuirhealth.com",
+            "server_aliases": [
+              "stage02.johnmuirhealth.com"
+            ]
+          },
+          "api": {
+            "server_name": "api-stage.johnmuirhealth.com"
+          },
+          "prc": {
+            "server_name": "prc-stage.johnmuirhealth.com"
+          },
+          "jmhhr": {
+            "server_name": "stage.johnmuirhr.com"
+          },
+          "idp": {
+            "server_name": "idp-stage.johnmuirhealth.com"
+          },
+          "supportportal": {
+            "server_name": "supportportal-stage.johnmuirhealth.com"
+          }
+        },
+        "google_captcha_site_key": "6LdDGo8UAAAAACYPmZtCoMuTaIAAAGnRtJSEmk9C",
+        "google_captcha_secret_key": "6LdDGo8UAAAAAO02xp1KdZ2hPS1VoC_xtIb4-inl",
+        "google_uc_doc_maps_api_key": "AIzaSyCFsJ6FPSaiis4lc3dq2eqcC62J5U_2u9c"
+      },
+      "yum": {
+        "use_local_repo": false
+      },
+      "use_mail_relay": true
+    },
+    "postfix": {
+      "main": {
+        "relayhost": "localhost"
+      }
+    },
+    "yum": {
+      "main": {
+        "installonly_limit": "2"
+      }
+    },
+    "jmh_fad": {
+      "client": {
+        "captcha_key": "6LdDGo8UAAAAACYPmZtCoMuTaIAAAGnRtJSEmk9C"
+      }
+    },
+    "jmh_sched": {
+      "google_secret": "6LdDGo8UAAAAAO02xp1KdZ2hPS1VoC_xtIb4-inl"
+    },
+    "jmh_webproxy": {
+      "supportportal": {
+        "proxy": {
+          "webcommon": {
+            "ipaddress": "147.75.8.229"
+          },
+          "vvisits_client": {
+            "ipaddress": "147.75.8.229"
+          }
+        }
+      }
+    },
+    "jmh_myjmh": {
+      "myjmh_client": {
+        "properties": [
+          "feature.flag.android.app.available=on",
+          "featureFlags=bypassApiCertVerification,disableZipnosis"
+        ]
+      },
+      "profile_client": {
+        "properties": [
+          "feature.flag.android.app.available=on",
+          "featureFlags=mfaEnabled,selfSignUp"
+        ]
+      },
+      "profile_api": {
+        "chatbot_environment_type": "prod",
+        "ldap_environment_type": "stage",
+        "aws_environment_type": "infosec"
+      },
+      "admin": {
+        "appserver": {
+          "java_options": [
+            "-Dcrypto.private.key.path=/usr/local/webapps/myjmh/keys/jmh_private_key.der",
+            "-Dcrypto.public.key.path=/usr/local/webapps/myjmh/keys/jmh_public_key.der",
+            "-Dcrowd.properties=/usr/local/tomcat/myjmh-admin/conf/catalina.properties -Xmx256m",
+            "-DfeatureFlags=mfaEnabled"
+          ]
+        }
+      }
+    },
+    "jmh_splunk": {
+      "server_environment": "arprod"
+    },
+    "jmh_vvisits": {
+      "api": {
+        "chatbot_environment_type": "prod",
+        "aws_environment_type": "infosec",
+        "ldap_environment_type": "test",
+        "videovisit_environment_type": "prod"
+      }
+    },
+    "jmh_utilities": {
+      "hostsfile": {
+        "www_servers": [
+          {
+            "hostname": "stage.johnmuirhealth.com",
+            "ipaddress": "100.68.181.22",
+            "aliases": [
+              "prc-stage.johnmuirhealth.com",
+              "stage02.johnmuirhealth.com"
+            ],
+            "action": "create",
+            "unique": true
+          },
+          {
+            "hostname": "api-stage.johnmuirhealth.com",
+            "ipaddress": "100.68.181.29",
+            "aliases": [
+
+            ],
+            "action": "create",
+            "unique": true
+          },
+          {
+            "hostname": "idp-stage.johnmuirhealth.com",
+            "ipaddress": "100.68.181.24",
+            "aliases": [
+              "idp-stage02.johnmuirhealth.com"
+            ],
+            "action": "create",
+            "unique": true
+          }
+        ]
+      }
+    }
+  }
+}

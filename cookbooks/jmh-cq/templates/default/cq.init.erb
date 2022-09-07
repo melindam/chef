@@ -1,0 +1,55 @@
+#
+# 
+# chkconfig: 345 99 1
+# Description: <%= @app %> init script
+# Provides: <%= @app %>
+# Default-Start: 3 4 5
+# Default-Stop: 0 1 2 6
+
+APP_NAME="<%= @app %>"
+APP_USER="<%= @user %>"
+
+# Being within current directory is requirement
+cd <%= @app_dir %>
+
+case "$1" in
+  start)
+    echo "Starting <%= @app %>"
+    <% if @systemd %>
+    /usr/bin/systemctl start <%= @app %>
+    <% else %>
+    sudo -u $APP_USER <%= @bin_path %>/start
+    <% end %>
+    ;;
+  stop)
+  	echo "Stopping <%= @app %>"
+    <% if @systemd %>
+    /usr/bin/systemctl stop <%= @app %>
+    <% else %>
+    sudo -u $APP_USER <%= @bin_path %>/stop
+    <% end %>
+    ;;
+  restart)
+    echo "Restarting <%= @app %>"
+    <% if @systemd %>
+    /usr/bin/systemctl restart <%= @app %>
+    <% else %>
+    echo "Stopping <%= @app %>"
+    sudo -u $APP_USER <%= @bin_path %>/stop
+    sleep 3
+    echo "Starting <%= @app %>"
+    sudo -u $APP_USER <%= @bin_path %>/start
+    <% end %>
+    ;;
+  status)
+    <% if @systemd %>
+    /usr/bin/systemctl status <%= @app %>
+    <% else %>
+    sudo -u $APP_USER <%= @bin_path %>/status
+    <% end %>
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|status}"
+    exit 1
+    ;;
+esac

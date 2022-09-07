@@ -1,0 +1,44 @@
+#!/bin/sh
+set -x
+
+#install into Author
+AUTHOR_PACKAGES="<%= @author_packages %>"
+A_PACKS=`echo $AUTHOR_PACKAGES | awk -F"[" '{print $2}' | awk -F"]" '{print $1}' | sed s/author\\\/jmh/jmh/g | sed s/,//g`
+
+for package in $A_PACKS
+do
+   curl http://ebiz-tools.hsys.local/<%= @share_dir %>/$package -o $package
+done
+
+AdminPass="admin"
+
+for AFile in `echo $A_PACKS`
+do
+	curl -u admin:$AdminPass -F file=@${AFile} -F name=${AFile} -F force=true -F install=true http://localhost:4502/crx/packmgr/service.jsp
+	sleep 5
+	curl -u admin:$AdminPass -F name=${AFile} http://localhost:4502/crx/packmgr/service.jsp?cmd=inst
+	sleep 20
+done
+
+# install into publisher if running
+pub_install=`ps aux | grep java | grep 4503`
+if [ $? = 0 ]
+then 
+	PUBLISHER_PACKAGES="<%= @publisher_packages %>"
+
+	P_PACKS=`echo $PUBLISHER_PACKAGES | awk -F"[" '{print $2}' | awk -F"]" '{print $1}' | sed s/publisher\\/jmh/jmh/g | sed s/,//g`
+
+	for package in $PUBLISHER_PACKAGES
+	do
+     	curl http://ebiz-tools.hsys.local/<%= @share_path %>/$package -o $package
+	done
+	echo $PUBLISHER_PACKAGES | awk -F"[" '{print $2}' | awk -F"]" '{print $1}' | sed s/publisher\\/jmh/jmh/g | sed s/,//g
+
+	for PFile in `echo $PUBLISHER_PACKAGES | awk -F"[" '{print $2}' | awk -F"]" '{print $1}' | sed s/publisher\\/jmh/jmh/g | sed s/,//g` 
+	do
+		curl -u admin:$AdminPass -F file=@${PFile} -F name=${PFile} http://localhost:4503/crx/packmgr/service.jsp
+		sleep 5
+		curl -u admin:$AdminPass -F name=${PFile} http://localhost:4503/crx/packmgr/service.jsp?cmd=inst
+		sleep 20
+	done
+fi

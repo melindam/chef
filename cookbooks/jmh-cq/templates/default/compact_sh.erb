@@ -1,0 +1,21 @@
+#!/bin/sh
+# set -x
+
+USERNAME=`echo $USER`
+if [ "$USERNAME" != "root" ]
+then
+        echo "Please run this service as the user root."
+        echo "Aborting."
+        exit 5;
+fi
+
+/usr/bin/systemctl stop <%= @app_exe %>
+
+<%= @java_home %>/bin/java -jar <%= @oak_jar %> checkpoints <%= @cq_instance %>/crx-quickstart/repository/segmentstore
+<%= @java_home %>/bin/java -jar <%= @oak_jar %> checkpoints <%= @cq_instance %>/crx-quickstart/repository/segmentstore rm-all
+<%= @java_home %>/bin/java -jar <%= @oak_jar %> compact <%= @cq_instance %>/crx-quickstart/repository/segmentstore
+
+cd <%= @cq_basepath %>
+chown -R cq. <%= @cq_name %>
+
+/usr/bin/systemctl start <%= @app_exe %>

@@ -1,0 +1,7 @@
+{ 
+  "comment": "Sasha Firsov",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAwvgnKQ34Qy61eFGwJ2UQZja4fO4NRuv98OuFknlZYdOppgJNiOpkJkOL2V5FcE2gxH1WTiqMEW7S78HDagmIEBMf7OfJDnEQY7ZCWPDwyomVZpPXSJEgRwgoxtlghgznH17LclrpfZtwr0vRS5FpjhFbJKzySFbr+U7L1k/j7xjVl0ejS2OkosHTGRidOQ+e+we0nUcE2l4LpiXIPi9gs3W0qkGnIUS9nECuNKtzxhpvxO4i1q6fI7NNF1mnjo/V+6YRbHrZg73hjUjCz+Hak/mk9R5JMfb398VQw+Yl4Bfbvko6wgrjsydyP9em8qZGXxsa8vQK9Ut/r+I2x7xGMw==",
+  "id": "sasha",
+  "shell": "/bin/false"
+}

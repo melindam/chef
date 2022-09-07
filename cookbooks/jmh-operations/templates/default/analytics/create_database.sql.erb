@@ -1,0 +1,177 @@
+USE mychart;
+
+  DROP TABLE IF EXISTS activated;
+  DROP TABLE IF EXISTS not_activated;
+  DROP TABLE IF EXISTS proxies;
+  DROP TABLE IF EXISTS online_scheduling_appt;
+
+
+  DROP TABLE IF EXISTS online_patients;
+  CREATE TABLE online_patients (
+                                 `id` bigint(20) not NULL auto_increment,
+                                 `status` VARCHAR(255),
+                                 `pat_name` VARCHAR(255),
+                                 `pat_mrn_id` VARCHAR(255),
+                                 `deceased` VARCHAR(255),
+                                 `dob` DATE NULL,
+                                 `sex` CHAR(1),
+                                 `activatedate` DATE NULL,
+                                 `codegenerationdate` DATE NULL,
+                                 `myc_acss_code` VARCHAR(255),
+                                 `expirationdate` DATE NULL,
+                                 `email_address` VARCHAR(255),
+                                 `home_phone` VARCHAR(255),
+                                 `add_line_1` VARCHAR(255),
+                                 `add_line_2` VARCHAR(255),
+                                 `city` VARCHAR(255),
+                                 `st` CHAR(2),
+                                 `zip` VARCHAR(255),
+                                 `pcp_name` VARCHAR(255),
+                                 `pcp` VARCHAR(255),
+                                 `prim_location` VARCHAR(255),
+                                 `data_date` DATE NULL,
+                                 `enc_type_abbr` VARCHAR(255),
+                                 `effective_date` DATE NULL,
+                                 `contact_date` DATE NULL,
+                                 INDEX (pat_mrn_id),
+                                 PRIMARY KEY  (`id`)
+  ) ENGINE=InnoDB ;
+
+
+  DROP TABLE IF EXISTS online_proxy_patients;
+  CREATE TABLE online_proxy_patients (
+                                       `id` bigint(20) not NULL auto_increment,
+                                       `status` VARCHAR(255),
+                                       `pat_name` VARCHAR(255),
+                                       `pat_mrn_id` VARCHAR(255),
+                                       `deceased` VARCHAR(255),
+                                       `dob` DATE NULL,
+                                       `sex` CHAR(1),
+                                       `activatedate` DATE NULL,
+                                       `codegenerationdate` DATE NULL,
+                                       `myc_acss_code` VARCHAR(255),
+                                       `expirationdate` DATE NULL,
+                                       `email_address` VARCHAR(255),
+                                       `home_phone` VARCHAR(255),
+                                       `add_line_1` VARCHAR(255),
+                                       `add_line_2` VARCHAR(255),
+                                       `city` VARCHAR(255),
+                                       `st` CHAR(2),
+                                       `zip` VARCHAR(255),
+                                       `pcp_name` VARCHAR(255),
+                                       `pcp` VARCHAR(255),
+                                       `prim_location` VARCHAR(255),
+                                       `proxy_name` VARCHAR(255),
+                                       `proxy_relation` VARCHAR(255),
+                                       `proxy_email` VARCHAR(255),
+                                       `proxy_phone` VARCHAR(255),
+                                       `proxy_add_line_1` VARCHAR(255),
+                                       `proxy_add_line_2` VARCHAR(255),
+                                       `proxy_city` VARCHAR(255),
+                                       `proxy_st` VARCHAR(255),
+                                       `proxy_zip` VARCHAR(255),
+                                       `data_date` DATE NULL,
+                                       `enc_type_abbr` VARCHAR(255),
+                                       `effective_date` DATE NULL,
+                                       `contact_date` DATE NULL,
+                                       PRIMARY KEY  (`id`)
+  ) ENGINE=InnoDB ;
+
+  DROP VIEW IF EXISTS combined_codes;
+  CREATE VIEW combined_codes AS
+    SELECT
+      `online_patients`.`activatedate` AS `ActivateDate`,
+      (
+        CASE
+          WHEN (
+            `online_patients`.`codegenerationdate` > _utf8 '00-00-0000 00:00:00'
+            ) THEN
+            `online_patients`.`codegenerationdate`
+          ELSE
+            _utf8 '10/01/2013'
+          END
+        ) AS `code`,
+      `online_patients`.`pat_mrn_id` AS `PAT_MRN_ID`,
+      (
+        CASE
+          WHEN (
+            `online_patients`.`activatedate` > _utf8 '00-00-0000 00:00:00'
+            ) THEN
+            _utf8 'Activated'
+          ELSE
+            _utf8 'NotActivated'
+          END
+        ) AS `case`,
+      `online_patients`.`pcp` AS `pcp`,
+      `online_patients`.`prim_location` AS `prim_location`,
+      `online_patients`.`city` AS `CITY`,
+      `online_patients`.`zip` AS `ZIP`,
+      _utf8 'none' AS `proxy_relation`,
+      `online_patients`.`enc_type_abbr` AS `enc_type_abbr`,
+      `online_patients`.`effective_date` AS `effective_date`,
+      `online_patients`.`contact_date` AS `contact_date`
+    FROM
+      `online_patients`
+    WHERE
+      (
+        `online_patients`.`codegenerationdate` > _utf8 '11-01-2013 00:00:00'
+        )
+    UNION ALL
+    SELECT
+      _utf8 '00-00-0000 00:00:00' AS `ActivateDate`,
+      `online_proxy_patients`.`codegenerationdate` AS `code`,
+      `online_proxy_patients`.`pat_mrn_id` AS `PAT_MRN_ID`,
+      _utf8 'Proxy' AS `case`,
+      `online_proxy_patients`.`pcp` AS `pcp`,
+      `online_proxy_patients`.`prim_location` AS `prim_location`,
+      `online_proxy_patients`.`proxy_city` AS `CITY`,
+      `online_proxy_patients`.`proxy_zip` AS `ZIP`,
+      `online_proxy_patients`.`proxy_relation` AS `proxy_relation`,
+      `online_proxy_patients`.`enc_type_abbr` AS `enc_type_abbr`,
+      `online_proxy_patients`.`effective_date` AS `effective_date`,
+      `online_proxy_patients`.`contact_date` AS `contact_date`
+    FROM
+      `online_proxy_patients`;
+
+  DROP TABLE IF EXISTS online_scheduling_appt;
+  CREATE TABLE online_scheduling_appt(
+                                      `id` bigint(20) not NULL auto_increment,
+                                      `PatMRN` VARCHAR(255),
+                                      `PatientEncounterID` VARCHAR(255),
+                                      `ApptMadeDate` DATETIME NULL,
+                                      `ApptMadeTime` VARCHAR(255),
+                                      `RecordCreateDate` DATE NULL,
+                                      `RecordCreatedWhenApptMade` VARCHAR(255),
+                                      `OriginalApptType` VARCHAR(255),
+                                      `ChangedApptType` VARCHAR(255),
+                                      `FinalApptType` VARCHAR(255),
+                                      `AppointmentEntryEpicUserID` VARCHAR(255),
+                                      `AppointmentChannel` VARCHAR(255),
+                                      `ApptDTTM` DATETIME NULL,
+                                      `DayOfWeekNM` VARCHAR(255),
+                                      `ApptStatus` VARCHAR(255),
+                                      `ApptStatusCD` VARCHAR(255),
+                                      `CancelReason` VARCHAR(255),
+                                      `CancelUser` VARCHAR(255),
+                                      `Payor` VARCHAR(255),
+                                      `FinancialClass` VARCHAR(255),
+                                      `ProviderID` VARCHAR(255),
+                                      `ProvName` VARCHAR(255),
+                                      `SpecialtyDSC` VARCHAR(255),
+                                      `ProvCity` VARCHAR(255),
+                                      `ProvZip` VARCHAR(255),
+                                      `Center` VARCHAR(255),
+                                      `DeptName` VARCHAR(255),
+                                      `DeptSpecialty` VARCHAR(255),
+                                      `PatientID` VARCHAR(255),
+                                      `PatAge` TINYINT,
+                                      `PatAgeGroup` VARCHAR(255),
+                                      `PatSex` VARCHAR(255),
+                                      `PatCity` VARCHAR(255),
+                                      `PatZip` VARCHAR(255),
+                                      `DaysBookedAhead` VARCHAR(255),
+                                      `AfterHours` VARCHAR(255),
+                                      `NewAppointmentType` VARCHAR(255),
+                                      INDEX (PatMRN),
+                                      PRIMARY KEY  (`id`)
+  ) ENGINE=InnoDB ;

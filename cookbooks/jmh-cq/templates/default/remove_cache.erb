@@ -1,0 +1,25 @@
+#!/bin/sh
+
+CQCACHE="content etc* libs conf"
+EXIT_CODE=0
+cd <%= @docroot %>
+for cqdir in $CQCACHE
+do
+	rm -rf $cqdir
+    if [ $? -ne 0 ]
+    then 
+        sleep 3
+        rm -rf $cqdir
+        if [ $? -ne 0 ]
+        then
+        	echo "ERORR: Failed to remove $cqdir after 2nd attempt"
+        	EXIT_CODE=1
+        else
+        	echo "$cqdir removed after 2nd attempt"
+        fi
+    else
+        echo "$cqdir removed"
+    fi
+done
+touch .stat
+exit $EXIT_CODE

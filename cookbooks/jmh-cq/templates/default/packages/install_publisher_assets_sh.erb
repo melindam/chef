@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PublisherFiles="<%= @publisher_packages.join(" ")%>"
+
+cd <%= @share_dir %>
+
+<% @publisher_servers.each do |pub_server| %>
+
+for AFile in `echo $PublisherFiles` 
+do
+	curl -u admin:<%= pub_server['password']%> -F file=@${AFile}.zip -F name=${AFile} http://<%= pub_server['ipaddress'] %>:4503/crx/packmgr/service.jsp
+	sleep 5
+	curl -u admin:<%= pub_server['password']%> -F name=${AFile} http://<%= pub_server['ipaddress'] %>:4503/crx/packmgr/service.jsp?cmd=inst
+	sleep 20
+done
+<% end %>

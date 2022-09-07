@@ -1,0 +1,10 @@
+{
+  "id": "myjmh-admin",
+  "crowd_password": {
+    "encrypted_data": "08uWz6rjDa51u2QTXAPjQy7c0FFUrYJ9RXjrya8GYSvsU5smktlZ3ERttG7Q\nm8PWX3wktelyNi3BolMqWl5Z3MKgMg+c+N8oh/bpTxLXSM6EEo6A4LCNcXQ4\nGJrWagOv5kaaJyem\n",
+    "iv": "KKmPkR6DS/eviuG1\n",
+    "auth_tag": "8riMm+qR3nHWfVJmCVP6vw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

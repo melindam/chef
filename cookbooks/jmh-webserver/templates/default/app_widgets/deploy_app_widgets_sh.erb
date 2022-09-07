@@ -1,0 +1,27 @@
+#!/bin/bash
+# set -x
+
+# To deploy the app_widgets application to the root documentation directory for application
+
+ROOTDIR=/var/www/html
+HOMEDIR=/home/jmhbackup
+APPNAME=app_widgets
+
+cd ${HOMEDIR}
+rm -rf ./*${APPNAME}*.prev
+echo "COPY current running ${APPNAME} files"
+cp -rp ${ROOTDIR}/${APPNAME} ./${APPNAME}.prev
+
+echo "UnTar files"
+rm -rf ${ROOTDIR}/${APPNAME}/*
+tar -C ${ROOTDIR}/${APPNAME}/ -xzf ${HOMEDIR}/${APPNAME}.tgz
+
+echo "Changing Permissions for ${APPNAME}"
+chmod -R 755 ${ROOTDIR}/${APPNAME}
+
+if [ $? -ne 0 ]
+then
+  echo "!!!! PROBLEM with untar ${APPNAME} !!!! "
+  exit 1
+fi
+

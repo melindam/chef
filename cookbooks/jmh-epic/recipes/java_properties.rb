@@ -1,0 +1,1 @@
+node.default['jmh_epic']['java_properties'] = JmhEpic.get_environment_java_properties(node)

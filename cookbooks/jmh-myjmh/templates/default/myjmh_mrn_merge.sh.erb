@@ -1,0 +1,105 @@
+#!/bin/bash
+# set -x
+# Check if MRN is in profile DB, and if so check that new MRN is not, if its not change ORIGMRN to NEWMRN
+
+DATE=`date +%Y%m%d`
+UPLOADDIR=/usr/local/webapps/myjmh/import
+PROCDIR=/usr/local/webapps/myjmh/processed
+LOGFILE=${PROCDIR}/merge-$DATE.log
+DETAIL_LOGFILE=${PROCDIR}/detail-$DATE.log
+EXECFILE=${PROCDIR}/execfile-$DATE.sh
+
+UPLOADFILE=Patient_Merge_${DATE}.csv
+INFILE=$UPLOADDIR/$UPLOADFILE
+IN_NONPENDING_FILE=${UPLOADDIR}/${DATE}_nonpending
+NEWINFILE=$UPLOADDIR/revised_epic_mrn_to_chk_$DATE
+SQLFILE=$UPLOADDIR/epic_mrn_to_chg_$DATE.sql
+
+USER=<%= @db_user %>
+PASS=<%= @db_password %>
+
+HELPME=0
+
+grep -v -i "Pending" $INFILE > $IN_NONPENDING_FILE
+
+if [ -e $INFILE ]
+then
+    true > $NEWINFILE
+
+    # Query DB with ORIGINAL MRN to see if they were not already in the system, and if they were, keep thier record.
+    while read line
+    do
+            ORIGMRN=`echo $line | awk -F\" '{print $8}' | sed s/\"//g`
+            # Ignore first line
+            echo $ORIGMRN | grep MRN  > /dev/null
+            if [ $? = 0 ]
+            then
+                continue
+            fi
+
+            # Check mysql for exising MRN
+            VAL=`mysql -h 127.0.0.1 -u$USER -p$PASS --raw --skip-column-names --silent profile -e "SELECT id from application_attributes where value=$ORIGMRN group by id;"`
+            if [ -z $VAL ]
+            then
+                    echo "SKIPPING MERGE => This MRN $ORIGMRN is NOT active in MyJMH" >> $LOGFILE
+            else
+                    echo "NEED MERGING profile.id= $VAL = Original MRN = $ORIGMRN" >> $LOGFILE
+                    echo $line >> $NEWINFILE
+            fi
+    done < $IN_NONPENDING_FILE
+
+    echo "use profile;" > $SQLFILE
+    while read line 
+    do
+            NEWMRN=`echo $line | awk -F\" '{print $4}' | sed s/\"//g`
+            ORIGMRN=`echo $line | awk -F\" '{print $8}' | sed s/\"//g`
+            PATIENT_NAME=`echo $line | awk -F\" '{print $2}' | sed s/\"//g`
+
+            # mysql command to check NEWMRN - if not found NEWMRN then change ORIGMRN to NEWMRN
+            VAL=`mysql -h 127.0.0.1 -u$USER -p$PASS --skip-column-names --silent profile -e "SELECT id from application_attributes where value=$NEWMRN group by id;"`
+            if [ -z "$VAL" ]
+            then
+                    echo "Changing MRN number for $PATIENT_NAME from $ORIGMRN to $NEWMRN" >> $LOGFILE
+                    echo "UPDATE application_attributes set value=$NEWMRN where value in ('$ORIGMRN');" >> $SQLFILE
+            else
+                    MERGED_PROFILE_ID=`mysql -h 127.0.0.1 -u$USER -p$PASS --skip-column-names --silent profile -e "select c.id from application_attributes a, application_profile b, profile c where a.value = '$ORIGMRN' and a.name = 'EPI' and a.id = b.id and b.profile_id = c.id;"`
+                    KEEP_PROFILE_ID=`mysql -h 127.0.0.1 -u$USER -p$PASS --skip-column-names --silent profile -e "select c.id from application_attributes a, application_profile b, profile c where a.value = '$NEWMRN' and a.name = 'EPI' and a.id = b.id and b.profile_id = c.id;"`
+                    MERGED_DATA=`mysql -h 127.0.0.1 -u$USER -p$PASS --skip-column-names --silent profile -e "select firstName,lastName,username,email from profile where id = '$MERGED_PROFILE_ID';"`
+                    KEEP_DATA=`mysql -h 127.0.0.1 -u$USER -p$PASS --skip-column-names --silent profile -e "select firstName,lastName,username,email from profile where id = '$KEEP_PROFILE_ID';"`
+                    
+                    echo "========== START RECORD ===============" >> $DETAIL_LOGFILE
+		    echo "MERGED Record = $MERGED_DATA, profileId=$MERGED_PROFILE_ID" >> $DETAIL_LOGFILE
+		    echo "KEEPING Data Record = $KEEP_DATA, profileId=$KEEP_PROFILE_ID" >> $DETAIL_LOGFILE
+                    echo "========== END RECORD ===============" >> $DETAIL_LOGFILE
+
+                    echo "HELP::: Found EXISTING New MRN $NEWMRN - need cleanup Original MRN=$ORIGMRN, for application_attibute $VAL /application_profile_id = $MERGED_PROFILE_ID where keeping profileID= $KEEP_PROFILE_ID ...."  >> $LOGFILE
+
+                    echo "curl -k -X DELETE \"https://100.68.179.25:8465/profile-api/profile/identity\" -H \"accept: application/json\" -H \"Authorization: Basic c3lzdGVtOkVOYUx5Y0xJWVFiTTU0TGNkOXd0QVVyY2xC\" -H \"Content-Type: application/json\" -d \"{\\\"profileId\\\":$MERGED_PROFILE_ID}\"" >> $EXECFILE
+                    HELPME=1 
+            fi
+    done < $NEWINFILE
+
+    mysql -h 127.0.0.1 -u$USER -p$PASS profile < $SQLFILE 
+
+    cat $SQLFILE
+    # rm -f $NEWINFILE
+    mv $INFILE $PROCDIR/$UPLOADFILE.processed
+    mv ${UPLOADDIR}/${DATE}_nonpending $PROCDIR/${DATE}_nonpending.processed
+    mv $SQLFILE $PROCDIR
+
+else
+	echo "File does not exist today $DATE" >> $LOGFILE
+	exit 1
+
+fi
+
+find $PROCDIR/ -mtime +180 -exec rm -f {} \;
+
+
+if [ $HELPME = 1 ] 
+then
+	grep HELP $LOGFILE
+        echo "excuting curl cleanup script"
+        chmod 544 $EXECFILE
+        /bin/sh $EXECFILE
+fi

@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# 1 = app name
+# 2 = production server
+# 3 = stage server
+# 4 = dev server
+APP[0]="events","apps01-prd","apps01-stg"
+APP[1]="preregistration","apps01-prd","apps01-stg"
+APP[2]="webrequest","apps01-prd","apps01-stg"
+APP[3]="billpay","apps02-prd","apps02-stg"
+APP[4]="myjmh","apps05-prd","apps05-stg"
+APP[5]="profile","apps05-prd","apps05-stg"
+APP[6]="api","apps05-prd","apps05-stg"
+APP[7]="fad","apps01-prd","apps01-stg"
+APP[8]="broker","apps02-prd","apps02-stg"
+APP[9]="apptapi","apps02-prd","apps02-stg"
+
+
+
+IFS="&"
+set -- $QUERY_STRING
+
+arg_result="apps"
+arg_env="stage"
+arg_app=""
+
+if [ $1 ]
+then
+        arg_result=`echo $1 | cut -d"=" -f2`
+fi
+if [ $2 ]
+then
+        arg_env=`echo $2 | cut -d"=" -f2`
+fi
+if [ $3 ]
+then
+        arg_app=`echo $3 | cut -d"=" -f2`
+fi
+
+echo "Content-type: application/json"
+echo ""
+
+if [ "$arg_result" == "apps" ]
+then
+        apparray="["
+        separator=""
+        for i in {0..9}
+        do
+                appName=`echo ${APP[$i]} | cut -d"," -f1`
+                apparray="$apparray$separator\"$appName\""
+                separator=","
+        done
+        echo "$apparray]"
+elif [ "$arg_result" == "server" ]
+then
+	for i in {0..9}
+	do
+		appName=`echo ${APP[$i]} | cut -d"," -f1`
+		if [ "$appName" == "$arg_app" ] 
+		then
+			if [ "$arg_env" == "prod" ]
+				then
+				echo [\"`echo ${APP[$i]} | cut -d"," -f2`\"]
+				break
+			elif [ "$arg_env" == "stage" ]
+				then
+				echo [\"`echo ${APP[$i]} | cut -d"," -f3`\"]
+				break
+			fi
+		fi
+	done
+fi
+
+
+#set -x
+#logdate=`date +%Y_%m_%d_%H`
+#/bin/rm -f /var/tmp/files/*
+#mkdir /var/tmp/files 2> /dev/null
+#cd /usr/local/tcserver/@option.application@
+#tar czf /var/tmp/files/@option.application@-${logdate}.tgz `find logs -mtime -@option.Days@`
+#cd /var/tmp/files
+#openssl des3 -salt -k 'jmh3B!Z!' -in @option.application@-${logdate}.tgz -out @option.application@-${logdate}.tgz.enc
+#scp ./@option.application@-${logdate}.tgz.enc jmhbackup@172.23.204.207:/var/www/html/logs

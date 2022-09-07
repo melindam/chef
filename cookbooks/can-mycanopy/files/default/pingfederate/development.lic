@@ -1,0 +1,13 @@
+ID=81159
+Organization=John Muir Health
+Product=PingFederate
+Version=8.1
+IssueDate=2016-05-10
+EnforcementType=3
+ExpirationDate=2017-05-3
+Tier=Subscription
+SaasProvisioning=true
+WSTrustSTS=true
+OAuth=true
+SignCode=FF07
+Signature=302D02150080E797C3FD37F9C94F272E520292E1F0672D309F0214376FD5B58EC8DB05FC02E8AF901D3DE2CD019922

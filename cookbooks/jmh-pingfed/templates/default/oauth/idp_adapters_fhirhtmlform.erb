@@ -1,0 +1,257 @@
+{
+  "id": "fhirhtmlform",
+  "name": "FHIR HTML FORM",
+  "pluginDescriptorRef": {
+    "id": "com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/descriptors/com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter"
+  },
+  "parentRef": {
+    "id": "httpform",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/idp/adapters/httpform"
+  },
+  "configuration": {
+    "tables": [
+      {
+        "name": "Credential Validators",
+        "inherited": true,
+        "rows": [
+          {
+            "fields": [
+              {
+                "name": "Password Credential Validator Instance",
+                "value": "RESTCROWD"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "name": "Challenge Retries",
+        "value": "3",
+        "inherited": true
+      },
+      {
+        "name": "Session State",
+        "value": "Per Adapter",
+        "inherited": true
+      },
+      {
+        "name": "Session Timeout",
+        "value": "60",
+        "inherited": true
+      },
+      {
+        "name": "Session Max Timeout",
+        "value": "480",
+        "inherited": true
+      },
+      {
+        "name": "Allow Password Changes",
+        "value": "false",
+        "inherited": true
+      },
+      {
+        "name": "Password Management System",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Enable 'Remember My Username'",
+        "value": "true",
+        "inherited": true
+      },
+      {
+        "name": "Change Password Email Notification",
+        "value": "false",
+        "inherited": true
+      },
+      {
+        "name": "Show Password Expiring Warning",
+        "value": "false",
+        "inherited": true
+      },
+      {
+        "name": "Password Reset Type",
+        "value": "NONE",
+        "inherited": true
+      },
+      {
+        "name": "Account Unlock",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Login Template",
+        "value": "fhir.html.form.login.template.html"
+      },
+      {
+        "name": "Logout Path",
+        "value": "/fhirlogout"
+      },
+      {
+        "name": "Logout Redirect",
+        "value": "https://<%= @www_server_name %>/<%= @mychart_name %>/Authentication/OAuth/Redirect"
+      },
+      {
+        "name": "Logout Template",
+        "value": "idp.logout.success.page.template.html",
+        "inherited": true
+      },
+      {
+        "name": "Change Password Template",
+        "value": "html.form.change.password.template.html",
+        "inherited": true
+      },
+      {
+        "name": "Change Password Message Template",
+        "value": "html.form.message.template.html",
+        "inherited": true
+      },
+      {
+        "name": "Password Management System Message Template",
+        "value": "html.form.message.template.html",
+        "inherited": true
+      },
+      {
+        "name": "Change Password Email Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Expiring Password Warning Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Threshold for Expiring Password Warning",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Snooze Interval for Expiring Password Warning",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Login Challenge Template",
+        "value": "html.form.login.challenge.template.html",
+        "inherited": true
+      },
+      {
+        "name": "'Remember My Username' Lifetime",
+        "value": "30",
+        "inherited": true
+      },
+      {
+        "name": "Allow Username Edits During Chaining",
+        "value": "false",
+        "inherited": true
+      },
+      {
+        "name": "Track Authentication Time",
+        "value": "true",
+        "inherited": true
+      },
+      {
+        "name": "Post-Password Change Re-Authentication Delay",
+        "value": "0",
+        "inherited": true
+      },
+      {
+        "name": "Password Reset Username Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Password Reset Code Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Password Reset Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Password Reset Error Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Password Reset Success Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "Account Unlock Template",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "OTP Length",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "OTP Time to Live",
+        "value": "",
+        "inherited": true
+      },
+      {
+        "name": "PingID Properties",
+        "value": "",
+        "inherited": true
+      }
+    ]
+  },
+  "attributeContract": {
+    "coreAttributes": [
+      {
+        "name": "username",
+        "masked": false,
+        "pseudonym": true
+      }
+    ],
+    "extendedAttributes": [
+      {
+        "name": "profileId",
+        "masked": false,
+        "pseudonym": false
+      },
+      {
+        "name": "token",
+        "masked": false,
+        "pseudonym": false
+      }
+    ],
+    "maskOgnlValues": false
+  },
+  "attributeMapping": {
+    "attributeSources": [],
+    "attributeContractFulfillment": {
+      "profileId": {
+        "source": {
+          "type": "ADAPTER"
+        },
+        "value": "profileId"
+      },
+      "token": {
+        "source": {
+          "type": "ADAPTER"
+        },
+        "value": "token"
+      },
+      "username": {
+        "source": {
+          "type": "ADAPTER"
+        },
+        "value": "username"
+      }
+    },
+    "issuanceCriteria": {
+      "conditionalCriteria": []
+    }
+  }
+}

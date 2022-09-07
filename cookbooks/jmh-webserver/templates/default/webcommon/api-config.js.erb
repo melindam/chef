@@ -1,0 +1,33 @@
+// This file is maintained by Chef - do not modify by hand
+// These to eventually use Global webserver variables
+window.JMH_fadApiBaseUrl='https://<%= @www_server_name %>';
+window.JMH_schedulingApiBaseUrl='https://<%= @api_server_name %>';
+window.JMH_site_url='https://<%= @www_server_name %>';
+// Google
+window.JMH_googleCaptchaSiteKey='<%= @google_captcha_site_key %>';
+window.JMH_googleMapsApiKey='<%= @google_maps_api_key %>';
+window.JMH_googleMapsApiKeyForUrgentCareAndDocScheduler='<%= @google_uc_doc_maps_api_key %>';
+window.JMH_googleApiKey='<%= @google_api_key %>';
+window.JMH_googleTrackingId='<%= @google_analytics_id %>';
+window.JMH_patientPortalLink='<%= @patient_portal_url %>';
+window.JMH_patientPortalName='<%= @portal_name %>';
+window.JMH_numSchedulingDays='<%= @numschedulingdays %>';
+// video visits
+window.JMH_googleTrackingIdVideoVisits='<%= @google_analytics_id_vvisits %>';
+window.JMH_videoVisitsApiBaseUrl='https://<%= @api_server_name  %>/vvisits';
+window.JMH_videoVisitsClientBaseUrl='https://<%= @supportportal_server_name %>/vv';
+window.JMH_videoVisitTimeAllowanceInHours=<%= @vvisits_time_allowance %>;
+<% if node['jmh_webserver']['webcommon']['newrelic_enabled'] -%>
+window.JMH_newrelicEnabled=true;
+<% end -%>
+// Global webserver variables
+window.JMH_apiUrl='https://<%= @api_server_name %>';
+window.JMH_websiteUrl='https://<%= @www_server_name %>'; 
+window.JMH_idpUrl='https://<%= @idp_server_name %>';
+window.JMH_supportUrl='https://<%= @supportportal_server_name %>';
+// Tealium
+window.JMH_tealiumConfig_reportSuiteId='<%= @tealium_reportsuite_id %>';
+window.JMH_tealiumConfig_profile='<%= @tealium_profile %>';
+window.JMH_tealiumConfig_account='<%= @tealium_account %>';
+window.JMH_tealiumConfig_environment='<%= @tealium_environment %>';
+window.JMH_tealiumConfig_datasource='<%= @tealium_datasource %>';

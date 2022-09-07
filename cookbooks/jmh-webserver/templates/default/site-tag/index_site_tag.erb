@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>John Muir Health - Custom Commit/Tag</title>
+		
+		<style type="text/css">
+			html { margin: 0; padding: 0; }
+			body { font: 12px Arial; margin: 0; padding: 0; background: #fff; background: #958d86; color: #685c53; width: 100%; }
+			a { color: #569099; text-decoration: none; outline: none; }
+			a:hover { text-decoration: underline; }
+			ul { margin: 0 0 0 8px; padding: 0; list-style: none; }
+			ul li a { list-style: none; margin: 0 0 5px; padding: 0 0 0 10px; background: url('/images/bullet.png') left 5px no-repeat; }
+			#blotter { background: #fff; }
+			#topNavWrapper { background: #C7C2BA; height: 40px; color: #fff; font-size: 100%; line-height: 146.5%;}
+			#topNav { 	position: relative; width: 954px; 	margin: 0 auto; 	padding: 10px 0 0 0; text-align: right; }
+			#topNav a.user { color: #fff; }		
+			#topNav a.userSelect { color: #766A62; text-decoration: none !important; }
+			.signIn { margin-top: 10px; }
+			.fixer { position: relative; width: 954px; margin: 0 auto; }
+			#content { clear: both; overflow: hidden; padding: 0 0 40px 0; position: relative; }
+			#header { position: relative; padding-top: 16px; border-bottom: 1px solid #d5d0cc; }
+			#header { height: 53px; }
+			#paper { float: left; overflow: hidden; width: 695px; }
+			.text { line-height: 20px; }
+			.text p { margin: 0 0 1em; }
+			.clear { clear: both; height: 0; }
+			h1#logo { margin: 0; width: 197px; float: left; }
+			h1#logo a { display: block; margin: 0; width: 197px; padding: 43px 0px 0px 0px; overflow: hidden; background-image: url('/images/logo_jmh.gif'); background-repeat: no-repeat; height: 0px !important; text-indent: -5000px; }
+			h2 { font-size: 167%; font-weight: normal; margin: 1.5em 0px 10px; }
+			#footer { color: #fff; text-decoration: none; }
+			.portalNavSelect { float: left; height: 30px; background: #635a51; overflow: auto; display: block; }
+			.portalNavSelect a { position: relative; top: 10px; color: #fff; padding: 0 10px 0 10px; }
+			h1#component { margin: 0; width: 160px; float: right; }
+			h1#component a.eventManager { display: block; margin: 0; width: 160px; margin-top: 6px; padding: 37px 0px 0px 0px; overflow: hidden; background-repeat: no-repeat; height: 0px !important; }
+			h1#component a.eventManager { background-image: url('/images/header_commit.png'); }
+			.floatLeft { float: left; }
+			.floatRight { float: right; }
+		</style>
+	</head>
+	<body>
+	
+<!-- START Wrapper -->
+
+		<div id="blotter">
+
+	<!-- START Top Navigtation -->
+
+			<div id="topNavWrapper">
+				<div id="topNav">
+					<a href="http://<%= @webdevip %>:81/" class="userSelect">Custom Commit/Tag</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="http://<%= @webprodip %>:81/" class="user">Custom Rollout</a>
+				</div>
+			</div>
+			
+	<!-- END Top Navigtation -->
+	
+			<div class="fixer">
+			
+		<!-- START Header -->
+		
+				<div class="header">
+					<div id="header">									
+						<h1 id="logo"><a href="http://www.johnmuirhealth.com/">John Muir Health</a></h1>
+						<h1 id="component"><a href="http://<%= @webdevip %>:81/" class="eventManager">Custom Commit/Tag</a></h1>				
+					</div>
+				</div>
+			
+		<!-- END Header -->
+					
+		<!-- START Content -->
+	
+				<div id="content">
+				
+					<!-- START Content -->
+					
+					<div style="float: left;">
+					<?
+					$array = array('hr','custom','staticphp');
+					$arrayName = array('John Muir HR', 'Custom','Static PHP' );
+					
+					$count = count($array);
+					$count = count($arrayName);
+					$counter = 1;
+					
+					for ($i = 0; $i < $count; $i++) {
+						print ("<h2>" . $arrayName[$i] . "</h2>");	
+						print ("<ul>\r\n");
+						print ("<li><a href='/cgi-bin/update.cgi?site=" . $array[$i] . "'>Update Code</a></li>\r\n");
+						print ("<li><a href='/cgi-bin/compare.cgi?site=" . $array[$i] . "'>Compare</a></li>\r\n");
+						print ("<li><a href='/cgi-bin/tag.cgi?site=" . $array[$i] . "' onClick='return confirm(\"Are You Sure?\");'>Tag</a></li>\r\n");
+						print ("</ul>\r\n");
+						if($counter == 4) {
+						print ("</div>\r\n");
+						print ("<div style=\"float: left; margin-left: 200px;\">\r\n");
+						$counter = 1;
+						} else {
+						++$counter;
+						}
+					}
+					?>
+					</div>
+					
+					<!-- END Content -->
+				</div>
+						
+			<!-- END Content -->		
+			</div>
+
+			</div>
+	
+<!-- END Wrapper -->
+	
+<!-- START Footer -->
+
+	<div class="parsys iparsys footerIParsys">
+		<div class="iparys_inherited">
+			<div class="parsys iparsys footerIParsys">
+				<div class="section">
+					<div class="footer">
+						<div id="footer" style="height: 80px;">
+							<div class="fixer" style="padding-bottom: 20px;">
+							<div class="twoColumn section">
+							&nbsp;
+							</div>
+	
+		<!-- Copyright -->
+	
+							<div id="copyright">
+								Copyright &#169;  <script type="text/javascript">
+									now = new Date
+									theYear=now.getYear()
+									if (theYear < 1900)
+									theYear=theYear+1900
+									document.write(theYear)
+									</script> John Muir Health
+							</div>
+							<div class="clear"></div>
+						</div>
+						<!-- / fixer -->
+						<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div class="new"></div>
+		</div>
+	
+<!-- END Footer -->
+
+	</div>
+	</body>
+</html>

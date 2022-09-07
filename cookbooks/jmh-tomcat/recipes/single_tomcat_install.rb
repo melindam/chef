@@ -1,0 +1,22 @@
+
+jmh_tomcat node['jmh_tomcat']['singleton']['name'] do
+  name node['jmh_tomcat']['singleton']['name']
+  remove_dirs node['jmh_tomcat']['singleton']['remove_dirs'] if node['jmh_tomcat']['singleton']['remove_dirs']
+  java_version node['jmh_tomcat']['singleton']['java_version'] if node['jmh_tomcat']['singleton']['java_version']
+  java_options [node['jmh_tomcat']['singleton']['java_options']] if node['jmh_tomcat']['singleton']['java_options']
+  max_heap_size node['jmh_tomcat']['singleton']['max_heap_size'] if node['jmh_tomcat']['singleton']['max_heap_size']
+  max_permgen node['jmh_tomcat']['singleton']['max_permgen'] if node['jmh_tomcat']['singleton']['max_permgen']
+  thread_stack_size node['jmh_tomcat']['singleton']['thread_stack_size'] if node['jmh_tomcat']['singleton']['thread_stack_size']
+  catalina_opts [node['jmh_tomcat']['singleton']['catalina_opts']] if node['jmh_tomcat']['singleton']['catalina_opts']
+  enable_http node['jmh_tomcat']['singleton']['enable_http'] if node['jmh_tomcat']['singleton']['enable_http']
+  enable_ssl node['jmh_tomcat']['singleton']['enable_ssl'] if node['jmh_tomcat']['singleton']['enable_ssl']
+  port node['jmh_tomcat']['singleton']['port'] if node['jmh_tomcat']['singleton']['port']
+  ssl_port node['jmh_tomcat']['singleton']['ssl_port'] if node['jmh_tomcat']['singleton']['ssl_port']
+  iptables node['jmh_tomcat']['singleton']['iptables'] if node['jmh_tomcat']['singleton']['iptables']
+  shutdown_port node['jmh_tomcat']['singleton']['shutdown_port'] if node['jmh_tomcat']['singleton']['shutdown_port']
+  jmx_port node['jmh_tomcat']['singleton']['jmx_port'] if node['jmh_tomcat']['singleton']['jmx_port']
+  app_properties node['jmh_tomcat']['singleton']['app_properties'] if node['jmh_tomcat']['singleton']['app_properties']
+  catalina_properties node['jmh_tomcat']['singleton']['catalina_properties'] if node['jmh_tomcat']['singleton']['catalina_properties']
+  newrelic node['jmh_tomcat']['singleton']['newrelic'] if node['jmh_tomcat']['singleton']['newrelic']
+  directories node['jmh_tomcat']['singleton']['directories'] if node['jmh_tomcat']['singleton']['directories']
+end

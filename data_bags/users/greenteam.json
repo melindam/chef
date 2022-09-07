@@ -1,0 +1,7 @@
+{ 
+  "comment": "Green Team Laptop",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwHgzKD/ltTeuD/sjLoj97lHPh4aWC3MaXQLFr+jM6rVUvSk2lYgJoWKU/E0VCnML15okOcMpC7Fmi4azpjs0M+LXVIjlPKnkOtVgdNUIkRg153tihai+wv19odcjKWP/ZCBHWNRl7NwUFIJJ4EZrXxLENo+4ab7iRAdEo+87fABbIJ4dCM3XRieI53N1aX0b0er+hfhTvRwUofCcG1PeB3lAv0VgWY82G5Qix4DCdxUq2vplIKgHE0sZ2SnfqdFMlvLxtdhvnjUpsbI2WyO0ErEZY4HqBv+zMViDD4d/VBtZwfFlg/58UFqdu+fs3y4U9fKpRCF+J1v9qCaLESCYH greenteam@TEBIZ0177.local",
+  "id": "greenteam",
+  "shell": "/bin/false"
+}

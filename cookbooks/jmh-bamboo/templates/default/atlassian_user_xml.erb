@@ -1,0 +1,9 @@
+<atlassian-user>
+    <repositories>
+    <% if @use_crowd %>
+        <crowd name='Crowd Repository' key='crowd'/>
+    <% else %>
+        <hibernate name="Hibernate Repository" key="hibernateRepository" description="Hibernate Repository" cache="true"/>
+    <% end %>
+    </repositories>
+</atlassian-user>

@@ -1,0 +1,22 @@
+# 
+# mod_expires configuration
+#   Changed FilesMatch and ExpiresByType to be = 1 day instead of 1 week
+#<FilesMatch "\.(jpe?g|png|gif|js|css)$">
+#        ExpiresDefault "access plus 1 day"
+#</FilesMatch>
+
+<IfModule mod_expires.c>
+    ExpiresActive On  
+    
+    ExpiresByType image/jpeg "<%= node['jmh_webserver']['apache']['expires_default'] %>"
+    ExpiresByType image/png "<%= node['jmh_webserver']['apache']['expires_default'] %>"
+    ExpiresByType image/gif "<%= node['jmh_webserver']['apache']['expires_default'] %>"
+    ExpiresByType image/svg+xml "<%= node['jmh_webserver']['apache']['expires_default'] %>"
+
+    ExpiresByType font/woff2 "<%= node['jmh_webserver']['apache']['expires_fonts'] %>"
+    ExpiresByType application/font-sfnt "<%= node['jmh_webserver']['apache']['expires_fonts'] %>"
+    
+    ExpiresByType application/javascript "<%= node['jmh_webserver']['apache']['expires_scripts']%>"
+    ExpiresByType application/x-javascript "<%= node['jmh_webserver']['apache']['expires_scripts']%>"
+    ExpiresByType text/css "<%= node['jmh_webserver']['apache']['expires_scripts']%>"
+</IfModule>

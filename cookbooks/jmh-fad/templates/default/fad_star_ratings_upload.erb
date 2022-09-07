@@ -1,0 +1,16 @@
+# Currently not in use - Admin tool now uses functionality instead of script
+#/bin/bash
+
+INFILE="DocStarRatings.csv"
+SQLFILE="doc_ratings.sql"
+
+echo "use fad;" > $SQLFILE
+
+while read line 
+do
+    DR_ID=`echo $line | awk -F"," '{print $1}'`
+    NUM_RATING=`echo $line | awk -F"," '{print $4}'`
+    RATE=`echo $line | awk -F"," '{print $5}'`
+            # mysql to upload the FAD ratings
+            echo "UPDATE doctor SET rating=$RATE,ratings_count=$NUM_RATING WHERE national_provider_id=$DR_ID;" >> $SQLFILE
+done < $INFILE

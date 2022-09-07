@@ -1,0 +1,169 @@
+#!/bin/sh
+#set -x
+
+# non-secure authentication needed for interconnect checks
+<% check_num = 0 %>
+<% @insecure_checks.keys.each do |check| %>
+SOAP[<%= check_num %>]="<%= check %>","<%=@insecure_checks[check][:ipaddress] %>",<%=@insecure_checks[check][:hostname] %>,<%=@insecure_checks[check][:context] %>,<%=@insecure_checks[check][:patient_mrn] %>,"<%=@insecure_checks[check][:clientid] %>"
+	<% check_num += 1 %>
+<% end %>
+
+URLSUFFIX="wcf/Epic.Common.GeneratedServices/Patient.svc/basic_2012"
+SOAPACTION="urn:Epic-com:Common.2012.Services.Patient.GetPatientIdentifiers"
+
+# Secure authentication needed for interconnect checks
+<% check_num = 0 %>
+<% @secure_checks.keys.each do |check| %>
+	REST[<%= check_num %>]="<%= check %>-Secure","<%=@secure_checks[check][:ipaddress] %>","<%=@insecure_checks[check][:hostname] %>","<%=@secure_checks[check][:context] %>","<%=@secure_checks[check][:clientid] %>"
+	<% check_num += 1 %>
+<% end %>
+
+EXITCODE=0
+
+/bin/cat << EOM
+Content-type: text/html
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+	<title>Interconnect Checks</title>
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	</head>
+<body>
+
+
+<h1>Open Interconnect Instances</h1>
+<ul>
+EOM
+
+SOAP_COUNT=${#SOAP[*]}
+
+for (( sequence=0 ; sequence < SOAP_COUNT ; sequence++ ))
+do
+	name=`echo ${SOAP[$sequence]} | cut -d"," -f1`
+	domain=`echo ${SOAP[$sequence]} | cut -d"," -f2`
+	hostname=`echo ${SOAP[$sequence]} | cut -d"," -f3`
+	domaincontext=`echo ${SOAP[$sequence]} | cut -d"," -f4`
+	patientid=`echo ${SOAP[$sequence]} | cut -d"," -f5`
+	clientid=`echo ${SOAP[$sequence]} | cut -d"," -f6`
+
+	CALL="<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:urn='urn:Epic-com:Common.2012.Services.Patient'>     <soapenv:Header>  <Headers xmlns='urn:epic-com.2013.Interconnect.Headers'>  <Epic-Client-ID>${clientid}</Epic-Client-ID>  </Headers>  </soapenv:Header><soapenv:Body>      <urn:GetPatientIdentifiers> <urn:PatientID>${patientid}</urn:PatientID> <urn:PatientIDType>EPI</urn:PatientIDType>      </urn:GetPatientIdentifiers>   </soapenv:Body></soapenv:Envelope>"
+
+	RESPONSE=`curl -k -i -H "Content-Type: text/xml; charset=utf-8" -H "SOAPAction: $SOAPACTION" -d "${CALL}" -X POST https://${domain}/${domaincontext}/${URLSUFFIX} 2> /dev/null`
+	EXITCODE=$?
+
+	if [ $EXITCODE -ne 0 ]
+	then
+		echo "<li>$name - <font color='red'>${hostname}/${domaincontext}(${domain}) is DOWN!!</font>"
+		echo "<ul><li>"
+		echo "Return code was not 0 but $EXITCODE"
+		echo "</li></ul>"
+		EXITCODE=5
+	fi
+
+	HTTPCODE=`echo $RESPONSE | tr $'\r' $'\n' | head -1 | grep "200"`
+	if [ -n "$HTTPCODE" ]
+	then
+		echo "<li>$name - <font color='green'> ${hostname}/${domaincontext}(${domain}) is UP!</font>"
+		echo "<ul><li>"
+		echo "$HTTPCODE"
+		echo "</li></ul>"
+	else
+		echo "<li>$name - <font color='red'>${hostname}/${domaincontext}(${domain}) is DOWN!!</font>"
+		#echo "<li>*****${domain}.hsys.local is DOWN!!"
+		echo "<ul><li>"
+		echo $RESPONSE | tr $'\r' $'\n'
+		echo "</li></ul>"
+		EXITCODE=5
+	fi
+done
+
+/bin/cat << EOM
+</ul>
+<h1>Secured Instances (via REST)</h1>
+<ul>
+EOM
+
+REST_COUNT=${#REST[*]}
+
+for (( n=0 ; n < REST_COUNT ; n++ ))
+do
+	name=`echo ${REST[$n]} | cut -d"," -f1`
+	server=`echo ${REST[$n]} | cut -d"," -f2`
+	hostname=`echo ${REST[$n]} | cut -d"," -f3`
+	instance=`echo ${REST[$n]} | cut -d"," -f4`
+	clientid=`echo ${REST[$n]} | cut -d"," -f5`
+
+	RESP=`curl -k -i -w httpcode%{http_code} -X POST -H "Authorization: Basic <%= @basic_auth%>" -H "Content-Type: application/json" -H "EPIC-CLIENT-ID: ${clientid}" -H "Cache-Control: no-cache" -d '{"ProviderID":"2609","ProviderIDType":"External"}' "https://${server}/${instance}/wcf/Epic.PatientAccess.GeneratedServices/External.svc/rest/Scheduling/Open/Provider/GetScheduleDays"`
+
+	HTTPCODE=`echo $RESP | grep "httpcode201"`
+
+	if [ -n "$HTTPCODE" ]
+	then
+        	echo "<li>${name} - <font color='green'>${hostname}/${instance}(${server}) is UP!</font>"
+        	echo "<ul><li>"
+        	echo "HTTPCODE 201 OK"
+        	echo "</li></ul>"
+	else
+        	echo "<li>${name} - <font color='red'>${hostname}/${instance}(${server}) is DOWN!!</font>"
+        	echo "<ul><li>"
+        	echo "$RESP"
+        	echo "</li></ul>"
+	fi
+done
+/bin/cat << EOM
+</ul>
+
+
+<h1>MyChart Mobile Interconnect Instance (via SOAP)</h1>
+<ul>
+EOM
+
+#mychart mobile connections
+<% check_num = 0 %>
+<% @mcm_checks.keys.each do |check| %>
+	MCM[<%= check_num %>]="<%= check %>","<%=@mcm_checks[check][:ipaddress] %>","<%=@mcm_checks[check][:hostname] %>","<%=@mcm_checks[check][:context] %>","<%=@mcm_checks[check][:username] %>","<%=@mcm_checks[check][:password] %>"
+	<% check_num += 1 %>
+<% end %>
+
+
+MCM_COUNT=${#MCM[*]}
+for (( n=0 ; n < MCM_COUNT ; n++ ))
+do
+	name=`echo ${MCM[$n]} | cut -d"," -f1`
+	server=`echo ${MCM[$n]} | cut -d"," -f2`
+	hostname=`echo ${MCM[$n]} | cut -d"," -f3`
+	instance=`echo ${MCM[$n]} | cut -d"," -f4`
+	username=`echo ${MCM[$n]} | cut -d"," -f5`
+	password=`echo ${MCM[$n]} | cut -d"," -f6`
+
+	CALL="<Authenticate xmlns=\"urn:Epic-com:MyChartMobile.2010.Services\"><Username>${username}</Username><Password>${password}</Password><DeviceID>TEST-CONNECTION-SCRIPT</DeviceID><AppID>com.johnmuirhealth.MyJMH-iPhone</AppID></Authenticate>"
+	USERAGENT="com.johnmuirhealth.MyJMH-iPhone/8.5"
+	SOAPACTION="urn:Epic-com:MyChartMobile.2010.Services"
+	URL="https://${hostname}/${instance}/WCF/Epic.MyChartMobile/MyChartMobile.svc/rest/Authenticate"
+
+	RESPONSE=`curl -k -i -H "Content-Type: text/xml; charset=utf-8" -A "$USERAGENT" -H "SOAPAction: $SOAPACTION" -d "${CALL}" -X POST ${URL}`
+	HTTPCODE=`echo $RESPONSE | grep "HTTP/1.1 200"`
+	if [ -n "$HTTPCODE" ]
+		then
+						echo "<li>${name} - <font color='green'>${hostname}/${instance}(${server}) is UP!</font>"
+						echo "<ul><li>"
+						echo "HTTP/1.1 200"
+						echo "</li></ul>"
+		else
+						echo "<li>${name} - <font color='red'>${hostname}/${instance}(${server}) is DOWN!!</font>"
+						echo "<ul><li>"
+						echo "$RESPONSE"
+						echo "</li></ul>"
+	fi
+done
+
+	/bin/cat << EOM
+</ul>
+<h4>Done!</h4>
+</body>
+</html>
+EOM
+	exit $EXITCODE

@@ -1,0 +1,41 @@
+# THIS TEMPLATE IS NO LONGER USED # DEC 2018 #
+#!/bin/bash
+
+# This is for rundeck job to move file between preregistration server to ebiz-tools server for 
+#  Onbase processing of prereg data into EPIC.
+
+FAILURE_FLAG=0
+MOVE_FAILURE=0
+
+ListFiles=`ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no <%= @user %>@<%= @host %> "ls /usr/local/webapps/preregistration/forms" `
+
+for FileN in $ListFiles
+do
+  echo "$FileN filename to be downloaded..."
+  scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no <%= @user %>@<%= @host %>:/usr/local/webapps/preregistration/forms/$FileN /nas_prereg_onbase/.
+
+  if [ $? -ne 0 ]
+  then
+     echo "File $FileN FAILED to download, setting flag for failure"
+     FAILURE_FLAG=1
+  else
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no <%= @user %>@<%= @host %> "mv /usr/local/webapps/preregistration/forms/$FileN /usr/local/webapps/preregistration/processed_forms/."
+     if [ $? -ne 0 ]
+     then
+        MOVE_FAILURE=1
+     fi
+  fi
+
+done
+
+if [ $FAILURE_FLAG -eq 1 ]
+then
+    echo "File SCP failed for job"
+    exit 1
+fi
+
+if [ $MOVE_FAILURE -eq 1 ]
+then
+    echo "MOVE failed for job"
+    exit 1
+fi

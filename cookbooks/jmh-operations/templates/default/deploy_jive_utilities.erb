@@ -1,0 +1,33 @@
+#!/bin/bash
+# Dropped off by Chef!
+# set -x
+
+# To deploy jive_utilities
+
+USER=nodejs
+ROOTDIR=/usr/local/nodeapp
+HOMEDIR=/home/nodejs
+APPNAME=jive_utilities
+
+cd ${HOMEDIR}
+rm -rf ./${APPNAME}/* ./${APPNAME}.tgz.prev
+echo "Moving current running ${APPNAME} files"
+
+mkdir ${HOMEDIR}/${APPNAME}
+cd ${HOMEDIR}/${APPNAME}
+echo "UnTar files"
+tar -xzf ${HOMEDIR}/${APPNAME}.tgz
+
+if [ $? -eq 0 ]
+then
+  chown -R ${USER}. *
+  rm -rf ${ROOTDIR}/${APPNAME}
+  cd ..
+  mv ${APPNAME} ${ROOTDIR}/
+else
+  echo "!!!! PROBLEM with untar ${APPNAME} !!!! "
+  exit 1
+fi
+
+mv ${HOMEDIR}/${APPNAME}.tgz ${HOMEDIR}/${APPNAME}.tgz.prev
+echo "Rollout of jive_utilities complete"

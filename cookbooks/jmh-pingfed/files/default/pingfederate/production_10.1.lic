@@ -1,0 +1,14 @@
+ID=00089470
+WSTrustSTS=true
+OAuth=true
+SaasProvisioning=true
+Product=PingFederate
+Version=10.2
+EnforcementType=3
+Tier=Subscription
+IssueDate=2020-11-09
+ExpirationDate=2023-08-30
+DeploymentMethod=Traditional
+Organization=John Muir Health
+SignCode=FF0F
+Signature=302C021439EB17556073EDC556C2D31A094E2A5D1EBA77C602146C405660B3648D0B11CA8CDB9BAB8DF05B43BB0C

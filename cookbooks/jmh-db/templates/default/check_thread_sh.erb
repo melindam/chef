@@ -1,0 +1,87 @@
+#!/bin/sh
+#set -x
+
+## Config Section ##
+CURRENT_FILE="check_threads.sh"
+MYSQL_PROCESS="<%= @mysql_process %>"
+MYSQL_USER="<%= @user %>"
+EMAIL="<%= @email %>"
+LOG=<%= @log %>
+CONNECTION_LIMIT=<%= @connection_limit %>
+CHECK_COMMAND="/opt/chef/embedded/bin/ruby <%= @ruby_script %> -m ${CONNECTION_LIMIT}"
+## Config End ###
+
+LOCALHOST_NAME=`hostname`
+CURRENT=`date +"%Y-%m-%d %H:%M:%S"`
+QUERY_RESULTS=""
+
+
+function isMySQLRunning() {
+  PROCESS=`ps ax | fgrep "${MYSQL_PROCESS}" | grep -v "fgrep"`
+  if [ $? -ne 0 ]
+  then
+    echo "MySQL is not running."
+    exit 1
+  fi
+}
+
+function mysqlProcessCheck() {
+  PROCESS=`${CHECK_COMMAND}`
+  rc=$?
+  echo "$PROCESS"
+  if [ "$rc" != "0" ]
+  then
+    return 1
+  else
+    return 0
+  fi
+}
+
+function collectProcesses() {
+  QUERY=`mysql -u ${MYSQL_USER} -p'<%= @pass %>' -h 127.0.0.1 -e "show processlist"`
+  QUERY2=`mysql -u ${MYSQL_USER} -p'<%= @pass %>' -h 127.0.0.1 -e "show session status"`
+  echo "----SHOW PROCESSLIST----"  >> $LOG
+  echo "------------------------" >> $LOG
+  echo "$QUERY" >> $LOG
+  echo "----SHOW SESSION STATUS----" >> $LOG
+  echo "$QUERY2" >> $LOG
+  echo "------------------------" >> $LOG
+}
+
+function restartMySQL() {
+  echo "Restarting MYSQL"
+  STOP=`/usr/bin/systemctl stop ${MYSQL_PROCESS}`
+  echo "Stopped"
+  sleep 5
+  START=`/usr/bin/systemctl start ${MYSQL_PROCESS}`
+  echo "Started"
+}
+
+## Main Application
+isMySQLRunning
+mysqlProcessCheck
+if [ $? -eq 0 ]
+then
+  echo "$CURRENT"
+  echo "We are good"
+  exit 0
+else
+  echo "We are bad"
+  collectProcesses
+  echo "Too Many Connections.  Going for a Restart" | /usr/bin/mutt -a $LOG -s "$LOCALHOST_NAME ${MYSQL_PROCESS} Restart" -- $EMAIL
+  restartMySQL
+  isMySQLRunning
+  mysqlProcessCheck
+  if [ $? -eq 0 ]
+  then
+    echo "Successful Restart"
+    echo "Successful Restart" | mail -s "$LOCALHOST_NAME ${MYSQL_PROCESS} Restart Good" $EMAIL
+  else
+    echo "Failed Restart"
+    echo "Failed Restart" | mail -s "$LOCALHOST_NAME ${MYSQL_PROCESS} Restart Bad" $EMAIL
+  fi
+  sleep 300
+fi
+
+exit 0
+

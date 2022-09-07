@@ -1,0 +1,31 @@
+#!/bin/sh
+# Authentication was created via 64base encoding https://www.base64encode.org/
+# sample user/password = emp$MYCHART:MyChARt
+
+server=$1
+instance=$2
+client_id=$3
+
+if [[ -n ${client_id} ]]
+then
+  RESP=`curl -k -i -w httpcode%{http_code} -X POST -H "Authorization: Basic ZW1wJE1ZQ0hBUlRaRDE6TXlDaEFyVFpk" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "EPIC-CLIENT-ID: ${client_id}" -d '{"ProviderID":"2609","ProviderIDType":"External"}' "https://${server}/${instance}/wcf/Epic.PatientAccess.GeneratedServices/External.svc/rest/Scheduling/Open/Provider/GetScheduleDays"`
+else
+  RESP=`curl -k -i -w httpcode%{http_code} -X POST -H "Authorization: Basic ZW1wJE1ZQ0hBUlRaRDE6TXlDaEFyVFpk" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{"ProviderID":"2609","ProviderIDType":"External"}' "https://${server}/${instance}/wcf/Epic.PatientAccess.GeneratedServices/External.svc/rest/Scheduling/Open/Provider/GetScheduleDays"`
+fi
+
+HTTPCODE=`echo $RESP | grep "httpcode201"`
+
+if [ -n "$HTTPCODE" ]
+then
+	echo "HTTPCODE 201 OK"
+	EXITCODE=0
+else
+	echo "$RESP"
+	EXITCODE=1
+fi
+
+if [ $EXITCODE -ne 0 ]
+then
+        echo "Return code was not 0 but $EXITCODE"
+        exit 5
+fi

@@ -1,0 +1,48 @@
+{
+  "chef_type": "data_bag_item",
+  "data_bag": "rundeck",
+  "id": "users",
+  "description": "Local rundeck users",
+  "users": {
+    "admin": {
+      "groups": [
+        "user",
+        "admin",
+        "architect",
+        "deploy",
+        "build"
+      ],
+      "password": "MD5:6bb480151cf26b8aa5bc16bc4c0f936b"
+    },
+    "devuser": {
+      "groups": [
+        "user", "devadmin"
+      ],
+      "password": "MD5:6bb480151cf26b8aa5bc16bc4c0f936b"
+    },
+    "104651": {
+      "groups": ["user","devadmin"],
+      "password": "MD5:ae418b5ba1d8504f64f1de2110a8b8a9"
+    },
+    "melindam": {
+      "groups": [
+        "user",
+        "admin",
+        "architect",
+        "deploy",
+        "build"
+      ],
+      "password": "MD5:689d139ea152e62b49b60ccb2191fd7e"
+    },
+    "scott": {
+      "groups": [
+        "user",
+        "admin",
+        "architect",
+        "deploy",
+        "build"
+      ],
+      "password": "MD5:0129a1b96d44cd5defe86a9b283bb795"
+    }
+  }
+}

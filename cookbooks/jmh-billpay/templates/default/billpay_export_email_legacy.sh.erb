@@ -1,0 +1,33 @@
+#!/bin/bash
+#set -x
+
+HOMEDIR="<%= node['jmh_billpay']['scripts_dir'] %>"
+SOURCEDIR="<%= node['jmh_billpay']['export']['source'] %>"
+DATE=`date +%m-%d-%Y`
+FILE="${DATE}-legacy_export.txt"
+
+# Create file list
+cd $SOURCEDIR
+ls *.txt > $HOMEDIR/export_list.txt
+
+COUNT=`cat $HOMEDIR/export_list.txt | wc -l`
+
+if [ $COUNT -eq 0 ]
+then 
+	echo "NO TRANSACTIONS FROM LAST WEEK" | mutt -e 'my_hdr From:noreply@johnmuirhealth.com' -s "NO FILES for EBusiness Legacy Online Billpay Export $DATE" -- <%= node['jmh_billpay']['export']['email']['legacy_files'] %>
+else
+	
+	message_body="New Billpay Legacy Export File attached for $DATE." 
+	cat *.txt > $HOMEDIR/$FILE    
+	echo ${message_body} | mutt -a $HOMEDIR/$FILE -e 'my_hdr From:noreply@johnmuirhealth.com' -s "EBusiness Legacy Online Billpay Export $DATE" -- <%= node['jmh_billpay']['export']['email']['legacy_files'] %>
+
+	# Move files to archive
+	while read N
+	do
+    	  mv $SOURCEDIR/$N $SOURCEDIR/archive/
+	done <$HOMEDIR/export_list.txt
+fi
+
+# cleanup
+rm -f $HOMEDIR/$FILE 
+rm -f $HOMEDIR/export_list.txt

@@ -1,0 +1,54 @@
+#!/bin/sh
+#set -x
+
+CQSCRIPTSERVER="<%= @ip_address %>"
+CQUSER="<%= @user %>"
+REMOTEDIR="<%= @share_dir %>"
+LOCALDIR="<%= @backup_dir %>"
+
+cd $LOCALDIR
+
+PACK_LIST=`ssh $CQUSER@$CQSCRIPTSERVER /bin/ls $REMOTEDIR/*.zip`
+
+echo "Packages for download: $PACK_LIST"
+
+for zipfile in $PACK_LIST
+do
+    echo "Now downloading $zipfile"
+	END_PROCESS=true
+	scp -l 6000 -o BatchMode=yes $CQUSER@$CQSCRIPTSERVER:$zipfile ./ &
+	PID=$!
+	for time in {0..60}
+	do
+		sleep 120
+		kill -0 $PID
+		if [ $? -eq 0 ]
+		then
+			echo "Still Running"
+		else
+			echo "Process Stopped"
+			END_PROCESS=false
+			break
+		fi
+	done
+	if [ "$END_PROCESS" = true ]
+	then
+		echo "Now Killing Process"
+		kill $PID
+	fi
+done
+
+cd $LOCALDIR
+RESULT=0
+
+for fpack in `ls`
+do
+    <%= @java_home %>/bin/jar tvf  $fpack > /dev/null
+    if [ $? -ne 0 ]
+    then
+        RESULT=1
+        echo "Problem with $fpack"
+    fi
+done
+
+exit $RESULT

@@ -1,0 +1,38 @@
+{
+  "id": "preregistration",
+  "dev_password": {
+    "encrypted_data": "uVEFSaj7p54S553s/fVAbc2pulLeWQu6K8JuJzaRwQ==\n",
+    "iv": "CblDvK5yz0Ttb8nj\n",
+    "auth_tag": "5fRiOGT2a2x4D6odopUOuw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "stage_password": {
+    "encrypted_data": "DMhhegT0FpSD78kGIW8FUOvTwQcd5hgdx9K0SujXwx5H\n",
+    "iv": "NH11Ah0tZ0xQ/D1s\n",
+    "auth_tag": "IKXzis97zqxQoF4GeDNHww==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_password": {
+    "encrypted_data": "i4hJIidGxdIwEd0fqroLBA93y9D9DMB8gTwRsOddb8v1\n",
+    "iv": "+3HY6fAng2GsQgnb\n",
+    "auth_tag": "5iSajRuLh4/n6OYTSRb6rw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "nas_mount_username": {
+    "encrypted_data": "0La4xP0Hpgzy/UnNa8zwQkyuoNDV46ViFmTk\n",
+    "iv": "I9Q3rNehPq8klSzd\n",
+    "auth_tag": "fLxEwD78nY677po6RAgJwg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "nas_mount_password": {
+    "encrypted_data": "8UA2KvS/XD6NdQnbJjZ2GC5o2d0yDcbV+w==\n",
+    "iv": "q/WolDexAHDzXLSU\n",
+    "auth_tag": "bK4GoeV6pZppBKeO7e9uKg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

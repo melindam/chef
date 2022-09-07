@@ -1,0 +1,40 @@
+{
+  "checks": {
+  	<% @checks.each do |check| %>
+    "soap_<%= check['name'] %>": {
+      "handlers": <%= check['handlers'] %>,
+      "command": "/bin/sh /etc/sensu/plugins/check-soap.sh <% check['options'].each do |option| %> \"<%= option %>\"<% end %>",
+      <% if check['interval'] %>
+      "interval": <%= check['interval'] %>,
+      <% else %>
+      "interval": 60,
+      <% end %>
+      <% if check['maintenance'] %>
+      "maintenance": <%= check['maintenance'] %>,
+      <% end %>
+      <% if check['afterhours'].nil? %>
+      "afterhours": true,
+      <% else %>
+      "afterhours": <%= check['afterhours'] %>,
+      <% end %>
+      <% if check['mail_to'] %>
+      "mail_to": <%= check['mail_to'] %>,
+      <% end %>
+      <% if check['mail_from'] %>
+      "mail_from": <%= check['mail_from'] %>,
+      <% end %>
+      <% if check['occurences'] %>
+      "occurrences" : <%= check['occurences'] %>,
+      <% else %>
+      "occurrences" : 2,
+      <% end %>
+	    "refresh": <%= check['refresh'] ? check['refresh'] : node['jmh_monitor']['client']['default_refresh_rate'] %>,
+	    "subscribers": <%= check['subscribers'] %>
+	    <% if check == @checks.last %>
+	        }
+	    <% else %>
+	   		},
+	   	<% end %>
+    <% end %>
+  }
+}

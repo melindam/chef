@@ -1,0 +1,13 @@
+#!/bin/bash
+
+AuthorFiles="<%= @author_packages.join(" ")%>"
+
+cd <%= @share_dir %>
+
+for AFile in `echo $AuthorFiles` 
+do
+	curl -u admin:<%= @author_server['password'] %> -F file=@${AFile}.zip -F name=${AFile} http://<%= @author_server['ipaddress'] %>:4502/crx/packmgr/service.jsp
+	sleep 5
+	curl -u admin:<%= @author_server['password'] %> -F name=${AFile} http://<%= @author_server['ipaddress'] %>:4502/crx/packmgr/service.jsp?cmd=inst
+	sleep 20
+done

@@ -1,0 +1,24 @@
+{
+  "id": "secure",
+  "description": {
+    "encrypted_data": "OgDh6pOz41J/r2w+rd9/lYV4MnxxjRJ1XlLL5z3co0x1Gwsux8S+NVyvZ/Us\nfnOs+ULQYISTNw==\n",
+    "iv": "2SaiH0eczgTfJBqK\n",
+    "auth_tag": "dL8QW3kT7L7yo/NSO/2a2w==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "crowd_prod_apache_password": {
+    "encrypted_data": "vn4qLrUIaI7en7mnrJMqRnXo0wjAiYqS6WVGkkmXud23UEnM\n",
+    "iv": "NNThcLN17hkq/RG5\n",
+    "auth_tag": "BzPzn8l+b5eGYOqWhSmUqQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "crowd_ebiztools_apache_password": {
+    "encrypted_data": "+EAJ0v+Var4nh6fU6K7lbWnjlrerwoELdvc2xuY=\n",
+    "iv": "AFN/zOj5awW8dvBf\n",
+    "auth_tag": "rTiiHoKMD3s95JjEdbrk0Q==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

@@ -1,0 +1,119 @@
+#!/opt/chef/embedded/bin/ruby
+require 'optparse'
+require 'fileutils'
+require 'date'
+require 'csv'
+# Note: Job that processes echo file happens at 3am, so this needs to run before this.
+
+# ["ID", "CC", "WC", "BH", "PN", "LASTNAME", "FIRSTNAME", "TITLE", "NPI", "ADDRESS1", "ADDRESS1", "CITY1", "STATE1", "ZIP1", "PHONE1", "FAX1", "ADDRESS2", "ADDRESS2", "CITY2", "STATE2", "ZIP2", "PHONE2", "FAX2", "ADDRESS3", "ADDRESS3", "CITY3", "STATE3", "ZIP3", "PHONE3", "FAX3", "SPECIALTY1", "SPECIALTY2", "SPECIALTY3", "SPECIALTY4", "MEDICALSCHOOL", "INTERNSHIP", "RESIDENCY", "INTERNSHIPRESIDENCY", "RESIDENCYFELLOWSHIP", "INSTITUTE6", "INSTITUTE7", "BOARDCERT1", "BOARDCERT2", "BOARDCERT3", "GENDER", "LANGUAGE1", "LANGUAGE2", "LANGUAGE3", "LANGUAGE4", "HOMEPAGE", "HANDICAP", "HEALTHCODE", "EXPERTISE1", "EXPERTISE2", "EXPERTISE3", "EXPERTISE4", "EXPERTISE5", "EXPERTISE6", "ADDRESSCHECKLIST", "EFFECTIVEDATE", "DEPTPOSITION", "FACILITYCOMMENTONE", "WCDICTID", "CCDICTID"]
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: echo_file_update.rb [options]"
+  opts.on('-r', '--remove-non-jmpn [true,false]', 'Remove Non Jmpn Doctors') { |v| options['remove-non-jmpn'] = v }
+  opts.on('-h', '--help', 'Help') { puts opts
+                                    exit }
+end.parse!
+
+echo_folder = '<%= @echo_folder%>'
+echo_file_name = '<%= @echo_file_name %>'
+new_echo_file_name = '<%= @echo_file_name %>.new'
+npi_column = 8
+pn_column = 4
+remove_non_jmpn_doctors = options['remove-non-jmpn'] == 'true' ? true : false
+
+unless File.exists?(File.join(echo_folder,echo_file_name))
+  puts "No echo file found. Exiting"
+  exit
+end
+                          
+if remove_non_jmpn_doctors
+  puts "Set to remove non-jmpn doctors"
+else
+  puts "Set to leave non-jmpn doctors"
+end
+
+Time.now.strftime("%d/%m/%Y %H:%M")
+
+jmpn_removal_list = <%= @jmpn_removal_list %>
+puts "Total NPIS for jmpn removal: #{jmpn_removal_list.size()}"
+
+removal_list = <%= @removal_list %>
+puts "Total NPIS for removal: #{removal_list.size()}"
+
+addition_list = <%= @addition_list %>
+puts "Total NPIS for addition: #{addition_list.size()}"
+
+new_file = []
+echo_lines = 0
+added_jmpn_file = 0
+removed_jmpn_file = 0
+removed_file = 0
+removed_no_jmpn = 0
+
+CSV.foreach(File.join(echo_folder,echo_file_name)) do |f|
+	current_line = f
+    echo_lines += 1
+	skip = false
+	# puts current_line[npi_column]
+	npi = current_line[npi_column].to_i
+	# puts npi
+	if addition_list.include?(npi)
+	  puts "#{npi} from addition file found. added to jmpn"
+	  current_line[pn_column] = 'JMPN'
+	  added_jmpn_file += 1
+	elsif removal_list.include?(npi)
+	  puts "#{npi} from removal file found."
+	  removed_file += 1
+	  next      
+	elsif jmpn_removal_list.include?(npi)
+	  puts "#{npi} from removal file found."
+	  removed_jmpn_file += 1
+	  skip = remove_non_jmpn_doctors
+      current_line[pn_column] = ''
+	elsif remove_non_jmpn_doctors && current_line[pn_column] == ""
+	  puts "#{npi} not in jmpn."
+	  skip = remove_non_jmpn_doctors
+	  removed_no_jmpn += 1
+	end
+    unless skip
+        new_row = ''
+        comma = ''
+        current_line.each do |cl|
+           new_row +=  comma + '"' + cl + '"'
+           comma = ','
+        end
+        new_file.push(new_row)
+	end
+end
+
+begin
+  file = File.open(File.join(echo_folder,new_echo_file_name), "w")
+  new_file.each do |line|
+    file.puts(line)
+  end 
+rescue IOError => e
+  #some error occur, dir not writable etc.
+ensure
+  file.close unless file.nil?
+end
+
+File.foreach(File.join(echo_folder,new_echo_file_name)) {}
+count = $.
+puts "Total Lines of previous echo file: #{echo_lines}"
+puts "Total doctors added to jmpn: #{added_jmpn_file}"
+puts "Total doctors removed from jmpn: #{removed_jmpn_file}"
+puts "Total doctors remove from list: #{removed_file}"
+#puts "Total doctors removed for not being jmpn #{removed_no_jmpn}"
+puts "Total Lines in new file #{count}"
+
+if count < 700
+  puts "Count is too low. Erroring out"
+  exit 1
+end
+
+# Move old file out of the way
+timestamp = Time.now.strftime("%m_%d_%y")
+old_file_moved = File.join(echo_folder, 'processed', "#{File.basename(echo_file_name,'.txt')}_#{timestamp}_UNEDITED.txt")
+FileUtils.mv(File.join(echo_folder,echo_file_name), old_file_moved)
+FileUtils.mv(File.join(echo_folder,new_echo_file_name), File.join(echo_folder,echo_file_name))

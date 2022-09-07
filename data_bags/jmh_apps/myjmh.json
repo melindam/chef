@@ -1,0 +1,31 @@
+{
+  "id": "myjmh",
+  "dev_password": {
+    "encrypted_data": "VxSzMlH6BJtAkbTv5c5fffbQSmctPazUxSv1IVec\n",
+    "iv": "+nzr2tvdcMJwtsBr\n",
+    "auth_tag": "RwLdTQzxZKvQk3H1VRHFjQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "stage_password": {
+    "encrypted_data": "k//taB+mqjAydk225BTuGU9RF2v1Bv4PH2I=\n",
+    "iv": "nh9stHE78Ca1YAg8\n",
+    "auth_tag": "wsn5uQwuAIevr37JaugSvg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "prod_password": {
+    "encrypted_data": "+4wUC9zq10UWiicAMwEPawHdHOQ0GBUNYeE=\n",
+    "iv": "HW2H3w2awu11yFQu\n",
+    "auth_tag": "zbOoaoBFYhKz2bX8wnLNXw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "crowd_password": {
+    "encrypted_data": "it+1uWFAXy5K90B0BRb0lM96JppfBdGKYB8rNuuOMHKa9CCt3UxUudEc8ZQB\n4sHCXUQt8sLjknlN6rqBPPM6RjQitqcKTYXhKrEEMg4zRIglgRBPl/ver0wE\nS2t3D5ythzY9YOBpPt3o3aE5Mqo=\n",
+    "iv": "biTx4vQD0vlKv3at\n",
+    "auth_tag": "df5D1E++8v9og1YTlEzSog==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

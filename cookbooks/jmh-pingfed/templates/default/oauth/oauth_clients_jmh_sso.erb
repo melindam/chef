@@ -1,0 +1,43 @@
+{
+  "clientId": "jmh-sso",  
+  "redirectUris": [
+    "http://localhost:8080/login",
+    "https://<%= @www_server_name %>/myjmh-client/dashboard"  
+  ],
+  "grantTypes": [
+    "AUTHORIZATION_CODE",
+    "RESOURCE_OWNER_CREDENTIALS",
+    "REFRESH_TOKEN",
+    "ACCESS_TOKEN_VALIDATION"
+  ],
+  "name": "JMH",
+  "description": "",
+  "logoUrl": "",
+  "refreshRolling": "SERVER_DEFAULT",
+  "persistentGrantExpirationType": "SERVER_DEFAULT",
+  "persistentGrantExpirationTime": 0,
+  "persistentGrantExpirationTimeUnit": "DAYS",
+  "bypassApprovalPage": true,
+  "restrictScopes": false,
+  "restrictedScopes": [],
+  "defaultAccessTokenManagerRef": {
+    "id": "PORTAL",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/oauth/accessTokenManagers/PORTAL"  
+  },
+  "validateUsingAllEligibleAtms": true,
+  "oidcPolicy": {
+    "idTokenSigningAlgorithm": "RS256",
+    "policyGroup": {
+      "id": "OAuth",
+      "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/oauth/openIdConnect/policies/OAuth"
+    },
+    "grantAccessSessionRevocationApi": false,
+    "pingAccessLogoutCapable": false
+  },
+  "clientAuth": {
+    "type": "SECRET",
+    "secret": "<%= @client_secret %>",
+    "enforceReplayPrevention": false
+  },
+  "requireSignedRequests": false
+}

@@ -1,0 +1,13 @@
+name 'jmh-paygateway'
+maintainer 'Melinda Moran'
+maintainer_email 'melinda.moran@johnmuirhealth.com'
+license 'all_rights'
+description 'Installs/Configures jmh-paygateway'
+long_description 'Installs/Configures jmh-paygateway'
+version '0.1.2'
+
+depends 'jmh-encrypt'
+depends 'jmh-nodejs'
+depends 'jmh-utilities'
+depends 'jmh-db'
+depends 'openssl'

@@ -1,0 +1,18 @@
+name 'jmh-archiva'
+maintainer 'John Muir Health'
+maintainer_email 'melinda.moran@johnmuirhealth.com'
+license 'All rights reserved'
+description 'Installs Apache Archiva for JMH'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version '1.0.11'
+
+depends 'ark'
+depends 'iptables'
+depends 'jmh-java'
+depends 'jmh-apps'
+depends 'jmh-db'
+depends 'jmh-webserver'
+depends 'jmh-server'
+depends 'mysql_connector'
+depends 'openssl'
+depends 'systemd'

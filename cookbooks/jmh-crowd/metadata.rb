@@ -1,0 +1,16 @@
+name 'jmh-crowd'
+maintainer 'Scott Marshall'
+maintainer_email 'scott.marshall@johnmuirhealth.com'
+description 'Install and configure Crowd for JMH'
+
+version '2.4.6'
+
+depends 'apache2'
+depends 'iptables'
+depends 'jmh-java'
+depends 'jmh-utilities'
+depends 'mysql'
+depends 'mysql_connector'
+depends 'openssl'
+depends 'jmh-db'
+depends 'systemd'

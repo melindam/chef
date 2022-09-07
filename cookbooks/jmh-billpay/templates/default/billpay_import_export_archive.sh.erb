@@ -1,0 +1,34 @@
+#!/bin/bash
+#set -x
+umask 0022
+
+EXPORTDIR=/usr/local/webapps/billpay/export/archive
+IMPORTDIR=/usr/local/webapps/billpay/import/processed
+MonthDate=`date +%Y-%m`
+
+# PROCESSING THE BILLPAY EXPORT FILES 
+cd $EXPORTDIR
+# remove old archives
+echo "Removing old EXPORT archives from `pwd`"
+find . -name "*tgz" -exec rm -f {} \;
+
+echo "Removing EXPORT files older than 31 days ago from: `pwd`"
+find . -name "*txt" -mtime +31 -exec rm -f {} \;
+
+# create new archive for the month
+echo "Creating EXPORT archive for $MonthDate"
+find . -name "*txt" -exec tar -czvf $EXPORTDIR/billpay-export-archive-$MonthDate.tgz {} \+
+
+
+# PROCESSING THE BILLPAY IMPORT FILES
+cd $IMPORTDIR
+# remove old archives
+echo "Removing old IMPORT archive files from `pwd`"
+find . -name "*tgz" -exec rm -f {} \;
+
+echo "Removing IMPORT files older than 31 days ago from: `pwd`"
+find . -name "*txt" -mtime +31 -exec rm -f {} \;
+
+# create new archive for the month
+echo "Creating IMPORT archive for $MonthDate"
+find . -name "*txt" -exec tar -czvf $IMPORTDIR/billpay-import-archive-$MonthDate.tgz {} \+

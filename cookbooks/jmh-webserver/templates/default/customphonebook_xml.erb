@@ -1,0 +1,51 @@
+<% i=0 %>
+<?xml version="1.0" encoding="UTF-16"?>
+<WebServerInfo>
+  <ArrayOfWebServer>
+    <% @phonebook_hash.keys.sort.each do |phonebook_hash_key|
+      epic_val = @phonebook_hash[phonebook_hash_key]
+      i += 1
+    %>
+    <WebServer>
+      <orgID>1-<%= i %></orgID> <!--OrgID: This must be unique for each environment in your custom phonebook. -->
+      <name>John Muir Health (<%= epic_val[:env].upcase %> - <%= epic_val[:webserver][0..epic_val[:webserver].index('.')-1] %>)</name> <!--Name: Name of organization, displays if there is not an associated image. -->
+      <myChartBrandName>MyChart (<%= epic_val[:env].upcase %> - <%= epic_val[:webserver][0..epic_val[:webserver].index('.')-1] %>)</myChartBrandName> <!--myChartBrandName: Shows up below image on Select a Healthcare provider and My Healthcare provider. -->
+      <locations>California</locations>
+      <url>https://<%= epic_val[:apiserver] %>/<%= epic_val[:mcminterconnect_context] %>/WCF/Epic.MyChartMobile/MyChartMobile.svc/rest</url> <!--URL: The root of the address to the rest services for the entry. e.g., https://mychart.domain.com/interconnect-path/WCF/Epic.MyChartMobile/MyChartMobile.svc/rest-->
+      <imageHandle>https://<%= epic_val[:webserver] %>/content/dam/jmh/email/htmlEmail/logoJMH_catalog.png</imageHandle> <!--The address for the image used to represent the organization in the phonebook/organization selection list.-->
+      <loginIDlabel>Username</loginIDlabel> <!--The hint for the username field on the login screen.-->
+      <loginPWlabel>Password</loginPWlabel> <!--The hint for the password field on the login screen.-->
+      <ArrayOfOptions>
+        <option>
+          <key>loginbgcolor</key> <!--LoginbgColor: Background color for the login screen in Hex code (Ex. #00FF00 is green).-->
+          <value>#d1c4e9</value>
+        </option>
+        <option>
+          <key>loginImageURL</key> <!--address to the image used on the login screen. If using apple watch, this option key is needed. For the apple watch login image, create another file at the same location with the same file name appended with _wm.-->
+          <value>https://<%= epic_val[:webserver] %>/content/dam/jmh/email/htmlEmail/logoJMH_swatch.png</value>
+        </option>
+        <option><!-- Color used once the patient is inside the app.  Talk to your MyChart TS about skittles if you want to test multiple colors. -->
+          <key>ThemeColor</key>
+          <value>#7e57c2</value>
+        </option>
+        <option>
+          <key>disableSecondaryLogin</key> <!-- Set value to 1 if organization is not live on apple watch.  If live you do not need to include this option-->
+          <value>0</value>
+        </option>
+        <option>
+          <key>signupurl</key>
+          <value>https://<%= epic_val[:webserver] %>/profile-client/registration/new?mobileSdk=1</value>
+        </option>
+        <option>
+          <key>passwordrecoveryurl</key>
+          <value>https://<%= epic_val[:webserver] %>/profile-client/login-help/password?mobileSdk=1</value>
+        </option>
+        <option>
+          <key>usernamerecoveryurl</key>
+          <value>https://<%= epic_val[:idpserver] %>/ext/idrecovery/Recover?AdapterId=httpform&amp;mobileSdk=1</value>
+        </option>
+      </ArrayOfOptions>
+    </WebServer>
+      <% end %>
+  </ArrayOfWebServer>
+</WebServerInfo>

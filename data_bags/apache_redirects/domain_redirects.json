@@ -1,0 +1,82 @@
+{
+	"id": "domain_redirects",
+	"config": {
+		"cond_rewrites": {
+			".* /jmherror/pagenotfound.html [R,L]": [
+				"%{REQUEST_URI} ^/mychartprdsso/openscheduling [OR]",
+				"%{REQUEST_URI} ^/mychartsupsso/openscheduling [OR]",
+				"%{REQUEST_URI} ^/mycharttstsso/openscheduling [OR]",
+				"%{REQUEST_URI} ^/mychartpocsso/openscheduling [OR]",
+				"%{REQUEST_URI} ^/mycharttst2sso/openscheduling"		
+			],
+			".* /jmherror/error.html? [R,L]": [
+				"%{REQUEST_URI} ^/search_results.html.*",
+				"%{QUERY_STRING} .*%22.*"
+			],
+			".* https://%{SERVER_NAME}/doctor/npi/1134221021 [R=301,L]": [
+				"%{HTTP_HOST} .*jcrockettmd.com [OR]",
+				"%{HTTP_HOST} .*jcrockettmd.net"
+			],
+			".* https://%{SERVER_NAME}/custom/workday-login-instructions-former-employee.html [R,L]": [
+				"%{HTTP_HOST} .*johnmuirhr.com",
+				"%{REQUEST_URI} ^/workday-login-instructions-former-employee.php"
+			],
+			".* https://%{SERVER_NAME}/locations/cancer-network.html [R,L]": [
+				"%{HTTP_HOST} .*ucsfjmhcancer.*"
+			],
+			".* https://%{SERVER_NAME}/custom/workday-login-instructions.html [R,L]": [
+				"%{HTTP_HOST} .*johnmuirhr.com",
+				"%{REQUEST_URI} ^/workday-login-instructions.php"
+			],
+			".* https://%{SERVER_NAME}/custom/logout-instructions.html [R,L]": [
+				"%{HTTP_HOST} .*johnmuirhr.com",
+				"%{REQUEST_URI} ^/workday-logout-instructions.php"
+			],
+			".* https://%{SERVER_NAME}/custom/logout-instructions.html [R,L]": [
+				"%{HTTP_HOST} .*johnmuirhr.com",
+				"%{REQUEST_URI} ^/logout-instructions.php"
+			],
+			".* https://%{SERVER_NAME}/custom/john-muir-hr.html [R=301,L]": [
+				"%{HTTP_HOST} .*johnmuirhr.com"
+			],
+			".* https://www.givehealthjmh.org [R,L]": [
+				"%{REQUEST_URI} /about-john-muir-health/foundation.html [OR]",
+				"%{REQUEST_URI} /about-john-muir-health/givehealth [OR]",
+				"%{REQUEST_URI} /secure/make-a-donation.html"
+			],
+			"^/fad/doctor/searchResults(.*)?$ https://%{SERVER_NAME}/doctor?$1 [NE,L,QSA,B=;]": [
+				"%{REQUEST_URI} ^/fad/doctor/searchResults(.*)"
+			],
+			"^/fad/doctor/searchResults_mobile(.*)?$ https://%{SERVER_NAME}/doctor?$1 [NE,L,QSA,B=;]": [
+				"%{REQUEST_URI} ^/fad/doctor/searchResults_mobile(.*)"
+			],
+			"^/fad/doctor/profile/(.*) https://%{SERVER_NAME}/doctor/npi/$1 [R=301,L]": [
+				"%{REQUEST_URI} ^/fad/doctor/profile/"
+			],
+			".* https://%{SERVER_NAME}/patientportal [R,L]": [
+				"%{HTTP_HOST} .*myjohnmuirhealth.com [OR]",
+				"%{HTTP_HOST} .*myjmh.net [OR]",
+				"%{HTTP_HOST} .*myjmh.com [OR]",
+				"%{HTTP_HOST} my.*.johnmuirhealth.com"
+			],
+			".* https://%{SERVER_NAME}/about-john-muir-health/muirlab.html [R,L]": [
+				"%{HTTP_HOST} .*muirlab.com [OR]",
+				"%{HTTP_HOST} .*muirlab.net [OR]",
+				"%{HTTP_HOST} .*muirlab.org [OR]",
+				"%{HTTP_HOST} .*lab.%{BASE_DOMAIN}"
+			],
+			"^/(.*)$ https://autodiscover.johnmuirhealth.com/$1 [R,L]": [
+				"%{REQUEST_URI} ^/[Aa]uto[Dd]iscover.*"
+
+			],
+			".* https://%{SERVER_NAME}/about-john-muir-health/givehealth.html [R,L]": [
+				"%{HTTP_HOST} .*givehealthjmh.com [OR]",
+				"%{HTTP_HOST} .*givehealthjmh.org"
+			],
+			".* /about-john-muir-health/foundation.html": "%{HTTP_HOST} .*johnmuirhealthfoundation.org",
+			".* http://%{SERVER_NAME}/about-john-muir-health/community-commitment/community-health-fund.html [last]": "%{HTTP_HOST} .*jmmdcommunityhealthfund.com",
+			".* http://%{SERVER_NAME}/services/medical-imaging-services.html [L]": "%{HTTP_HOST} .*medicalimaging.%{BASE_DOMAIN}",
+			".* http://%{SERVER_NAME}/for-physicians/video-publication-center.html [L]": "%{HTTP_HOST} .*mdvideo.%{BASE_DOMAIN}"
+		}
+	}
+}

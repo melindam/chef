@@ -1,0 +1,25 @@
+#!/bin/sh
+#set -x
+
+GOOD_RESPONSE="HTTP/1.1 200"
+
+if [ -z $1 ]
+then
+	echo "Usage: checkURL.sh <URL>"
+	exit 1;
+fi
+
+URL=$1
+
+URL_CODE=`/usr/bin/curl -s -k -I "$URL" | grep "$GOOD_RESPONSE"`
+STATUS=$?
+
+if [ $STATUS -ne 0 ]
+then
+	echo "FAIL"
+	/usr/bin/curl -s -I "$URL" 
+	exit 1;
+else
+	echo "SUCCESS:$URL_CODE"
+	exit 0;
+fi

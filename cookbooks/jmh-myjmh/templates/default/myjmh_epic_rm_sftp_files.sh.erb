@@ -1,0 +1,19 @@
+#!/bin/bash
+#set -x
+
+SFTP_HOST="ssh2.hsys.local"
+SFTP_USER="ebusiness"
+PRIVATE_KEY="/home/tomcat/.ssh/ebusiness_id_rsa"
+DESTDIR="/myjmh/mrn_report"
+SOURCEDIR="/usr/local/webapps/myjmh/"
+
+SFTP_COMMAND="sftp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=${PRIVATE_KEY} -b - ${SFTP_USER}@${SFTP_HOST}"
+
+DEL_COMMAND="rm *"
+
+printf "cd ${DESTDIR}\n${DEL_COMMAND}\nbye\n" | $SFTP_COMMAND
+if [ $? -ne 0 ]
+then
+	echo "**PROBLEM DURING SFTP FILE REMOVAL PROCESS**"
+	exit 5;
+fi

@@ -1,0 +1,7 @@
+{
+  "comment": "Wesley Prager Hero Digital Contractor",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVU4MRZwuPsZ7CWgv37HIlQXyMlYL9uc3Zkc+Vl5pabRKAK10E8Kt+JC5CS1MNKlLjoHRBmzYHgyx3NYd01hOq3WeYeLEoP7M0TxWLUBO2o++eraXUvrH6sSMM+BIEg6O1hOKD7T2ZrE5aU/i8NgYgLc731jWLnxe5VsxdMO2AnkFhmzjtsmKWe7AVl0MxD1LptJYBoBkNaxw9BFUKDWrsNDfH7u4Zl7IRgUpw6KpKII3Ivv/0hJCBpr0RDRPUzXiG1+urP9rBBYigo7B8ZaotFPueS1fwpBREeGNFg4PRvelhYIO6bTk4Kzsx8vUVbw1hp1YeQv1Al3pOJDLrmvxh wesleyprager@Hero-C02QK014FVH6.local",
+  "id": "wesleyprager",
+  "shell": "/bin/false"
+}

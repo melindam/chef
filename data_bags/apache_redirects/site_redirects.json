@@ -1,0 +1,14 @@
+{
+  "id": "site_redirects",
+  "config": {
+    "redirect_matches": {
+      "/relayhealth": "https://app.relayhealth.com/security/login/default.aspx?bid=jmh\\&cmp=rhe-0511-1000",
+      "/academynight": "http://events.constantcontact.com/register/event?llr=b7ogcqnab\\&oeidk=a07ebgjzejea863621c",
+      "(/satsurvey$|/feedback$)": "https://www.surveygizmo.com/s3/517504/patientsat",
+      "/exploratoriumnight" : "http://events.constantcontact.com/register/event?llr=b7ogcqnab\\&oeidk=a07ed12mjml528df639",
+      "/mobile/ios": "https://apps.apple.com/us/app/mychart/id382952264",
+      "/mobile/android":  "https://play.google.com/store/apps/details?id=epic.mychart.android&hl=en_US",
+      "/tn/(.*)":  "https://%{API_SERVER_NAME}/vvisits/v1/lookupUrl/$1"
+    }
+  }
+}

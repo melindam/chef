@@ -1,0 +1,31 @@
+{
+  "comment": {
+    "encrypted_data": "OYl9yC0MSfP4Cmci58fRLyDs+H9tJ/4T7HSY80uHPaw=\n",
+    "iv": "jZgU97gsG19jSoAl\n",
+    "auth_tag": "73jytB/AA33MDAENAsmLEA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "id": "melindam",
+  "password": {
+    "encrypted_data": "qAVCFjQOydlfzwlStzso7Lqm1HfZblYD8oDYszrF7Jb8BWQWt2kZukoKFkXB\nCpr+79y2iaMW1i12H90I\n",
+    "iv": "Jma0+DIp1qgjG0f+\n",
+    "auth_tag": "KFmoB61cSiauut2PNtfHzg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "active": {
+    "encrypted_data": "zotE/VCquYv50pSLy9GhBX3I6Gd0\n",
+    "iv": "d56Oh0CZFWMq3adv\n",
+    "auth_tag": "f4/hezEFy8kmkHYAH8BU+A==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "access": {
+    "encrypted_data": "zH8ne1N5wjn7EfMz+2xEc1ft8sMTQbpsIRr6VY4jqw6vl88=\n",
+    "iv": "pT1C/QllwI1FffAv\n",
+    "auth_tag": "t0qUtM1umY4I5DQtPm6iaA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

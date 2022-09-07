@@ -1,0 +1,19 @@
+{
+	"id": "check_cmd",
+	"template_name": "checks/check_cmd.erb",
+	"checks": [
+		{"name" : "iptables",
+		 "subscribers" : ["base"],
+		 "handlers" : ["mailer"],
+		 "interval": 60,
+		 "occurences": 1,
+		 "options" : ["-c", "'service iptables status'", "-s", "0"]},
+		{"name" : "mychart_proxy",
+		 "subscribers" : ["mychart_proxy"],
+		 "handlers" : ["mailer"],
+		 "interval": 60,
+		 "occurences": 1,
+		 "options" : ["-c", "'curl -k https://localhost/iisstart.htm'", "-s", "0"]}
+	]
+
+}

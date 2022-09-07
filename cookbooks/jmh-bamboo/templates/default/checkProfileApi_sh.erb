@@ -1,0 +1,26 @@
+#!/bin/sh
+#set -x
+# Dropped of by Chef
+
+SERVER=$1
+USERID=$2
+PASSWORD=$3
+BASIC_AUTH="<%= @profile_data_bag['basic_auth']['default']['hash'] %>"
+case $4 in
+  <%  @profile_data_bag['basic_auth'].each_key do |envmode| %>
+    <%= envmode %>) BASIC_AUTH=<%= @profile_data_bag['basic_auth'][envmode]['hash'] %>;;
+  <% end %>
+esac
+PORT="8465"
+
+results=`/usr/bin/curl -k -X POST "https://${SERVER}:${PORT}/profile-api/v2/profile/session/authenticate" -H "accept: application/json" -H "authorization: Basic ${BASIC_AUTH}" -H "Content-Type: application/json" -d "{ \"username\": \"${USERID}\",\"password\": \"${PASSWORD}\"}"`
+echo $results | grep -i profileId
+
+if [ $? -eq 0 ]
+then
+  echo "Successful check of ${USERID}"
+  exit 0
+else
+  echo "Failed check of ${USERID}"
+  exit 1
+fi

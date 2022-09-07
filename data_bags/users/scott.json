@@ -1,0 +1,8 @@
+{ 
+  "comment": "Scott Marshall",
+  "groups": ["lock"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDDPmPzpquhwlqdo0Ce0OH3eCkgs5KcUFdVspiE7RzdzOkxplCjYwm2C0iYLgC2SE6kQCGTGD+r22GrKA/AYvKtu7MDiFLKcikP8UZxEwkgsd8upLyxWEsnvMnEmBQZgZOZePpamt5hl0lFfL+1D1jN5zA5tWPNFP5P3yPPG9oSjJrtPv4hLl4A0moieoybFGyWPc0QEHHgZiYEDmTL6lKSqBVBkkbbxI1DEx6KV+7UoyF3/UGnc+cv61Dn5OVAFKMrp/NDL6wHhVfiN+9gR4JVIvW4+5PCcXsiABmrzWCQTA5zc3kc6tYrxwoMUIUGLLXWL/QMD5nR6smbBb00zeGKetT/SNqexGAFg+vqZUJVvCNeaWNNk3Kgu8wAh0qAYbhHSu4PtMGvGsaZPRQJvB2mr/0g0TNlZojMsFvJwnqL+UhW8hVDeCnME7OUoZL//A3/KDVo84gLQOtppQYaRNJy8mzEL/LR6ecGPjt1hxhkqSobjB6G3xJeJ/kcrjATNt7uCibZI8D4JFwkjKwe4zUrWBoW2j5SMCrbLTrzOx0Urn++s/ASJHW87scZt/f4moB8Hq7mfj8tic6sRBz+aE+4rNXZuOQAPXb3GsHgKHQtllauBHHIejHkN1QYLUg9U0+hQ0874AHrFsZT+MuzuyzFpc6IkFz8YqUSee0fqdWsUQ== scott.marshall@johnmuirhealth.com",
+  "id": "scott",
+  "shell": "/bin/false"
+}
+

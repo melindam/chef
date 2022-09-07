@@ -1,0 +1,13 @@
+name             'jmh-prereg'
+maintainer       'John Muir Health'
+maintainer_email 'ebusiness@johnmuirhealth.com'
+license          'all_rights'
+description      'Installs/Configures jmh-prereg'
+long_description 'Installs/Configures jmh-prereg'
+version          '0.3.8'
+
+depends 'jmh-apps'
+depends 'jmh-tomcat'
+depends 'jmh-utilities'
+depends 'jmh-db'
+depends 'openssl'

@@ -1,0 +1,31 @@
+# Dropped of by Chef DO NOT MODIFY 
+
+# Configuration snippets may be placed in this directory as well
+includedir /etc/krb5.conf.d/
+
+[logging]
+ default = FILE:/var/log/krb5libs.log
+ kdc = FILE:/var/log/krb5kdc.log
+ admin_server = FILE:/var/log/kadmind.log
+
+[libdefaults]
+ dns_lookup_realm = true
+ ticket_lifetime = 24h
+ renew_lifetime = 7d
+ forwardable = true
+ rdns = false
+ pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
+ default_ccache_name = KEYRING:persistent:%{uid}
+ default_realm = HSYS.LOCAL
+ dns_lookup_kdc = true
+
+[realms]
+ HSYS.LOCAL = {
+  admin_server = hsys.local:464
+  kdc = hsys.local:88
+ }
+
+[domain_realm]
+ hsys.local = HSYS.LOCAL
+ .hsys.local = HSYS.LOCAL
+ 

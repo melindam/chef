@@ -1,0 +1,107 @@
+#!/bin/sh
+#set -x
+
+### Config Section ###
+URL="https://<%= @hostname %>:<%= @port%><%= @check_page %>"
+APP_NAME="<%= @app_name %>"
+LOG=<%= @log_file %>
+LOCALHOST_NAME=`hostname`
+
+STATUS=10
+URL_CODE=
+MESSAGE=
+CURRENT=`date +"%Y-%m-%d %H:%M:%S"`
+GOOD_RESPONSE="HTTP/1.1 200"
+## Config End ###
+
+### Functions ###
+function checkCrowd() {
+        CURRENT=`date +"%Y-%m-%d %H:%M:%S"`
+        URL_CODE=`/usr/bin/curl "$URL" -k -I | grep -e "HTTP/1.1"`
+        STATUS=$?
+        echo "$URL_CODE" | grep "$GOOD_RESPONSE"
+        URL_CODE_STATUS=$?
+        if [ $STATUS -ne 0 ] || [ $URL_CODE_STATUS -ne 0 ]
+        then
+                MESSAGE="FAIL|Bad URL Code: $URL_CODE"
+        else
+                MESSAGE="SUCCESS|$GOOD_RESPONSE"
+        fi
+        echo "$CURRENT|$MESSAGE" >> $LOG
+}
+
+
+
+function isProcessRunning() {
+	PROCESS=`ps ax | fgrep java | fgrep <%= @app_name %> | fgrep -v "fgrep"`
+}
+
+function restartCrowd() {
+	echo "Now Restarting"
+  <%= @restart_script %> stop
+	sleep 3
+	kill -9 $1
+	sleep 3
+  <%= @restart_script %> start
+}
+
+### Main Program ###
+PID=`ps -ef | fgrep java | fgrep <%= @app_name %> | awk '/<%= @process_owner %>/&&!/awk/{print $2}'`
+
+if [ "$1" = "-f" ]
+then
+	FORCE_CHECK=1
+fi
+# Check if crowd just started
+if [ $FORCE_CHECK -ne 1 ]
+then
+	isProcessRunning
+	if [ $? -eq 0 ]
+	then
+		PID_STATUS=`find <%= @cfg_dir %> -type f -name "<%= @cfg_file %>" -mmin -5`
+		if [ -n "$PID_STATUS" ]
+		then
+			echo "Crowd started within 5 minutes, skipping test"
+			exit 0;
+		fi
+	else
+		echo "No process.  Wait 20 seconds and the check."
+		sleep 20
+		isProcessRunning
+		if [ $? -eq 0 ]
+		then
+			echo "Process just kicked off, skipping test"
+			exit 0
+		fi
+	fi
+fi
+
+checkCrowd
+
+if [ "$MESSAGE" != "SUCCESS|$GOOD_RESPONSE" ]
+then
+	echo "Fail:$URL_CODE"
+	# Email team that you will restart
+	echo "Bad Response: $URL_CODE.  Going for a Restart" | mail -s "$LOCALHOST_NAME <%= @app_name %> Restart" <%= @email %>
+	#echo "starting dump"
+	#`<%= @java_home%>/bin/jmap -dump:file=/root/crowd_dump$$.bin -F $PID`
+  `kill -3 $PID`
+
+	restartCrowd "$PID"
+
+	# Wait for Restart
+	sleep 90
+	# check one more time
+	checkCrowd
+
+	if [ "$MESSAGE" != "SUCCESS|$GOOD_RESPONSE" ]
+	then
+		echo "Bad Response: $URL_CODE" | mail -s "$LOCALHOST_NAME <%= @app_name %> Failed Restart" <%= @email %>
+	else
+		echo "Success: $URL_CODE" | mail -s "$LOCALHOST_NAME <%= @app_name %> Successful Restart" <%= @email %>
+	fi
+	sleep 600
+else
+	# Send to Log File
+	echo "Success:$URL_CODE"
+fi

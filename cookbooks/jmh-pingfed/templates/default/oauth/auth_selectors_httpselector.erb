@@ -1,0 +1,28 @@
+{
+  "id": "httpselector",
+  "name": "HTTP SELECTOR",
+  "pluginDescriptorRef": {
+    "id": "com.pingidentity.pf.selectors.http.HttpRequestParamAuthnSelector",
+    "location": "https://<%= @server_hostname %>:9999/pf-admin-api/v1/authenticationSelectors/descriptors/com.pingidentity.pf.selectors.http.HttpRequestParamAuthnSelector"
+  },
+  "configuration": {
+    "tables": [],
+    "fields": [
+      {
+        "name": "HTTP Request Parameter Name",
+        "value": "client_id"
+      },
+      {
+        "name": "Case-Sensitive Matching",
+        "value": "true"
+      }
+    ]
+  },
+  "attributeContract": {
+    "extendedAttributes": [
+      {
+        "name": "fhir"
+      }
+    ]
+  }
+}

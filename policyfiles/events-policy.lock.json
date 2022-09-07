@@ -1,0 +1,1490 @@
+{
+  "revision_id": "ce37af45288584e45f97aae2f0b7fae82d9a3022a9d71aba716c4974896a8725",
+  "name": "events",
+  "run_list": [
+    "recipe[jmh-server::default]",
+    "recipe[jmh-events::default]"
+  ],
+  "included_policy_locks": [
+    {
+      "name": "base",
+      "revision_id": "cf5a532b626fc4e49000f1f919323ba45eb65f47c5fdc553cfac7e87f278acfd",
+      "source_options": {
+        "path": "base-policy.lock.json"
+      }
+    }
+  ],
+  "cookbook_locks": {
+    "apache2": {
+      "version": "3.3.0",
+      "identifier": "9679bc9c57378ba4b88141149edb346eb5a68bd3",
+      "dotted_decimal_identifier": "42355097490372491.46364761462709979.57650098637779",
+      "cache_key": "apache2-3.3.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/apache2/versions/3.3.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/apache2/versions/3.3.0/download",
+        "version": "3.3.0"
+      }
+    },
+    "ark": {
+      "version": "4.0.0",
+      "identifier": "5d82df37c1f7d6f64b0afe4eb8f8affbad642025",
+      "dotted_decimal_identifier": "26321068058867670.69325354859149560.193495480672293",
+      "cache_key": "ark-4.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ark/versions/4.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ark/versions/4.0.0/download",
+        "version": "4.0.0"
+      }
+    },
+    "build-essential": {
+      "version": "8.2.1",
+      "identifier": "4b9d5c72796184085681d3eefd625c90b79530a8",
+      "dotted_decimal_identifier": "21283643636408708.2346915420110178.101776625053864",
+      "cache_key": "build-essential-8.2.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.2.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.2.1/download",
+        "version": "8.2.1"
+      }
+    },
+    "chef-client": {
+      "version": "11.3.4",
+      "identifier": "66bc883905fbf519e878722f851c5ba8c6e8c968",
+      "dotted_decimal_identifier": "28917740882754549.7292478427202844.100780449778024",
+      "cache_key": "chef-client-11.3.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef-client/versions/11.3.4/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef-client/versions/11.3.4/download",
+        "version": "11.3.4"
+      }
+    },
+    "chef_client_updater": {
+      "version": "3.5.3",
+      "identifier": "435a9d30a164e0ef68c2bba8562991f592993004",
+      "dotted_decimal_identifier": "18958454611862752.67387705015162409.160483912527876",
+      "cache_key": "chef_client_updater-3.5.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_client_updater/versions/3.5.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_client_updater/versions/3.5.3/download",
+        "version": "3.5.3"
+      }
+    },
+    "chef_handler": {
+      "version": "3.0.3",
+      "identifier": "4d1b0688e8699097d2e921a3271b2667dc8ffcde",
+      "dotted_decimal_identifier": "21703288087406992.42734620216862491.42227523910878",
+      "cache_key": "chef_handler-3.0.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.3/download",
+        "version": "3.0.3"
+      }
+    },
+    "cron": {
+      "version": "6.2.2",
+      "identifier": "602e43b375c9dd2dc5f4540b50f34c1fe6692ab7",
+      "dotted_decimal_identifier": "27072466072750557.12884027124699379.83699893349047",
+      "cache_key": "cron-6.2.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/cron/versions/6.2.2/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/cron/versions/6.2.2/download",
+        "version": "6.2.2"
+      }
+    },
+    "database": {
+      "version": "6.1.2",
+      "identifier": "6e8c217c00bdbf1c1c602c85734648a0e847361a",
+      "dotted_decimal_identifier": "31116322880404927.7912498737279814.79855928948250",
+      "cache_key": "database-2ac3a03918f48c2aaaf2115b30030755ada9c80d",
+      "origin": "git@github.com:scottymarshall/database.git",
+      "source_options": {
+        "git": "git@github.com:scottymarshall/database.git",
+        "revision": "2ac3a03918f48c2aaaf2115b30030755ada9c80d"
+      }
+    },
+    "discovery": {
+      "version": "0.2.2",
+      "identifier": "3880c04aca1b2a0190e985e90429ff1a21956c1a",
+      "dotted_decimal_identifier": "15904162072632106.440807625131049.280487697673242",
+      "cache_key": "discovery-0.2.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/discovery/versions/0.2.2/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/discovery/versions/0.2.2/download",
+        "version": "0.2.2"
+      }
+    },
+    "dm-crypt": {
+      "version": "0.1.1",
+      "identifier": "36bd7dc2e678645e206b01b4525f3df5e4553d60",
+      "dotted_decimal_identifier": "15407996580821092.26494291772985951.68126307073376",
+      "cache_key": "dm-crypt-0.1.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/dm-crypt/versions/0.1.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/dm-crypt/versions/0.1.1/download",
+        "version": "0.1.1"
+      }
+    },
+    "dpkg_autostart": {
+      "version": "0.2.0",
+      "identifier": "cc01affe684c2a2dc2f49508529730e301bde065",
+      "dotted_decimal_identifier": "57422750648126506.12880729680138903.53751544930405",
+      "cache_key": "dpkg_autostart-0.2.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/dpkg_autostart/versions/0.2.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/dpkg_autostart/versions/0.2.0/download",
+        "version": "0.2.0"
+      }
+    },
+    "git": {
+      "version": "9.0.1",
+      "identifier": "260cfe920ed414d5288948ca45c921d72d161358",
+      "dotted_decimal_identifier": "10710336626676756.59998740136216009.37208058106712",
+      "cache_key": "git-9.0.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/git/versions/9.0.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/git/versions/9.0.1/download",
+        "version": "9.0.1"
+      }
+    },
+    "homebrew": {
+      "version": "5.0.8",
+      "identifier": "072611ae06a863c842644c85bf776ffe18f59b0a",
+      "dotted_decimal_identifier": "2012182212946019.56367993890127735.123137131125514",
+      "cache_key": "homebrew-5.0.8-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.8/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.8/download",
+        "version": "5.0.8"
+      }
+    },
+    "hostsfile": {
+      "version": "2.4.3",
+      "identifier": "d7070a61d280d6229e3592e6fb2669a537b215e5",
+      "dotted_decimal_identifier": "60524861165043926.9744102143228710.116158324938213",
+      "cache_key": "hostsfile-2.4.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/hostsfile/versions/2.4.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/hostsfile/versions/2.4.3/download",
+        "version": "2.4.3"
+      }
+    },
+    "iptables": {
+      "version": "0.15.0",
+      "identifier": "6f710ee5641611eab5420717e9c016a0b7f0a572",
+      "dotted_decimal_identifier": "31368031206905361.66064439741770176.24879536579954",
+      "cache_key": "iptables-402a37e585757fa68a40d63df6f61bdf08b35723",
+      "origin": "git@github.com:scottymarshall/iptables.git",
+      "source_options": {
+        "git": "git@github.com:scottymarshall/iptables.git",
+        "revision": "402a37e585757fa68a40d63df6f61bdf08b35723"
+      }
+    },
+    "java": {
+      "version": "4.3.0",
+      "identifier": "654c6e9afe85561edf1b79facd55816f552176f7",
+      "dotted_decimal_identifier": "28513010578261334.8689558404910421.142315169609463",
+      "cache_key": "java-4.3.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/java/versions/4.3.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/java/versions/4.3.0/download",
+        "version": "4.3.0"
+      }
+    },
+    "jmh-apps": {
+      "version": "1.2.0",
+      "identifier": "93d2e2fe1d5b3640d1d3a373bc0a7070505c787d",
+      "dotted_decimal_identifier": "41608693944245046.18245105420057610.123627686885501",
+      "source": "../cookbooks/jmh-apps",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-apps"
+      }
+    },
+    "jmh-crowd": {
+      "version": "2.4.4",
+      "identifier": "b87965049c1e379ead07fcd8a9a2338b646f3750",
+      "dotted_decimal_identifier": "51924870490758711.44663296138717602.56673778480976",
+      "source": "../cookbooks/jmh-crowd",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-crowd"
+      }
+    },
+    "jmh-db": {
+      "version": "0.5.16",
+      "identifier": "0e9d65675f12ea1dfde16616127c3645f80a57b2",
+      "dotted_decimal_identifier": "4113708525490922.8441918846800508.59674142070706",
+      "source": "../cookbooks/jmh-db",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-db"
+      }
+    },
+    "jmh-encrypt": {
+      "version": "0.1.2",
+      "identifier": "9fe565d3a2661ba7b9698040a16cfc8ff0ddbeff",
+      "dotted_decimal_identifier": "45006746802087451.47210183885103468.277695151587071",
+      "source": "../cookbooks/jmh-encrypt",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-encrypt"
+      }
+    },
+    "jmh-epic": {
+      "version": "0.1.9",
+      "identifier": "e6f9952fee97ddf9b5aa3ac71803ced45679994b",
+      "dotted_decimal_identifier": "65013663793059805.70287011936147459.227411379198283",
+      "source": "../cookbooks/jmh-epic",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-epic"
+      }
+    },
+    "jmh-events": {
+      "version": "0.2.6",
+      "identifier": "29b6f0c7001871669a217d60807ee77e434a60c7",
+      "dotted_decimal_identifier": "11741619292215409.28879916252561534.254529480843463",
+      "source": "../cookbooks/jmh-events",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-events"
+      }
+    },
+    "jmh-java": {
+      "version": "0.2.14",
+      "identifier": "d5300919ebf7d537e96172bde1caf2ee2152ab7a",
+      "dotted_decimal_identifier": "60006985687103445.15737728465232330.267104575204218",
+      "source": "../cookbooks/jmh-java",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-java"
+      }
+    },
+    "jmh-pingfed": {
+      "version": "0.4.1",
+      "identifier": "fa43afbb21c457c52e32897ee694bdf7cce3e44f",
+      "dotted_decimal_identifier": "70443166215554135.55501365002036884.208871992058959",
+      "source": "../cookbooks/jmh-pingfed",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-pingfed"
+      }
+    },
+    "jmh-server": {
+      "version": "1.5.8",
+      "identifier": "fd04d0f2026ec994ce9655cdc4e2f4263b1f231f",
+      "dotted_decimal_identifier": "71218464567750345.41885441633141986.268445037830943",
+      "source": "../cookbooks/jmh-server",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-server"
+      }
+    },
+    "jmh-tomcat": {
+      "version": "0.6.7",
+      "identifier": "b7df46f1604d24bc74db111ba412bad86380915e",
+      "dotted_decimal_identifier": "51755416528375076.53045779855287314.205438545072478",
+      "source": "../cookbooks/jmh-tomcat",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-tomcat"
+      }
+    },
+    "jmh-utilities": {
+      "version": "0.1.19",
+      "identifier": "402aa45a54d29df80684b282cb4cb74a9b26b400",
+      "dotted_decimal_identifier": "18061283887993501.69812961224608588.201531058467840",
+      "source": "../cookbooks/jmh-utilities",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-utilities"
+      }
+    },
+    "jmh-webserver": {
+      "version": "0.5.26",
+      "identifier": "69f7b732cf55f96f7d404eb0f14d5b2070d58aad",
+      "dotted_decimal_identifier": "29827238758143481.31381437566480717.100194890123949",
+      "source": "../cookbooks/jmh-webserver",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:JohnMuirHealth/chef-repo.git",
+        "revision": "dbbb60cee8aaa492ace45256967750b204d29202",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/scott"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/jmh-webserver"
+      }
+    },
+    "logrotate": {
+      "version": "2.2.2",
+      "identifier": "bd20a5c5c2c06cb301f5903e61fe3749357a7755",
+      "dotted_decimal_identifier": "53234666957881452.50386175029830142.60787569358677",
+      "cache_key": "logrotate-2.2.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/logrotate/versions/2.2.2/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/logrotate/versions/2.2.2/download",
+        "version": "2.2.2"
+      }
+    },
+    "mingw": {
+      "version": "2.1.0",
+      "identifier": "9f5d572c671e4a85015941a73f9d8f54820af19e",
+      "dotted_decimal_identifier": "44857150285487690.37437654767714205.157593121780126",
+      "cache_key": "mingw-2.1.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/2.1.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/2.1.0/download",
+        "version": "2.1.0"
+      }
+    },
+    "mysql": {
+      "version": "8.5.2",
+      "identifier": "b9cd0ddf3233aecdf7ff413e839a93ef289752d6",
+      "dotted_decimal_identifier": "52298330154349486.57975045909021594.162655387472598",
+      "cache_key": "mysql-d157981c415d32bd26df72dbe0aec26ab1cebb7b",
+      "origin": "git@github.com:scottymarshall/mysql.git",
+      "source_options": {
+        "git": "git@github.com:scottymarshall/mysql.git",
+        "revision": "d157981c415d32bd26df72dbe0aec26ab1cebb7b",
+        "branch": "chef13_changes"
+      }
+    },
+    "mysql_connector": {
+      "version": "0.8.1",
+      "identifier": "41ce7c8b9ead377f2a97458f92398dac2d798ea2",
+      "dotted_decimal_identifier": "18522907799891255.35794151237718585.155770636832418",
+      "cache_key": "mysql_connector-0.8.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mysql_connector/versions/0.8.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mysql_connector/versions/0.8.1/download",
+        "version": "0.8.1"
+      }
+    },
+    "ntp": {
+      "version": "3.7.0",
+      "identifier": "e78794a444524ab708cd1c50ddf5a5a3bb037e66",
+      "dotted_decimal_identifier": "65169792101012042.51519597774429685.182122635820646",
+      "cache_key": "ntp-3.7.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/3.7.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/3.7.0/download",
+        "version": "3.7.0"
+      }
+    },
+    "openldap": {
+      "version": "4.0.0",
+      "identifier": "e619681185410a04897745a9c17b585f34160ce0",
+      "dotted_decimal_identifier": "64767179404689674.1277045269709179.97165918997728",
+      "cache_key": "openldap-4.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/openldap/versions/4.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/openldap/versions/4.0.0/download",
+        "version": "4.0.0"
+      }
+    },
+    "openssl": {
+      "version": "8.5.5",
+      "identifier": "45fc200d16a306f36d43900044d66a9f296ed914",
+      "dotted_decimal_identifier": "19698987981775622.68518556286862550.117231827474708",
+      "cache_key": "openssl-8.5.5-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/openssl/versions/8.5.5/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/openssl/versions/8.5.5/download",
+        "version": "8.5.5"
+      }
+    },
+    "php": {
+      "version": "7.0.0",
+      "identifier": "77f92e954e284db7dc33ba5ff9a52339efaaa5b2",
+      "dotted_decimal_identifier": "33769500697307213.51752035466344869.38731741046194",
+      "cache_key": "php-7.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/php/versions/7.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/php/versions/7.0.0/download",
+        "version": "7.0.0"
+      }
+    },
+    "pingfederate": {
+      "version": "0.3.0",
+      "identifier": "b9fe09508a74b05daaf51783886f42f2c6c74c93",
+      "dotted_decimal_identifier": "52352186650883248.26365142472296559.73610484468883",
+      "cache_key": "pingfederate-aa2834569ddd53691c472014863822376ec4382b",
+      "origin": "git@github.com:scottymarshall/pingfederate.git",
+      "source_options": {
+        "git": "git@github.com:scottymarshall/pingfederate.git",
+        "revision": "aa2834569ddd53691c472014863822376ec4382b",
+        "branch": "cluster-capable"
+      }
+    },
+    "postfix": {
+      "version": "5.3.1",
+      "identifier": "056b45399cf83081fcac07623433a80fc06ac844",
+      "dotted_decimal_identifier": "1525319947057200.36588087784125491.184785606199364",
+      "cache_key": "postfix-5.3.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/postfix/versions/5.3.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/postfix/versions/5.3.1/download",
+        "version": "5.3.1"
+      }
+    },
+    "postgresql": {
+      "version": "7.1.4",
+      "identifier": "40ae76daa03ca00ec1b9a944d747b004aea57221",
+      "dotted_decimal_identifier": "18206224006790304.4153652826920775.193534156436001",
+      "cache_key": "postgresql-7.1.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/postgresql/versions/7.1.4/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/postgresql/versions/7.1.4/download",
+        "version": "7.1.4"
+      }
+    },
+    "s3_file": {
+      "version": "2.8.5",
+      "identifier": "c403c984149cd15a044c7f83f053ed2b98234adb",
+      "dotted_decimal_identifier": "55173259474541777.25337474507337811.260771491826395",
+      "cache_key": "s3_file-2.8.5-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/s3_file/versions/2.8.5/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/s3_file/versions/2.8.5/download",
+        "version": "2.8.5"
+      }
+    },
+    "selinux": {
+      "version": "3.0.0",
+      "identifier": "7017a92afa3f0098c0747a304cbe4fcccd7d7fa6",
+      "dotted_decimal_identifier": "31551212729548544.42995802958744766.87741039476646",
+      "cache_key": "selinux-3.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/selinux/versions/3.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/selinux/versions/3.0.0/download",
+        "version": "3.0.0"
+      }
+    },
+    "seven_zip": {
+      "version": "3.1.2",
+      "identifier": "0e1fed3b56aa5e84205e330d92aca22d8704a014",
+      "dotted_decimal_identifier": "3975753437194846.37190285881348780.178316422455316",
+      "cache_key": "seven_zip-3.1.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/3.1.2/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/3.1.2/download",
+        "version": "3.1.2"
+      }
+    },
+    "ssh_known_hosts": {
+      "version": "7.0.0",
+      "identifier": "c4d24783a2c2bd5bd0bf733b817d9cc17bc6d999",
+      "dotted_decimal_identifier": "55400300028281533.25843743571280253.172354819250585",
+      "cache_key": "ssh_known_hosts-7.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ssh_known_hosts/versions/7.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ssh_known_hosts/versions/7.0.0/download",
+        "version": "7.0.0"
+      }
+    },
+    "subversion": {
+      "version": "3.0.0",
+      "identifier": "2c1f3f4f0e71d8fc8c02c9c324f1e149d762affb",
+      "dotted_decimal_identifier": "12419255745016280.71085637733917937.247707262431227",
+      "cache_key": "subversion-3.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/subversion/versions/3.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/subversion/versions/3.0.0/download",
+        "version": "3.0.0"
+      }
+    },
+    "sudo": {
+      "version": "5.4.4",
+      "identifier": "4a4001d9714ca71ad2b10d4bca500d96d9d61b0a",
+      "dotted_decimal_identifier": "20899524963814567.7550007268592208.14941550942986",
+      "cache_key": "sudo-5.4.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/sudo/versions/5.4.4/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/sudo/versions/5.4.4/download",
+        "version": "5.4.4"
+      }
+    },
+    "systemd": {
+      "version": "3.2.4",
+      "identifier": "71ac8154375761c6b042d859805adef9123c231c",
+      "dotted_decimal_identifier": "31996343831975777.55925846532784218.245161334154012",
+      "cache_key": "systemd-3.2.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/systemd/versions/3.2.4/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/systemd/versions/3.2.4/download",
+        "version": "3.2.4"
+      }
+    },
+    "tar": {
+      "version": "2.2.0",
+      "identifier": "ef3a79aca8f810cb10d63d3da2e722fa5131994f",
+      "dotted_decimal_identifier": "67336813696055312.57157932608758503.38458499373391",
+      "cache_key": "tar-2.2.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/tar/versions/2.2.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/tar/versions/2.2.0/download",
+        "version": "2.2.0"
+      }
+    },
+    "timezone-ii": {
+      "version": "0.2.2",
+      "identifier": "9961b834c933ec82e3c21616b3fa66cb349bafe4",
+      "dotted_decimal_identifier": "43173115224208364.36842169706132474.113022947012580",
+      "cache_key": "timezone-ii-59bcada94981bbd5cbfce9060c9d282001a102cc",
+      "origin": "git@github.com:scottymarshall/timezone-ii.git",
+      "source_options": {
+        "git": "git@github.com:scottymarshall/timezone-ii.git",
+        "revision": "59bcada94981bbd5cbfce9060c9d282001a102cc"
+      }
+    },
+    "users": {
+      "version": "5.4.0",
+      "identifier": "f64164d4237cb2d6a888728bc1fc8e61d6a6ca11",
+      "dotted_decimal_identifier": "69314745582451890.60420949006860796.156550864226833",
+      "cache_key": "users-5.4.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/users/versions/5.4.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/users/versions/5.4.0/download",
+        "version": "5.4.0"
+      }
+    },
+    "windows": {
+      "version": "6.0.1",
+      "identifier": "042f33803f392155c065c33572f454070c4a3a4d",
+      "dotted_decimal_identifier": "1177798148307233.24136916319695604.92389247695437",
+      "cache_key": "windows-6.0.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/6.0.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/6.0.1/download",
+        "version": "6.0.1"
+      }
+    },
+    "xml": {
+      "version": "3.1.2",
+      "identifier": "91882847854d92d3e707e9fd6a3ed03c440434ab",
+      "dotted_decimal_identifier": "40963578203032978.59645241262434878.228957257741483",
+      "cache_key": "xml-3.1.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/xml/versions/3.1.2/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/xml/versions/3.1.2/download",
+        "version": "3.1.2"
+      }
+    },
+    "yum": {
+      "version": "5.1.0",
+      "identifier": "705aaff4ddd04afff64efc8c738cfea4fd628e82",
+      "dotted_decimal_identifier": "31624909165547594.72046938166162316.279984579186306",
+      "cache_key": "yum-5.1.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/yum/versions/5.1.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/yum/versions/5.1.0/download",
+        "version": "5.1.0"
+      }
+    },
+    "yum-epel": {
+      "version": "3.3.0",
+      "identifier": "187c02d6cef471b7f37402ac80fb6ca2db347732",
+      "dotted_decimal_identifier": "6891751076721777.51777600324665595.119446718150450",
+      "cache_key": "yum-epel-3.3.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/yum-epel/versions/3.3.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/yum-epel/versions/3.3.0/download",
+        "version": "3.3.0"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "apache2",
+        "= 3.3.0"
+      ],
+      [
+        "ark",
+        "= 4.0.0"
+      ],
+      [
+        "build-essential",
+        "= 8.2.1"
+      ],
+      [
+        "chef-client",
+        "= 11.3.4"
+      ],
+      [
+        "chef_client_updater",
+        "= 3.5.3"
+      ],
+      [
+        "chef_handler",
+        "= 3.0.3"
+      ],
+      [
+        "cron",
+        "= 6.2.2"
+      ],
+      [
+        "database",
+        ">= 0.0.0"
+      ],
+      [
+        "discovery",
+        "= 0.2.2"
+      ],
+      [
+        "dm-crypt",
+        "= 0.1.1"
+      ],
+      [
+        "dpkg_autostart",
+        "= 0.2.0"
+      ],
+      [
+        "git",
+        "= 9.0.1"
+      ],
+      [
+        "homebrew",
+        "= 5.0.8"
+      ],
+      [
+        "hostsfile",
+        "= 2.4.3"
+      ],
+      [
+        "iptables",
+        "= 0.15.0"
+      ],
+      [
+        "java",
+        "= 4.3.0"
+      ],
+      [
+        "jmh-apps",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-crowd",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-db",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-encrypt",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-epic",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-events",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-java",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-pingfed",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-server",
+        "= 1.5.8"
+      ],
+      [
+        "jmh-tomcat",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-utilities",
+        ">= 0.0.0"
+      ],
+      [
+        "jmh-webserver",
+        ">= 0.0.0"
+      ],
+      [
+        "logrotate",
+        "= 2.2.2"
+      ],
+      [
+        "mingw",
+        "= 2.1.0"
+      ],
+      [
+        "mysql",
+        ">= 0.0.0"
+      ],
+      [
+        "mysql_connector",
+        "= 0.8.1"
+      ],
+      [
+        "ntp",
+        "= 3.7.0"
+      ],
+      [
+        "openldap",
+        "= 4.0.0"
+      ],
+      [
+        "openssl",
+        "= 8.5.5"
+      ],
+      [
+        "php",
+        "= 7.0.0"
+      ],
+      [
+        "pingfederate",
+        ">= 0.0.0"
+      ],
+      [
+        "postfix",
+        "= 5.3.1"
+      ],
+      [
+        "postgresql",
+        "= 7.1.4"
+      ],
+      [
+        "s3_file",
+        "= 2.8.5"
+      ],
+      [
+        "selinux",
+        "= 3.0.0"
+      ],
+      [
+        "seven_zip",
+        "= 3.1.2"
+      ],
+      [
+        "ssh_known_hosts",
+        "= 7.0.0"
+      ],
+      [
+        "subversion",
+        "= 3.0.0"
+      ],
+      [
+        "sudo",
+        "= 5.4.4"
+      ],
+      [
+        "systemd",
+        "= 3.2.4"
+      ],
+      [
+        "tar",
+        "= 2.2.0"
+      ],
+      [
+        "timezone-ii",
+        "= 0.2.2"
+      ],
+      [
+        "users",
+        "= 5.4.0"
+      ],
+      [
+        "windows",
+        "= 6.0.1"
+      ],
+      [
+        "xml",
+        "= 3.1.2"
+      ],
+      [
+        "yum",
+        "= 5.1.0"
+      ],
+      [
+        "yum-epel",
+        "= 3.3.0"
+      ]
+    ],
+    "dependencies": {
+      "apache2 (3.3.0)": [
+
+      ],
+      "ark (4.0.0)": [
+        [
+          "build-essential",
+          ">= 0.0.0"
+        ],
+        [
+          "seven_zip",
+          ">= 0.0.0"
+        ]
+      ],
+      "build-essential (8.2.1)": [
+        [
+          "seven_zip",
+          ">= 0.0.0"
+        ],
+        [
+          "mingw",
+          ">= 1.1.0"
+        ]
+      ],
+      "chef-client (11.3.4)": [
+        [
+          "cron",
+          ">= 4.2.0"
+        ],
+        [
+          "logrotate",
+          ">= 1.9.0"
+        ]
+      ],
+      "chef_client_updater (3.5.3)": [
+
+      ],
+      "chef_handler (3.0.3)": [
+
+      ],
+      "cron (6.2.2)": [
+
+      ],
+      "database (6.1.2)": [
+        [
+          "postgresql",
+          ">= 1.0.0"
+        ]
+      ],
+      "discovery (0.2.2)": [
+
+      ],
+      "dm-crypt (0.1.1)": [
+
+      ],
+      "dpkg_autostart (0.2.0)": [
+
+      ],
+      "git (9.0.1)": [
+        [
+          "build-essential",
+          ">= 5.0.0"
+        ]
+      ],
+      "homebrew (5.0.8)": [
+
+      ],
+      "hostsfile (2.4.3)": [
+
+      ],
+      "iptables (0.15.0)": [
+
+      ],
+      "java (4.3.0)": [
+        [
+          "homebrew",
+          ">= 0.0.0"
+        ],
+        [
+          "windows",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-apps (1.2.0)": [
+        [
+          "jmh-db",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-server",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-tomcat",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-crowd",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-java",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-webserver",
+          ">= 0.0.0"
+        ],
+        [
+          "mysql",
+          ">= 0.0.0"
+        ],
+        [
+          "openssl",
+          ">= 0.0.0"
+        ],
+        [
+          "database",
+          ">= 0.0.0"
+        ],
+        [
+          "subversion",
+          ">= 0.0.0"
+        ],
+        [
+          "logrotate",
+          ">= 0.0.0"
+        ],
+        [
+          "discovery",
+          ">= 0.0.0"
+        ],
+        [
+          "ssh_known_hosts",
+          ">= 0.0.0"
+        ],
+        [
+          "hostsfile",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-crowd (2.4.4)": [
+        [
+          "apache2",
+          ">= 0.0.0"
+        ],
+        [
+          "iptables",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-java",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-utilities",
+          ">= 0.0.0"
+        ],
+        [
+          "mysql",
+          ">= 0.0.0"
+        ],
+        [
+          "mysql_connector",
+          ">= 0.0.0"
+        ],
+        [
+          "openssl",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-db",
+          ">= 0.0.0"
+        ],
+        [
+          "systemd",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-db (0.5.16)": [
+        [
+          "database",
+          "> 6.1.1"
+        ],
+        [
+          "jmh-encrypt",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-server",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-utilities",
+          ">= 0.0.0"
+        ],
+        [
+          "logrotate",
+          ">= 0.0.0"
+        ],
+        [
+          "mysql",
+          "~> 8.5.0"
+        ],
+        [
+          "openssl",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-encrypt (0.1.2)": [
+        [
+          "dm-crypt",
+          ">= 0.0.0"
+        ],
+        [
+          "openssl",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-epic (0.1.9)": [
+        [
+          "jmh-server",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-events (0.2.6)": [
+        [
+          "jmh-apps",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-crowd",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-tomcat",
+          ">= 0.6.4"
+        ],
+        [
+          "jmh-db",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-utilities",
+          ">= 0.0.0"
+        ],
+        [
+          "openssl",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-java (0.2.14)": [
+        [
+          "java",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-pingfed (0.4.1)": [
+        [
+          "apache2",
+          ">= 0.0.0"
+        ],
+        [
+          "iptables",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-db",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-java",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-server",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-epic",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-utilities",
+          ">= 0.0.0"
+        ],
+        [
+          "openldap",
+          ">= 0.0.0"
+        ],
+        [
+          "openssl",
+          ">= 0.0.0"
+        ],
+        [
+          "pingfederate",
+          "~> 0.3.0"
+        ]
+      ],
+      "jmh-server (1.5.8)": [
+        [
+          "chef-client",
+          ">= 0.0.0"
+        ],
+        [
+          "chef_handler",
+          ">= 0.0.0"
+        ],
+        [
+          "chef_client_updater",
+          ">= 0.0.0"
+        ],
+        [
+          "git",
+          ">= 0.0.0"
+        ],
+        [
+          "iptables",
+          ">= 0.0.0"
+        ],
+        [
+          "ntp",
+          ">= 0.0.0"
+        ],
+        [
+          "postfix",
+          ">= 4.0.0"
+        ],
+        [
+          "ssh_known_hosts",
+          ">= 0.0.0"
+        ],
+        [
+          "selinux",
+          ">= 0.0.0"
+        ],
+        [
+          "sudo",
+          ">= 0.0.0"
+        ],
+        [
+          "systemd",
+          ">= 0.0.0"
+        ],
+        [
+          "timezone-ii",
+          ">= 0.0.0"
+        ],
+        [
+          "users",
+          ">= 0.0.0"
+        ],
+        [
+          "yum",
+          ">= 0.0.0"
+        ],
+        [
+          "yum-epel",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-tomcat (0.6.7)": [
+        [
+          "ark",
+          ">= 0.0.0"
+        ],
+        [
+          "iptables",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-encrypt",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-java",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-utilities",
+          ">= 0.0.0"
+        ],
+        [
+          "logrotate",
+          ">= 0.0.0"
+        ],
+        [
+          "mysql_connector",
+          ">= 0.0.0"
+        ],
+        [
+          "systemd",
+          ">= 0.0.0"
+        ],
+        [
+          "tar",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-utilities (0.1.19)": [
+        [
+          "hostsfile",
+          ">= 0.0.0"
+        ],
+        [
+          "s3_file",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-java",
+          ">= 0.0.0"
+        ]
+      ],
+      "jmh-webserver (0.5.26)": [
+        [
+          "apache2",
+          ">= 3.3.0"
+        ],
+        [
+          "iptables",
+          ">= 0.0.0"
+        ],
+        [
+          "xml",
+          ">= 0.0.0"
+        ],
+        [
+          "php",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-encrypt",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-epic",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-pingfed",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-server",
+          ">= 0.0.0"
+        ],
+        [
+          "jmh-utilities",
+          ">= 0.0.0"
+        ],
+        [
+          "logrotate",
+          ">= 1.9.0"
+        ]
+      ],
+      "logrotate (2.2.2)": [
+
+      ],
+      "mingw (2.1.0)": [
+        [
+          "seven_zip",
+          ">= 0.0.0"
+        ]
+      ],
+      "mysql (8.5.2)": [
+
+      ],
+      "mysql_connector (0.8.1)": [
+
+      ],
+      "ntp (3.7.0)": [
+
+      ],
+      "openldap (4.0.0)": [
+        [
+          "dpkg_autostart",
+          ">= 0.0.0"
+        ]
+      ],
+      "openssl (8.5.5)": [
+
+      ],
+      "php (7.0.0)": [
+        [
+          "yum-epel",
+          ">= 0.0.0"
+        ]
+      ],
+      "pingfederate (0.3.0)": [
+        [
+          "java",
+          ">= 0.0.0"
+        ],
+        [
+          "systemd",
+          ">= 0.0.0"
+        ]
+      ],
+      "postfix (5.3.1)": [
+
+      ],
+      "postgresql (7.1.4)": [
+
+      ],
+      "s3_file (2.8.5)": [
+
+      ],
+      "selinux (3.0.0)": [
+
+      ],
+      "seven_zip (3.1.2)": [
+        [
+          "windows",
+          ">= 0.0.0"
+        ]
+      ],
+      "ssh_known_hosts (7.0.0)": [
+
+      ],
+      "subversion (3.0.0)": [
+        [
+          "apache2",
+          ">= 2.0.0"
+        ]
+      ],
+      "sudo (5.4.4)": [
+
+      ],
+      "systemd (3.2.4)": [
+
+      ],
+      "tar (2.2.0)": [
+
+      ],
+      "timezone-ii (0.2.2)": [
+
+      ],
+      "users (5.4.0)": [
+
+      ],
+      "windows (6.0.1)": [
+
+      ],
+      "xml (3.1.2)": [
+        [
+          "build-essential",
+          ">= 0.0.0"
+        ]
+      ],
+      "yum (5.1.0)": [
+
+      ],
+      "yum-epel (3.3.0)": [
+
+      ]
+    }
+  }
+}

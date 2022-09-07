@@ -1,0 +1,8 @@
+{ 
+  "comment": "Tammy Shanker",
+  "groups": ["devadmin"],
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1BczTq9ezLOe9dMasOqw9/NSXgRY5goC1fZD3INoZiPkUJ83d9DUJ73Knayjp5bYwHaXvgV4qn7Ev4nuHm04sdfFhwkISR9CQj+Uf4yYBFX7IMMB97tAMFIiLyCI9GczM5Qbb9+RHxqgFkck1ucH7qnVNGi6Q41zTRlVGgi5Z8qqcCDsl8CjgsafRHvtpRtOIqF+YB2ApqrBq5jePoIV7GgA7RanZDO7QqH6gtgdzm0TCUZB8Pc1+/kfOPskOiYybEmixd5UQIAbZRiGUqwpCgzkJVlhrbXrQ2XMdso/hnSXuiDIk1vPlQtrWGqwRfwxk6guwxdlK/72V6YFtNZxas6QOPt8rT6LXTqhpRT7FC75i6teLsdq74Zkzg7o2fO8melhJ8DldvbRdWN5gs87R88FzSVFt9ekFnrOpD5NEWb1Zj0epYutiyElRc3qwpYON74kgk9q7TJtACR4UegVajwPJFuT+FR6AABMe9dcPNE69AGa2zSlD8wkQqq0J1L/O/3y8uBlI1Cd9oBBJqLFPGSBYmP1wWKlTWW3ddW6x/EubU9GbG+ZxCP2iqcMBxoYpzjfYKAg9qCO2PSUK3Sr+WzWH+citqRRgqRFaZxd5P2JbXu07WHBMzFzrxCpG68sRO61fsVxDWySXxtOMZ8QedZv+v0+yNb0+Wk1AJZyCfQ== tammy",
+  "id": "tammy",
+  "shell": "/bin/bash"
+}
+

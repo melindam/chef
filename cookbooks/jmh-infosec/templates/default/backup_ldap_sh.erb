@@ -1,0 +1,13 @@
+#!/bin/sh
+## Script Dropped off by Chef! ##
+# set -x
+
+TIMESTAMP=`date +%Y%m%d%H%M`
+FILENAME=ldapbackup_${TIMESTAMP}.ldif
+/usr/sbin/slapcat -f /etc/openldap/slapd.conf -b '<%= @basedn %>' > <%= @backup_location %>/$FILENAME
+gzip <%= @backup_location %>/$FILENAME
+
+chown jmhbackup. <%= @backup_location %>/$FILENAME.gz
+chmod 600 <%= @backup_location %>/$FILENAME.gz
+
+find <%= @backup_location %> -mtime +<%= @backup_days %> -exec rm -f {} \;

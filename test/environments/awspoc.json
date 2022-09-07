@@ -1,0 +1,47 @@
+{
+  "name": "awspoc",
+  "description": "My Chef environment",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+
+
+  },
+  "override_attributes": {
+    "jmh_server": {
+        "environment": "dev",
+        "global": {
+          "crowd_chef_environment": "awstst",
+          "apache": {
+            "www": {
+              "server_name": "test-www.johnmuirhealth.com",
+              "server_aliases": ["local-www.johnmuirhealth.com", "test-www-poc.johnmuirhealth.com"]
+            },
+            "idp": {
+              "server_name": "test-idp.johnmuirhealth.com"
+            },
+            "prc": {
+              "server_name": "test-prc.johnmuirhealth.com"
+            },
+            "jmhhr": {
+              "server_name": "test-www.johnmuirhr.com"
+            },
+            "supportportal": {
+              "server_name": "test-supportportal.johnmuirhealth.com"
+            },
+            "api": {
+              "server_name": "test-api.johnmuirhealth.com",
+              "server_aliases": ["local-api.johnmuirhealth.com","test-api-poc.johnmuirhealth.com"]
+            }
+          }
+        },
+        "use_mail_relay": true
+    },
+    "jmh_epic": {
+        "environment": "poc"
+    }
+  }
+}

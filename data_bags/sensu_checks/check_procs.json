@@ -1,0 +1,23 @@
+{
+  "id": "check_procs",
+  "checks": [
+    {"name": "cron_check",
+      "command": "check_procs -C crond -c 1:",
+      "subscribers": [ "base" ]},
+    {"name": "chef-client_check",
+      "command": "check_procs -C chef-client -w 5 -c 10",
+      "subscribers": [ "base" ]},
+    {"name": "postfix_check",
+      "handlers": ["mailer"],
+      "command": "check_procs -a postfix -c 1:10",
+      "subscribers": [ "base" ]},
+    {"name": "mysql_check",
+      "command": "check_procs -a mysqld -c 1:15",
+      "subscribers": ["mysql"] },
+    {"name": "mongodb",
+      "handlers": ["mailer"],
+      "command": "check_procs -a mongod -c 1: -w 3",
+      "subscribers": [ "mongodb" ] }
+  ]
+
+}

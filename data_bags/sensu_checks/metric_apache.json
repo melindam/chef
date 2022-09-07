@@ -1,0 +1,16 @@
+{
+	"id": "metric_apache",
+	"template_name": "checks/metric_apache.erb",
+	"checks": [ {"name" : "graphite_web_server",
+				 "subscribers" : ["server","sensu-server","sensu-armor"],
+				 "handlers" : ["graphite"],
+				 "options" : {"-h" : "127.0.0.1"}},
+			 {"name" : "apache80",
+				 "subscribers" : ["hr","cq-dispatcher"],
+				 "handlers" : ["graphite"],
+				 "options" : {"-h" : "localhost",
+				  			  "-s" : "",
+				  			  "-p": "443"}}	 
+			 ]
+
+}

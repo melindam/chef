@@ -1,0 +1,30 @@
+#!/bin/sh
+#set -x
+
+if [[ -z $1 || -z $2 ]]
+then
+	echo "Usage: checkURLString.sh <URL> <String to look For>"
+	exit 1;
+fi
+
+URL=$1
+CHECKSTRING=$2
+
+URLPAGE=`curl -k -X GET $URL  2>/dev/null`
+RESULT=` echo $URLPAGE | fgrep "$CHECKSTRING"`
+STATUS=$?
+
+#if [ -z "$RESULT" ]
+#then
+#	echo "String \"$CHECKSTRING\" not found: $RESULT"
+#	exit 1;
+#fi
+
+if [ $STATUS -ne 0 ]
+then
+	echo "FAIL:Could Not Find \"$CHECKSTRING\""
+	exit 1;
+fi
+
+echo "PASS:String \"$CHECKSTRING\" found"
+exit 0;

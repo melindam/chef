@@ -1,0 +1,121 @@
+#!/bin/sh
+#set -x
+
+## Config Section ##
+URL="http://<%= @hostname %>:<%= @port%><%= @check_page %>"
+CQ_TYPE="<%= @cq_type %>"
+EMAIL="<%= @email %>"
+PID_DIR="<%= @pid_dir%>"
+RESTART_SCRIPT=<%= @restart_script %>
+LOG=<%= @log_file %>
+LOCK_FILE=<%= @lock_file %>
+## Config End ###
+
+FORCE_CHECK=0
+LOCALHOST_NAME=`hostname`
+
+STATUS=10
+URL_CODE=
+MESSAGE=
+CURRENT=`date +"%Y-%m-%d %H:%M:%S"`
+GOOD_RESPONSE="HTTP/1.1 200 OK"
+
+function checkURL() {
+	CURRENT=`date +"%Y-%m-%d %H:%M:%S"`
+    URL_CODE=`/usr/bin/curl -s "$URL" -k -I | grep -e "HTTP/1.1"`
+    STATUS=$?
+    echo "$URL_CODE" | grep "$GOOD_RESPONSE"
+    URL_CODE_STATUS=$?
+    if [ $STATUS -ne 0 ] || [ $URL_CODE_STATUS -ne 0 ]
+    then
+            MESSAGE="FAIL|Bad URL Code: $URL_CODE"
+    else
+            MESSAGE="SUCCESS|$GOOD_RESPONSE"
+    fi
+    echo "$CURRENT|$MESSAGE" >> $LOG
+}
+
+function isProcessRunning() {
+	PROCESS=`ps ax | fgrep java | fgrep ${CQ_TYPE} | fgrep -v "fgrep"`
+}
+
+#check for Lock File
+if [ -a $LOCK_FILE ]
+then
+	# Send to Log File
+	echo "$CURRENT|Lock|Lock File Present" >> $LOG
+	echo "Lock File Present."
+	DIRLOCK=`dirname $LOCK_FILE`
+	LOCKNAME=`basename $LOCK_FILE`
+	LOCK_STATUS=`find $DIRLOCK -type f -name $LOCKNAME -cmin -30`
+	if [ -n "$LOCK_STATUS" ]
+	then 
+		echo "Lock created within 30 minutes, skipping test"
+		echo "Current Lock File Present" | mail -s "$LOCALHOST_NAME <%= @cq_type %> Lock File" $EMAIL
+		exit 1
+	else
+		echo "Lock stale more than 30 minutes. Removing lock and testing"
+		echo "Removing Stale Lock File" | mail -s "$LOCALHOST_NAME <%= @cq_type %> Lock File" $EMAIL
+		rm -f $LOCK_FILE
+	fi	
+fi
+
+if [ "$1" = "-f" ] 
+then 
+	FORCE_CHECK=1
+fi
+
+if [ $FORCE_CHECK -eq 0 ]
+then
+	# Check for Process
+	isProcessRunning
+	if [ $? -eq 0 ]
+	then
+		#echo "Need to Check PID"
+		PID_STATUS=`find $PID_DIR -type f -name "cq.pid" -cmin -5`
+		if [ -n "$PID_STATUS" ]
+		then 
+			echo "CQ started within 5 minutes, skipping test"
+			exit 0;
+		fi	
+	else
+		echo "No process.  Wait 20 seconds and the check."
+		sleep 20
+		isProcessRunning
+		if [ $? -eq 0 ]
+		then
+			echo "Process just kicked off, skipping test"
+			exit 0	
+		fi
+	fi
+fi
+
+checkURL
+
+if [ "$MESSAGE" != "SUCCESS|$GOOD_RESPONSE" ]
+then
+	touch $LOCK_FILE
+	echo "Fail:$URL_CODE"
+	# Email team that you will restart
+	echo "Bad Response: $URL_CODE.  Going for a Restart" | mail -s "$LOCALHOST_NAME <%= @cq_type %> Restart" $EMAIL
+	echo "Now Restarting"
+	$RESTART_SCRIPT stop
+	sleep 3
+	$RESTART_SCRIPT start
+	# Wait for Restart
+	sleep 120
+	# check one more time
+	checkURL
+	if [ "$MESSAGE" != "SUCCESS|$GOOD_RESPONSE" ]
+	then
+		echo "Bad Response: $URL_CODE" | mail -s "$LOCALHOST_NAME <%= @cq_type %> Failed Restart" $EMAIL
+	else
+		echo "Success: $URL_CODE" | mail -s "$LOCALHOST_NAME <%= @cq_type %> Successful Restart" $EMAIL
+	fi
+	sleep 120 
+	# Send out failure or successful response
+	rm -f $LOCK_FILE
+else 
+	# Send to Log File
+	echo "Success:$URL_CODE"
+fi

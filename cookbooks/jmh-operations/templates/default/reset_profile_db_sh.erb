@@ -1,0 +1,26 @@
+#!/bin/sh
+# Dropped off by Chef!
+
+echo "Removing emailidentity"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+        -e 'delete from emailidentity where profile_id not in (<%= @profile_id_list.to_s %>); select ROW_COUNT();'
+
+echo "Removing application_attributes"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+        -e 'delete from application_attributes where id not in (select id from application_profile where profile_id in (<%= @profile_id_list.to_s %>)); select ROW_COUNT();'
+
+echo "Removing application_profile"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+       -e 'delete from application_profile where profile_id not in (<%= @profile_id_list.to_s %>); select ROW_COUNT();'
+
+echo "Removing passwordtoken"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+       -e 'delete from passwordtoken where profile_id not in (<%= @profile_id_list.to_s %>); select ROW_COUNT();'
+
+echo "Removing Relationships"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+       -e 'delete from profile_relationship where profile_id not in (<%= @profile_id_list.to_s %>); select ROW_COUNT();'
+
+echo "Removing profile"
+/usr/bin/mysql -h <%= @host %> -u <%= @mysql_user %> --password='<%= @password %>' <%= @database %> \
+        -e 'delete from profile where id not in (<%= @profile_id_list.to_s %>); select ROW_COUNT();'

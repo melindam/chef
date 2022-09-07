@@ -1,0 +1,9 @@
+{
+  "id": "ssh",
+  "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/plugins/check-banner.rb",
+  "pattern": "SSH-2.0",
+  "subscribers": [
+    "all","sensu-armor","sensu-server"
+  ],
+  "interval": 60
+}

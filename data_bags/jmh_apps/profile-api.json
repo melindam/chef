@@ -1,0 +1,24 @@
+{
+  "id": "profile-api",
+  "basic_auth": {
+    "encrypted_data": "Jv+Vxpj0+7g3+ZpnyB0uLPUT//8/8yYigBZkmhMp6VdgUjW60x7pAn+ld8FX\nYc3uESlRqtFcAqK06m6tQnEkxDYn1NIKO+tZeIQfEh4TGsHlZhpqdu7fwiCP\nGHPE12glJAoaCVZwJXj5KYDEkTHVPcMBDkKxUy6T17+iGmbRye915KjIND5p\nwnksWmPfbUrtOeZTQQUwUoYdgLyRyXYg7yZ68naq5uxfV1zsGyLntrg1S7Gb\nLXT+eCKstHDtUvkozGDqRBxnnQIFkCv5Psqh1HyI7NExom67enOkOKoPptzH\nVssFyrivHdV2FDQ2zqUAifvQekWr5YbYpYlxj0u6TutERHiF1y9EQvWIXweZ\nrOM0W/j0zt0KAnPnjVKZFieKZX1pa/+2JufJk4Wg0MlR16lTlUV47oUmk0G+\nls8CefLiaIBlW9DDpli47zvyZ1QH9ik1Yi/YncpBruyWiRE8dYhvCA==\n",
+    "iv": "LL89jRLWyG/E+jQO\n",
+    "auth_tag": "6dCqTlOrcgX9bPD7Nh+dcw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "ldap": {
+    "encrypted_data": "b3jE/aQQcqWV5aRxeR5TQORkl3vlvRw73N5TYqhZZq9Q5z71a7DrtNi7VHx4\nk5fN3nTYWuHVmSlRd/JcL8WPRb5idzNu9HOI6WxZJ6J7bt202cbPFTRUxaCA\n2Yxk1TiySVb8SgBUlbuLuxXe4TjnVyR9ycmXbf4Ksi57+QjMPqIbkRvjvsor\nCydo6WXyswqVOlVgtNkPRSjJr5JKtTSTCVrqnP5nIAREhVSxe3ldBaAIBXXL\nJZwPZWWJXm1roL0zE95xm4T3CF2xTFDi4sMZdH6fTuPxQ7MenP0T4wj0g9I3\n2rwbJCTMl5oZ9bEs7zTUx7Kb42kO1MPBBYLv1rX1+zbhneiq3BDwYvChdiJY\nTPRGfF5MKuHhkfW5BSRUAOdFDDRuy9jdcFDyuzdOEqVOVBSylv9r8u9WGo/i\nId59VTq4EF0x/IpArZAtKZKvAb0Jnl4je0TBwvNGwo4RnQ+FujUPVJBBFKHe\nwMEL3N+vxbDx2KDognxhD38AVtgOcDTZ3yog/MQjAG+Ko3GZ61p8QQ/XcHb+\ndSuHaeMvRsbT86YcMdif+Mo4cqPzyAyvBzIjtB8WODOsTmvmMdRuHebvBFe7\nC12Q9DNbIh3AZu+Tql8DeQ3mwgD45yNvTZa7El+cP1WB0W6coTvwS/p3k7ID\ngf0xA0N+zti6FHdYxZOIaSDm9EmVB7zcoeIRPIe9USMyuymwOlEhBNoiQwGR\n/NKg8khsC51CIFWdtmr2nzfyAC47Bm6UJBQuoiIIAQOjrxvN7l7A7G4pZQag\nLPQKNhfUr1L7paLkh/eq/oljEJhJnEFX7492Y0gwSas7p2A3HZdzrcgpvBq9\nk2xK4MAHXuggX2x3RtAWpXTlDCEkWovF/MGJp1qVd4AuMMyGT8WkUjXEZ/m9\nVj/klCfujkDSzP1f7kL1KiccuvKZ0P6dTChS/A81ZMFgqrIvZs5AnHEM5Afv\nZrKQGKHkrEZDvNW8kqlxJZStFLe2soJWgjjSSqNXdYvIkOS8WkGwj3Oa6Up2\n",
+    "iv": "cl0SygU8lWhcIKLs\n",
+    "auth_tag": "RHtgwjXB3dXRvxe1be2iWw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "chatbot": {
+    "encrypted_data": "YqMi0VNPTTVH8E6TMyBQWFZGA/cbucjQRuVGOgcqGPpq92ivrUQBMn7l0PBJ\nUBlQJYKbtyTgpBvzB1eO46A1aXCekFwT9UcgGcuN++4Ynvj8rom9jw+853E/\nppMJY9icclDCKS5ZR1i/LGOKU+5/K4hiWjFX6c/MnT/AZ4pEZFBlZWSE3olQ\nleXCS/WqkE0+wVUPtepPetFpxePzFA1/ybhZJ/xfL6Bxyt+riLEtsaCBsF8X\n7qbf7xegvUygEcSMLjgZDdyHs4Qo+YIgYrXtHBWpleqSi0XPAMmaaYdE76y5\nZt924JUxSbH5tiW2MrQPnsv1BajBBVkDznI9DeX46A+VZQEwycmOmYRvI7Zk\nkWtNac4OPaODoOgTSWfezVDd/E0F53h7YSHjJzxnHUOeyyqEfHkm278T5vu5\nXzrLWXJlv+CRIJkl252bdegFD43HvAFqKY5j5TUYoUyuEeeEOsO3a063/ZFO\nIobX7CodrNqH6nV2zLVZgCNzh94sP8HTKiTQHGMIeZcRQST9INeQzHWKZhzp\nxPiYJyNM9KSrrxQGTWHezGwaTlBbvV+aPY8t56E43J39/J6rcDLZPLLBlBYU\n5NWZPt0=\n",
+    "iv": "Tc+ssuc0acQe12Cw\n",
+    "auth_tag": "nd+hA4WRarIXo3sNE40wXQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

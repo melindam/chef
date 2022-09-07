@@ -1,0 +1,21 @@
+# DEPRECATED as MyChart is used not myjmh-client
+
+set -x
+cd ./mychart/asp/en-US
+rm -rf javabin swf *.txt *.html
+cd ../../../
+rm -rf ebiz/myjmh/myjmh-client/src/main/webapp/mychart
+mkdir -p ebiz/myjmh/myjmh-client/src/main/webapp/mychart/en-US
+cp -r ./mychart/asp/en-US/* ebiz/myjmh/myjmh-client/src/main/webapp/mychart/en-US/
+mkdir -p ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Scripts
+cp -r ./mychart/asp/Scripts/* ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Scripts/
+mkdir -p ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Templates
+cp -r ./mychart/asp/Templates/* ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Templates/
+mkdir -p ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Areas/Documents/Scripts/Controllers
+cp -r ./mychart/asp/Areas/Documents/Scripts/Controllers/* ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Areas/Documents/Scripts/Controllers/
+mkdir -p ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Content/images
+cp -r ./mychart/asp/Content/images/* ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Content/images/
+mkdir -p ebiz/myjmh/myjmh-client/src/main/webapp/mychart/External
+cp -r ./mychart/asp/External/* ebiz/myjmh/myjmh-client/src/main/webapp/mychart/External/
+mkdir -p ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Areas
+cp -r ./mychart/asp/Areas/* ebiz/myjmh/myjmh-client/src/main/webapp/mychart/Areas/

@@ -1,0 +1,28 @@
+#!/bin/sh
+#set -x
+
+BACKUP_USER='<%= node['jmh_db']['backup']['username'] %>'
+BACKUPDIR='<%= File.join(node['jmh_server']['backup']['home'],node['jmh_db']['backup']['base_dir'])%>'
+MYSQLPASSWORD='<%= node['jmh_db']['backup']['password'] %>'
+
+# Create Backup Folder
+CURRENTTIME=`date +%Y%m%d%H%M`
+BACKUPNAME=mysql-db-$CURRENTTIME
+
+#  Backup the mysql db
+
+/usr/bin/mysqldump -h 127.0.0.1 -u$BACKUP_USER -p$MYSQLPASSWORD --opt --databases mysql --events > $BACKUPDIR/mysqldb-$CURRENTTIME.sql 2>/dev/null
+gzip -f $BACKUPDIR/mysqldb-$CURRENTTIME.sql
+
+# Get List of Databases
+DBS=`/usr/bin/mysql -h 127.0.0.1 -u $BACKUP_USER -p$MYSQLPASSWORD -s -e 'show databases;' 2>/dev/null | egrep -v "mysql|schema"`
+
+# Backup each database
+for db in $DBS
+do 
+	#echo "Database $db"
+	/usr/bin/mysqldump -h 127.0.0.1 -u $BACKUP_USER -p$MYSQLPASSWORD --opt --databases $db > $BACKUPDIR/$db-$CURRENTTIME.sql 2>/dev/null
+	gzip -f $BACKUPDIR/$db-$CURRENTTIME.sql
+done;
+
+find -L $BACKUPDIR -type f -name '*.sql.*' -mtime <%= node['jmh_db']['backup']['expiration'] %> -exec rm -f {} \;

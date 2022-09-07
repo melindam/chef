@@ -1,0 +1,19 @@
+#!/bin/sh
+# set -x
+# DROPPED off by CHEF!
+
+/bin/curl -u <%= @admin %>:<%= @password %> -X POST --data markOnly=false \
+  http://<%= @hostname %>:<%= @port %>/system/console/jmx/org.apache.jackrabbit.oak%3Aname%3Drepository+manager%2Ctype%3DRepositoryManagement/op/startDataStoreGC/boolean
+
+
+if [ $? -ne 0 ]
+then
+  echo "Failed to execute Garbage Collection"
+  exit 1
+else
+  sleep 10
+  tail -150 <%= @cq_instance %>/crx-quickstart/logs/error.log
+fi
+
+exit 0
+

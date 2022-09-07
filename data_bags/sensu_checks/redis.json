@@ -1,0 +1,8 @@
+{
+  "id": "redis_process",
+  "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/plugins/check-procs.rb -p redis-server -C 1",
+  "subscribers": [
+    "sensu-server","sensu-armor"
+  ],
+  "interval": 60
+}

@@ -1,0 +1,15 @@
+#!/bin/bash
+# Copies the archived export and import data files from billpay server to archive location
+# This job will be run from rundeck.johnmuirhealth.com daily to see if new files were created 
+
+
+USER=<%= @user %>
+SERVER=<%= @server %>
+BACKUPDIR="<%= @backup_dir %>"
+EXPORTDIR=/usr/local/webapps/billpay/export/archive
+IMPORTDIR=/usr/local/webapps/billpay/import/processed
+
+rsync -av --bwlimit=2000 --size-only -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' $USER@$SERVER:$EXPORTDIR/*tgz $BACKUPDIR/.
+
+rsync -av --bwlimit=2000 --size-only -e 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' $USER@$SERVER:$IMPORTDIR/*tgz $BACKUPDIR/.
+

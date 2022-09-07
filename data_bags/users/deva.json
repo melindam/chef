@@ -1,0 +1,10 @@
+{ 
+  "comment": "Devadeth Santhakumari",
+  "groups": ["sysadmin", "devadmin"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZN+pO8k0GWuc5IOg/S7XHSXR/xN+wUoYaywlIAF0H6m/vA+xfawQCqryih0qMvYrlBs9gXehkiF9Kha7ySLRQmQJS79PB2liQjadmq4+LW8KOhoTOKJaO0+QQZLjM07O0HJJjV84i44iwyEP0Cf2gpb0yQvNx4B2Scky396h7YZ/WNOVVcXHAtzJwnnqfKALRfhtzBmJNlO+AptMvO9i6Q82nD9OLO9vqgwZ2S2/mZmKsWYWj09QCj6aaxmp9syA4eKdzwcWctz8q4hIreu8m5RLZPonvqcEdFemfdVQgU58D/7YEFmxOU0qHwmOFvzkN+PtbMv/zA7jyp92f8fVl deva@tebiz0143.local",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2TeP9eMe+9GXcdU+BZsLjc7MET1GgXLAmCrGDz0GdctlkJfmyuvidhfatq/6T0D4FVbtTYjvGJtCuuTdF3hhrhgg3kD2BdcIZC++dDLtmk3xMVRHY8nP8rMgVeirAwwto9pyblJTObPdv+aNdW3Da/EXXmXzKvpnRrwWEaNVdwCe+rFhlXAO1acokpXoqY9W2Yybz0yCS0SuDyY5qfdw1Fc5ApbqMrYrHPJE/UNSGveWUpjMsC8Nzkb5JlcmstaSM6On29kBjfr7akKoMmb8s1rx7gMmyGdgibxPgxQ66wQ71XNgccooQb0n7/cTh6BbgiQtTaRKo4DEUrMcwWtiXWM7tyP8iU1N+yOa+RFYZxtT+26ZmvfLZ8zmhBIPHQ+ZVbLpOqeb0uedFvOX5IUKiBivahNHVMoXvsI1QZijIMFrVbN71GVNcsbXGCGuI7trs/3xv6NgkR4b5JdNp4jK7K4E9h7QHqMQOEYMM51Oj0bo4RsZPvypWFNxdJQeLKwbKrEstuQtYQHnMLy6KUWBNNQ6vu+NhQrZNypYhxVOSva0+1V7jGRnUo7IS7rycWuKLHyI7YZpjUAZzUY1lbtlHmd5hd5pgQAcn5hoZv9AK+ETVJDO/Sa6t3Q2XjuNrsnCxT3N5/hshckf6IMdgATbdLUy/68Btf2FkPRpw3Sxliw== deva"
+  ],
+  "id": "deva",
+  "shell": "/bin/bash"
+}

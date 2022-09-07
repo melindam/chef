@@ -1,0 +1,45 @@
+#!/bin/sh
+#set -x 
+
+REMOTEUSER=jmhbackup
+#LOGSERVER="prc.johnmuirhealth.com|192.168.113.62|prc-access*log*.gz|/home/awstats/webserver_logs/prc.johnmuirhealth.com"
+
+#NAME="<%= @server_name %>"
+#IP=`echo ${LOGSERVER[$server]} | cut -d"|" -f2`
+#LOGNAME="<%= @logs%>"
+#LOCALDIR=`echo ${LOGSERVER[$server]} | cut -d"|" -f4`
+
+echo "Now working on <%= @server_name %> with ips: <%= @ips %>"
+
+for IP in <% @ips.each do |i| %>"<%= i %>" <% end %>
+do
+	RECENTFILES=`/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no <%= @remote_user%>@$IP find /var/log/httpd -name "<%= @logs %>" -mtime -17`
+	
+	for logfile in $RECENTFILES
+	do
+	    logfilename=`echo $logfile | cut -d/ -f5`
+	    logfileprefix=`echo $logfilename | awk -F'.gz' '{print $1}'`
+	    if [ -a <%= @local_dir%>/<%= @server_name %>/$logfileprefix.$IP.gz ]
+	    then
+	    	echo "File already exists at <%= @local_dir%>/<%= @server_name %>/$logfileprefix.$IP.gz"
+	    elif [ -a <%= @local_dir%>/<%= @server_name %>/done/$logfileprefix.$IP.gz ]
+	    then
+	    	echo "File already exists at <%= @local_dir%>/<%= @server_name %>/done/$logfileprefix.$IP.gz"
+	    else
+	    	echo "Copying $logfileprefix.gz to <%= @local_dir%>/<%= @server_name %>/$logfileprefix.$IP.gz"
+	    	/usr/bin/scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no <%= @remote_user%>@$IP:$logfile <%= @local_dir%>/<%= @server_name %>/$logfileprefix.$IP.gz
+	    fi
+	done
+
+done
+
+<%= @wwwroot%>/cgi-bin/awstats.pl -update -config="<%= @server_name %>" -configdir="<%= node['jmh_operations']['awstats']['etcdir'] %>"
+if [ $? -eq 0 ]
+then
+	mv <%= @local_dir%>/<%= @server_name %>/<%= @logs %> <%= @local_dir%>/<%= @server_name %>/done/
+    echo "SUCCESS for <%= @server_name %>"
+	echo "removing old logs for <%= @server_name %>"
+	rm -rf <%= @local_dir%>/<%= @server_name %>/done/*
+else
+	echo "Problem running awstats for <%= @server_name %> for ips: <%= @ips %>" 
+fi

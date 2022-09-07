@@ -1,0 +1,53 @@
+#!/bin/bash
+#
+# archiva        This shell script takes care of starting and stopping
+#               the tomcat server
+#
+# chkconfig: - 80 20 
+# description: Archiva
+
+ARCHIVA_HOME=/usr/local/archiva
+
+# See how we were called.
+case "$1" in
+  start)
+        echo "Starting Archiva"
+        <% if @systemd %>
+        echo "Redirecting to systemd"
+        /bin/systemctl start archiva.service
+        <% else %>
+        su - archiva -c "cd $ARCHIVA_HOME/bin; ./archiva $@"
+        <% end %>
+    ;;
+  stop)
+        echo "Stopping Archiva"
+        <% if @systemd %>
+        echo "Redirecting to systemd"
+        /bin/systemctl stop archiva.service
+        <% else %>
+        su - archiva -c "cd $ARCHIVA_HOME/bin; ./archiva $@"
+        <% end %>
+    ;;
+   restart)
+        echo "Restarting Archiva"
+        <% if @systemd %>
+        echo "Redirecting to systemd"
+        /bin/systemctl stop archiva.service
+        /bin/systemctl start archiva.service
+        <% else %>
+        su - archiva -c "cd $ARCHIVA_HOME/bin; ./archiva $@"
+        <% end %>
+    ;;
+   status)
+        echo "Status of Archiva"
+        <% if @systemd %>
+        echo "Redirecting to systemd"
+        /bin/systemctl status archiva
+        <% else %>
+        su - archiva -c "cd $ARCHIVA_HOME/bin; ./archiva $@"
+        <% end %>
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|status}"
+    exit 1
+esac

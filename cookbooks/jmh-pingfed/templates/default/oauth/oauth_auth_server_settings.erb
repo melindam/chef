@@ -1,0 +1,54 @@
+{
+  "defaultScopeDescription": "Use Single-Sign-On",
+  "scopes": [
+    {
+      "name": "address",
+      "description": "Address"
+    },
+    {
+      "name": "edit",
+      "description": "Edit"
+    },
+    {
+      "name": "phone",
+      "description": "Phone"
+    },
+    {
+      "name": "openid",
+      "description": "Open ID"
+    },
+    {
+      "name": "profile",
+      "description": "Access your John Muir Health account"
+    },
+    {
+      "name": "email",
+      "description": "Email"
+    }
+  ],
+  "scopeGroups": [],
+  "authorizationCodeTimeout": 60,
+  "authorizationCodeEntropy": 30,
+  "refreshTokenLength": 42,
+  "rollRefreshTokenValues": true,
+  "refreshRollingInterval": 0,
+  "persistentGrantReuseGrantTypes": [
+    "IMPLICIT",
+    "RESOURCE_OWNER_CREDENTIALS",
+    "AUTHORIZATION_CODE"
+  ],
+  "persistentGrantContract": {
+    "extendedAttributes": [],
+    "coreAttributes": [
+      {
+        "name": "USER_KEY"
+      },
+      {
+        "name": "USER_NAME"
+      }
+    ]
+  },
+  "bypassAuthorizationForApprovedGrants": false,
+  "allowUnidentifiedClientROCreds": false,
+  "allowUnidentifiedClientExtensionGrants": false
+}

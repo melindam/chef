@@ -1,0 +1,242 @@
+{
+  "name": "awsdev2",
+  "description": "JMH Isotopes Environment",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "jmh_tomcat": {
+      "7": {
+        "version": "7.0.93"
+      }
+    }
+  },
+  "override_attributes": {
+    "cq": {
+      "app_proxies": {
+        "mychartsso_proxies": {
+          "target_ipaddress": "172.24.202.105"
+        }
+      },
+      "dispatcher": {
+        "robots": {
+          "disallow": [
+            "*"
+          ]
+        }
+      },
+      "databag": {
+        "password_key": "sbx_aem_password"
+      },
+      "author": {
+        "max_memory": "4096m",
+        "apache80": {
+          "server_name": "author-dev2.johnmuirhealth.com"
+        },
+        "apache_ssl": {
+          "server_name": "author-dev2.johnmuirhealth.com",
+          "server_aliases": [
+            "author-int.johnmuirhealth.com"
+          ]
+        },
+        "memory": "1024m",
+        "environment": "sbx",
+        "cron": {
+          "gc": {
+            "weekday": "5"
+          }
+        }
+      },
+      "publisher": {
+        "max_memory": "4096m",
+        "environment": "sbx",
+        "cron": {
+          "gc": {
+            "weekday": "5"
+          }
+        }
+      }
+    },
+    "chef_client": {
+      "cron": {
+        "hour": "*",
+        "minute": "0,30",
+        "log_file": "/var/log/chef_cron.log",
+        "use_cron_d": false
+      },
+      "log_rotation": {
+        "postrotate": ""
+      },
+      "logrotate": {
+        "rotate": "7"
+      }
+    },
+    "jmh_db": {
+      "backup": {
+        "expiration": "+14",
+        "hour_interval": "*/6",
+        "weekday_interval": "1-5"
+      }
+    },
+    "jmh_apps": {
+      "databag": {
+        "password_key": "dev_password"
+      }
+    },
+    "jmh_monitor": {
+      "sensu_server": {
+        "role": "sensu-aws"
+      }
+    },
+    "jmh_epic": {
+      "environment": "tst"
+    },
+    "jmh_server": {
+      "global": {
+        "max_header_size": "12000",
+        "apache": {
+          "www": {
+            "server_name": "www-dev2.johnmuirhealth.com",
+            "server_aliases": [
+              "www-tst2.johnmuirhealth.com"
+            ]
+          },
+          "api": {
+            "server_name": "api-dev2.johnmuirhealth.com",
+            "server_aliases": [
+              "api-tst2.johnmuirhealth.com"
+            ]
+          },
+          "myjmh": {
+            "server_name": "myjmh-dev2.johnmuirhealth.com"
+          },
+          "jmhhr": {
+            "server_name": "www-dev2.johnmuirhr.com"
+          },
+          "prc": {
+            "server_name": "prc-dev2.johnmuirhealth.com"
+          },
+          "supportportal": {
+            "server_name": "supportportal-dev2.johnmuirhealth.com"
+          },
+          "idp": {
+            "server_name": "idp-dev2.johnmuirhealth.com",
+            "server_aliases": [
+              "idp-tst2.johnmuirhealth.com"
+            ]
+          }
+        }
+      },
+      "environment": "sbx",
+      "handlers": {
+        "hip_chat": {
+          "action": "disable"
+        }
+      },
+      "yum": {
+        "use_local_repo": false
+      },
+      "use_mail_relay": true
+    },
+    "jmh_webserver": {
+      "jmherror": {
+        "myjmh_maintenance_message": "<h3 class=\"brighttext\">MyChart will be back online at 02:30 AM.</h3>"
+      },
+      "idp": {
+        "apache": {
+          "server_name": "idp-dev2.johnmuirhealth.com"
+        }
+      },
+      "api": {
+        "apache": {
+          "server_name": "api-dev2.johnmuirhealth.com"
+        }
+      },
+      "customphonebook": {
+        "install": true
+      }
+    },
+    "postfix": {
+      "relayhost_role": "mail_server"
+    },
+    "activemq": {
+      "admin_console": {
+        "credentials": {
+          "password": "ebiz--2017--NESS"
+        }
+      },
+      "web_console": {
+        "system_password": "ebiz--2017--NESS"
+      },
+      "simple_auth_password": "ebiz--2017--NESS"
+    },
+    "jmh_pingfed": {
+      "idp": {
+        "server_name": "idp-dev2.johnmuirhealth.com"
+      },
+      "jmh": {
+        "server": "www-dev2.johnmuirhealth.com"
+      },
+      "api": {
+        "server": "api-dev2.johnmuirhealth.com"
+      },
+      "pingfederate": {
+        "plugins": [
+          "pf.plugins.pf-pcv-rest.jar",
+          "pf.plugin.set-cookie-authentication-selector.jar",
+          "pf.plugins.mfa-authentication-selector.jar"
+        ]
+      }
+    },
+    "jmh_webproxy": {
+      "supportportal": {
+        "proxy": {
+          "videovisit": {
+            "hide_link": false
+          },
+          "vvisits_client": {
+            "hide_link": false
+          }
+        }
+      }
+    },
+    "jmh_broker": {
+      "cloverleaf_port": "22854"
+    },
+    "jmh_tomcat": {
+      "manager_available": true
+    },
+    "jmh_myjmh": {
+      "profile_api": {
+        "nodejs_newrelic_enabled": true
+      },
+      "profile_client": {
+        "properties": [
+          "featureFlags=bypassApiCertVerification,mfaEnabled,localEnabled"
+        ]
+      },
+      "admin": {
+        "appserver": {
+          "java_options": [
+            "-Dcrypto.private.key.path=/usr/local/webapps/myjmh/keys/jmh_private_key.der",
+            "-Dcrypto.public.key.path=/usr/local/webapps/myjmh/keys/jmh_public_key.der",
+            "-Dcrowd.properties=/usr/local/tomcat/myjmh-admin/conf/catalina.properties -Xmx256m",
+            "-DfeatureFlags=mfaEnabled"
+          ]
+        }
+      }
+    },
+    "jmh_idev": {
+      "jmhweb": {
+        "apache": {
+          "server_name": "jmhapp-dev2.johnmuirhealth.com",
+          "server_aliases": [
+            "jmhapp-dev2.hsys.local"
+          ]
+        }
+      }
+    }
+  }
+}

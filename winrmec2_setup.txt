@@ -1,0 +1,16 @@
+$user="chef" $password="v6kTmNE7Ywm5pt39JaPP2C8Y8"
+net user /add $user $password;
+net localgroup Administrators /add $user;
+
+winrm quickconfig -q
+winrm create winrm/config/Listener?Address=*+Transport=HTTP
+winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="300"}'
+winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+winrm set winrm/config/service/auth '@{Basic="true"}'
+netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
+netsh advfirewall firewall add rule name="WinRM 5986" protocol=TCP dir=in localport=5986 action=allow
+NetSh Advfirewall set allprofiles state off
+net stop winrm
+sc config winrm start=auto
+net start winrm

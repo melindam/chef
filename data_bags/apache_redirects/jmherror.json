@@ -1,0 +1,45 @@
+{
+  "id": "jmherror",
+  "config": {
+    "aliases" : {
+      "/jmherror/": "/var/www/html/jmherror/"
+    },
+    "directories": {
+      "/var/www/html/jmherror" : {
+        "AllowOverride": "None",
+        "Options": "IncludesNoExec",
+        "Order": "allow,deny",
+        "Allow": "from all"
+      }
+    },
+    "directories_apache24": {
+      "/var/www/html/jmherror" : {
+        "AllowOverride": "None",
+        "Options": "IncludesNoExec",
+        "Require": "all granted"
+      }
+    },
+    "rewrites": [
+      "^/jmherror/(.*) /jmherror/$1 [PT,L]"
+    ],
+    "error_docs": {
+      "400": "/jmherror/error.html",
+      "401": "/jmherror/unauthorized-ebusiness.html",
+      "403": "/jmherror/unauthorized-ebusiness.html",
+      "404": "/jmherror/pagenotfound.html",
+      "405": "/jmherror/error.html",
+      "408": "/jmherror/error.html",
+      "410": "/jmherror/error.html",
+      "411": "/jmherror/error.html",
+      "412": "/jmherror/error.html",
+      "413": "/jmherror/error.html",
+      "414": "/jmherror/error.html",
+      "415": "/jmherror/error.html",
+      "500": "/jmherror/error.html",
+      "501": "/jmherror/error.html",
+      "502": "/jmherror/error.html",
+      "503": "/jmherror/error.html",
+      "506": "/jmherror/error.html"
+    }
+  }
+}

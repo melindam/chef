@@ -1,0 +1,39 @@
+#!/bin/bash
+# Dropped off by Chef!
+# set -x
+
+# To deploy the profile-api
+
+USER=nodejs
+ROOTDIR=/usr/local/nodeapp
+HOMEDIR=/home/nodejs
+APPNAME=profile-api
+LOCALYAML=<%= @yaml_file %>
+NEWRELICFILE=<%= @newrelic_file %>
+
+cd ${HOMEDIR}
+rm -rf ./${APPNAME}.tgz.prev
+echo "Moving current running ${APPNAME} files"
+
+echo "UnTar files"
+tar -xzf ${APPNAME}.tgz
+if [ $? -eq 0 ]
+then
+  chown -R ${USER}. ${APPNAME}
+  cp ${HOMEDIR}/${LOCALYAML} ${APPNAME}/config/local.yaml
+  <% if @newrelic_enabled %>
+  echo "Adding newrelic config"
+  cp ${HOMEDIR}/profile-api-${NEWRELICFILE} ${APPNAME}/$NEWRELICFILE
+  <% end %>
+  sudo /bin/systemctl stop profile-api
+  rm -rf ${ROOTDIR}/${APPNAME}
+  mv ${APPNAME} ${ROOTDIR}/
+else
+  echo "!!!! PROBLEM with untar ${APPNAME} !!!! "
+  exit 1
+fi
+
+sudo /bin/systemctl start profile-api
+sudo /bin/systemctl status profile-api
+mv ./${APPNAME}.tgz ./${APPNAME}.tgz.prev
+echo "Rollout complete"

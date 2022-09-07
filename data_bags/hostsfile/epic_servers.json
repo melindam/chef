@@ -1,0 +1,23 @@
+{
+	"id": "epic_servers",
+	"hosts": {
+		"epicmychartprd.hsys.local": {"ip": "172.24.201.20"},
+		"epicmchrtxvprd1.hsys.local": {"ip": "172.24.202.128"},
+		"epicmchrtxvprd2.hsys.local": {"ip": "172.24.202.129"},
+		"epicmchrtxvprd3.hsys.local": {"ip": "172.24.202.71"},
+		"epicmchrtxvprd4.hsys.local": {"ip": "172.24.202.72"},
+		"epicmchrtxvprd5.hsys.local": {"ip": "172.24.202.73"},
+		"epicmchrtxvprd6.hsys.local": {"ip": "172.24.202.74"},
+		"epicmchrtxvsup1.hsys.local": {"ip": "172.23.209.114"},
+		"epicinterxvprd1.hsys.local": {"ip": "172.24.206.227"},
+		"epicinterxvprd2.hsys.local": {"ip": "172.24.206.228"},
+		"epicinterxvprd.hsys.local": {"ip": "172.24.201.24"},
+        "epic18mchrtbld1.hsys.local": {"ip": "172.24.202.105"},
+    	"epic18interbld1.hsys.local": {"ip": "172.24.202.97"},
+		"epicmychartbld.hsys.local": {"ip": "172.24.201.47"},
+		"epicinternbgwsh.hsys.local": {"ip": "172.24.201.16"}
+	},
+	"delete_hosts": {
+		"epicconnectffprd.hsys.local": {"ip": "172.24.201.13", "alias": ["epicconnectprd.hsys.local"]}
+	}
+}

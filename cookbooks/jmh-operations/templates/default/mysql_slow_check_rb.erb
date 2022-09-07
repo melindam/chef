@@ -1,0 +1,35 @@
+#!/opt/chef/embedded/bin/ruby
+
+databases = <%= @db_list %>
+
+server_list = <%= @server_hash %>
+
+slow_query = "mysqldumpslow /var/log/mysql-share/slow_queries.log.1"
+
+server_slow_results = {}
+
+server_list.each_key do |server|
+  #mysqldumpslow
+  results = `ssh -i /Users/smarshal/.ssh/jmhbackup_id_rsa \
+              -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+              jmhbackup@#{server_list[server]['ipaddress']} '#{slow_query}' 2> /dev/null`
+  if $?.exitstatus != 0
+    puts "Bad exit status for #{server}"
+  end
+  server_slow_results[server] = results
+end
+
+
+databases.each do | dbname|
+  puts "\n**#{dbname.upcase} Database"
+  server_list.each do | server, info|
+    if info['servers'].include?(dbname)
+      puts server
+      if server_slow_results[server] == ''
+        puts "  No Results"
+      else
+        puts "  " + server_slow_results[server].chomp
+      end
+    end
+  end
+end
